@@ -6,6 +6,9 @@ import bbData from '@/data/chips/bb.json';
 import fhData from '@/data/chips/fh.json';
 import wcData from '@/data/chips/wc.json';
 import calibrationData from '@/data/calibration.json';
+import simHaaland from '@/data/sims/haaland-vs-no-haaland.json';
+import simChip from '@/data/sims/chip-vs-no-chip.json';
+import simBaseline from '@/data/sims/baseline-vs-optimiser.json';
 
 import {
   GameweekDecision,
@@ -14,7 +17,14 @@ import {
   ChipType,
   ChipScenarioData,
   PositionCalibrationMetric,
+  HistoricalSim,
 } from '@/types/fpl';
+
+const HISTORICAL_SIMS: HistoricalSim[] = [
+  simHaaland as unknown as HistoricalSim,
+  simChip as unknown as HistoricalSim,
+  simBaseline as unknown as HistoricalSim,
+];
 
 const GAMEWEEKS: GameweekDecision[] = [
   gw1Data as unknown as GameweekDecision,
@@ -46,6 +56,21 @@ export function getLatestGameweekDecision(): GameweekDecision {
 
 export function getCalibrationMetrics(): PositionCalibrationMetric[] {
   return calibrationData as PositionCalibrationMetric[];
+}
+
+export function getAllSims(): HistoricalSim[] {
+  return HISTORICAL_SIMS;
+}
+
+export function getSimById(season: string, gw: number, scenario: string): HistoricalSim | null {
+  const match = HISTORICAL_SIMS.find(
+    (s) => s.season === season && s.gw === gw && s.slug === scenario
+  );
+  return match || null;
+}
+
+export function getSimsForGameweek(gw: number): HistoricalSim[] {
+  return HISTORICAL_SIMS.filter((s) => s.gw === gw || s.relatedGw === gw);
 }
 
 export function getChipScenario(chip: ChipType, gw: number): ChipScenarioData | null {

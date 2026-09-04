@@ -1,0 +1,80 @@
+{
+  "id": "2026-27-gw2-chip-vs-no-chip",
+  "slug": "chip-vs-no-chip",
+  "season": "2026-27",
+  "gw": 2,
+  "title": "Triple Captain Early Burn vs Baseline Preservation",
+  "scenario": "Chip Timing Counterfactual",
+  "category": "chip-counterfactual",
+  "hypothesis": "Deploying Triple Captain on Haaland against newly promoted Ipswich at the Etihad (projected 10.45 xP) produces higher certainty than waiting for spring Double Gameweeks where rotation and fixture congestion degrade per-minute output.",
+  "methodologyNote": "Simulates identical squad execution under frozen GW2 parameters, isolating the marginal impact of the 3x captaincy multiplier against historical Double Gameweek distributions.",
+  "provenance": {
+    "modelVersion": "v2.4.1-rc3",
+    "frozenAt": "2026-08-24T08:00:00Z",
+    "snapshotHash": "sha256:d41d8cd98f00b204e9800998ecf8427e324a18b76e1a90c0ef49a9987812bc8f",
+    "datasetId": "fpl-ep-202627-gw2-freeze",
+    "solverEngine": "Highs-MILP-v1.7.2",
+    "executionTimestamp": "2026-08-24T08:05:12Z",
+    "solverParameters": {
+      "horizonWeeks": 5,
+      "decayRate": 0.85,
+      "hitPenalty": 4.0,
+      "riskAversion": 0.15,
+      "freeTransferConservationWeight": 0.8,
+      "maxPlayersPerClub": 3,
+      "teamBudgetCap": 100.5
+    },
+    "isDemoSample": true
+  },
+  "controlArmName": "Control: No Chip Baseline (Normal 2x Armband)",
+  "treatmentArmName": "Treatment: Triple Captain Haaland (3x Armband)",
+  "arms": [
+    {
+      "id": "control-no-chip",
+      "name": "Standard Captaincy (No Chip Active)",
+      "label": "Control Arm",
+      "isControl": true,
+      "planSummary": {
+        "formation": "3-5-2",
+        "captain": "Haaland (2x)",
+        "viceCaptain": "Palmer",
+        "keyPlayers": ["Haaland (£15.1m)", "Palmer (£10.5m)", "Son (£10.0m)", "Jota (£7.5m)", "Saka (£10.0m)"],
+        "bank": 0.0,
+        "hitCost": 0,
+        "chip": "none"
+      },
+      "projectedEP": 75.9,
+      "realisedPoints": 98,
+      "deltaVsControl": 0.0,
+      "varianceScore": 13.9,
+      "tacticalShiftNotes": "Executes 1 FT (Eze -> Jota) using £0.5m bank. Haaland carries regular 2x armband vs Ipswich (H)."
+    },
+    {
+      "id": "treatment-triple-captain",
+      "name": "Triple Captain Active on Haaland (3x)",
+      "label": "Counterfactual Treatment",
+      "isControl": false,
+      "planSummary": {
+        "formation": "3-5-2",
+        "captain": "Haaland (3x)",
+        "viceCaptain": "Palmer",
+        "keyPlayers": ["Haaland (£15.1m)", "Palmer (£10.5m)", "Son (£10.0m)", "Jota (£7.5m)", "Saka (£10.0m)"],
+        "bank": 0.0,
+        "hitCost": 0,
+        "chip": "tc"
+      },
+      "projectedEP": 86.35,
+      "realisedPoints": 115,
+      "deltaVsControl": 10.45,
+      "varianceScore": 17.8,
+      "tacticalShiftNotes": "Burns Triple Captain chip in GW2, boosting Haaland multiplier from 2 to 3 (+10.45 xP immediate gain)."
+    }
+  ],
+  "counterfactualFindings": "Haaland scored a hat-trick for 17 base points. Under the Triple Captain treatment arm, the team registered 115 points (+17 points above the control arm's 98 points). While this provided an immense short-term rank surge into the top 0.2% percentile, season-long opportunity cost models highlight that Double Gameweek candidates historically average 18.9–19.4 xP, meaning the decision surrendered an expected +2.0 to +3.5 points in theoretical chip surplus.",
+  "takeaways": [
+    "Immediate payoff was exceptionally high: 17 net points gained over the control arm.",
+    "The 10.45 xP projection for Haaland vs Ipswich was the highest single-fixture projection recorded in the 2026/27 model.",
+    "Despite the 17-point windfall, burning TC in GW2 permanently removes the chip from high-volume Double Gameweek windows (GW34/GW37)."
+  ],
+  "relatedGw": 2
+}

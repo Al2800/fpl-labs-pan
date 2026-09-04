@@ -10,6 +10,7 @@ import {
   ArrowRight,
   CheckCircle2,
   Table,
+  FlaskConical,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -151,13 +152,57 @@ export default function MethodsPage() {
         </div>
       </section>
 
+      {/* Replay & Simulation Methodology */}
+      <section className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 space-y-4">
+        <div className="flex items-center gap-2">
+          <FlaskConical className="w-5 h-5 text-emerald-400" />
+          <h2 className="text-lg font-bold text-slate-100">
+            3. Historical Replay & Counterfactual Simulation Methodology
+          </h2>
+        </div>
+        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+          A core thesis of FPL Labs Pan is that simulations must be mathematically grounded rather than purely speculative. We explicitly <strong>skip inventing fake, synthetic seasons</strong>. Instead, our simulation protocol evaluates counterfactual decisions against verified historical fixture environments:
+        </p>
+
+        {/* Replay Flow Pipeline */}
+        <div className="bg-slate-950 p-4 rounded-lg border border-slate-800 text-xs font-mono space-y-3">
+          <div className="text-slate-400 uppercase tracking-wider text-[11px]">
+            The 3-Stage Grounded Simulation Pipeline:
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="bg-slate-900/80 p-3 rounded border border-slate-800">
+              <span className="text-cyan-400 font-bold block mb-1">Stage 1: Point-in-Time Freeze</span>
+              <p className="text-slate-400 font-sans text-xs">
+                All exogenous inputs (bookmaker clean sheet odds, goalscorer lines, expected minutes, injury flags) are frozen at T-120min. No future knowledge leaks into the simulation.
+              </p>
+            </div>
+            <div className="bg-slate-900/80 p-3 rounded border border-slate-800">
+              <span className="text-amber-400 font-bold block mb-1">Stage 2: Multiple Policy Arms</span>
+              <p className="text-slate-400 font-sans text-xs">
+                Parallel solvers execute with isolated constraint variations (e.g. Control: Haaland Anchor vs Treatment: Quad-Midfield, or Chip Burn vs Chip Preservation).
+              </p>
+            </div>
+            <div className="bg-slate-900/80 p-3 rounded border border-slate-800">
+              <span className="text-emerald-400 font-bold block mb-1">Stage 3: Realised Outcome Audit</span>
+              <p className="text-slate-400 font-sans text-xs">
+                Both arms are settled against actual, unmanipulated official match scores, calculating the true empirical payoff of the strategic divergence.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p className="text-xs text-slate-400 leading-relaxed">
+          By isolating endogenous decision variables while locking real-world fixture outcomes, the lab rigorously measures whether model-derived expected value (Δ xP) translates into positive out-of-sample realised equity.
+        </p>
+      </section>
+
       {/* Position Calibration & Error Metrics (Core MVP Requirement) */}
       <section id="calibration" className="bg-slate-900/70 border border-slate-800 rounded-xl overflow-hidden shadow-sm space-y-0">
         <div className="p-5 border-b border-slate-800">
           <div className="flex items-center gap-2">
             <Table className="w-5 h-5 text-emerald-400" />
             <h2 className="text-lg font-bold text-slate-100">
-              3. Position-by-Position Calibration & Error Metrics
+              4. Position-by-Position Calibration & Error Metrics
             </h2>
           </div>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">

@@ -44,6 +44,13 @@ export function Navbar() {
             <span>Chips</span>
           </Link>
           <Link
+            href="/sims"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
+          >
+            <FlaskConical className="w-4 h-4 text-amber-400" />
+            <span>Sims</span>
+          </Link>
+          <Link
             href="/methods"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
           >

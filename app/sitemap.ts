@@ -1,10 +1,11 @@
 import { MetadataRoute } from 'next';
-import { getAllGameweeks } from '@/lib/data';
+import { getAllGameweeks, getAllSims } from '@/lib/data';
 import { ChipType, ArmId } from '@/types/fpl';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://fpl-labs-pan.vercel.app';
   const gameweeks = getAllGameweeks();
+  const sims = getAllSims();
   const chips: ChipType[] = ['tc', 'bb', 'fh', 'wc'];
   const arms: ArmId[] = ['baseline', 'optimiser', 'agent'];
 
@@ -20,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/sims`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/methods`,
@@ -63,6 +70,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
       });
     }
+  }
+
+  // Add all Counterfactual Historical Simulation pages
+  for (const sim of sims) {
+    routes.push({
+      url: `${baseUrl}/sims/${sim.season}/gw/${sim.gw}/${sim.slug}`,
+      lastModified: new Date(sim.provenance.frozenAt),
+      changeFrequency: 'weekly',
+      priority: 0.75,
+    });
   }
 
   return routes;

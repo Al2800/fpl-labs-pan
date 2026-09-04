@@ -1,0 +1,80 @@
+{
+  "id": "2026-27-gw3-baseline-vs-optimiser",
+  "slug": "baseline-vs-optimiser",
+  "season": "2026-27",
+  "gw": 3,
+  "title": "Rolling FT Heuristic vs MILP Active Bench Reconstruction",
+  "scenario": "Policy Formulation Counterfactual",
+  "category": "policy-comparison",
+  "hypothesis": "Deploying the Free Transfer on Antonee Robinson (£4.6m) to extinguish zero-minute risk on departed Barco while promoting João Pedro into a 3-4-3 produces a higher expected floor than rolling 2 FTs for the post-international break window.",
+  "methodologyNote": "Direct side-by-side simulation comparing heuristic consensus rules (rolling FT into international break) against MILP multi-period dual optimization with a 0.85 discount factor.",
+  "provenance": {
+    "modelVersion": "v2.4.1-rc3",
+    "frozenAt": "2026-08-31T08:00:00Z",
+    "snapshotHash": "sha256:7c92b7a2d488e3fa0895c32b567b489ef0c239458e0a29367d5668b02ea6f381",
+    "datasetId": "fpl-ep-202627-gw3-freeze",
+    "solverEngine": "Highs-MILP-v1.7.2",
+    "executionTimestamp": "2026-08-31T08:04:22Z",
+    "solverParameters": {
+      "horizonWeeks": 5,
+      "decayRate": 0.85,
+      "hitPenalty": 4.0,
+      "riskAversion": 0.15,
+      "freeTransferConservationWeight": 0.8,
+      "maxPlayersPerClub": 3,
+      "teamBudgetCap": 100.8
+    },
+    "isDemoSample": true
+  },
+  "controlArmName": "Control: Baseline Heuristic (Roll Transfer)",
+  "treatmentArmName": "Treatment: MILP Solver Arm (Robinson + 3-4-3 Shape)",
+  "arms": [
+    {
+      "id": "control-roll-ft",
+      "name": "Template Heuristic (Roll Transfer)",
+      "label": "Control Arm",
+      "isControl": true,
+      "planSummary": {
+        "formation": "3-5-2",
+        "captain": "Haaland (2x)",
+        "viceCaptain": "Palmer",
+        "keyPlayers": ["Haaland (£15.2m)", "Palmer (£10.6m)", "Saka (£10.1m)", "Son (£10.0m)", "Rogers (£5.1m)"],
+        "bank": 0.2,
+        "hitCost": 0,
+        "chip": "none"
+      },
+      "projectedEP": 64.1,
+      "realisedPoints": null,
+      "deltaVsControl": 0.0,
+      "varianceScore": 14.8,
+      "tacticalShiftNotes": "Preserves 1 FT to hold 2 Free Transfers entering GW4. Leaves Barco (0 projected min) occupying the 3rd bench spot and starts Rogers vs Leicester away."
+    },
+    {
+      "id": "treatment-milp-optimiser",
+      "name": "MILP Solver Execution (Robinson + 3-4-3)",
+      "label": "Counterfactual Treatment",
+      "isControl": false,
+      "planSummary": {
+        "formation": "3-4-3",
+        "captain": "Haaland (2x)",
+        "viceCaptain": "Palmer",
+        "keyPlayers": ["Haaland (£15.2m)", "Isak (£8.5m)", "João Pedro (£5.6m)", "Palmer (£10.6m)", "Saka (£10.1m)", "Robinson (£4.6m)"],
+        "bank": 0.2,
+        "hitCost": 0,
+        "chip": "none"
+      },
+      "projectedEP": 67.8,
+      "realisedPoints": null,
+      "deltaVsControl": 3.7,
+      "varianceScore": 13.2,
+      "tacticalShiftNotes": "Transfers Barco -> Robinson (£4.6m, IPS away) and shifts formation to 3-4-3 promoting in-form João Pedro into the starting XI."
+    }
+  ],
+  "counterfactualFindings": "The simulation highlights that the marginal shadow value of saving an extra Free Transfer (+1.92 xP) was insufficient to offset the immediate +4.20 xP security and fixture matchup provided by Robinson, alongside promoting João Pedro (4.60 xP) over Rogers (4.15 xP). The MILP arm captured a net model delta of +3.7 xP while reducing lineup variance from 14.8 to 13.2.",
+  "takeaways": [
+    "Holding deadwood players on the bench degrades effective auto-sub floor equity by 1.84 xP.",
+    "The 3-4-3 formation flex unlocked João Pedro's favorable Arsenal transition fixture equity while maintaining Rogers as first auto-sub.",
+    "Realised settlement is live/pending official Premier League match completion."
+  ],
+  "relatedGw": 3
+}

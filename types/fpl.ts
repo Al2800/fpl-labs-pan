@@ -208,3 +208,45 @@ export interface PositionCalibrationMetric {
   rSquared: number;
   bias: number;
 }
+
+export type SimCategory = 'structural-tradeoff' | 'chip-counterfactual' | 'policy-comparison';
+
+export interface SimArm {
+  id: string;
+  name: string;
+  label: string;
+  isControl: boolean;
+  planSummary: {
+    formation: string;
+    captain: string;
+    viceCaptain: string;
+    keyPlayers: string[];
+    bank: number;
+    hitCost: number;
+    chip: string;
+  };
+  projectedEP: number;
+  realisedPoints: number | null;
+  deltaVsControl: number;
+  varianceScore: number;
+  tacticalShiftNotes: string;
+}
+
+export interface HistoricalSim {
+  id: string;
+  slug: string;
+  season: string;
+  gw: number;
+  title: string;
+  scenario: string;
+  category: SimCategory;
+  hypothesis: string;
+  methodologyNote: string;
+  provenance: ProvenanceMetadata;
+  controlArmName: string;
+  treatmentArmName: string;
+  arms: SimArm[];
+  counterfactualFindings: string;
+  takeaways: string[];
+  relatedGw: number;
+}

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { getGameweekDecision, getAllGameweeks } from '@/lib/data';
+import { getGameweekDecision, getAllGameweeks, getSimsForGameweek } from '@/lib/data';
 import { ProvenanceCard } from '@/components/ProvenanceCard';
 import { ArmsComparisonTable } from '@/components/ArmsComparisonTable';
 import { PitchLineup } from '@/components/PitchLineup';
@@ -11,6 +11,7 @@ import {
   ArrowRight,
   Repeat,
   CheckCircle2,
+  FlaskConical,
 } from 'lucide-react';
 
 interface PageProps {
@@ -56,6 +57,7 @@ export default async function GameweekDecisionPage({ params }: PageProps) {
 
   const { provenance, validatedPlan, arms, summaryAnalysis } = decision;
   const isLive = decision.status === 'live';
+  const sims = getSimsForGameweek(decision.gw);
 
   const datasetJsonLd = {
     '@context': 'https://schema.org',
@@ -380,6 +382,78 @@ export default async function GameweekDecisionPage({ params }: PageProps) {
           </p>
         </div>
       </section>
+
+      {/* Simulations for this GW Related Block */}
+      {sims.length > 0 && (
+        <section className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 sm:p-6 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-md bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                <FlaskConical className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-slate-100">
+                  Simulations & Counterfactuals for Gameweek {decision.gw}
+                </h3>
+                <p className="text-xs text-slate-400">
+                  Point-in-time replays testing alternative strategic hypotheses against this round&apos;s frozen priors.
+                </p>
+              </div>
+            </div>
+            <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-500/30">
+              HISTORICAL SIMULATION
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 gap-3">
+            {sims.map((sim) => {
+              const controlArm = sim.arms.find((a) => a.isControl);
+              const treatmentArm = sim.arms.find((a) => !a.isControl);
+
+              return (
+                <div
+                  key={sim.id}
+                  className="bg-slate-950/80 border border-slate-800/80 rounded-lg p-4 space-y-3 hover:border-slate-700 transition-colors"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="font-semibold text-slate-100 text-sm">
+                      {sim.title}
+                    </div>
+                    <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">
+                      Scenario: {sim.scenario}
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    <strong>Hypothesis:</strong> {sim.hypothesis}
+                  </p>
+
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs font-mono">
+                    <div className="flex items-center gap-4 text-slate-400">
+                      <span>Control: <strong className="text-slate-200">{controlArm?.projectedEP.toFixed(1)} xP</strong></span>
+                      <span>Treatment: <strong className="text-cyan-300">{treatmentArm?.projectedEP.toFixed(1)} xP</strong></span>
+                      <span>
+                        Delta:{' '}
+                        <strong className={treatmentArm && treatmentArm.deltaVsControl >= 0 ? 'text-emerald-400' : 'text-rose-400'}>
+                          {treatmentArm && treatmentArm.deltaVsControl >= 0 ? `+${treatmentArm.deltaVsControl.toFixed(1)}` : treatmentArm?.deltaVsControl.toFixed(1)} xP
+                        </strong>
+                      </span>
+                    </div>
+
+                    <Link
+                      href={`/sims/${sim.season}/gw/${sim.gw}/${sim.slug}`}
+                      className="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 font-sans font-medium"
+                    >
+                      <span>Explore Simulation Replay</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {/* Internal Cross-Linking: Chip Scenarios & Methods */}
       <section className="bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">

@@ -1,0 +1,80 @@
+{
+  "id": "2026-27-gw1-haaland-vs-no-haaland",
+  "slug": "haaland-vs-no-haaland",
+  "season": "2026-27",
+  "gw": 1,
+  "title": "Haaland Anchor vs Spread Quad-Midfield Reallocation",
+  "scenario": "Structural Anchor Counterfactual",
+  "category": "structural-tradeoff",
+  "hypothesis": "Reallocating Haaland's £15.0m price tag across Salah (£12.5m), Palmer (£10.5m), Saka (£10.0m), and Son (£10.0m) yields superior aggregate expectation across 11 starters by eliminating sub-£5.5m midfield compromises.",
+  "methodologyNote": "Both policy arms are simulated under identical frozen point-in-time bookmaker and statistical priors at T-120min before the GW1 deadline. Zero retroactive adjustment.",
+  "provenance": {
+    "modelVersion": "v2.4.1-rc3",
+    "frozenAt": "2026-08-14T15:30:00Z",
+    "snapshotHash": "sha256:8f4c2e9a1b0d745e99812458c067e2a9b311fc90d813476fa33c79e652a9ef01",
+    "datasetId": "fpl-ep-202627-gw1-freeze",
+    "solverEngine": "Highs-MILP-v1.7.2",
+    "executionTimestamp": "2026-08-14T15:35:40Z",
+    "solverParameters": {
+      "horizonWeeks": 5,
+      "decayRate": 0.85,
+      "hitPenalty": 4.0,
+      "riskAversion": 0.15,
+      "freeTransferConservationWeight": 0.8,
+      "maxPlayersPerClub": 3,
+      "teamBudgetCap": 100.0
+    },
+    "isDemoSample": true
+  },
+  "controlArmName": "Control: Haaland Anchor (3-5-2)",
+  "treatmentArmName": "Treatment: No-Haaland Quad Premium (3-5-2)",
+  "arms": [
+    {
+      "id": "control-haaland",
+      "name": "Haaland Anchor (Actual Selected Plan)",
+      "label": "Control Arm",
+      "isControl": true,
+      "planSummary": {
+        "formation": "3-5-2",
+        "captain": "Haaland (2x)",
+        "viceCaptain": "Saka",
+        "keyPlayers": ["Haaland (£15.0m)", "Saka (£10.0m)", "Palmer (£10.5m)", "Son (£10.0m)", "Rogers (£5.0m)"],
+        "bank": 0.5,
+        "hitCost": 0,
+        "chip": "none"
+      },
+      "projectedEP": 65.8,
+      "realisedPoints": 74,
+      "deltaVsControl": 0.0,
+      "varianceScore": 12.8,
+      "tacticalShiftNotes": "Relies on Haaland's 8.72 single-match expectation (doubled to 17.44 xP with armband). Requires accepting Rogers at £5.0m in the starting XI."
+    },
+    {
+      "id": "treatment-no-haaland",
+      "name": "No-Haaland Quad Midfield (Reallocated)",
+      "label": "Counterfactual Treatment",
+      "isControl": false,
+      "planSummary": {
+        "formation": "3-5-2",
+        "captain": "Salah (2x)",
+        "viceCaptain": "Saka",
+        "keyPlayers": ["Salah (£12.5m)", "Palmer (£10.5m)", "Saka (£10.0m)", "Son (£10.0m)", "Watkins (£9.0m)", "Isak (£8.5m)"],
+        "bank": 0.0,
+        "hitCost": 0,
+        "chip": "none"
+      },
+      "projectedEP": 67.2,
+      "realisedPoints": 69,
+      "deltaVsControl": 1.4,
+      "varianceScore": 16.4,
+      "tacticalShiftNotes": "Distributes £15.0m across Salah, Watkins, and upgraded defenders (Trent £7.0m over Muñoz £5.0m). Captaincy rests on Salah vs Ipswich away (7.89 xP)."
+    }
+  ],
+  "counterfactualFindings": "The counterfactual solver confirmed that spreading Haaland's £15.0m generated a +1.4 xP theoretical advantage across the starting XI prior to kickoff. However, in realised terms, Haaland delivered 13 points (26 with captaincy) and Rogers kept pace, while Watkins blanked (2 pts) and Trent kept no clean sheet (2 pts). Control defeated the treatment arm by +5 actual points, demonstrating how high-density captaincy concentration dampens multi-player variance in opening fixtures.",
+  "takeaways": [
+    "Mathematical model projected +1.4 xP for the distributed quad-midfield squad due to replacing Rogers (4.12 xP) with Salah (7.89 xP).",
+    "Realised variance favoured the anchor: Haaland + Rogers yielded 15 points (28 with captaincy) vs Salah + Watkins delivering 16 points (23 with captaincy).",
+    "Holding Haaland prevented a costly -4 hit restructuring required to re-acquire him ahead of Ipswich (H) in GW2."
+  ],
+  "relatedGw": 1
+}

@@ -93,6 +93,11 @@ export function Footer() {
             </h4>
             <ul className="space-y-1.5 text-xs">
               <li>
+                <Link href="/sims" className="hover:text-amber-400 transition-colors">
+                  Labelled Historical Simulations
+                </Link>
+              </li>
+              <li>
                 <Link href="/methods" className="hover:text-violet-400 transition-colors">
                   Methodology & Mathematical Formulation
                 </Link>

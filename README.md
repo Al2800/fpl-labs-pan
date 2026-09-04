@@ -39,12 +39,14 @@ Conventional fantasy content suffers from retroactive rationalisation, survivors
 |---|---|---|
 | `/` | Product Home | Value proposition, comparative architecture vs tip blogs/commodity hubs, latest GW freeze state, quick links |
 | `/decisions` | Gameweek Index | Searchable catalog of all gameweeks with freeze timestamps, top arm delta, and completion status |
-| `/decisions/gw/[n]` | **Template D** | Validated squad plan (XI, bench, captain, transfers, bank), arms comparison table, projected vs realised points, frozen_at + snapshot hash |
+| `/decisions/gw/[n]` | **Template D** | Validated squad plan (XI, bench, captain, transfers, bank), arms comparison table, projected vs realised points, frozen_at + snapshot hash, related sims |
 | `/replays/[season]/gw/[n]/[arm]` | Policy Arm Detail | Arm-specific breakdown: captaincy candidates, solver constraint duals (binding vs slack), sensitivity what-if scenarios, raw JSON export |
 | `/chips/[chip]/gw/[n]` | **Template C** | Chip deployment solver table (tc, bb, fh, wc), immediate net gain vs historical benchmark, 38-GW window opportunity cost |
-| `/methods` | Methods & Calibration | MILP mathematical formulation, freeze protocol rules, and position-by-position RMSE/MAE evaluation table (GKP, DEF, MID, FWD, ALL) |
+| `/sims` | Simulations Index | Catalog of labelled historical counterfactual simulations grounded in point-in-time frozen priors |
+| `/sims/[season]/gw/[n]/[scenario]` | Counterfactual Sim Replay | Dedicated counterfactual page: hypothesis, inputs frozen_at + snapshot_hash, control vs treatment table, delta vs control, labelled sim badge |
+| `/methods` | Methods & Calibration | MILP mathematical formulation, freeze protocol rules, grounded simulation pipeline (no fake seasons), and position-by-position RMSE/MAE evaluation table |
 | `/about` | Product About | Lab mission, independence, and disclaimers (not financial advice, not affiliated with PL/FPL) |
-| `/sitemap.xml` | Programmatic SEO | Dynamic sitemap indexing all gameweeks, policy arms, chip scenarios, and core pages |
+| `/sitemap.xml` | Programmatic SEO | Dynamic sitemap indexing all gameweeks, policy arms, chip scenarios, counterfactual sims, and core pages |
 | `/robots.txt` | Crawler Directives | Standard crawler allowlist and sitemap pointer |
 
 ---
@@ -119,8 +121,12 @@ npm run lint
 │   │   └── page.tsx                   # Individual policy arm deep-dive replay
 │   ├── chips/[chip]/gw/[n]/
 │   │   └── page.tsx                   # Template C (Chip scenario horizon solver)
+│   ├── sims/
+│   │   ├── page.tsx                   # /sims index catalog of counterfactual replays
+│   │   └── [season]/gw/[n]/[scenario]/
+│   │       └── page.tsx               # Counterfactual replay detail page with labelled badge
 │   ├── methods/
-│   │   └── page.tsx                   # Formulation, freeze protocol, position calibration table
+│   │   └── page.tsx                   # Formulation, freeze protocol, simulation pipeline, calibration
 │   └── about/
 │       └── page.tsx                   # Lab mission, thesis, and legal disclaimers
 ├── components/
@@ -134,6 +140,7 @@ npm run lint
 ├── data/
 │   ├── gameweeks/                     # Typed GW1, GW2, GW3 datasets with complete provenance
 │   ├── chips/                         # tc.json, bb.json, fh.json, wc.json scenario models
+│   ├── sims/                          # Labelled historical sim packs (haaland, chip, baseline)
 │   └── calibration.json               # Position-by-position MAE, RMSE, and bias metrics
 ├── lib/
 │   └── data.ts                        # Data loader & typed accessors
