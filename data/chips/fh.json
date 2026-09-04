@@ -1,0 +1,119 @@
+{
+  "chip": "fh",
+  "chipName": "Free Hit",
+  "gw": 3,
+  "season": "2026-27",
+  "status": "suboptimal",
+  "headline": "Suboptimal: Single-Gameweek Gain of +12.4 xP Does Not Outweigh Blank GW Shield",
+  "summary": "A specialized 1-week Free Hit squad in GW3 projects 80.2 xP (+12.4 xP above the 67.8 baseline plan). However, holding Free Hit to navigate severe Spring Blank Gameweeks (GW29/GW33) retains an expected relative equity of +24.6 xP.",
+  "projectedGainXP": 12.4,
+  "historicalAverageGain": 22.8,
+  "opportunityCostAssessment": "Free Hit serves as risk mitigation insurance against postponement blanks where baseline squads field fewer than 8 players. Expending in GW3 leaves the team vulnerable to -8 or -12 hit cascades.",
+  "solverSettings": {
+    "model": "Highs-MILP-v1.7.2",
+    "decayFactor": 0.85,
+    "horizon": 8,
+    "frozenAt": "2026-08-31T08:00:00Z",
+    "snapshotHash": "sha256:7c92b7a2d488e3fa0895c32b567b489ef0c239458e0a29367d5668b02ea6f381"
+  },
+  "windowAnalysis": [
+    {
+      "gw": 1,
+      "opponentContext": "Initial Setup (redundant with standard initial pick)",
+      "projectedChipEV": 0.0,
+      "projectedBaselineEV": 65.8,
+      "netDelta": 0.0,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 2,
+      "opponentContext": "GW2 Target Squad",
+      "projectedChipEV": 86.4,
+      "projectedBaselineEV": 75.9,
+      "netDelta": 10.5,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 3,
+      "opponentContext": "GW3 Ideal 1-Week Slate (Palmer, Salah, Haaland, Saka)",
+      "projectedChipEV": 80.2,
+      "projectedBaselineEV": 67.8,
+      "netDelta": 12.4,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 29,
+      "opponentContext": "Projected Major FA Cup Blank Gameweek (BGW)",
+      "projectedChipEV": 68.2,
+      "projectedBaselineEV": 43.1,
+      "netDelta": 25.1,
+      "isRecommendedWindow": true,
+      "dgwStatus": false
+    },
+    {
+      "gw": 34,
+      "opponentContext": "Split Blank / Double Gameweek Clash",
+      "projectedChipEV": 89.6,
+      "projectedBaselineEV": 66.2,
+      "netDelta": 23.4,
+      "isRecommendedWindow": true,
+      "dgwStatus": true
+    }
+  ],
+  "optimalRosterSample": [
+    {
+      "id": "p_salah_liv",
+      "webName": "Salah",
+      "fullName": "Mohamed Salah",
+      "team": "LIV",
+      "position": "MID",
+      "cost": 12.6,
+      "projectedMinutes": 90,
+      "expectedPoints": 8.10,
+      "realisedPoints": null,
+      "opponent": "MUN (A)",
+      "isHome": false,
+      "fixtureDifficulty": 3,
+      "xGI": 0.91,
+      "cleanSheetProbability": 0.29
+    },
+    {
+      "id": "p_haaland_mci",
+      "webName": "Haaland",
+      "fullName": "Erling Haaland",
+      "team": "MCI",
+      "position": "FWD",
+      "cost": 15.2,
+      "projectedMinutes": 89,
+      "expectedPoints": 8.85,
+      "realisedPoints": null,
+      "isCaptain": true,
+      "multiplier": 2,
+      "opponent": "WHU (A)",
+      "isHome": false,
+      "fixtureDifficulty": 3,
+      "xGI": 0.98,
+      "cleanSheetProbability": 0.36
+    },
+    {
+      "id": "p_palmer_che",
+      "webName": "Palmer",
+      "fullName": "Cole Palmer",
+      "team": "CHE",
+      "position": "MID",
+      "cost": 10.6,
+      "projectedMinutes": 88,
+      "expectedPoints": 7.82,
+      "realisedPoints": null,
+      "isViceCaptain": true,
+      "opponent": "CRY (H)",
+      "isHome": true,
+      "fixtureDifficulty": 2,
+      "xGI": 0.84,
+      "cleanSheetProbability": 0.38
+    }
+  ]
+}

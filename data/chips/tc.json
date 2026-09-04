@@ -1,0 +1,128 @@
+{
+  "chip": "tc",
+  "chipName": "Triple Captain",
+  "gw": 3,
+  "season": "2026-27",
+  "status": "preserve",
+  "headline": "Preserve for Projected Double Gameweeks (Optimal Target: GW34 / GW37)",
+  "summary": "Current round yields a +8.85 xP ceiling on Haaland vs West Ham (A). While positive, deploying here burns the chip at an estimated opportunity cost of -11.4 xP relative to historical expected value in Double Gameweek windows.",
+  "projectedGainXP": 8.85,
+  "historicalAverageGain": 16.4,
+  "opportunityCostAssessment": "Triple Captain EV efficiency is maximized when the captain candidate plays 170+ minutes over a 2-fixture slate with home tilt. Burning against a single fixture exhibits high negative skew.",
+  "solverSettings": {
+    "model": "Highs-MILP-v1.7.2",
+    "decayFactor": 0.85,
+    "horizon": 8,
+    "frozenAt": "2026-08-31T08:00:00Z",
+    "snapshotHash": "sha256:7c92b7a2d488e3fa0895c32b567b489ef0c239458e0a29367d5668b02ea6f381"
+  },
+  "windowAnalysis": [
+    {
+      "gw": 1,
+      "opponentContext": "Haaland vs CHE (A) [Single GW]",
+      "projectedChipEV": 8.72,
+      "projectedBaselineEV": 0.0,
+      "netDelta": 8.72,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 2,
+      "opponentContext": "Haaland vs IPS (H) [Single GW - Prime Fixture]",
+      "projectedChipEV": 10.45,
+      "projectedBaselineEV": 0.0,
+      "netDelta": 10.45,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 3,
+      "opponentContext": "Haaland vs WHU (A) [Single GW - Current]",
+      "projectedChipEV": 8.85,
+      "projectedBaselineEV": 0.0,
+      "netDelta": 8.85,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 25,
+      "opponentContext": "Projected EFL Cup DGW Window [Prob: 42%]",
+      "projectedChipEV": 15.2,
+      "projectedBaselineEV": 0.0,
+      "netDelta": 15.2,
+      "isRecommendedWindow": false,
+      "dgwStatus": true
+    },
+    {
+      "gw": 34,
+      "opponentContext": "FA Cup Semi-Final DGW [City / Arsenal Projected]",
+      "projectedChipEV": 18.9,
+      "projectedBaselineEV": 0.0,
+      "netDelta": 18.9,
+      "isRecommendedWindow": true,
+      "dgwStatus": true
+    },
+    {
+      "gw": 37,
+      "opponentContext": "Penultimate Double Gameweek [Primary Target]",
+      "projectedChipEV": 19.4,
+      "projectedBaselineEV": 0.0,
+      "netDelta": 19.4,
+      "isRecommendedWindow": true,
+      "dgwStatus": true
+    }
+  ],
+  "optimalRosterSample": [
+    {
+      "id": "p_haaland_mci",
+      "webName": "Haaland",
+      "fullName": "Erling Haaland",
+      "team": "MCI",
+      "position": "FWD",
+      "cost": 15.2,
+      "projectedMinutes": 89,
+      "expectedPoints": 8.85,
+      "realisedPoints": null,
+      "isCaptain": true,
+      "multiplier": 3,
+      "opponent": "WHU (A)",
+      "isHome": false,
+      "fixtureDifficulty": 3,
+      "xGI": 0.98,
+      "cleanSheetProbability": 0.36
+    },
+    {
+      "id": "p_palmer_che",
+      "webName": "Palmer",
+      "fullName": "Cole Palmer",
+      "team": "CHE",
+      "position": "MID",
+      "cost": 10.6,
+      "projectedMinutes": 88,
+      "expectedPoints": 7.82,
+      "realisedPoints": null,
+      "isViceCaptain": true,
+      "opponent": "CRY (H)",
+      "isHome": true,
+      "fixtureDifficulty": 2,
+      "xGI": 0.84,
+      "cleanSheetProbability": 0.38
+    },
+    {
+      "id": "p_saka_ars",
+      "webName": "Saka",
+      "fullName": "Bukayo Saka",
+      "team": "ARS",
+      "position": "MID",
+      "cost": 10.1,
+      "projectedMinutes": 89,
+      "expectedPoints": 7.35,
+      "realisedPoints": null,
+      "opponent": "BHA (H)",
+      "isHome": true,
+      "fixtureDifficulty": 2,
+      "xGI": 0.82,
+      "cleanSheetProbability": 0.49
+    }
+  ]
+}

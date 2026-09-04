@@ -1,0 +1,126 @@
+{
+  "chip": "wc",
+  "chipName": "Wildcard",
+  "gw": 3,
+  "season": "2026-27",
+  "status": "viable",
+  "headline": "Viable but Secondary: Post-GW4 International Break Window Preferred",
+  "summary": "Deploying Wildcard in GW3 generates +18.6 xP aggregate lift over a 5-week horizon by immediately accessing Liverpool/Arsenal fixture swings. However, waiting until GW4 allows assimilation of full summer transfer window data and international break injury flags.",
+  "projectedGainXP": 18.6,
+  "historicalAverageGain": 28.5,
+  "opportunityCostAssessment": "The first Wildcard must expire before the mid-season reset (Gameweek 19). The optimal model-derived deployment window is GW4–GW6 to capitalize on confirmed starting lineups and transfer deadline acquisitions.",
+  "solverSettings": {
+    "model": "Highs-MILP-v1.7.2",
+    "decayFactor": 0.85,
+    "horizon": 8,
+    "frozenAt": "2026-08-31T08:00:00Z",
+    "snapshotHash": "sha256:7c92b7a2d488e3fa0895c32b567b489ef0c239458e0a29367d5668b02ea6f381"
+  },
+  "windowAnalysis": [
+    {
+      "gw": 1,
+      "opponentContext": "GW1 Initial Setup",
+      "projectedChipEV": 0.0,
+      "projectedBaselineEV": 65.8,
+      "netDelta": 0.0,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 2,
+      "opponentContext": "GW2 Kneejerk Window",
+      "projectedChipEV": 81.2,
+      "projectedBaselineEV": 75.9,
+      "netDelta": 5.3,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 3,
+      "opponentContext": "GW3 Pre-International Break Restructure",
+      "projectedChipEV": 86.4,
+      "projectedBaselineEV": 67.8,
+      "netDelta": 18.6,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 4,
+      "opponentContext": "GW4 Post-Deadline & International Break Optimum",
+      "projectedChipEV": 94.2,
+      "projectedBaselineEV": 66.0,
+      "netDelta": 28.2,
+      "isRecommendedWindow": true,
+      "dgwStatus": false
+    },
+    {
+      "gw": 6,
+      "opponentContext": "GW6 Arsenal Fixture Turn (LEI, SOU, BOU)",
+      "projectedChipEV": 92.8,
+      "projectedBaselineEV": 68.1,
+      "netDelta": 24.7,
+      "isRecommendedWindow": true,
+      "dgwStatus": false
+    }
+  ],
+  "optimalRosterSample": [
+    {
+      "id": "p_raya_ars",
+      "webName": "Raya",
+      "fullName": "David Raya",
+      "team": "ARS",
+      "position": "GKP",
+      "cost": 5.5,
+      "projectedMinutes": 90,
+      "expectedPoints": 4.62,
+      "realisedPoints": null,
+      "opponent": "BHA (H)",
+      "isHome": true,
+      "fixtureDifficulty": 2
+    },
+    {
+      "id": "p_trent_liv",
+      "webName": "Alexander-Arnold",
+      "fullName": "Trent Alexander-Arnold",
+      "team": "LIV",
+      "position": "DEF",
+      "cost": 7.0,
+      "projectedMinutes": 88,
+      "expectedPoints": 5.85,
+      "realisedPoints": null,
+      "opponent": "MUN (A)",
+      "isHome": false,
+      "fixtureDifficulty": 3
+    },
+    {
+      "id": "p_salah_liv",
+      "webName": "Salah",
+      "fullName": "Mohamed Salah",
+      "team": "LIV",
+      "position": "MID",
+      "cost": 12.6,
+      "projectedMinutes": 90,
+      "expectedPoints": 8.10,
+      "realisedPoints": null,
+      "opponent": "MUN (A)",
+      "isHome": false,
+      "fixtureDifficulty": 3
+    },
+    {
+      "id": "p_haaland_mci",
+      "webName": "Haaland",
+      "fullName": "Erling Haaland",
+      "team": "MCI",
+      "position": "FWD",
+      "cost": 15.2,
+      "projectedMinutes": 89,
+      "expectedPoints": 8.85,
+      "realisedPoints": null,
+      "isCaptain": true,
+      "multiplier": 2,
+      "opponent": "WHU (A)",
+      "isHome": false,
+      "fixtureDifficulty": 3
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "position": "GKP",
+    "sampleCount": 460,
+    "meanProjectedXP": 3.82,
+    "meanRealisedPoints": 3.74,
+    "mae": 1.48,
+    "rmse": 2.12,
+    "rSquared": 0.44,
+    "bias": -0.08
+  },
+  {
+    "position": "DEF",
+    "sampleCount": 1840,
+    "meanProjectedXP": 3.65,
+    "meanRealisedPoints": 3.58,
+    "mae": 1.76,
+    "rmse": 2.45,
+    "rSquared": 0.48,
+    "bias": -0.07
+  },
+  {
+    "position": "MID",
+    "sampleCount": 2300,
+    "meanProjectedXP": 4.88,
+    "meanRealisedPoints": 4.96,
+    "mae": 2.15,
+    "rmse": 3.12,
+    "rSquared": 0.59,
+    "bias": 0.08
+  },
+  {
+    "position": "FWD",
+    "sampleCount": 920,
+    "meanProjectedXP": 5.42,
+    "meanRealisedPoints": 5.31,
+    "mae": 2.32,
+    "rmse": 3.48,
+    "rSquared": 0.62,
+    "bias": -0.11
+  },
+  {
+    "position": "ALL",
+    "sampleCount": 5520,
+    "meanProjectedXP": 4.48,
+    "meanRealisedPoints": 4.46,
+    "mae": 1.95,
+    "rmse": 2.86,
+    "rSquared": 0.56,
+    "bias": -0.02
+  }
+]

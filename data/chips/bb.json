@@ -1,0 +1,110 @@
+{
+  "chip": "bb",
+  "chipName": "Bench Boost",
+  "gw": 3,
+  "season": "2026-27",
+  "status": "suboptimal",
+  "headline": "Suboptimal: Current Bench Yields Only 6.55 Projected xP",
+  "summary": "Current bench setup (Valdimarsson 0.0 xP, Rogers 4.15 xP on bench, Faes 2.40 xP) provides minimal marginal value. Optimum Bench Boost deployment requires active 15-player DGW alignment.",
+  "projectedGainXP": 6.55,
+  "historicalAverageGain": 18.2,
+  "opportunityCostAssessment": "Playing Bench Boost with a 0-minute backup goalkeeper forfeits 3.5 to 5.0 points of baseline value immediately. Optimal execution pairs with a Wildcard the preceding week.",
+  "solverSettings": {
+    "model": "Highs-MILP-v1.7.2",
+    "decayFactor": 0.85,
+    "horizon": 8,
+    "frozenAt": "2026-08-31T08:00:00Z",
+    "snapshotHash": "sha256:7c92b7a2d488e3fa0895c32b567b489ef0c239458e0a29367d5668b02ea6f381"
+  },
+  "windowAnalysis": [
+    {
+      "gw": 1,
+      "opponentContext": "GW1 Initial Bench (Faes, Barco, Valdimarsson)",
+      "projectedChipEV": 3.55,
+      "projectedBaselineEV": 0.0,
+      "netDelta": 3.55,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 2,
+      "opponentContext": "GW2 Bench (Faes, Barco, Valdimarsson)",
+      "projectedChipEV": 3.10,
+      "projectedBaselineEV": 0.0,
+      "netDelta": 3.10,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 3,
+      "opponentContext": "GW3 Bench (Rogers, Muñoz, Faes, Valdimarsson)",
+      "projectedChipEV": 6.55,
+      "projectedBaselineEV": 0.0,
+      "netDelta": 6.55,
+      "isRecommendedWindow": false,
+      "dgwStatus": false
+    },
+    {
+      "gw": 34,
+      "opponentContext": "Post-Wildcard Double Gameweek Slate",
+      "projectedChipEV": 21.4,
+      "projectedBaselineEV": 0.0,
+      "netDelta": 21.4,
+      "isRecommendedWindow": true,
+      "dgwStatus": true
+    },
+    {
+      "gw": 37,
+      "opponentContext": "Late-Season Multi-Team DGW",
+      "projectedChipEV": 23.8,
+      "projectedBaselineEV": 0.0,
+      "netDelta": 23.8,
+      "isRecommendedWindow": true,
+      "dgwStatus": true
+    }
+  ],
+  "optimalRosterSample": [
+    {
+      "id": "p_valdimarsson_bre",
+      "webName": "Valdimarsson",
+      "fullName": "Hákon Valdimarsson",
+      "team": "BRE",
+      "position": "GKP",
+      "cost": 4.0,
+      "projectedMinutes": 0,
+      "expectedPoints": 0.0,
+      "realisedPoints": null,
+      "opponent": "SOU (H)",
+      "isHome": true,
+      "fixtureDifficulty": 2
+    },
+    {
+      "id": "p_rogers_avl",
+      "webName": "Rogers",
+      "fullName": "Morgan Rogers",
+      "team": "AVL",
+      "position": "MID",
+      "cost": 5.1,
+      "projectedMinutes": 85,
+      "expectedPoints": 4.15,
+      "realisedPoints": null,
+      "opponent": "LEI (A)",
+      "isHome": false,
+      "fixtureDifficulty": 2
+    },
+    {
+      "id": "p_faes_lei",
+      "webName": "Faes",
+      "fullName": "Wout Faes",
+      "team": "LEI",
+      "position": "DEF",
+      "cost": 4.0,
+      "projectedMinutes": 90,
+      "expectedPoints": 2.40,
+      "realisedPoints": null,
+      "opponent": "AVL (H)",
+      "isHome": true,
+      "fixtureDifficulty": 3
+    }
+  ]
+}
