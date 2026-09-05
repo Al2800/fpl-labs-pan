@@ -132,7 +132,7 @@ export default async function SimulationDetailPage({ params }: PageProps) {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="inline-flex items-center gap-2 font-mono text-xs font-bold text-amber-300 bg-amber-900/50 px-2.5 py-1 rounded border border-amber-600/40">
             <FlaskConical className="w-4 h-4 text-amber-400" />
-            <span>LABELLED HISTORICAL SIMULATION (DEMO UNTIL WIRED TO AL2800/FPL EXPORTS)</span>
+            <span>LABELLED HISTORICAL SIMULATION (DEMO)</span>
           </div>
           <span className="text-xs font-mono text-amber-400/80">
             Modality: Point-in-time Counterfactual

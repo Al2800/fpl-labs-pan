@@ -3,7 +3,7 @@ import { getAllGameweeks, getAllSims } from '@/lib/data';
 import { ChipType, ArmId } from '@/types/fpl';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://fpl-labs-pan.vercel.app';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://fpl-labs-pan.vercel.app';
   const gameweeks = getAllGameweeks();
   const sims = getAllSims();
   const chips: ChipType[] = ['tc', 'bb', 'fh', 'wc'];

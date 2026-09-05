@@ -8,7 +8,7 @@ export function DemoNoticeBanner() {
         <div className="flex items-center gap-2">
           <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
           <span>
-            <strong className="font-semibold text-amber-300">DEMO & ILLUSTRATIVE RUN (2026/27):</strong> Displayed gameweek decisions, solver weights, and snapshot hashes represent pre-production laboratory fixtures for pipeline verification.
+            <strong className="font-semibold text-amber-300">DEMO & ILLUSTRATIVE RUN:</strong> Displayed gameweek decisions, solver weights, and snapshot hashes represent illustrative laboratory telemetry until wired to official Al2800/FPL exports.
           </span>
         </div>
         <div className="hidden sm:flex items-center gap-1.5 font-mono text-[11px] text-amber-400/80 bg-amber-900/40 px-2 py-0.5 rounded border border-amber-600/30">

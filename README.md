@@ -150,6 +150,25 @@ npm run lint
 
 ---
 
-## 7. Legal Disclaimer
+## 7. Connecting & Deploying to Vercel
+
+The application is structured as a standard zero-configuration Next.js App Router project deployable directly to Vercel from the `main` branch.
+
+### Connecting via Vercel Dashboard
+1. Go to [vercel.com/new](https://vercel.com/new).
+2. Connect your GitHub account and import `Al2800/fpl-labs-pan`.
+3. Keep default settings:
+   - **Framework Preset**: Next.js
+   - **Root Directory**: `./`
+   - **Build Command**: `next build`
+   - **Output Directory**: `.next`
+4. Set Environment Variables (optional override):
+   - `NEXT_PUBLIC_SITE_URL`: `https://fpl-labs-pan.vercel.app` (or your production custom domain)
+   - `SITE_URL`: `https://fpl-labs-pan.vercel.app`
+5. Click **Deploy**. Vercel will build all static pages and deploy previews on PRs and production on merges to `main`.
+
+---
+
+## 8. Legal Disclaimer
 
 FPL Labs Pan is an independent open statistical decision intelligence laboratory. This project is **not** affiliated with, endorsed by, or sponsored by the Football Association Premier League Ltd, Fantasy Premier League, or any Premier League football club. All club insignias, player names, and trademarks belong to their respective owners. Statistical outputs and policy recommendations are strictly for research, decision science evaluation, and entertainment purposes — **not financial, gambling, or betting advice**.

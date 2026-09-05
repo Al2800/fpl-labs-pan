@@ -16,8 +16,10 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://fpl-labs-pan.vercel.app';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://fpl-labs-pan.vercel.app'),
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'FPL Labs Pan | Decision Lab Data Product',
     template: '%s | FPL Labs Pan',
