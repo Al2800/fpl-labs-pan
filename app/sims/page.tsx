@@ -78,7 +78,7 @@ export default function SimsIndexPage() {
             <span>Counterfactual Laboratory</span>
           </div>
           <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-950/80 border border-amber-500/40 text-amber-300 font-semibold">
-            LABELLED HISTORICAL SIM / DEMO UNTIL WIRED TO AL2800/FPL EXPORTS
+            LABELLED HISTORICAL SIMULATION (DEMO)
           </span>
         </div>
 
