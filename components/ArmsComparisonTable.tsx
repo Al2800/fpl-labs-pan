@@ -6,9 +6,15 @@ interface ArmsComparisonTableProps {
   arms: PolicyArmSummary[];
   season: string;
   gw: number;
+  compact?: boolean;
 }
 
-export function ArmsComparisonTable({ arms, season, gw }: ArmsComparisonTableProps) {
+export function ArmsComparisonTable({
+  arms,
+  season,
+  gw,
+  compact = false,
+}: ArmsComparisonTableProps) {
   return (
     <div className="border border-neutral-200 bg-white overflow-hidden">
       <div className="px-4 py-3 border-b border-neutral-200">
@@ -61,7 +67,9 @@ export function ArmsComparisonTable({ arms, season, gw }: ArmsComparisonTablePro
                       {label}
                       {selected ? ' (selected)' : ''}
                     </div>
-                    <div className="text-neutral-600">{arm.description}</div>
+                    {compact ? null : (
+                      <div className="text-neutral-600">{arm.description}</div>
+                    )}
                   </td>
                   <td className="py-3 px-3">{arm.formation}</td>
                   <td className="py-3 px-3">

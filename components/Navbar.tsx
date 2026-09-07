@@ -4,7 +4,6 @@ import { chipPath, gameweekPath, statusLabel } from '@/lib/present';
 
 export function Navbar() {
   const latest = getLatestGameweekDecision();
-  const latestLabel = latest.status === 'live' ? `GW${latest.gw} live` : `GW${latest.gw}`;
 
   return (
     <header className="border-b border-neutral-200 bg-white">
@@ -32,12 +31,8 @@ export function Navbar() {
           <Link href="/about" className="hidden sm:inline hover:underline">
             About
           </Link>
-          <Link
-            href={gameweekPath(latest.gw)}
-            className="hidden md:inline text-neutral-600"
-          >
-            {latestLabel}
-            {latest.status === 'live' ? ` · ${statusLabel(latest.status)}` : ''}
+          <Link href={gameweekPath(latest.gw)} className="hidden md:inline text-neutral-600">
+            GW{latest.gw} · {statusLabel(latest.status)}
           </Link>
         </nav>
       </div>

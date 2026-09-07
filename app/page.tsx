@@ -63,7 +63,7 @@ export default function HomePage() {
             </dd>
           </div>
         </dl>
-        <ArmsComparisonTable arms={latest.arms} season={latest.season} gw={latest.gw} />
+        <ArmsComparisonTable compact arms={latest.arms} season={latest.season} gw={latest.gw} />
       </section>
 
       <section className="space-y-3">
