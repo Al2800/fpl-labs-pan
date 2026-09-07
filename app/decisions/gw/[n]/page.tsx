@@ -1,47 +1,63 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { getGameweekDecision, getAllGameweeks, getSimsForGameweek } from '@/lib/data';
-import { ProvenanceCard } from '@/components/ProvenanceCard';
-import { ArmsComparisonTable } from '@/components/ArmsComparisonTable';
-import { PitchLineup } from '@/components/PitchLineup';
-import { JsonLd } from '@/components/JsonLd';
 import {
-  ArrowLeft,
-  ArrowRight,
-  Repeat,
-  CheckCircle2,
-  FlaskConical,
-} from 'lucide-react';
+  getAdjacentGameweeks,
+  getAllGameweeks,
+  getChipScenario,
+  getGameweekDecision,
+  getSimsForGameweek,
+} from '@/lib/data';
+import { ChipScenarioData } from '@/types/fpl';
+import { ArmsComparisonTable } from '@/components/ArmsComparisonTable';
+import { JsonLd } from '@/components/JsonLd';
+import { SquadView } from '@/components/SquadView';
+import { TrustStrip } from '@/components/TrustStrip';
+import {
+  CHIP_IDS,
+  absoluteUrl,
+  breadcrumbList,
+  captainAnswer,
+  chipCheckAnswer,
+  chipOneLiner,
+  chipPath,
+  gameweekAnswer,
+  gameweekHeading,
+  gameweekPath,
+  gameweekSnapshotPath,
+  jsonAlternate,
+  seasonLabel,
+  simPath,
+  statusLabel,
+  verifyCopy,
+} from '@/lib/present';
 
 interface PageProps {
   params: Promise<{ n: string }>;
 }
 
-export async function generateStaticParams() {
-  const gws = getAllGameweeks();
-  return gws.map((g) => ({
-    n: g.gw.toString(),
-  }));
+export function generateStaticParams() {
+  return getAllGameweeks().map((gw) => ({ n: gw.gw.toString() }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { n } = await params;
-  const gwNum = parseInt(n, 10);
-  const decision = getGameweekDecision(gwNum);
+  const decision = getGameweekDecision(parseInt(n, 10));
 
   if (!decision) {
-    return {
-      title: 'Gameweek Decision Not Found',
-    };
+    return { title: 'Gameweek not found' };
   }
 
+  const title = gameweekHeading(decision);
+  const description = gameweekAnswer(decision);
+
   return {
-    title: `GW${decision.gw} Decision Replay & Policy Arms | ${decision.season}`,
-    description: `Pre-deadline frozen lineup and policy arms comparison for 2026/27 GW${decision.gw}. Captain: ${decision.validatedPlan.captain.webName}, Formation: ${decision.validatedPlan.formation}, Projected: ${decision.validatedPlan.projectedSquadTotalXP.toFixed(1)} xP. Verified SHA-256 snapshot.`,
+    title,
+    description,
+    alternates: jsonAlternate(gameweekPath(decision.gw), gameweekSnapshotPath(decision.gw)),
     openGraph: {
-      title: `GW${decision.gw} FPL Decision Replay & Policy Arms | FPL Labs Pan`,
-      description: `Validated plan and parallel arms for GW${decision.gw} (${decision.season}). Frozen at ${decision.provenance.frozenAt}.`,
+      title,
+      description,
     },
   };
 }
@@ -56,429 +72,256 @@ export default async function GameweekDecisionPage({ params }: PageProps) {
   }
 
   const { provenance, validatedPlan, arms, summaryAnalysis } = decision;
-  const isLive = decision.status === 'live';
+  const { prev, next } = getAdjacentGameweeks(decision.gw);
   const sims = getSimsForGameweek(decision.gw);
+  const chips = CHIP_IDS.map((chip) => getChipScenario(chip, decision.gw)).filter(
+    (chip): chip is ChipScenarioData => chip !== null
+  );
+  const answer = gameweekAnswer(decision);
+  const snapshotHref = gameweekSnapshotPath(decision.gw);
 
   const datasetJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Dataset',
-    name: `FPL 2026/27 Gameweek ${decision.gw} Decision Replay & Policy Arms Snapshot`,
-    description: `Pre-deadline locked mathematical programming policy arms for Fantasy Premier League 2026/27 Gameweek ${decision.gw}.`,
+    name: gameweekHeading(decision),
+    description: answer,
+    url: absoluteUrl(gameweekPath(decision.gw)),
     identifier: provenance.snapshotHash,
     version: provenance.modelVersion,
     datePublished: provenance.frozenAt,
     creator: {
       '@type': 'Organization',
       name: 'FPL Labs Pan',
-      url: 'https://x.com/FPLabsPan',
+      url: absoluteUrl('/'),
     },
-    temporalCoverage: '2026-08/2026-09',
-    variableMeasured: ['expected_points', 'realised_points', 'policy_delta', 'formation'],
+    temporalCoverage: decision.deadline,
+    variableMeasured: ['expected_points', 'realised_points', 'captain', 'formation'],
+    distribution: {
+      '@type': 'DataDownload',
+      encodingFormat: 'application/json',
+      contentUrl: absoluteUrl(snapshotHref),
+    },
   };
 
-  const breadcrumbsJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://fpl-labs-pan.vercel.app',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Decisions',
-        item: 'https://fpl-labs-pan.vercel.app/decisions',
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: `Gameweek ${decision.gw}`,
-        item: `https://fpl-labs-pan.vercel.app/decisions/gw/${decision.gw}`,
-      },
-    ],
-  };
+  const facts = [
+    { label: 'Captain', value: `${validatedPlan.captain.webName} (${validatedPlan.captain.expectedPoints.toFixed(1)} xP)` },
+    { label: 'Vice-captain', value: validatedPlan.viceCaptain.webName },
+    { label: 'Formation', value: validatedPlan.formation },
+    {
+      label: 'Transfers',
+      value:
+        validatedPlan.transferActions.length === 0
+          ? 'None'
+          : validatedPlan.transferActions
+              .map((action) => `${action.playerOut.webName} → ${action.playerIn.webName}`)
+              .join(', '),
+    },
+    { label: 'Bank', value: `£${validatedPlan.bank.toFixed(1)}m` },
+    { label: 'Hits', value: validatedPlan.hitCost === 0 ? 'None' : `${validatedPlan.hitCost} pts` },
+    { label: 'Chip', value: validatedPlan.chipUsed === 'none' ? 'None' : validatedPlan.chipUsed.toUpperCase() },
+    {
+      label: 'Projected',
+      value: `${validatedPlan.projectedSquadTotalXP.toFixed(1)} xP`,
+    },
+    {
+      label: 'Points',
+      value:
+        validatedPlan.realisedSquadTotalPoints !== null
+          ? `${validatedPlan.realisedSquadTotalPoints}`
+          : 'Pending',
+    },
+    { label: 'Status', value: statusLabel(decision.status) },
+  ];
 
   return (
     <div className="space-y-8">
-      <JsonLd data={[datasetJsonLd, breadcrumbsJsonLd]} />
-
-      {/* Navigation & Breadcrumbs */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
-        <div className="flex items-center gap-2 text-xs text-slate-400">
-          <Link href="/decisions" className="hover:text-emerald-400 transition-colors">
-            Decisions
-          </Link>
-          <span>/</span>
-          <span className="text-slate-200 font-mono font-medium">GW{decision.gw}</span>
-          <span className="text-slate-500">({decision.season})</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          {decision.gw > 1 && (
-            <Link
-              href={`/decisions/gw/${decision.gw - 1}`}
-              className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 transition-colors"
-            >
-              <ArrowLeft className="w-3 h-3" />
-              <span>GW{decision.gw - 1}</span>
-            </Link>
-          )}
-          {decision.gw < 3 && (
-            <Link
-              href={`/decisions/gw/${decision.gw + 1}`}
-              className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 transition-colors"
-            >
-              <span>GW{decision.gw + 1}</span>
-              <ArrowRight className="w-3 h-3" />
-            </Link>
-          )}
-        </div>
-      </div>
-
-      {/* Hero Header */}
-      <div className="space-y-2">
-        <div className="flex flex-wrap items-center gap-2.5">
-          <span className="font-mono text-xs px-2 py-0.5 rounded bg-emerald-950 border border-emerald-500/40 text-emerald-300 font-semibold">
-            TEMPLATE D ARTEFACT
-          </span>
-          {isLive ? (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-amber-950/60 border border-amber-500/40 text-amber-300 text-xs font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-              <span>LIVE ROUND (SETTLEMENT PENDING)</span>
-            </span>
-          ) : (
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 text-xs font-mono">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>ROUND COMPLETED</span>
-            </span>
-          )}
-        </div>
-
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-100 tracking-tight">
-          GW{decision.gw} Decision Replay:{' '}
-          <span className="text-slate-300 font-semibold">{decision.title}</span>
-        </h1>
-        <p className="text-sm text-slate-400 max-w-3xl leading-relaxed">
-          Full audit trail of the selected execution arm and parallel policy comparisons. Frozen at T-120min prior to the official deadline of {decision.deadline}.
-        </p>
-      </div>
-
-      {/* Provenance Card */}
-      <ProvenanceCard
-        provenance={provenance}
-        gw={decision.gw}
-        season={decision.season}
+      <JsonLd
+        data={[
+          datasetJsonLd,
+          breadcrumbList([
+            { name: 'Home', path: '/' },
+            { name: 'Decisions', path: '/decisions' },
+            { name: `Gameweek ${decision.gw}`, path: gameweekPath(decision.gw) },
+          ]),
+        ]}
       />
 
-      {/* Validated Plan Summary Dashboard */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-slate-100 flex items-center gap-2">
-            <span>Validated Plan Summary</span>
-            <span className="text-xs font-mono font-normal text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">
-              {validatedPlan.armName}
-            </span>
-          </h2>
-          <span className="text-xs text-slate-400 font-mono">
-            Bank: £{validatedPlan.bank.toFixed(1)}m | Hits: -{validatedPlan.hitCost} pts
+      <nav className="flex flex-wrap items-center justify-between gap-3 text-sm text-neutral-600">
+        <p>
+          <Link href="/decisions" className="underline underline-offset-2">
+            Decisions
+          </Link>
+          <span aria-hidden="true"> / </span>
+          <span className="text-neutral-900">
+            GW{decision.gw} ({seasonLabel(decision.season)})
           </span>
+        </p>
+        <p className="flex gap-3">
+          {prev ? (
+            <Link href={gameweekPath(prev.gw)} className="underline underline-offset-2">
+              Previous: GW{prev.gw}
+            </Link>
+          ) : null}
+          {next ? (
+            <Link href={gameweekPath(next.gw)} className="underline underline-offset-2">
+              Next: GW{next.gw}
+            </Link>
+          ) : null}
+        </p>
+      </nav>
+
+      <header className="space-y-3">
+        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
+          {gameweekHeading(decision)}
+        </h1>
+        <p className="text-base leading-relaxed text-neutral-800">{answer}</p>
+      </header>
+
+      <TrustStrip
+        provenance={provenance}
+        snapshotHref={snapshotHref}
+        status={decision.status}
+      />
+
+      <section>
+        <h2 className="text-lg font-semibold mb-3">Key facts</h2>
+        <dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 border border-neutral-200 bg-white">
+          {facts.map((fact) => (
+            <div key={fact.label} className="p-3 border-b border-r border-neutral-200">
+              <dt className="text-sm text-neutral-500">{fact.label}</dt>
+              <dd className="mt-1 font-medium">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <SquadView plan={validatedPlan} />
+
+      <section className="space-y-4">
+        <h2 className="text-lg font-semibold">Why this plan</h2>
+        <p className="text-neutral-800 leading-relaxed">{summaryAnalysis.executiveSummary}</p>
+
+        {validatedPlan.transferActions.length > 0 ? (
+          <div className="border border-neutral-200 bg-white p-4 space-y-2">
+            <h3 className="font-medium">Transfers</h3>
+            {validatedPlan.transferActions.map((action, index) => (
+              <p key={index} className="text-sm text-neutral-700">
+                {action.playerOut.webName} out (£{action.playerOut.sellPrice.toFixed(1)}m) →{' '}
+                {action.playerIn.webName} in (£{action.playerIn.cost.toFixed(1)}m). {action.rationale}
+              </p>
+            ))}
+          </div>
+        ) : null}
+
+        <ul className="space-y-2">
+          {summaryAnalysis.keyTradeoffs.map((item, index) => (
+            <li key={index} className="text-neutral-800 leading-relaxed">
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        <div className="border border-neutral-200 bg-white p-4 space-y-2 text-sm">
+          <h3 className="font-medium">What extra resources were worth</h3>
+          <p>
+            An extra £1.0m was worth +{summaryAnalysis.shadowPrices.budgetPerMillionXP.toFixed(2)}{' '}
+            projected points.
+          </p>
+          <p>
+            An extra free transfer was worth +
+            {summaryAnalysis.shadowPrices.transferMarginalValueXP.toFixed(2)} projected points.
+          </p>
+          <p>
+            Expected points from auto-subs:{' '}
+            {summaryAnalysis.shadowPrices.benchPointsExpectancy.toFixed(2)}.
+          </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          {/* Formation */}
-          <div className="bg-slate-900/60 border border-slate-800 p-3.5 rounded-lg space-y-1">
-            <div className="text-[11px] text-slate-400 font-mono uppercase">Formation</div>
-            <div className="text-xl font-bold font-mono text-slate-100">
-              {validatedPlan.formation}
-            </div>
-            <div className="text-[10px] text-slate-500">1 GKP, 3–5 DEF, 2–5 MID, 1–3 FWD</div>
-          </div>
+        <p className="text-sm text-neutral-600">{summaryAnalysis.divergenceNotes}</p>
+      </section>
 
-          {/* Captain */}
-          <div className="bg-slate-900/60 border border-slate-800 p-3.5 rounded-lg space-y-1">
-            <div className="text-[11px] text-slate-400 font-mono uppercase flex items-center gap-1">
-              <span>Captain (2x)</span>
-            </div>
-            <div className="text-xl font-bold text-amber-400 truncate">
-              {validatedPlan.captain.webName}
-            </div>
-            <div className="text-[10px] text-slate-400 font-mono">
-              {validatedPlan.captain.expectedPoints.toFixed(1)} xP | VC: {validatedPlan.viceCaptain.webName}
-            </div>
-          </div>
+      <ArmsComparisonTable arms={arms} season={decision.season} gw={decision.gw} />
 
-          {/* Transfers Executed */}
-          <div className="bg-slate-900/60 border border-slate-800 p-3.5 rounded-lg space-y-1">
-            <div className="text-[11px] text-slate-400 font-mono uppercase">Transfers</div>
-            <div className="text-xl font-bold font-mono text-slate-100">
-              {validatedPlan.transfersIn.length} FT
-            </div>
-            <div className="text-[10px] text-slate-400 truncate">
-              {validatedPlan.transfersIn.length > 0
-                ? `${validatedPlan.transfersIn[0].webName} in`
-                : '0 transfers executed'}
-            </div>
-          </div>
-
-          {/* Chip Status */}
-          <div className="bg-slate-900/60 border border-slate-800 p-3.5 rounded-lg space-y-1">
-            <div className="text-[11px] text-slate-400 font-mono uppercase">Chip Active</div>
-            <div className="text-xl font-bold font-mono text-cyan-400 uppercase">
-              {validatedPlan.chipUsed === 'none' ? 'None' : validatedPlan.chipUsed}
-            </div>
-            <div className="text-[10px] text-slate-500">
-              <Link href={`/chips/tc/gw/${decision.gw}`} className="text-cyan-400 hover:underline">
-                View chip solver →
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold">Chip check</h2>
+        <ul className="space-y-2">
+          {chips.map((chip) => (
+            <li key={chip.chip}>
+              <Link href={chipPath(chip.chip, decision.gw)} className="underline underline-offset-2">
+                {chip.chipName}
               </Link>
-            </div>
-          </div>
-
-          {/* Projected Total */}
-          <div className="bg-slate-900/60 border border-slate-800 p-3.5 rounded-lg space-y-1">
-            <div className="text-[11px] text-slate-400 font-mono uppercase">Projected Total</div>
-            <div className="text-xl font-bold font-mono text-slate-100">
-              {validatedPlan.projectedSquadTotalXP.toFixed(1)}
-              <span className="text-xs text-slate-400 font-normal ml-1">xP</span>
-            </div>
-            <div className="text-[10px] text-slate-500">Starting XI + C armband</div>
-          </div>
-
-          {/* Realised Total */}
-          <div className="bg-slate-900/60 border border-slate-800 p-3.5 rounded-lg space-y-1">
-            <div className="text-[11px] text-slate-400 font-mono uppercase">Realised Total</div>
-            <div className="text-xl font-bold font-mono">
-              {validatedPlan.realisedSquadTotalPoints !== null ? (
-                <span className="text-emerald-400">{validatedPlan.realisedSquadTotalPoints} pts</span>
-              ) : (
-                <span className="text-amber-400 text-sm font-sans flex items-center gap-1 pt-1">
-                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                  <span>Pending</span>
-                </span>
-              )}
-            </div>
-            <div className="text-[10px] text-slate-500">Official FPL points</div>
-          </div>
-        </div>
-
-        {/* Transfer Action Details (if transfers occurred) */}
-        {validatedPlan.transferActions.length > 0 && (
-          <div className="bg-slate-950/70 border border-slate-800/80 rounded-lg p-3.5 space-y-2 text-xs">
-            <div className="font-mono text-slate-400 text-[11px] uppercase tracking-wider flex items-center gap-1.5">
-              <Repeat className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Executed Transfer Action Rationale</span>
-            </div>
-            {validatedPlan.transferActions.map((action, idx) => (
-              <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-slate-300">
-                <div className="flex items-center gap-2">
-                  <span className="text-rose-400 font-medium">OUT: {action.playerOut.webName} (£{action.playerOut.sellPrice.toFixed(1)}m)</span>
-                  <span className="text-slate-600">→</span>
-                  <span className="text-emerald-400 font-medium">IN: {action.playerIn.webName} (£{action.playerIn.cost.toFixed(1)}m)</span>
-                  <span className="text-[11px] font-mono text-slate-400 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">
-                    Net: {action.netCostDelta >= 0 ? `+£${action.netCostDelta.toFixed(1)}m` : `-£${Math.abs(action.netCostDelta).toFixed(1)}m`}
-                  </span>
-                </div>
-                <div className="text-slate-400 text-xs italic">
-                  {action.rationale}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Arms Comparison Matrix (Core Template D Requirement) */}
-      <section className="space-y-3">
-        <ArmsComparisonTable
-          arms={arms}
-          season={decision.season}
-          gw={decision.gw}
-        />
+              {': '}
+              {chipOneLiner(chip).replace(`${chip.chipName}: `, '')}
+            </li>
+          ))}
+        </ul>
       </section>
 
-      {/* Starting XI and Bench Tactical Pitch Layout */}
-      <section className="space-y-3">
-        <PitchLineup plan={validatedPlan} />
-      </section>
-
-      {/* Analytical Trade-offs & Shadow Prices */}
-      <section className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 sm:p-6 space-y-5">
-        <div className="border-b border-slate-800 pb-3">
-          <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
-            <span>Solver Trade-Off Analysis & Marginal Values</span>
-            <span className="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded">
-              Convergence Report
-            </span>
-          </h3>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Objective value sensitivity, binding constraints, and shadow price evaluations.
-          </p>
-        </div>
-
-        {/* Executive Summary */}
-        <div className="space-y-2">
-          <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400">
-            Executive Summary
-          </h4>
-          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed bg-slate-950/60 p-4 rounded-lg border border-slate-800">
-            {summaryAnalysis.executiveSummary}
-          </p>
-        </div>
-
-        {/* Shadow Prices Table */}
-        <div className="space-y-2">
-          <h4 className="text-xs font-mono uppercase tracking-wider text-cyan-400">
-            Marginal Value Shadow Prices
-          </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-            <div className="bg-slate-950/60 border border-slate-800 p-3 rounded-lg">
-              <div className="text-slate-400">Budget Shadow Price</div>
-              <div className="text-lg font-bold font-mono text-slate-100 mt-1">
-                +{summaryAnalysis.shadowPrices.budgetPerMillionXP.toFixed(2)} xP
-              </div>
-              <div className="text-[10px] text-slate-500">Expected points per additional £1.0m bank</div>
-            </div>
-            <div className="bg-slate-950/60 border border-slate-800 p-3 rounded-lg">
-              <div className="text-slate-400">Transfer Marginal Value</div>
-              <div className="text-lg font-bold font-mono text-slate-100 mt-1">
-                +{summaryAnalysis.shadowPrices.transferMarginalValueXP.toFixed(2)} xP
-              </div>
-              <div className="text-[10px] text-slate-500">Value of rolling an extra Free Transfer into GW+1</div>
-            </div>
-            <div className="bg-slate-950/60 border border-slate-800 p-3 rounded-lg">
-              <div className="text-slate-400">Bench Expectancy</div>
-              <div className="text-lg font-bold font-mono text-slate-100 mt-1">
-                {summaryAnalysis.shadowPrices.benchPointsExpectancy.toFixed(2)} xP
-              </div>
-              <div className="text-[10px] text-slate-500">Effective points gained per auto-sub activation</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Key Trade-offs List */}
-        <div className="space-y-2">
-          <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400">
-            Resolved Mathematical Trade-Offs
-          </h4>
-          <ul className="space-y-2 text-xs text-slate-300">
-            {summaryAnalysis.keyTradeoffs.map((item, idx) => (
-              <li key={idx} className="flex items-start gap-2 bg-slate-950/40 p-3 rounded-lg border border-slate-800/80">
-                <span className="text-emerald-400 font-mono font-bold shrink-0">#{idx + 1}</span>
-                <span className="leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Divergence Notes */}
-        <div className="bg-slate-950/60 p-4 rounded-lg border border-slate-800 text-xs space-y-1">
-          <span className="font-mono text-slate-400 text-[11px] uppercase">
-            Policy Divergence & Out-of-Sample Performance
-          </span>
-          <p className="text-slate-300 leading-relaxed">
-            {summaryAnalysis.divergenceNotes}
-          </p>
-        </div>
-      </section>
-
-      {/* Simulations for this GW Related Block */}
-      {sims.length > 0 && (
-        <section className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 sm:p-6 space-y-4">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-md bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
-                <FlaskConical className="w-4 h-4" />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-100">
-                  Simulations & Counterfactuals for Gameweek {decision.gw}
-                </h3>
-                <p className="text-xs text-slate-400">
-                  Point-in-time replays testing alternative strategic hypotheses against this round&apos;s frozen priors.
-                </p>
-              </div>
-            </div>
-            <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-500/30">
-              HISTORICAL SIMULATION
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 gap-3">
+      {sims.length > 0 ? (
+        <section className="space-y-3">
+          <h2 className="text-lg font-semibold">What-ifs for this gameweek</h2>
+          <ul className="space-y-3">
             {sims.map((sim) => {
-              const controlArm = sim.arms.find((a) => a.isControl);
-              const treatmentArm = sim.arms.find((a) => !a.isControl);
-
+              const control = sim.arms.find((arm) => arm.isControl);
+              const treatment = sim.arms.find((arm) => !arm.isControl);
               return (
-                <div
-                  key={sim.id}
-                  className="bg-slate-950/80 border border-slate-800/80 rounded-lg p-4 space-y-3 hover:border-slate-700 transition-colors"
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="font-semibold text-slate-100 text-sm">
-                      {sim.title}
-                    </div>
-                    <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">
-                      Scenario: {sim.scenario}
-                    </span>
-                  </div>
-
-                  <p className="text-xs text-slate-300 leading-relaxed">
-                    <strong>Hypothesis:</strong> {sim.hypothesis}
-                  </p>
-
-                  <div className="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs font-mono">
-                    <div className="flex items-center gap-4 text-slate-400">
-                      <span>Control: <strong className="text-slate-200">{controlArm?.projectedEP.toFixed(1)} xP</strong></span>
-                      <span>Treatment: <strong className="text-cyan-300">{treatmentArm?.projectedEP.toFixed(1)} xP</strong></span>
-                      <span>
-                        Delta:{' '}
-                        <strong className={treatmentArm && treatmentArm.deltaVsControl >= 0 ? 'text-emerald-400' : 'text-rose-400'}>
-                          {treatmentArm && treatmentArm.deltaVsControl >= 0 ? `+${treatmentArm.deltaVsControl.toFixed(1)}` : treatmentArm?.deltaVsControl.toFixed(1)} xP
-                        </strong>
-                      </span>
-                    </div>
-
+                <li key={sim.id} className="border border-neutral-200 bg-white p-4 space-y-1">
+                  <p className="font-medium">
                     <Link
-                      href={`/sims/${sim.season}/gw/${sim.gw}/${sim.slug}`}
-                      className="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 font-sans font-medium"
+                      href={simPath(sim.season, sim.gw, sim.slug)}
+                      className="underline underline-offset-2"
                     >
-                      <span>Explore Simulation Replay</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      {sim.title}
                     </Link>
-                  </div>
-                </div>
+                  </p>
+                  <p className="text-sm text-neutral-700">{sim.hypothesis}</p>
+                  {treatment && control ? (
+                    <p className="text-sm text-neutral-600">
+                      Control {control.projectedEP.toFixed(1)} xP · Alternative{' '}
+                      {treatment.projectedEP.toFixed(1)} xP · Delta{' '}
+                      {treatment.deltaVsControl >= 0 ? '+' : ''}
+                      {treatment.deltaVsControl.toFixed(1)} xP
+                    </p>
+                  ) : null}
+                </li>
               );
             })}
-          </div>
+          </ul>
         </section>
-      )}
+      ) : null}
 
-      {/* Internal Cross-Linking: Chip Scenarios & Methods */}
-      <section className="bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-        <div className="space-y-1">
-          <div className="font-bold text-slate-200 text-sm">
-            Explore Chip Horizons for Gameweek {decision.gw}
-          </div>
-          <p className="text-slate-400">
-            Review solver opportunity cost calculations for Triple Captain, Bench Boost, Free Hit, and Wildcard.
-          </p>
-        </div>
-        <div className="flex items-center gap-2 shrink-0">
-          <Link
-            href={`/chips/tc/gw/${decision.gw}`}
-            className="px-3 py-2 rounded-md bg-cyan-950 border border-cyan-700/50 text-cyan-300 hover:bg-cyan-900 transition-colors font-mono"
-          >
-            TC Solver →
+      <section className="space-y-2">
+        <h2 className="text-lg font-semibold">How to verify</h2>
+        <p className="text-neutral-800 leading-relaxed">
+          {verifyCopy(
+            provenance.frozenAt,
+            provenance.snapshotHash,
+            `This Gameweek ${decision.gw} plan`
+          )}
+        </p>
+        <p className="text-sm">
+          <a href={snapshotHref} className="underline underline-offset-2">
+            Download the JSON snapshot
+          </a>
+          {' · '}
+          <Link href="/methods" className="underline underline-offset-2">
+            Methods
           </Link>
-          <Link
-            href="/methods"
-            className="px-3 py-2 rounded-md bg-slate-800 border border-slate-700 text-slate-200 hover:bg-slate-700 transition-colors font-medium"
-          >
-            Methods Spec →
-          </Link>
-        </div>
+        </p>
+      </section>
+
+      <section className="space-y-2">
+        <h2 className="text-lg font-semibold">
+          Who should I captain in Gameweek {decision.gw}?
+        </h2>
+        <p className="text-neutral-800 leading-relaxed">{captainAnswer(decision)}</p>
+      </section>
+
+      <section className="space-y-2">
+        <h2 className="text-lg font-semibold">
+          Should I use a chip in Gameweek {decision.gw}?
+        </h2>
+        <p className="text-neutral-800 leading-relaxed">{chipCheckAnswer(decision, chips)}</p>
       </section>
     </div>
   );

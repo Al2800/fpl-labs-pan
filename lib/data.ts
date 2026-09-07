@@ -50,8 +50,23 @@ export function getGameweekDecision(gw: number): GameweekDecision | null {
 }
 
 export function getLatestGameweekDecision(): GameweekDecision {
-  // Return GW3 as the active/latest in 2026-27 sample
-  return GAMEWEEKS[GAMEWEEKS.length - 1];
+  const ordered = [...GAMEWEEKS].sort((a, b) => a.gw - b.gw);
+  return ordered[ordered.length - 1];
+}
+
+export function getAdjacentGameweeks(gw: number): {
+  prev: GameweekDecision | null;
+  next: GameweekDecision | null;
+} {
+  const ordered = [...GAMEWEEKS].sort((a, b) => a.gw - b.gw);
+  const index = ordered.findIndex((item) => item.gw === gw);
+  if (index === -1) {
+    return { prev: null, next: null };
+  }
+  return {
+    prev: ordered[index - 1] ?? null,
+    next: ordered[index + 1] ?? null,
+  };
 }
 
 export function getCalibrationMetrics(): PositionCalibrationMetric[] {

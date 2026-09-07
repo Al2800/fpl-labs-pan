@@ -1,17 +1,16 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 import { getAllGameweeks, getAllSims } from '@/lib/data';
-import { ChipType, ArmId } from '@/types/fpl';
+import { ARM_IDS, CHIP_IDS } from '@/lib/present';
+import { getSiteUrl } from '@/lib/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://fpl-labs-pan.vercel.app';
+  const baseUrl = getSiteUrl();
   const gameweeks = getAllGameweeks();
   const sims = getAllSims();
-  const chips: ChipType[] = ['tc', 'bb', 'fh', 'wc'];
-  const arms: ArmId[] = ['baseline', 'optimiser', 'agent'];
 
   const routes: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}`,
+      url: baseUrl,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1.0,
@@ -42,7 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Add all Gameweek Decision pages (Template D)
   for (const gw of gameweeks) {
     routes.push({
       url: `${baseUrl}/decisions/gw/${gw.gw}`,
@@ -50,35 +48,56 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: gw.status === 'live' ? 'hourly' : 'weekly',
       priority: 0.9,
     });
+    routes.push({
+      url: `${baseUrl}/decisions/gw/${gw.gw}/snapshot.json`,
+      lastModified: new Date(gw.provenance.frozenAt),
+      changeFrequency: 'weekly',
+      priority: 0.4,
+    });
 
-    // Add Arm detail replay pages
-    for (const arm of arms) {
+    for (const arm of ARM_IDS) {
       routes.push({
         url: `${baseUrl}/replays/${gw.season}/gw/${gw.gw}/${arm}`,
         lastModified: new Date(gw.provenance.frozenAt),
         changeFrequency: 'weekly',
         priority: 0.7,
       });
+      routes.push({
+        url: `${baseUrl}/replays/${gw.season}/gw/${gw.gw}/${arm}/snapshot.json`,
+        lastModified: new Date(gw.provenance.frozenAt),
+        changeFrequency: 'weekly',
+        priority: 0.3,
+      });
     }
 
-    // Add Chip scenario pages (Template C)
-    for (const chip of chips) {
+    for (const chip of CHIP_IDS) {
       routes.push({
         url: `${baseUrl}/chips/${chip}/gw/${gw.gw}`,
         lastModified: new Date(gw.provenance.frozenAt),
         changeFrequency: 'weekly',
         priority: 0.8,
       });
+      routes.push({
+        url: `${baseUrl}/chips/${chip}/gw/${gw.gw}/snapshot.json`,
+        lastModified: new Date(gw.provenance.frozenAt),
+        changeFrequency: 'weekly',
+        priority: 0.3,
+      });
     }
   }
 
-  // Add all Counterfactual Historical Simulation pages
   for (const sim of sims) {
     routes.push({
       url: `${baseUrl}/sims/${sim.season}/gw/${sim.gw}/${sim.slug}`,
       lastModified: new Date(sim.provenance.frozenAt),
       changeFrequency: 'weekly',
       priority: 0.75,
+    });
+    routes.push({
+      url: `${baseUrl}/sims/${sim.season}/gw/${sim.gw}/${sim.slug}/snapshot.json`,
+      lastModified: new Date(sim.provenance.frozenAt),
+      changeFrequency: 'weekly',
+      priority: 0.3,
     });
   }
 

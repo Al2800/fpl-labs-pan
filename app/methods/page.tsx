@@ -2,260 +2,163 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { getCalibrationMetrics } from '@/lib/data';
 import { JsonLd } from '@/components/JsonLd';
-import {
-  ShieldCheck,
-  Calculator,
-  Clock,
-  Hash,
-  ArrowRight,
-  CheckCircle2,
-  Table,
-  FlaskConical,
-} from 'lucide-react';
+import { breadcrumbList } from '@/lib/present';
 
 export const metadata: Metadata = {
-  title: 'Methodology, Formulations & Calibration | FPL Labs Pan',
+  title: 'Methods and calibration',
   description:
-    'Mathematical programming formulation, exponential horizon decay, freeze protocol, and position-by-position RMSE/MAE calibration metrics for FPL Labs Pan.',
+    'How FPL Labs Pan builds a gameweek plan: mixed-integer solver, two-hour freeze, SHA-256 snapshots, and position-by-position error metrics.',
 };
 
 export default function MethodsPage() {
   const metrics = getCalibrationMetrics();
 
-  const breadcrumbsJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://fpl-labs-pan.vercel.app',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Methods',
-        item: 'https://fpl-labs-pan.vercel.app/methods',
-      },
-    ],
-  };
-
   return (
     <div className="space-y-10">
-      <JsonLd data={breadcrumbsJsonLd} />
+      <JsonLd
+        data={breadcrumbList([
+          { name: 'Home', path: '/' },
+          { name: 'Methods', path: '/methods' },
+        ])}
+      />
 
-      {/* Header */}
-      <div className="border-b border-slate-800 pb-5 space-y-2">
-        <div className="flex items-center gap-2 text-xs font-mono text-violet-400 uppercase tracking-wider">
-          <ShieldCheck className="w-4 h-4" />
-          <span>Scientific Specification</span>
-        </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-100 tracking-tight">
-          Methodology, Solver Formulation & Calibration
+      <header className="space-y-2">
+        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
+          Methods and calibration
         </h1>
-        <p className="text-slate-400 text-sm max-w-3xl leading-relaxed">
-          Open technical documentation describing the Mixed-Integer Linear Programming (MILP) model, pre-deadline freeze protocol, cryptographic verification, and out-of-sample error calibration.
+        <p className="text-neutral-700 max-w-3xl leading-relaxed">
+          The optimiser maximises discounted expected points over a five-week window, subject to
+          FPL squad rules. Inputs freeze two hours before the deadline. Error is reported by
+          position.
         </p>
-      </div>
+      </header>
 
-      {/* Mathematical Formulation */}
-      <section className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 space-y-4">
-        <div className="flex items-center gap-2">
-          <Calculator className="w-5 h-5 text-cyan-400" />
-          <h2 className="text-lg font-bold text-slate-100">
-            1. Mathematical Program Formulation
-          </h2>
-        </div>
-        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-          The core optimiser solves a rolling-horizon mixed-integer linear optimization problem over an <em>H</em>-week planning window (default <em>H</em> = 5). The objective maximizes the discounted sum of starting XI expected points less transfer hit penalties:
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold">1. Solver</h2>
+        <p className="text-neutral-800 leading-relaxed">
+          The core optimiser is a rolling-horizon mixed-integer linear programme over an H-week
+          window (default H = 5). The objective maximises the discounted sum of starting XI expected
+          points less transfer-hit penalties:
         </p>
+        <pre className="border border-neutral-200 bg-white p-4 text-xs sm:text-sm overflow-x-auto font-mono text-neutral-800">
+{`maximise
+  Σ_{t=1..H} γ^(t-1) * [ Σ_{i ∈ XI_t} ( E[P_{i,t}] * (1 + 1_{i = captain_t}) ) - 4.0 * max(0, Transfers_t - FreeTransfers_t) ]
 
-        {/* Math Block */}
-        <div className="bg-slate-950 p-4 sm:p-5 rounded-lg border border-slate-800 font-mono text-xs sm:text-sm text-slate-200 overflow-x-auto space-y-2">
-          <div className="text-emerald-400 font-semibold">
-            maximize:
+subject to
+  1. Roster size: Σ x_{i,t} = 15
+  2. Budget: Σ cost_{i,t} * x_{i,t} + bank_t ≤ Budget_t
+  3. Club limit: Σ_{i ∈ Club_k} x_{i,t} ≤ 3
+  4. Formation: 1 GKP, 3–5 DEF, 2–5 MID, 1–3 FWD
+  5. One captain, who must start`}
+        </pre>
+        <dl className="grid grid-cols-1 sm:grid-cols-3 border border-neutral-200 bg-white text-sm">
+          <div className="p-4 border-r border-b border-neutral-200">
+            <dt className="font-medium">Discount γ = 0.85</dt>
+            <dd className="text-neutral-600 mt-1">
+              Later weeks count for less because fixtures and minutes are less certain.
+            </dd>
           </div>
-          <div className="pl-4 text-emerald-300">
-            {`Σ_{t=1..H} γ^(t-1) * [ Σ_{i ∈ XI_t} ( E[P_{i,t}] * (1 + 1_{i = captain_t}) ) - 4.0 * max(0, Transfers_t - FreeTransfers_t) ]`}
+          <div className="p-4 border-r border-b border-neutral-200">
+            <dt className="font-medium">Hit penalty = 4.0 pts</dt>
+            <dd className="text-neutral-600 mt-1">
+              Official FPL deduction for transfers beyond free transfers.
+            </dd>
           </div>
-          <div className="text-cyan-400 font-semibold pt-2">
-            subject to:
+          <div className="p-4 border-b border-neutral-200">
+            <dt className="font-medium">Solver: HiGHS MILP v1.7.2</dt>
+            <dd className="text-neutral-600 mt-1">Branch-and-bound mixed-integer solver.</dd>
           </div>
-          <div className="pl-4 space-y-1 text-slate-400 text-xs">
-            <div>1. Total Roster Cardinality: {`Σ_{i=1..N} x_{i,t} = 15  ∀ t ∈ {1..H}`}</div>
-            <div>2. Budget Feasibility: {`Σ_{i=1..N} cost_{i,t} * x_{i,t} + bank_t ≤ Budget_t`}</div>
-            <div>3. Club Limit: {`Σ_{i ∈ Club_k} x_{i,t} ≤ 3  ∀ k ∈ Clubs`}</div>
-            <div>4. Formation Bounds: {`1 GKP, 3 ≤ DEF ≤ 5, 2 ≤ MID ≤ 5, 1 ≤ FWD ≤ 3`}</div>
-            <div>5. Captaincy Selection: {`Σ_{i ∈ XI_t} c_{i,t} = 1,  c_{i,t} ≤ starting_{i,t}`}</div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-2">
-          <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
-            <span className="font-mono text-cyan-400 font-semibold block">Discount Factor γ = 0.85</span>
-            <span className="text-slate-400 text-[11px]">Penalizes fixture horizon uncertainty exponentially into future weeks.</span>
-          </div>
-          <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
-            <span className="font-mono text-emerald-400 font-semibold block">Transfer Hit Penalty = 4.0 pts</span>
-            <span className="text-slate-400 text-[11px]">Rigid point deduction enforced on transfers beyond accumulated Free Transfers.</span>
-          </div>
-          <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
-            <span className="font-mono text-violet-400 font-semibold block">Solver Engine: HiGHS MILP</span>
-            <span className="text-slate-400 text-[11px]">High-performance dual simplex and branch-and-bound solver (v1.7.2).</span>
-          </div>
-        </div>
+        </dl>
       </section>
 
-      {/* Freeze Protocol */}
-      <section className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 space-y-4">
-        <div className="flex items-center gap-2">
-          <Clock className="w-5 h-5 text-amber-400" />
-          <h2 className="text-lg font-bold text-slate-100">
-            2. The Pre-Deadline Freeze Protocol
-          </h2>
-        </div>
-        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-          The primary failure of conventional fantasy content is retroactive rationalisation and hindsight distortion. FPL Labs Pan enforces an immutable cryptographic freeze protocol:
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold">2. Freeze protocol</h2>
+        <p className="text-neutral-800 leading-relaxed">
+          Conventional FPL write-ups are easy to edit after results. This lab does not:
         </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-          <div className="bg-slate-950/70 p-4 rounded-lg border border-slate-800 space-y-2">
-            <div className="font-mono font-bold text-slate-200 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-              <span>T-120min Execution</span>
-            </div>
-            <p className="text-slate-400 leading-relaxed">
-              Exactly two hours prior to the official Premier League deadline, the data ingestion pipeline locks all player odds, projected minutes, and injury statuses.
-            </p>
-          </div>
-
-          <div className="bg-slate-950/70 p-4 rounded-lg border border-slate-800 space-y-2">
-            <div className="font-mono font-bold text-slate-200 flex items-center gap-1.5">
-              <Hash className="w-4 h-4 text-cyan-400" />
-              <span>SHA-256 Digesting</span>
-            </div>
-            <p className="text-slate-400 leading-relaxed">
-              A canonical JSON snapshot containing all solver inputs, parameters, and generated plans is passed through SHA-256 and committed to the public ledger.
-            </p>
-          </div>
-
-          <div className="bg-slate-950/70 p-4 rounded-lg border border-slate-800 space-y-2">
-            <div className="font-mono font-bold text-slate-200 flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Zero Retroactive Edits</span>
-            </div>
-            <p className="text-slate-400 leading-relaxed">
-              Once frozen, model weights and expected points are never revised, ensuring transparent tracking of genuine pre-match decision intelligence.
-            </p>
-          </div>
-        </div>
+        <ol className="list-decimal pl-5 space-y-2 text-neutral-800">
+          <li>
+            Two hours before the official deadline, player odds, projected minutes and injury flags
+            lock.
+          </li>
+          <li>
+            A JSON snapshot of inputs, parameters and the generated plan is hashed with SHA-256 and
+            published on the gameweek page.
+          </li>
+          <li>After the freeze, projections are not revised. Pending fixtures stay pending.</li>
+        </ol>
       </section>
 
-      {/* Replay & Simulation Methodology */}
-      <section className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 space-y-4">
-        <div className="flex items-center gap-2">
-          <FlaskConical className="w-5 h-5 text-emerald-400" />
-          <h2 className="text-lg font-bold text-slate-100">
-            3. Historical Replay & Counterfactual Simulation Methodology
-          </h2>
-        </div>
-        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-          A core thesis of FPL Labs Pan is that simulations must be mathematically grounded rather than purely speculative. We explicitly <strong>skip inventing fake, synthetic seasons</strong>. Instead, our simulation protocol evaluates counterfactual decisions against verified historical fixture environments:
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold">3. What-ifs</h2>
+        <p className="text-neutral-800 leading-relaxed">
+          What-ifs are not invented seasons. They change one decision while holding the same frozen
+          inputs, then score both paths against official match points.
         </p>
-
-        {/* Replay Flow Pipeline */}
-        <div className="bg-slate-950 p-4 rounded-lg border border-slate-800 text-xs font-mono space-y-3">
-          <div className="text-slate-400 uppercase tracking-wider text-[11px]">
-            The 3-Stage Grounded Simulation Pipeline:
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div className="bg-slate-900/80 p-3 rounded border border-slate-800">
-              <span className="text-cyan-400 font-bold block mb-1">Stage 1: Point-in-Time Freeze</span>
-              <p className="text-slate-400 font-sans text-xs">
-                All exogenous inputs (bookmaker clean sheet odds, goalscorer lines, expected minutes, injury flags) are frozen at T-120min. No future knowledge leaks into the simulation.
-              </p>
-            </div>
-            <div className="bg-slate-900/80 p-3 rounded border border-slate-800">
-              <span className="text-amber-400 font-bold block mb-1">Stage 2: Multiple Policy Arms</span>
-              <p className="text-slate-400 font-sans text-xs">
-                Parallel solvers execute with isolated constraint variations (e.g. Control: Haaland Anchor vs Treatment: Quad-Midfield, or Chip Burn vs Chip Preservation).
-              </p>
-            </div>
-            <div className="bg-slate-900/80 p-3 rounded border border-slate-800">
-              <span className="text-emerald-400 font-bold block mb-1">Stage 3: Realised Outcome Audit</span>
-              <p className="text-slate-400 font-sans text-xs">
-                Both arms are settled against actual, unmanipulated official match scores, calculating the true empirical payoff of the strategic divergence.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <p className="text-xs text-slate-400 leading-relaxed">
-          By isolating endogenous decision variables while locking real-world fixture outcomes, the lab rigorously measures whether model-derived expected value (Δ xP) translates into positive out-of-sample realised equity.
-        </p>
+        <ol className="list-decimal pl-5 space-y-2 text-neutral-800">
+          <li>Freeze exogenous inputs at T-120 minutes.</li>
+          <li>Run a control path and an alternative path.</li>
+          <li>Settle both against official FPL scores.</li>
+        </ol>
       </section>
 
-      {/* Position Calibration & Error Metrics (Core MVP Requirement) */}
-      <section id="calibration" className="bg-slate-900/70 border border-slate-800 rounded-xl overflow-hidden shadow-sm space-y-0">
-        <div className="p-5 border-b border-slate-800">
-          <div className="flex items-center gap-2">
-            <Table className="w-5 h-5 text-emerald-400" />
-            <h2 className="text-lg font-bold text-slate-100">
-              4. Position-by-Position Calibration & Error Metrics
-            </h2>
-          </div>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Historical out-of-sample evaluation across 5,520 player-round observations. Realised vs projected performance calibration by position.
-          </p>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs sm:text-sm">
-            <thead className="bg-slate-950/90 text-slate-400 uppercase font-mono text-[11px] tracking-wider border-b border-slate-800">
+      <section id="calibration" className="space-y-3">
+        <h2 className="text-lg font-semibold">4. Position-by-position error</h2>
+        <p className="text-neutral-700 text-sm">
+          Out-of-sample evaluation across 5,520 player-round observations.
+        </p>
+        <div className="overflow-x-auto border border-neutral-200 bg-white">
+          <table className="w-full text-sm text-left">
+            <thead className="bg-neutral-100 text-neutral-600">
               <tr>
-                <th className="py-3 px-4">Position</th>
-                <th className="py-3 px-4 text-right">Sample (N)</th>
-                <th className="py-3 px-4 text-right">Mean Projected</th>
-                <th className="py-3 px-4 text-right">Mean Realised</th>
-                <th className="py-3 px-4 text-right">MAE</th>
-                <th className="py-3 px-4 text-right">RMSE</th>
-                <th className="py-3 px-4 text-right">R² Correlation</th>
-                <th className="py-3 px-4 text-right">Model Bias</th>
+                <th scope="col" className="py-2 px-3 font-medium">
+                  Position
+                </th>
+                <th scope="col" className="py-2 px-3 font-medium text-right">
+                  N
+                </th>
+                <th scope="col" className="py-2 px-3 font-medium text-right">
+                  Mean projected
+                </th>
+                <th scope="col" className="py-2 px-3 font-medium text-right">
+                  Mean realised
+                </th>
+                <th scope="col" className="py-2 px-3 font-medium text-right">
+                  MAE
+                </th>
+                <th scope="col" className="py-2 px-3 font-medium text-right">
+                  RMSE
+                </th>
+                <th scope="col" className="py-2 px-3 font-medium text-right">
+                  R²
+                </th>
+                <th scope="col" className="py-2 px-3 font-medium text-right">
+                  Bias
+                </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800 font-mono text-xs">
+            <tbody>
               {metrics.map((row) => {
                 const isAll = row.position === 'ALL';
                 return (
                   <tr
                     key={row.position}
-                    className={`hover:bg-slate-800/40 transition-colors ${
-                      isAll ? 'bg-slate-950/80 font-bold' : ''
-                    }`}
+                    className={`border-t border-neutral-200 ${isAll ? 'font-medium bg-neutral-50' : ''}`}
                   >
-                    <td className="py-3.5 px-4 font-sans text-slate-100 font-semibold">
-                      {isAll ? 'Overall (All Positions)' : row.position}
-                    </td>
-                    <td className="py-3.5 px-4 text-right text-slate-400 tabular-nums">
+                    <td className="py-2 px-3">{isAll ? 'All positions' : row.position}</td>
+                    <td className="py-2 px-3 text-right tabular-nums">
                       {row.sampleCount.toLocaleString()}
                     </td>
-                    <td className="py-3.5 px-4 text-right text-slate-200 tabular-nums">
-                      {row.meanProjectedXP.toFixed(2)} xP
+                    <td className="py-2 px-3 text-right tabular-nums">
+                      {row.meanProjectedXP.toFixed(2)}
                     </td>
-                    <td className="py-3.5 px-4 text-right text-slate-200 tabular-nums">
-                      {row.meanRealisedPoints.toFixed(2)} pts
+                    <td className="py-2 px-3 text-right tabular-nums">
+                      {row.meanRealisedPoints.toFixed(2)}
                     </td>
-                    <td className="py-3.5 px-4 text-right tabular-nums text-amber-300">
-                      {row.mae.toFixed(2)}
-                    </td>
-                    <td className="py-3.5 px-4 text-right tabular-nums text-rose-300">
-                      {row.rmse.toFixed(2)}
-                    </td>
-                    <td className="py-3.5 px-4 text-right tabular-nums text-emerald-400">
-                      {row.rSquared.toFixed(2)}
-                    </td>
-                    <td className="py-3.5 px-4 text-right tabular-nums text-slate-400">
+                    <td className="py-2 px-3 text-right tabular-nums">{row.mae.toFixed(2)}</td>
+                    <td className="py-2 px-3 text-right tabular-nums">{row.rmse.toFixed(2)}</td>
+                    <td className="py-2 px-3 text-right tabular-nums">{row.rSquared.toFixed(2)}</td>
+                    <td className="py-2 px-3 text-right tabular-nums">
                       {row.bias > 0 ? `+${row.bias.toFixed(2)}` : row.bias.toFixed(2)}
                     </td>
                   </tr>
@@ -264,31 +167,21 @@ export default function MethodsPage() {
             </tbody>
           </table>
         </div>
-
-        <div className="p-4 bg-slate-950/60 border-t border-slate-800 text-xs text-slate-400 space-y-1">
-          <p>
-            <strong>Note on Evaluation Metrics:</strong> MAE (Mean Absolute Error) measures average magnitude of single-game deviations. RMSE (Root Mean Squared Error) penalizes large variance outliers (e.g. unexpected hat-tricks or red cards). Model bias of -0.02 overall indicates neutral calibration without systematic over-prediction.
-          </p>
-        </div>
+        <p className="text-sm text-neutral-600">
+          MAE is average miss per player-round. RMSE penalises large outliers. Overall bias of
+          −0.02 means the model is close to neutral, not systematically high or low.
+        </p>
       </section>
 
-      {/* Internal Cross Links */}
-      <section className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800 text-xs">
-        <Link
-          href="/decisions"
-          className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-medium"
-        >
-          <ArrowRight className="w-3.5 h-3.5" />
-          <span>Browse Validated Decisions Archive</span>
+      <p className="text-sm">
+        <Link href="/decisions" className="underline underline-offset-2">
+          Gameweek decisions
         </Link>
-        <Link
-          href="/about"
-          className="text-slate-400 hover:text-white flex items-center gap-1"
-        >
-          <span>About FPL Labs Pan</span>
-          <ArrowRight className="w-3.5 h-3.5" />
+        {' · '}
+        <Link href="/about" className="underline underline-offset-2">
+          About
         </Link>
-      </section>
+      </p>
     </div>
   );
 }

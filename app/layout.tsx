@@ -5,6 +5,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { DemoNoticeBanner } from '@/components/DemoNoticeBanner';
 import { JsonLd } from '@/components/JsonLd';
+import { getSiteUrl } from '@/lib/site';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,27 +17,25 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://fpl-labs-pan.vercel.app';
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'FPL Labs Pan | Decision Lab Data Product',
+    default: 'FPL Labs Pan | Pre-deadline FPL decisions',
     template: '%s | FPL Labs Pan',
   },
   description:
-    'Entity × time decision lab data product for Fantasy Premier League. Pre-deadline frozen policy arms, mixed-integer linear programming replays, and chip horizon scenarios.',
+    'Frozen FPL gameweek teams, captains, transfers and chip timing. Each plan is locked two hours before the deadline and published as a checkable JSON snapshot.',
   keywords: [
     'FPL',
     'Fantasy Premier League',
-    'Decision Lab',
-    'FPL Solver',
-    'Mixed Integer Linear Programming',
-    'Policy Arms',
-    'Chip Scenarios',
+    'FPL team',
+    'FPL captain',
+    'FPL transfers',
+    'Triple Captain',
+    'Wildcard',
     'FPL Labs Pan',
-    'Expected Points',
-    'Programmatic SEO',
   ],
   authors: [{ name: 'FPL Labs Pan', url: 'https://x.com/FPLabsPan' }],
   creator: 'FPL Labs Pan',
@@ -49,17 +48,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_GB',
-    url: 'https://fpl-labs-pan.vercel.app',
-    title: 'FPL Labs Pan | Decision Lab Data Product',
+    url: siteUrl,
+    title: 'FPL Labs Pan | Pre-deadline FPL decisions',
     description:
-      'Neutral, lab-native FPL decision replays, policy arms comparison, and chip optimization matrix.',
+      'Frozen FPL gameweek teams, captains, transfers and chip timing, published before the deadline.',
     siteName: 'FPL Labs Pan',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FPL Labs Pan | Decision Lab Data Product',
+    title: 'FPL Labs Pan | Pre-deadline FPL decisions',
     description:
-      'Pre-deadline frozen policy arms, mixed-integer linear programming replays, and chip horizon scenarios.',
+      'Frozen FPL gameweek teams, captains, transfers and chip timing, published before the deadline.',
     creator: '@FPLabsPan',
   },
   robots: {
@@ -85,13 +84,14 @@ export default function RootLayout({
     '@type': 'WebSite',
     name: 'FPL Labs Pan',
     alternateName: 'FPL Decision Lab',
-    url: 'https://fpl-labs-pan.vercel.app',
+    url: siteUrl,
     description:
-      'Entity × time data product generating pre-deadline frozen policy arms, mixed-integer solver replays, and chip horizon scenarios for Fantasy Premier League.',
+      'Frozen FPL gameweek teams, captains, transfers and chip timing. Each plan is locked two hours before the deadline.',
     publisher: {
       '@type': 'Organization',
       name: 'FPL Labs Pan',
-      url: 'https://x.com/FPLabsPan',
+      url: siteUrl,
+      sameAs: ['https://x.com/FPLabsPan'],
     },
   };
 
@@ -100,11 +100,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#090d16] text-slate-200">
+      <body className="min-h-full flex flex-col bg-neutral-50 text-neutral-900">
         <JsonLd data={websiteJsonLd} />
         <DemoNoticeBanner />
         <Navbar />
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8">
           {children}
         </main>
         <Footer />
