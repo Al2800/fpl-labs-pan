@@ -1,5 +1,5 @@
 import { ARM_IDS } from '@/lib/present';
-import { getAllGameweeks, getArmDetail } from '@/lib/data';
+import { getDemoGameweeks, getArmDetail } from '@/lib/data';
 import { snapshotNotFound, snapshotResponse } from '@/lib/snapshot';
 import { ArmId } from '@/types/fpl';
 
@@ -7,7 +7,7 @@ export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   const params: Array<{ season: string; n: string; arm: string }> = [];
-  for (const gw of getAllGameweeks()) {
+  for (const gw of getDemoGameweeks()) {
     for (const arm of ARM_IDS) {
       params.push({ season: gw.season, n: gw.gw.toString(), arm });
     }

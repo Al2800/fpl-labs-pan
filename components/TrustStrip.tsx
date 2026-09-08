@@ -1,17 +1,24 @@
 'use client';
 
 import { useState } from 'react';
-import { ProvenanceMetadata } from '@/types/fpl';
+import { DatasetKind, ProvenanceMetadata } from '@/types/fpl';
 import { formatUtc, shortHash, statusLabel } from '@/lib/present';
 
 interface TrustStripProps {
   provenance: ProvenanceMetadata;
   snapshotHref: string;
   status?: string;
+  kind?: DatasetKind;
 }
 
-export function TrustStrip({ provenance, snapshotHref, status }: TrustStripProps) {
+export function TrustStrip({ provenance, snapshotHref, status, kind }: TrustStripProps) {
   const [copied, setCopied] = useState(false);
+  const freezeKind =
+    kind === 'historical-replay'
+      ? 'Reconstructed cutoff (kickoff − 90 min)'
+      : kind === 'illustrative-sample'
+        ? 'Illustrative sample'
+        : '2h before deadline';
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(provenance.snapshotHash);
@@ -22,9 +29,9 @@ export function TrustStrip({ provenance, snapshotHref, status }: TrustStripProps
   return (
     <div className="text-sm text-neutral-600 border border-neutral-200 bg-white px-3 py-2.5">
       <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
-        <span>Frozen {formatUtc(provenance.frozenAt)}</span>
+        <span>Cutoff {formatUtc(provenance.frozenAt)}</span>
         <span aria-hidden="true">·</span>
-        <span>2h before deadline</span>
+        <span>{freezeKind}</span>
         <span aria-hidden="true">·</span>
         <span className="font-mono text-xs">{shortHash(provenance.snapshotHash)}</span>
         <button
@@ -37,15 +44,19 @@ export function TrustStrip({ provenance, snapshotHref, status }: TrustStripProps
         <a href={snapshotHref} className="underline underline-offset-2 text-neutral-800">
           Download snapshot
         </a>
-        <span aria-hidden="true">·</span>
-        <span>{provenance.modelVersion}</span>
         {status ? (
           <>
             <span aria-hidden="true">·</span>
             <span>{statusLabel(status)}</span>
           </>
         ) : null}
-        {provenance.isDemoSample ? (
+        {kind === 'historical-replay' ? (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>Reconstructive replay</span>
+          </>
+        ) : null}
+        {provenance.isDemoSample && kind !== 'historical-replay' ? (
           <>
             <span aria-hidden="true">·</span>
             <span>Illustrative sample</span>

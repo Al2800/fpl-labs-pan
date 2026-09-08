@@ -1,0 +1,17 @@
+{
+  "kind": "exploratory-fork",
+  "disclaimer": "The evidence fork is an exploratory historical path recovered after outcomes were known. It is not a preregistered live freeze and is not a headline skill claim.",
+  "canonicalNet": 2010,
+  "forkHybridNet": 2075,
+  "forkDeltaGw12to38": 65,
+  "sameStateEvidenceDelta": 16,
+  "chipsPlayed": [],
+  "gw34": {
+    "hitCost": 8,
+    "transfers": 3,
+    "freeTransfers": 1,
+    "blank": true,
+    "optimiserNet": 28,
+    "templateNet": 33
+  }
+}

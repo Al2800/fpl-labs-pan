@@ -36,12 +36,12 @@ export default function AboutPage() {
         </p>
         <ul className="list-disc pl-5 space-y-2 text-neutral-800">
           <li>
-            Gameweek pages compare a template, an optimiser, and a high-ceiling approach on the same
-            freeze.
+            Gameweek pages compare a template, an optimiser, and an evidence approach on the same
+            cutoff. 2025/26 is a reconstructive replay; 2026/27 pages are an illustrative sample.
           </li>
           <li>
-            Chip pages say whether Triple Captain, Bench Boost, Free Hit or Wildcard is worth
-            playing now or later.
+            Chip hubs say when Triple Captain, Bench Boost, Free Hit or Wildcard is worth playing.
+            That reconstructive path never used a chip.
           </li>
         </ul>
       </section>
@@ -49,7 +49,10 @@ export default function AboutPage() {
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">How it differs</h2>
         <ul className="list-disc pl-5 space-y-2 text-neutral-800">
-          <li>Plans lock two hours before the deadline and are hashed. They are not rewritten after results.</li>
+          <li>
+            Plans that are live will lock two hours before the deadline and be hashed. 2025/26
+            pages are reconstructive and labelled as such.
+          </li>
           <li>There is no first-person diary or “due a haul” language.</li>
           <li>
             Claims sit next to a downloadable snapshot. See{' '}

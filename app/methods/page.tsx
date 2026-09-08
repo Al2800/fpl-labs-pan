@@ -1,17 +1,18 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getCalibrationMetrics } from '@/lib/data';
+import { getCalibrationMetrics, getReplayCalibration } from '@/lib/data';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbList } from '@/lib/present';
 
 export const metadata: Metadata = {
   title: 'Methods and calibration',
   description:
-    'How FPL Labs Pan builds a gameweek plan: mixed-integer solver, two-hour freeze, SHA-256 snapshots, and position-by-position error metrics.',
+    'How FPL Labs Pan builds a gameweek plan, how a reconstructive replay differs from a two-hour freeze, and error metrics for the 2025/26 ingest.',
 };
 
 export default function MethodsPage() {
   const metrics = getCalibrationMetrics();
+  const replay = getReplayCalibration();
 
   return (
     <div className="space-y-10">
@@ -28,8 +29,8 @@ export default function MethodsPage() {
         </h1>
         <p className="text-neutral-700 max-w-3xl leading-relaxed">
           The optimiser maximises discounted expected points over a five-week window, subject to
-          FPL squad rules. Inputs freeze two hours before the deadline. Error is reported by
-          position.
+          FPL squad rules. Live seasons freeze two hours before the deadline. The published 2025/26
+          season is a reconstructive replay with a different cutoff.
         </p>
       </header>
 
@@ -38,7 +39,7 @@ export default function MethodsPage() {
         <p className="text-neutral-800 leading-relaxed">
           The core optimiser is a rolling-horizon mixed-integer linear programme over an H-week
           window (default H = 5). The objective maximises the discounted sum of starting XI expected
-          points less transfer-hit penalties:
+          points less transfer-hit penalties.
         </p>
         <pre className="border border-neutral-200 bg-white p-4 text-xs sm:text-sm overflow-x-auto font-mono text-neutral-800">
 {`maximise
@@ -51,61 +52,66 @@ subject to
   4. Formation: 1 GKP, 3–5 DEF, 2–5 MID, 1–3 FWD
   5. One captain, who must start`}
         </pre>
-        <dl className="grid grid-cols-1 sm:grid-cols-3 border border-neutral-200 bg-white text-sm">
-          <div className="p-4 border-r border-b border-neutral-200">
-            <dt className="font-medium">Discount γ = 0.85</dt>
-            <dd className="text-neutral-600 mt-1">
-              Later weeks count for less because fixtures and minutes are less certain.
-            </dd>
-          </div>
-          <div className="p-4 border-r border-b border-neutral-200">
-            <dt className="font-medium">Hit penalty = 4.0 pts</dt>
-            <dd className="text-neutral-600 mt-1">
-              Official FPL deduction for transfers beyond free transfers.
-            </dd>
-          </div>
-          <div className="p-4 border-b border-neutral-200">
-            <dt className="font-medium">Solver: HiGHS MILP v1.7.2</dt>
-            <dd className="text-neutral-600 mt-1">Branch-and-bound mixed-integer solver.</dd>
-          </div>
-        </dl>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-semibold">2. Freeze protocol</h2>
+        <h2 className="text-lg font-semibold">2. Live freeze versus reconstructive replay</h2>
         <p className="text-neutral-800 leading-relaxed">
-          Conventional FPL write-ups are easy to edit after results. This lab does not:
+          Live pages lock odds, minutes and the plan two hours before the official deadline, hash
+          the JSON, and do not edit after results. The 2025/26 pages use a reconstructed cutoff
+          (first kickoff minus 90 minutes) built after the season. Fixtures come from the final
+          export; private bank, exact pre-deadline prices and timestamped odds were not archived.
+          See{' '}
+          <Link href="/guides/reconstructive-replay" className="underline underline-offset-2">
+            reconstructive replay
+          </Link>{' '}
+          and{' '}
+          <Link href="/guides/how-freeze-and-hash-work" className="underline underline-offset-2">
+            freeze and hash
+          </Link>
+          .
         </p>
-        <ol className="list-decimal pl-5 space-y-2 text-neutral-800">
-          <li>
-            Two hours before the official deadline, player odds, projected minutes and injury flags
-            lock.
-          </li>
-          <li>
-            A JSON snapshot of inputs, parameters and the generated plan is hashed with SHA-256 and
-            published on the gameweek page.
-          </li>
-          <li>After the freeze, projections are not revised. Pending fixtures stay pending.</li>
-        </ol>
-      </section>
-
-      <section className="space-y-3">
-        <h2 className="text-lg font-semibold">3. What-ifs</h2>
-        <p className="text-neutral-800 leading-relaxed">
-          What-ifs are not invented seasons. They change one decision while holding the same frozen
-          inputs, then score both paths against official match points.
-        </p>
-        <ol className="list-decimal pl-5 space-y-2 text-neutral-800">
-          <li>Freeze exogenous inputs at T-120 minutes.</li>
-          <li>Run a control path and an alternative path.</li>
-          <li>Settle both against official FPL scores.</li>
-        </ol>
       </section>
 
       <section id="calibration" className="space-y-3">
-        <h2 className="text-lg font-semibold">4. Position-by-position error</h2>
+        <h2 className="text-lg font-semibold">3. 2025/26 replay error</h2>
+        {replay ? (
+          <>
+            <p className="text-neutral-800 leading-relaxed">{replay.note}</p>
+            <dl className="grid grid-cols-2 sm:grid-cols-4 border border-neutral-200 bg-white">
+              <div className="p-4 border-r border-b border-neutral-200">
+                <dt className="text-sm text-neutral-500">Squad weeks</dt>
+                <dd className="mt-1 font-medium">{replay.gameweeks}</dd>
+              </div>
+              <div className="p-4 border-r border-b border-neutral-200">
+                <dt className="text-sm text-neutral-500">Squad MAE</dt>
+                <dd className="mt-1 font-medium">{replay.squadMae.toFixed(1)} pts</dd>
+              </div>
+              <div className="p-4 border-r border-b border-neutral-200">
+                <dt className="text-sm text-neutral-500">Squad bias</dt>
+                <dd className="mt-1 font-medium">
+                  {replay.squadBias > 0 ? '+' : ''}
+                  {replay.squadBias.toFixed(1)}
+                </dd>
+              </div>
+              <div className="p-4 border-b border-neutral-200">
+                <dt className="text-sm text-neutral-500">Player-round MAE</dt>
+                <dd className="mt-1 font-medium">
+                  {replay.playerMae.toFixed(2)} ({replay.playerRounds.toLocaleString()} XI rows)
+                </dd>
+              </div>
+            </dl>
+          </>
+        ) : (
+          <p className="text-neutral-700">No replay calibration is available.</p>
+        )}
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold">4. Illustrative position table</h2>
         <p className="text-neutral-700 text-sm">
-          Out-of-sample evaluation across 5,520 player-round observations.
+          The table below is from the illustrative sample pack (5,520 labelled player-rounds). It is
+          not computed from the 2025/26 ingest.
         </p>
         <div className="overflow-x-auto border border-neutral-200 bg-white">
           <table className="w-full text-sm text-left">
@@ -167,19 +173,15 @@ subject to
             </tbody>
           </table>
         </div>
-        <p className="text-sm text-neutral-600">
-          MAE is average miss per player-round. RMSE penalises large outliers. Overall bias of
-          −0.02 means the model is close to neutral, not systematically high or low.
-        </p>
       </section>
 
       <p className="text-sm">
-        <Link href="/decisions" className="underline underline-offset-2">
-          Gameweek decisions
+        <Link href="/seasons/2025-26" className="underline underline-offset-2">
+          2025/26 season
         </Link>
         {' · '}
-        <Link href="/about" className="underline underline-offset-2">
-          About
+        <Link href="/glossary" className="underline underline-offset-2">
+          Glossary
         </Link>
       </p>
     </div>

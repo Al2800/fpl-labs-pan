@@ -107,7 +107,7 @@ export default async function SimulationDetailPage({ params }: PageProps) {
           All what-ifs
         </Link>
         {relatedGw ? (
-          <Link href={gameweekPath(sim.gw)} className="underline underline-offset-2">
+          <Link href={gameweekPath(sim.season, sim.gw)} className="underline underline-offset-2">
             Gameweek {sim.gw} decision
           </Link>
         ) : null}
@@ -121,7 +121,7 @@ export default async function SimulationDetailPage({ params }: PageProps) {
         <p className="text-neutral-800 leading-relaxed">{answer}</p>
       </header>
 
-      <TrustStrip provenance={sim.provenance} snapshotHref={snapshotHref} />
+      <TrustStrip provenance={sim.provenance} snapshotHref={snapshotHref} kind="illustrative-sample" />
 
       <section className="border border-neutral-200 bg-white overflow-hidden">
         <div className="px-4 py-3 border-b border-neutral-200">

@@ -74,7 +74,7 @@ export default function SimsIndexPage() {
                   <div>
                     <dt className="text-neutral-500">Related</dt>
                     <dd>
-                      <Link href={gameweekPath(sim.gw)} className="underline underline-offset-2">
+                      <Link href={gameweekPath(sim.season, sim.gw)} className="underline underline-offset-2">
                         GW{sim.gw} decision
                       </Link>
                     </dd>

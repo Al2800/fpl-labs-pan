@@ -1,5 +1,5 @@
 import { CHIP_IDS } from '@/lib/present';
-import { getAllGameweeks, getChipScenario } from '@/lib/data';
+import { getDemoGameweeks, getChipScenario } from '@/lib/data';
 import { snapshotNotFound, snapshotResponse } from '@/lib/snapshot';
 import { ChipType } from '@/types/fpl';
 
@@ -8,7 +8,7 @@ export const dynamic = 'force-static';
 export function generateStaticParams() {
   const params: Array<{ chip: string; n: string }> = [];
   for (const chip of CHIP_IDS) {
-    for (const gw of getAllGameweeks()) {
+    for (const gw of getDemoGameweeks()) {
       params.push({ chip, n: gw.gw.toString() });
     }
   }

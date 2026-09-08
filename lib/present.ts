@@ -3,13 +3,23 @@ import {
   ArmId,
   ChipScenarioData,
   ChipType,
+  DatasetKind,
   GameweekDecision,
   HistoricalSim,
+  PolicyArmSummary,
   ValidatedPlan,
 } from '@/types/fpl';
 
 export function seasonLabel(season: string): string {
   return season.replace('-', '/');
+}
+
+export function datasetKindOf(decision: GameweekDecision): DatasetKind {
+  return (
+    decision.datasetKind ||
+    decision.provenance.datasetKind ||
+    (decision.provenance.isDemoSample ? 'illustrative-sample' : 'live-freeze')
+  );
 }
 
 export function formatUtc(iso: string): string {
@@ -38,6 +48,33 @@ export const ARM_LABELS: Record<ArmId, string> = {
   optimiser: 'Optimiser',
   agent: 'High-ceiling',
 };
+
+export function armLabel(arm: PolicyArmSummary, kind?: DatasetKind): string {
+  if (kind === 'historical-replay') {
+    return arm.shortLabel || ARM_LABELS[arm.id];
+  }
+  return ARM_LABELS[arm.id] ?? arm.shortLabel;
+}
+
+export const CHIP_HUBS: Array<{
+  id: Exclude<ChipType, 'none'>;
+  slug: string;
+  name: string;
+}> = [
+  { id: 'tc', slug: 'triple-captain', name: 'Triple Captain' },
+  { id: 'bb', slug: 'bench-boost', name: 'Bench Boost' },
+  { id: 'fh', slug: 'free-hit', name: 'Free Hit' },
+  { id: 'wc', slug: 'wildcard', name: 'Wildcard' },
+];
+
+export function chipHubBySlug(slug: string) {
+  return CHIP_HUBS.find((hub) => hub.slug === slug || hub.id === slug) ?? null;
+}
+
+export function chipHubPath(chip: string): string {
+  const hub = CHIP_HUBS.find((item) => item.id === chip || item.slug === chip);
+  return `/chips/${hub?.slug ?? chip}`;
+}
 
 export const CHIP_LABELS: Record<Exclude<ChipType, 'none'>, string> = {
   tc: 'Triple Captain',
@@ -108,26 +145,54 @@ export function gameweekHeading(decision: GameweekDecision): string {
   return `FPL Gameweek ${decision.gw} (${seasonLabel(decision.season)}): Team, Captain and Transfers`;
 }
 
+export function formatProjected(value: number, kind: DatasetKind): string {
+  if (kind === 'historical-replay' && value === 0) return 'Unavailable';
+  return `${value.toFixed(1)} xP`;
+}
+
 export function gameweekAnswer(decision: GameweekDecision): string {
   const { validatedPlan: plan, provenance } = decision;
+  const kind = datasetKindOf(decision);
   const chipBit =
     plan.chipUsed === 'none' ? '' : ` It played ${chipLabel(plan.chipUsed)}.`;
   const realised =
     plan.realisedSquadTotalPoints !== null
-      ? ` It scored ${plan.realisedSquadTotalPoints} points.`
+      ? ` It scored ${plan.realisedSquadTotalPoints} net points after hits.`
       : ' Results are pending.';
+  const projected =
+    kind === 'historical-replay' && plan.projectedSquadTotalXP === 0
+      ? ' No locked expected-points objective was available for this week.'
+      : ` Projected squad total was ${plan.projectedSquadTotalXP.toFixed(1)}.`;
 
-  return `For FPL ${seasonLabel(decision.season)} Gameweek ${decision.gw} (deadline ${formatUtc(decision.deadline)}), the FPL Labs Pan optimiser picked ${plan.captain.webName} as captain and ${plan.viceCaptain.webName} as vice, a ${plan.formation}, and ${transferPhrase(plan)}, projecting ${plan.projectedSquadTotalXP.toFixed(1)} points.${chipBit} The plan was frozen at ${formatUtc(provenance.frozenAt)}, two hours before the deadline, and has not been edited since.${realised}`;
+  if (kind === 'historical-replay') {
+    return `For FPL ${seasonLabel(decision.season)} Gameweek ${decision.gw} (reconstructed cutoff ${formatUtc(decision.deadline)}), the optimiser picked ${plan.captain.webName} as captain and ${plan.viceCaptain.webName} as vice, a ${plan.formation}, and ${transferPhrase(plan)}.${projected}${chipBit}${realised} This is a reconstructive replay: the cutoff is first kickoff minus 90 minutes, not a live two-hour freeze.`;
+  }
+
+  const freezeBit =
+    kind === 'illustrative-sample'
+      ? ` The plan is an illustrative sample frozen at ${formatUtc(provenance.frozenAt)} in the live-product format.`
+      : ` The plan was frozen at ${formatUtc(provenance.frozenAt)}, two hours before the deadline, and has not been edited since.`;
+
+  return `For FPL ${seasonLabel(decision.season)} Gameweek ${decision.gw} (deadline ${formatUtc(decision.deadline)}), the FPL Labs Pan optimiser picked ${plan.captain.webName} as captain and ${plan.viceCaptain.webName} as vice, a ${plan.formation}, and ${transferPhrase(plan)}, projecting ${plan.projectedSquadTotalXP.toFixed(1)} points.${chipBit}${freezeBit}${realised}`;
 }
 
 export function captainAnswer(decision: GameweekDecision): string {
   const plan = decision.validatedPlan;
+  const kind = datasetKindOf(decision);
   const agent = decision.arms.find((arm) => arm.id === 'agent');
-  const agentBit = agent
-    ? ` The high-ceiling approach instead captains ${agent.captain}.`
-    : '';
+  const otherLabel = kind === 'historical-replay' ? 'evidence-informed' : 'high-ceiling';
+  const agentBit =
+    agent && agent.captain !== plan.captain.webName
+      ? ` The ${otherLabel} approach instead captains ${agent.captain}.`
+      : kind === 'historical-replay'
+        ? ' Same-state evidence matched this captain.'
+        : '';
+  const xp =
+    kind === 'historical-replay' && plan.captain.expectedPoints === 0
+      ? `against ${plan.captain.opponent}`
+      : `(${plan.captain.expectedPoints.toFixed(1)} projected points) against ${plan.captain.opponent}`;
 
-  return `The selected plan captains ${plan.captain.webName} (${plan.captain.expectedPoints.toFixed(1)} projected points) against ${plan.captain.opponent}. Vice-captain is ${plan.viceCaptain.webName}.${agentBit}`;
+  return `The selected plan captains ${plan.captain.webName} ${xp}. Vice-captain is ${plan.viceCaptain.webName}.${agentBit}`;
 }
 
 export function chipOneLiner(chip: ChipScenarioData): string {
@@ -144,6 +209,10 @@ export function chipCheckAnswer(
   decision: GameweekDecision,
   chips: ChipScenarioData[]
 ): string {
+  const kind = datasetKindOf(decision);
+  if (kind === 'historical-replay') {
+    return 'No chip was played. The 2025/26 reconstructive path left Wildcard, Free Hit, Triple Captain and Bench Boost unused, including in Gameweek 34 when both the optimiser and the template took an 8-point hit in a blank.';
+  }
   const planChip =
     decision.validatedPlan.chipUsed === 'none'
       ? 'No chip is in the selected plan this week.'
@@ -169,7 +238,15 @@ export function simAnswer(sim: HistoricalSim): string {
   return `What-if for FPL ${seasonLabel(sim.season)} Gameweek ${sim.gw}: ${sim.hypothesis} Before kick-off the alternative was ${sign}${treatment.deltaVsControl.toFixed(1)} projected points versus the control (${control.projectedEP.toFixed(1)} vs ${treatment.projectedEP.toFixed(1)}).${realised}`;
 }
 
-export function verifyCopy(frozenAt: string, hash: string, entity: string): string {
+export function verifyCopy(
+  frozenAt: string,
+  hash: string,
+  entity: string,
+  kind?: DatasetKind
+): string {
+  if (kind === 'historical-replay') {
+    return `${entity} is a reconstructive snapshot hashed with SHA-256 (${hash}), with cutoff ${formatUtc(frozenAt)} (first kickoff minus 90 minutes). Download the JSON to inspect the rebuilt inputs. This is not a live two-hour freeze.`;
+  }
   return `${entity} was written to a JSON snapshot at ${formatUtc(frozenAt)} and hashed with SHA-256 (${hash}). Download the snapshot to inspect the frozen inputs. The freeze rule is described in Methods.`;
 }
 
@@ -182,12 +259,23 @@ export function jsonAlternate(htmlPath: string, snapshotPath: string) {
   };
 }
 
-export function gameweekPath(gw: number): string {
-  return `/decisions/gw/${gw}`;
+export function gameweekPath(season: string, gw: number): string {
+  if (season === '2026-27') {
+    return `/decisions/gw/${gw}`;
+  }
+  return `/seasons/${season}/gw/${gw}`;
 }
 
-export function gameweekSnapshotPath(gw: number): string {
-  return `/decisions/gw/${gw}/snapshot.json`;
+export function gameweekSnapshotPath(season: string, gw: number): string {
+  return `${gameweekPath(season, gw)}/snapshot.json`;
+}
+
+export function seasonPath(season: string): string {
+  return `/seasons/${season}`;
+}
+
+export function seasonSnapshotPath(season: string): string {
+  return `/seasons/${season}/snapshot.json`;
 }
 
 export function chipPath(chip: string, gw: number): string {

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: '%s | FPL Labs Pan',
   },
   description:
-    'Frozen FPL gameweek teams, captains, transfers and chip timing. Each plan is locked two hours before the deadline and published as a checkable JSON snapshot.',
+    'FPL gameweek teams, captains, transfers and chip timing. 2025/26 is a full reconstructive replay with downloadable JSON. Live seasons will freeze two hours before the deadline.',
   keywords: [
     'FPL',
     'Fantasy Premier League',
@@ -51,14 +51,14 @@ export const metadata: Metadata = {
     url: siteUrl,
     title: 'FPL Labs Pan | Pre-deadline FPL decisions',
     description:
-      'Frozen FPL gameweek teams, captains, transfers and chip timing, published before the deadline.',
+      'FPL gameweek teams, captains, transfers and chip timing, with a reconstructive 2025/26 season and JSON snapshots.',
     siteName: 'FPL Labs Pan',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'FPL Labs Pan | Pre-deadline FPL decisions',
     description:
-      'Frozen FPL gameweek teams, captains, transfers and chip timing, published before the deadline.',
+      'FPL gameweek teams, captains, transfers and chip timing, with a reconstructive 2025/26 season and JSON snapshots.',
     creator: '@FPLabsPan',
   },
   robots: {
@@ -86,7 +86,7 @@ export default function RootLayout({
     alternateName: 'FPL Decision Lab',
     url: siteUrl,
     description:
-      'Frozen FPL gameweek teams, captains, transfers and chip timing. Each plan is locked two hours before the deadline.',
+      'FPL gameweek teams, captains and chip timing. 2025/26 is a reconstructive replay with JSON snapshots.',
     publisher: {
       '@type': 'Organization',
       name: 'FPL Labs Pan',

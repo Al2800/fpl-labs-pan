@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { getLatestGameweekDecision } from '@/lib/data';
-import { chipPath, gameweekPath, statusLabel } from '@/lib/present';
+import { getFeaturedGameweek } from '@/lib/data';
+import { gameweekPath, statusLabel } from '@/lib/present';
 
 export function Navbar() {
-  const latest = getLatestGameweekDecision();
+  const latest = getFeaturedGameweek();
 
   return (
     <header className="border-b border-neutral-200 bg-white">
@@ -11,27 +11,27 @@ export function Navbar() {
         <Link href="/" className="shrink-0">
           <span className="font-semibold tracking-tight">FPL Labs Pan</span>
           <span className="hidden sm:inline text-sm text-neutral-500 ml-2">
-            Pre-deadline FPL decisions
+            Checkable FPL decisions
           </span>
         </Link>
 
         <nav className="flex items-center gap-4 text-sm">
-          <Link href="/decisions" className="hover:underline">
+          <Link href="/seasons" className="hover:underline">
             Decisions
           </Link>
-          <Link href={chipPath('tc', latest.gw)} className="hover:underline">
+          <Link href="/chips" className="hover:underline">
             Chips
           </Link>
-          <Link href="/sims" className="hover:underline">
-            What-ifs
+          <Link href="/guides" className="hover:underline">
+            Guides
           </Link>
-          <Link href="/methods" className="hover:underline">
+          <Link href="/methods" className="hidden sm:inline hover:underline">
             Methods
           </Link>
-          <Link href="/about" className="hidden sm:inline hover:underline">
-            About
-          </Link>
-          <Link href={gameweekPath(latest.gw)} className="hidden md:inline text-neutral-600">
+          <Link
+            href={gameweekPath(latest.season, latest.gw)}
+            className="hidden md:inline text-neutral-600"
+          >
             GW{latest.gw} · {statusLabel(latest.status)}
           </Link>
         </nav>

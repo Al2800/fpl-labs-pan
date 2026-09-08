@@ -1,10 +1,10 @@
-import { getAllGameweeks, getGameweekDecision } from '@/lib/data';
+import { getDemoGameweeks, getGameweekDecision } from '@/lib/data';
 import { snapshotNotFound, snapshotResponse } from '@/lib/snapshot';
 
 export const dynamic = 'force-static';
 
 export function generateStaticParams() {
-  return getAllGameweeks().map((gw) => ({ n: gw.gw.toString() }));
+  return getDemoGameweeks().map((gw) => ({ n: gw.gw.toString() }));
 }
 
 export async function GET(

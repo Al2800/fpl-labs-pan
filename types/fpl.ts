@@ -2,6 +2,7 @@ export type Position = 'GKP' | 'DEF' | 'MID' | 'FWD';
 export type ChipType = 'none' | 'tc' | 'bb' | 'fh' | 'wc';
 export type ArmId = 'baseline' | 'optimiser' | 'agent';
 export type GameweekStatus = 'completed' | 'live' | 'upcoming';
+export type DatasetKind = 'historical-replay' | 'illustrative-sample' | 'live-freeze';
 
 export interface PlayerSelection {
   id: string;
@@ -84,6 +85,8 @@ export interface ProvenanceMetadata {
   executionTimestamp: string;
   solverParameters: SolverParameters;
   isDemoSample: boolean;
+  datasetKind?: DatasetKind;
+  limitations?: string[];
 }
 
 export interface PolicyArmSummary {
@@ -112,6 +115,7 @@ export interface GameweekDecision {
   title: string;
   deadline: string; // ISO 8601
   status: GameweekStatus;
+  datasetKind?: DatasetKind;
   provenance: ProvenanceMetadata;
   validatedPlan: ValidatedPlan;
   arms: PolicyArmSummary[];
@@ -125,6 +129,62 @@ export interface GameweekDecision {
     };
     divergenceNotes: string;
   };
+}
+
+export interface SeasonWeekRow {
+  gw: number;
+  captain: string;
+  formation: string;
+  projected: number;
+  points: number | null;
+  templatePoints: number | null;
+  evidencePoints: number | null;
+  transfers: number;
+  hits: number;
+  chip: ChipType;
+  hash: string;
+}
+
+export interface SeasonIndex {
+  id: string;
+  kind: DatasetKind;
+  title: string;
+  summary: string;
+  gameweeks: number;
+  optimiserPoints: number;
+  templatePoints: number;
+  evidencePoints: number;
+  chipsPlayed: SeasonWeekRow[];
+  rows: SeasonWeekRow[];
+}
+
+export interface ReplayForkNotes {
+  kind: 'exploratory-fork';
+  disclaimer: string;
+  canonicalNet: number;
+  forkHybridNet: number;
+  forkDeltaGw12to38: number;
+  sameStateEvidenceDelta: number;
+  chipsPlayed: ChipType[];
+  gw34: {
+    hitCost: number;
+    transfers: number;
+    freeTransfers: number;
+    blank: boolean;
+    optimiserNet: number;
+    templateNet: number;
+  };
+}
+
+export interface SquadCalibration {
+  season: string;
+  gameweeks: number;
+  playerRounds: number;
+  squadMae: number;
+  squadBias: number;
+  playerMae: number;
+  playerBias: number;
+  note: string;
 }
 
 export interface ArmDetailFull {

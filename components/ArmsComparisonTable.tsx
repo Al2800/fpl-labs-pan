@@ -1,12 +1,13 @@
 import Link from 'next/link';
-import { PolicyArmSummary } from '@/types/fpl';
-import { ARM_LABELS, replayPath } from '@/lib/present';
+import { DatasetKind, PolicyArmSummary } from '@/types/fpl';
+import { armLabel, replayPath } from '@/lib/present';
 
 interface ArmsComparisonTableProps {
   arms: PolicyArmSummary[];
   season: string;
   gw: number;
   compact?: boolean;
+  kind?: DatasetKind;
 }
 
 export function ArmsComparisonTable({
@@ -14,14 +15,19 @@ export function ArmsComparisonTable({
   season,
   gw,
   compact = false,
+  kind,
 }: ArmsComparisonTableProps) {
+  const showDetail = kind !== 'historical-replay';
+  const intro =
+    kind === 'historical-replay'
+      ? 'Template (roll transfers), optimiser (selected plan), and same-state evidence. In this ingest, evidence matched the optimiser every week.'
+      : 'Template (hold transfers), optimiser (selected plan), and high-ceiling (more risk).';
+
   return (
     <div className="border border-neutral-200 bg-white overflow-hidden">
       <div className="px-4 py-3 border-b border-neutral-200">
         <h2 className="text-lg font-semibold">Three approaches compared</h2>
-        <p className="text-sm text-neutral-600 mt-1">
-          Template (hold transfers), optimiser (selected plan), and high-ceiling (more risk).
-        </p>
+        <p className="text-sm text-neutral-600 mt-1">{intro}</p>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left">
@@ -51,15 +57,17 @@ export function ArmsComparisonTable({
               <th scope="col" className="py-2 px-3 font-medium">
                 Note
               </th>
-              <th scope="col" className="py-2 px-3 font-medium">
-                Detail
-              </th>
+              {showDetail ? (
+                <th scope="col" className="py-2 px-3 font-medium">
+                  Detail
+                </th>
+              ) : null}
             </tr>
           </thead>
           <tbody>
             {arms.map((arm) => {
               const selected = arm.id === 'optimiser';
-              const label = ARM_LABELS[arm.id] ?? arm.shortLabel;
+              const label = armLabel(arm, kind);
               return (
                 <tr key={arm.id} className="border-t border-neutral-200">
                   <td className="py-3 px-3">
@@ -81,7 +89,9 @@ export function ArmsComparisonTable({
                     {arm.hits > 0 ? ` (−${arm.hits * 4} hit)` : ''}
                   </td>
                   <td className="py-3 px-3 text-right tabular-nums">
-                    {arm.objectiveEP.toFixed(1)}
+                    {kind === 'historical-replay' && arm.objectiveEP === 0
+                      ? '—'
+                      : arm.objectiveEP.toFixed(1)}
                   </td>
                   <td className="py-3 px-3 text-right tabular-nums">
                     {arm.decisionDeltaVsBaseline === 0
@@ -94,14 +104,16 @@ export function ArmsComparisonTable({
                   <td className="py-3 px-3 text-neutral-600">
                     {arm.realisedRankEffect || 'Settlement in progress'}
                   </td>
-                  <td className="py-3 px-3">
-                    <Link
-                      href={replayPath(season, gw, arm.id)}
-                      className="underline underline-offset-2"
-                    >
-                      Detail
-                    </Link>
-                  </td>
+                  {showDetail ? (
+                    <td className="py-3 px-3">
+                      <Link
+                        href={replayPath(season, gw, arm.id)}
+                        className="underline underline-offset-2"
+                      >
+                        Detail
+                      </Link>
+                    </td>
+                  ) : null}
                 </tr>
               );
             })}

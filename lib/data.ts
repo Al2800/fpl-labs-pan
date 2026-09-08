@@ -1,3 +1,6 @@
+import { readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
 import gw1Data from '@/data/gameweeks/gw1.json';
 import gw2Data from '@/data/gameweeks/gw2.json';
 import gw3Data from '@/data/gameweeks/gw3.json';
@@ -9,6 +12,7 @@ import calibrationData from '@/data/calibration.json';
 import simHaaland from '@/data/sims/haaland-vs-no-haaland.json';
 import simChip from '@/data/sims/chip-vs-no-chip.json';
 import simBaseline from '@/data/sims/baseline-vs-optimiser.json';
+import forkNotesData from '@/data/seasons/2025-26/fork-notes.json';
 
 import {
   GameweekDecision,
@@ -18,7 +22,13 @@ import {
   ChipScenarioData,
   PositionCalibrationMetric,
   HistoricalSim,
+  SeasonIndex,
+  ReplayForkNotes,
+  SquadCalibration,
 } from '@/types/fpl';
+
+export const DEMO_SEASON = '2026-27';
+export const REPLAY_SEASON = '2025-26';
 
 const HISTORICAL_SIMS: HistoricalSim[] = [
   simHaaland as unknown as HistoricalSim,
@@ -26,11 +36,18 @@ const HISTORICAL_SIMS: HistoricalSim[] = [
   simBaseline as unknown as HistoricalSim,
 ];
 
-const GAMEWEEKS: GameweekDecision[] = [
+const DEMO_GAMEWEEKS: GameweekDecision[] = [
   gw1Data as unknown as GameweekDecision,
   gw2Data as unknown as GameweekDecision,
   gw3Data as unknown as GameweekDecision,
-];
+].map((gw) => ({
+  ...gw,
+  datasetKind: gw.datasetKind ?? 'illustrative-sample',
+  provenance: {
+    ...gw.provenance,
+    datasetKind: gw.provenance.datasetKind ?? 'illustrative-sample',
+  },
+}));
 
 const CHIP_DATA_MAP: Record<ChipType, ChipScenarioData> = {
   none: tcData as unknown as ChipScenarioData,
@@ -40,25 +57,124 @@ const CHIP_DATA_MAP: Record<ChipType, ChipScenarioData> = {
   wc: wcData as unknown as ChipScenarioData,
 };
 
+let replayCache: GameweekDecision[] | null = null;
+let replayIndexCache: SeasonIndex | null = null;
+
+function seasonDir(season: string): string {
+  return join(process.cwd(), 'data', 'seasons', season);
+}
+
+function loadReplayGameweeks(): GameweekDecision[] {
+  if (replayCache) return replayCache;
+  const dir = seasonDir(REPLAY_SEASON);
+  const files = readdirSync(dir)
+    .filter((name) => /^gw-\d+\.json$/.test(name))
+    .sort();
+  replayCache = files.map((name) =>
+    JSON.parse(readFileSync(join(dir, name), 'utf8')) as GameweekDecision
+  );
+  return replayCache;
+}
+
+export function getReplayForkNotes(): ReplayForkNotes {
+  return forkNotesData as ReplayForkNotes;
+}
+
+export function getSeasonIndex(season: string): SeasonIndex | null {
+  if (season === REPLAY_SEASON) {
+    if (!replayIndexCache) {
+      replayIndexCache = JSON.parse(
+        readFileSync(join(seasonDir(REPLAY_SEASON), 'index.json'), 'utf8')
+      ) as SeasonIndex;
+    }
+    return replayIndexCache;
+  }
+  if (season === DEMO_SEASON) {
+    const completed = DEMO_GAMEWEEKS.filter(
+      (gw) => gw.validatedPlan.realisedSquadTotalPoints !== null
+    );
+    return {
+      id: DEMO_SEASON,
+      kind: 'illustrative-sample',
+      title: 'FPL 2026/27 illustrative sample',
+      summary:
+        'Three illustrative gameweeks showing the live-product page format. Plans, hashes and scores are fixtures, not a live freeze.',
+      gameweeks: DEMO_GAMEWEEKS.length,
+      optimiserPoints: completed.reduce(
+        (sum, gw) => sum + (gw.validatedPlan.realisedSquadTotalPoints || 0),
+        0
+      ),
+      templatePoints: 0,
+      evidencePoints: 0,
+      chipsPlayed: [],
+      rows: DEMO_GAMEWEEKS.map((gw) => ({
+        gw: gw.gw,
+        captain: gw.validatedPlan.captain.webName,
+        formation: gw.validatedPlan.formation,
+        projected: gw.validatedPlan.projectedSquadTotalXP,
+        points: gw.validatedPlan.realisedSquadTotalPoints,
+        templatePoints: gw.arms.find((arm) => arm.id === 'baseline')?.realisedPoints ?? null,
+        evidencePoints: gw.arms.find((arm) => arm.id === 'agent')?.realisedPoints ?? null,
+        transfers: gw.validatedPlan.transferActions.length,
+        hits: gw.validatedPlan.hitCost,
+        chip: gw.validatedPlan.chipUsed,
+        hash: gw.provenance.snapshotHash.replace(/^sha256:/, ''),
+      })),
+    };
+  }
+  return null;
+}
+
+export function getSeasons(): SeasonIndex[] {
+  return [getSeasonIndex(REPLAY_SEASON), getSeasonIndex(DEMO_SEASON)].filter(
+    (season): season is SeasonIndex => season !== null
+  );
+}
+
+export function getDemoGameweeks(): GameweekDecision[] {
+  return DEMO_GAMEWEEKS;
+}
+
+export function getSeasonGameweeks(season: string): GameweekDecision[] {
+  if (season === REPLAY_SEASON) return loadReplayGameweeks();
+  if (season === DEMO_SEASON) return DEMO_GAMEWEEKS;
+  return [];
+}
+
 export function getAllGameweeks(): GameweekDecision[] {
-  return GAMEWEEKS;
+  return [...loadReplayGameweeks(), ...DEMO_GAMEWEEKS];
 }
 
 export function getGameweekDecision(gw: number): GameweekDecision | null {
-  const match = GAMEWEEKS.find((g) => g.gw === gw);
-  return match || null;
+  return DEMO_GAMEWEEKS.find((item) => item.gw === gw) ?? null;
 }
 
-export function getLatestGameweekDecision(): GameweekDecision {
-  const ordered = [...GAMEWEEKS].sort((a, b) => a.gw - b.gw);
+export function getSeasonGameweek(season: string, gw: number): GameweekDecision | null {
+  return getSeasonGameweeks(season).find((item) => item.gw === gw) ?? null;
+}
+
+export function getLatestDemoGameweek(): GameweekDecision {
+  const ordered = [...DEMO_GAMEWEEKS].sort((a, b) => a.gw - b.gw);
   return ordered[ordered.length - 1];
 }
 
-export function getAdjacentGameweeks(gw: number): {
+export function getFeaturedGameweek(): GameweekDecision {
+  const replay = loadReplayGameweeks();
+  return replay[replay.length - 1];
+}
+
+export function getLatestGameweekDecision(): GameweekDecision {
+  return getFeaturedGameweek();
+}
+
+export function getAdjacentGameweeks(
+  season: string,
+  gw: number
+): {
   prev: GameweekDecision | null;
   next: GameweekDecision | null;
 } {
-  const ordered = [...GAMEWEEKS].sort((a, b) => a.gw - b.gw);
+  const ordered = getSeasonGameweeks(season);
   const index = ordered.findIndex((item) => item.gw === gw);
   if (index === -1) {
     return { prev: null, next: null };
@@ -73,6 +189,40 @@ export function getCalibrationMetrics(): PositionCalibrationMetric[] {
   return calibrationData as PositionCalibrationMetric[];
 }
 
+export function getReplayCalibration(season = REPLAY_SEASON): SquadCalibration | null {
+  const weeks = getSeasonGameweeks(season).filter(
+    (gw) =>
+      gw.validatedPlan.projectedSquadTotalXP > 0 &&
+      gw.validatedPlan.realisedSquadTotalPoints !== null
+  );
+  if (weeks.length === 0) return null;
+
+  const squadErrors = weeks.map(
+    (gw) => gw.validatedPlan.realisedSquadTotalPoints! - gw.validatedPlan.projectedSquadTotalXP
+  );
+  const players = weeks.flatMap((gw) =>
+    gw.validatedPlan.startingXI.filter(
+      (player) => player.expectedPoints > 0 && player.realisedPoints !== null
+    )
+  );
+  const playerErrors = players.map(
+    (player) => (player.realisedPoints as number) - player.expectedPoints
+  );
+  const mean = (values: number[]) => values.reduce((sum, value) => sum + value, 0) / values.length;
+  const mae = (values: number[]) => mean(values.map(Math.abs));
+
+  return {
+    season,
+    gameweeks: weeks.length,
+    playerRounds: players.length,
+    squadMae: mae(squadErrors),
+    squadBias: mean(squadErrors),
+    playerMae: players.length ? mae(playerErrors) : 0,
+    playerBias: players.length ? mean(playerErrors) : 0,
+    note: 'Computed from this reconstructive replay (GW2–GW38). GW1 had no locked expected-points objective. Player errors compare unmultiplied starting-XI points to the locked forecast.',
+  };
+}
+
 export function getAllSims(): HistoricalSim[] {
   return HISTORICAL_SIMS;
 }
@@ -84,7 +234,8 @@ export function getSimById(season: string, gw: number, scenario: string): Histor
   return match || null;
 }
 
-export function getSimsForGameweek(gw: number): HistoricalSim[] {
+export function getSimsForGameweek(season: string, gw: number): HistoricalSim[] {
+  if (season !== DEMO_SEASON) return [];
   return HISTORICAL_SIMS.filter((s) => s.gw === gw || s.relatedGw === gw);
 }
 
@@ -98,6 +249,7 @@ export function getChipScenario(chip: ChipType, gw: number): ChipScenarioData | 
 }
 
 export function getArmDetail(season: string, gw: number, armId: ArmId): ArmDetailFull | null {
+  if (season !== DEMO_SEASON) return null;
   const gwDecision = getGameweekDecision(gw);
   if (!gwDecision) return null;
 

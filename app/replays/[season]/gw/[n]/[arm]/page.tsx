@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { getArmDetail, getAllGameweeks } from '@/lib/data';
+import { getArmDetail, getDemoGameweeks } from '@/lib/data';
 import { ArmId } from '@/types/fpl';
 import { JsonLd } from '@/components/JsonLd';
 import { TrustStrip } from '@/components/TrustStrip';
@@ -28,7 +28,7 @@ interface PageProps {
 
 export function generateStaticParams() {
   const params: Array<{ season: string; n: string; arm: string }> = [];
-  for (const gw of getAllGameweeks()) {
+  for (const gw of getDemoGameweeks()) {
     for (const arm of ARM_IDS) {
       params.push({ season: gw.season, n: gw.gw.toString(), arm });
     }
@@ -92,13 +92,13 @@ export default async function ArmDetailPage({ params }: PageProps) {
         data={breadcrumbList([
           { name: 'Home', path: '/' },
           { name: 'Decisions', path: '/decisions' },
-          { name: `GW${gwNum}`, path: gameweekPath(gwNum) },
+          { name: `GW${gwNum}`, path: gameweekPath(season, gwNum) },
           { name: ARM_LABELS[arm as ArmId], path: replayPath(season, gwNum, arm) },
         ])}
       />
 
       <nav className="flex flex-wrap items-center justify-between gap-3 text-sm text-neutral-600">
-        <Link href={gameweekPath(gwNum)} className="underline underline-offset-2">
+        <Link href={gameweekPath(season, gwNum)} className="underline underline-offset-2">
           Back to Gameweek {gwNum}
         </Link>
         <p className="flex flex-wrap gap-3">
@@ -120,7 +120,7 @@ export default async function ArmDetailPage({ params }: PageProps) {
         <p className="text-sm text-neutral-600">{armMeta.description}</p>
       </header>
 
-      <TrustStrip provenance={provenance} snapshotHref={snapshotHref} />
+      <TrustStrip provenance={provenance} snapshotHref={snapshotHref} kind="illustrative-sample" />
 
       <dl className="grid grid-cols-2 sm:grid-cols-4 border border-neutral-200 bg-white">
         <div className="p-3 border-r border-b border-neutral-200">

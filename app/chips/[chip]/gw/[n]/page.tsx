@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { getChipScenario, getAllGameweeks, getGameweekDecision } from '@/lib/data';
+import { getChipScenario, getDemoGameweeks, getGameweekDecision } from '@/lib/data';
 import { ChipType } from '@/types/fpl';
 import { JsonLd } from '@/components/JsonLd';
 import { TrustStrip } from '@/components/TrustStrip';
@@ -29,7 +29,7 @@ interface PageProps {
 export function generateStaticParams() {
   const params: Array<{ chip: string; n: string }> = [];
   for (const chip of CHIP_IDS) {
-    for (const gw of getAllGameweeks()) {
+    for (const gw of getDemoGameweeks()) {
       params.push({ chip, n: gw.gw.toString() });
     }
   }
@@ -85,13 +85,13 @@ export default async function ChipScenarioPage({ params }: PageProps) {
       <JsonLd
         data={breadcrumbList([
           { name: 'Home', path: '/' },
-          { name: `Gameweek ${gwNum}`, path: gameweekPath(gwNum) },
+          { name: `Gameweek ${gwNum}`, path: gameweekPath('2026-27', gwNum) },
           { name: chipData.chipName, path: chipPath(chip, gwNum) },
         ])}
       />
 
       <nav className="flex flex-wrap items-center justify-between gap-3 text-sm text-neutral-600">
-        <Link href={gameweekPath(gwNum)} className="underline underline-offset-2">
+        <Link href={gameweekPath('2026-27', gwNum)} className="underline underline-offset-2">
           Back to Gameweek {gwNum}
         </Link>
         <p className="flex flex-wrap gap-3">
@@ -118,6 +118,7 @@ export default async function ChipScenarioPage({ params }: PageProps) {
           provenance={gwDecision.provenance}
           snapshotHref={snapshotHref}
           status={gwDecision.status}
+          kind="illustrative-sample"
         />
       ) : null}
 
