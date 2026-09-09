@@ -12,7 +12,7 @@ export async function GET() {
   const seasons = getSeasons();
   const gws = getSeasonGameweeks('2025-26');
   const lines = [
-    '# FPL Labs Pan',
+    '# FPL Replay',
     '',
     '> Frozen and reconstructive FPL decisions: team, captain, transfers, chips. JSON twins at the same path plus /snapshot.json.',
     '',

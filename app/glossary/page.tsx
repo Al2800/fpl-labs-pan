@@ -5,7 +5,7 @@ import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbList } from '@/lib/present';
 
 export const metadata: Metadata = {
-  title: 'FPL Labs Pan glossary',
+  title: 'FPL Replay glossary',
   description:
     'Definitions for xP, FDR, T-120 freeze, reconstructed cutoff, approaches, hits, net points, and JSON snapshots.',
 };

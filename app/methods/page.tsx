@@ -7,7 +7,7 @@ import { breadcrumbList } from '@/lib/present';
 export const metadata: Metadata = {
   title: 'Methods and calibration',
   description:
-    'How FPL Labs Pan builds a gameweek plan, how a reconstructive replay differs from a two-hour freeze, and error metrics for the 2025/26 ingest.',
+    'How FPL Replay builds a gameweek plan, how a reconstructive replay differs from a two-hour freeze, and error metrics for the 2025/26 ingest.',
 };
 
 export default function MethodsPage() {

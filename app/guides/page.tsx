@@ -7,7 +7,7 @@ import { breadcrumbList } from '@/lib/present';
 export const metadata: Metadata = {
   title: 'FPL guides',
   description:
-    'Guides for reading FPL Labs Pan: the 2025/26 reconstructive replay, freeze vs replay, chips, and Gameweek 34.',
+    'Guides for reading FPL Replay: the 2025/26 reconstructive replay, freeze vs replay, chips, and Gameweek 34.',
 };
 
 export default function GuidesIndexPage() {

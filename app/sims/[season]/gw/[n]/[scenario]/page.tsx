@@ -79,7 +79,7 @@ export default async function SimulationDetailPage({ params }: PageProps) {
     datePublished: sim.provenance.frozenAt,
     creator: {
       '@type': 'Organization',
-      name: 'FPL Labs Pan',
+      name: 'FPL Replay',
       url: absoluteUrl('/'),
     },
     distribution: {

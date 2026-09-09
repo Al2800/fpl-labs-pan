@@ -7,7 +7,7 @@ import { breadcrumbList, seasonLabel, seasonPath } from '@/lib/present';
 export const metadata: Metadata = {
   title: 'FPL seasons',
   description:
-    'FPL Labs Pan seasons: the 2025/26 reconstructive replay and the 2026/27 illustrative sample of the live format.',
+    'FPL Replay seasons: the 2025/26 reconstructive replay and the 2026/27 illustrative sample of the live format.',
 };
 
 export default function SeasonsIndexPage() {

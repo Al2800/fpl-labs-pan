@@ -9,7 +9,7 @@ export function Navbar() {
     <header className="border-b border-neutral-200 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
         <Link href="/" className="shrink-0">
-          <span className="font-semibold tracking-tight">FPL Labs Pan</span>
+          <span className="font-semibold tracking-tight">FPL Replay</span>
           <span className="hidden sm:inline text-sm text-neutral-500 ml-2">
             Checkable FPL decisions
           </span>

@@ -163,8 +163,8 @@ The application is structured as a standard zero-configuration Next.js App Route
    - **Build Command**: `next build`
    - **Output Directory**: `.next`
 4. Set Environment Variables (optional override):
-   - `NEXT_PUBLIC_SITE_URL`: `https://fpl-labs-pan.vercel.app` (or your production custom domain)
-   - `SITE_URL`: `https://fpl-labs-pan.vercel.app`
+   - `NEXT_PUBLIC_SITE_URL`: `https://fplreplay.com`
+   - `SITE_URL`: `https://fplreplay.com`
 5. Click **Deploy**. Vercel will build all static pages and deploy previews on PRs and production on merges to `main`.
 
 ---

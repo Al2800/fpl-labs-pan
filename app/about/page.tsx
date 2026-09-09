@@ -6,7 +6,7 @@ import { breadcrumbList } from '@/lib/present';
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'FPL Labs Pan publishes frozen FPL gameweek teams, captains and chip timing. Independent, not affiliated with the Premier League or FPL.',
+    'FPL Replay publishes frozen FPL gameweek teams, captains and chip timing. Independent, not affiliated with the Premier League or FPL.',
 };
 
 export default function AboutPage() {
@@ -20,7 +20,7 @@ export default function AboutPage() {
       />
 
       <header className="space-y-2">
-        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">About FPL Labs Pan</h1>
+        <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">About FPL Replay</h1>
         <p className="text-neutral-700 leading-relaxed">
           A public record of FPL decisions that can be checked: the team, the captain, the
           transfers, and whether a chip was worth playing, all frozen before the deadline.
@@ -83,7 +83,7 @@ export default function AboutPage() {
       <section className="space-y-2 text-sm text-neutral-600">
         <h2 className="text-lg font-semibold text-neutral-900">Disclaimer</h2>
         <p>
-          FPL Labs Pan is independent. It is not affiliated with, sponsored by, or endorsed by the
+          FPL Replay is independent. It is not affiliated with, sponsored by, or endorsed by the
           Football Association Premier League Ltd, Fantasy Premier League, or any Premier League
           club. Trademarks remain with their owners.
         </p>

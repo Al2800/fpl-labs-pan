@@ -28,7 +28,7 @@ export default function HomePage() {
           FPL decisions you can check
         </h1>
         <p className="text-neutral-700 leading-relaxed max-w-3xl">
-          FPL Labs Pan publishes the team, captain, transfers and chip call for each gameweek, then
+          FPL Replay publishes the team, captain, transfers and chip call for each gameweek, then
           scores them on official points. 2025/26 is a full reconstructive replay. 2026/27 pages
           show the live format as an illustrative sample.
         </p>

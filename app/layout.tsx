@@ -22,8 +22,8 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'FPL Labs Pan | Pre-deadline FPL decisions',
-    template: '%s | FPL Labs Pan',
+    default: 'FPL Replay | Pre-deadline FPL decisions',
+    template: '%s | FPL Replay',
   },
   description:
     'FPL gameweek teams, captains, transfers and chip timing. 2025/26 is a full reconstructive replay with downloadable JSON. Live seasons will freeze two hours before the deadline.',
@@ -35,11 +35,11 @@ export const metadata: Metadata = {
     'FPL transfers',
     'Triple Captain',
     'Wildcard',
-    'FPL Labs Pan',
+    'FPL Replay',
   ],
-  authors: [{ name: 'FPL Labs Pan', url: 'https://x.com/FPLabsPan' }],
-  creator: 'FPL Labs Pan',
-  publisher: 'FPL Labs Pan',
+  authors: [{ name: 'FPL Replay', url: 'https://x.com/FPLabsPan' }],
+  creator: 'FPL Replay',
+  publisher: 'FPL Replay',
   formatDetection: {
     email: false,
     address: false,
@@ -49,14 +49,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_GB',
     url: siteUrl,
-    title: 'FPL Labs Pan | Pre-deadline FPL decisions',
+    title: 'FPL Replay | Pre-deadline FPL decisions',
     description:
       'FPL gameweek teams, captains, transfers and chip timing, with a reconstructive 2025/26 season and JSON snapshots.',
-    siteName: 'FPL Labs Pan',
+    siteName: 'FPL Replay',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FPL Labs Pan | Pre-deadline FPL decisions',
+    title: 'FPL Replay | Pre-deadline FPL decisions',
     description:
       'FPL gameweek teams, captains, transfers and chip timing, with a reconstructive 2025/26 season and JSON snapshots.',
     creator: '@FPLabsPan',
@@ -82,14 +82,14 @@ export default function RootLayout({
   const websiteJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'FPL Labs Pan',
+    name: 'FPL Replay',
     alternateName: 'FPL Decision Lab',
     url: siteUrl,
     description:
       'FPL gameweek teams, captains and chip timing. 2025/26 is a reconstructive replay with JSON snapshots.',
     publisher: {
       '@type': 'Organization',
-      name: 'FPL Labs Pan',
+      name: 'FPL Replay',
       url: siteUrl,
       sameAs: ['https://x.com/FPLabsPan'],
     },

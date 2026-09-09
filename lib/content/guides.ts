@@ -60,7 +60,7 @@ export const GUIDES: GuidePage[] = [
     description:
       'A reconstructive replay rebuilds pre-deadline inputs after the season. It is not the same as locking odds and minutes two hours before a live deadline.',
     answer:
-      'A reconstructive replay rebuilds what the lab could have known before a historical deadline, then scores the plan on official points. The 2025/26 cutoff is first kickoff minus 90 minutes. A live FPL Labs Pan freeze will lock inputs two hours before the official deadline and publish a hash before results.',
+      'A reconstructive replay rebuilds what the lab could have known before a historical deadline, then scores the plan on official points. The 2025/26 cutoff is first kickoff minus 90 minutes. A live FPL Replay freeze will lock inputs two hours before the official deadline and publish a hash before results.',
     sections: [
       {
         heading: 'What is rebuilt',

@@ -105,7 +105,7 @@ export function GameweekDecisionView({
     datePublished: provenance.frozenAt,
     creator: {
       '@type': 'Organization',
-      name: 'FPL Labs Pan',
+      name: 'FPL Replay',
       url: absoluteUrl('/'),
     },
     temporalCoverage: decision.deadline,

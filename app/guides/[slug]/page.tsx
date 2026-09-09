@@ -34,7 +34,7 @@ export default async function GuidePage({ params }: PageProps) {
     headline: guide.title,
     description: guide.description,
     url: absoluteUrl(`/guides/${guide.slug}`),
-    author: { '@type': 'Organization', name: 'FPL Labs Pan' },
+    author: { '@type': 'Organization', name: 'FPL Replay' },
   };
 
   return (

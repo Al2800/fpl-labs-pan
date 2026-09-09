@@ -173,7 +173,7 @@ export function gameweekAnswer(decision: GameweekDecision): string {
       ? ` The plan is an illustrative sample frozen at ${formatUtc(provenance.frozenAt)} in the live-product format.`
       : ` The plan was frozen at ${formatUtc(provenance.frozenAt)}, two hours before the deadline, and has not been edited since.`;
 
-  return `For FPL ${seasonLabel(decision.season)} Gameweek ${decision.gw} (deadline ${formatUtc(decision.deadline)}), the FPL Labs Pan optimiser picked ${plan.captain.webName} as captain and ${plan.viceCaptain.webName} as vice, a ${plan.formation}, and ${transferPhrase(plan)}, projecting ${plan.projectedSquadTotalXP.toFixed(1)} points.${chipBit}${freezeBit}${realised}`;
+  return `For FPL ${seasonLabel(decision.season)} Gameweek ${decision.gw} (deadline ${formatUtc(decision.deadline)}), the FPL Replay optimiser picked ${plan.captain.webName} as captain and ${plan.viceCaptain.webName} as vice, a ${plan.formation}, and ${transferPhrase(plan)}, projecting ${plan.projectedSquadTotalXP.toFixed(1)} points.${chipBit}${freezeBit}${realised}`;
 }
 
 export function captainAnswer(decision: GameweekDecision): string {

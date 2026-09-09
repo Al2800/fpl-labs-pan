@@ -12,7 +12,7 @@ export function Footer() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           <div className="space-y-2">
-            <div className="font-semibold text-neutral-900">FPL Labs Pan</div>
+            <div className="font-semibold text-neutral-900">FPL Replay</div>
             <p>
               Checkable FPL gameweek teams, captains, transfers and chip timing. 2025/26 is a
               reconstructive replay; live seasons will freeze two hours before the deadline.
@@ -99,7 +99,7 @@ export function Footer() {
         </div>
 
         <p className="text-xs text-neutral-500 leading-relaxed">
-          FPL Labs Pan is independent and is not affiliated with, sponsored by, or endorsed by the
+          FPL Replay is independent and is not affiliated with, sponsored by, or endorsed by the
           Football Association Premier League Ltd, Fantasy Premier League, or any Premier League
           club. Outputs are for research and entertainment — not financial, gambling, or betting
           advice.
