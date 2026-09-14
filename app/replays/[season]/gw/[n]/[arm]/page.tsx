@@ -48,14 +48,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = approachHeading(gwNum, season, arm as ArmId);
   const description = `${ARM_LABELS[arm as ArmId]} for FPL ${seasonLabel(season)} Gameweek ${gwNum}: ${armDetail.armMeta.description} Projected ${armDetail.armMeta.objectiveEP.toFixed(1)} points.`;
 
+  const path = replayPath(season, gwNum, arm);
+
   return {
     title,
     description,
     alternates: jsonAlternate(
-      replayPath(season, gwNum, arm),
+      path,
       replaySnapshotPath(season, gwNum, arm)
     ),
-    openGraph: { title, description },
+    openGraph: { title, description, url: path },
   };
 }
 

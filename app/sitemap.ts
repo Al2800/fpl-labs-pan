@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'daily', priority: 1.0 },
     { url: `${baseUrl}/seasons`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/seasons/2025-26`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.95 },
-    { url: `${baseUrl}/seasons/2025-26/snapshot.json`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.4 },
     { url: `${baseUrl}/decisions`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
     { url: `${baseUrl}/chips`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${baseUrl}/guides`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.85 },
@@ -49,12 +48,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.8,
     });
-    routes.push({
-      url: `${baseUrl}/seasons/${gw.season}/gw/${gw.gw}/snapshot.json`,
-      lastModified: new Date(gw.provenance.frozenAt),
-      changeFrequency: 'yearly',
-      priority: 0.4,
-    });
   }
 
   for (const gw of demoWeeks) {
@@ -63,12 +56,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(gw.provenance.frozenAt),
       changeFrequency: 'weekly',
       priority: 0.5,
-    });
-    routes.push({
-      url: `${baseUrl}/decisions/gw/${gw.gw}/snapshot.json`,
-      lastModified: new Date(gw.provenance.frozenAt),
-      changeFrequency: 'weekly',
-      priority: 0.2,
     });
 
     for (const arm of ARM_IDS) {

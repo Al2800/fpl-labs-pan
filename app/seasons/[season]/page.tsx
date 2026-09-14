@@ -32,6 +32,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: index.title,
     description: index.summary,
     alternates: jsonAlternate(seasonPath(season), seasonSnapshotPath(season)),
+    openGraph: {
+      title: index.title,
+      description: index.summary,
+      url: seasonPath(season),
+    },
   };
 }
 

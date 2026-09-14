@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: 'FPL what-ifs',
   description:
     'What-if FPL decisions held to the same pre-deadline freeze: Haaland vs no Haaland, chip timing, and template vs optimiser.',
+  alternates: {
+    canonical: '/sims',
+  },
+  openGraph: {
+    title: 'FPL what-ifs',
+    description:
+      'What-if FPL decisions held to the same pre-deadline freeze: Haaland vs no Haaland, chip timing, and template vs optimiser.',
+    url: '/sims',
+  },
 };
 
 export default function SimsIndexPage() {

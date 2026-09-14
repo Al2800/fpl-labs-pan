@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: 'FPL Replay glossary',
   description:
     'Definitions for xP, FDR, T-120 freeze, reconstructed cutoff, approaches, hits, net points, and JSON snapshots.',
+  alternates: {
+    canonical: '/glossary',
+  },
+  openGraph: {
+    title: 'FPL Replay glossary',
+    description:
+      'Definitions for xP, FDR, T-120 freeze, reconstructed cutoff, approaches, hits, net points, and JSON snapshots.',
+    url: '/glossary',
+  },
 };
 
 export default function GlossaryPage() {

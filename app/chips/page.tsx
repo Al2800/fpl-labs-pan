@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: 'FPL chips: Triple Captain, Bench Boost, Free Hit, Wildcard',
   description:
     'When to play FPL chips. The 2025/26 reconstructive replay never used one, including an 8-point hit in the Gameweek 34 blank.',
+  alternates: {
+    canonical: '/chips',
+  },
+  openGraph: {
+    title: 'FPL chips: Triple Captain, Bench Boost, Free Hit, Wildcard',
+    description:
+      'When to play FPL chips. The 2025/26 reconstructive replay never used one, including an 8-point hit in the Gameweek 34 blank.',
+    url: '/chips',
+  },
 };
 
 export default function ChipsIndexPage() {

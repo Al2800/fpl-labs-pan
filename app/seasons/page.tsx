@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: 'FPL seasons',
   description:
     'FPL Replay seasons: the 2025/26 reconstructive replay and the 2026/27 illustrative sample of the live format.',
+  alternates: {
+    canonical: '/seasons',
+  },
+  openGraph: {
+    title: 'FPL seasons',
+    description:
+      'FPL Replay seasons: the 2025/26 reconstructive replay and the 2026/27 illustrative sample of the live format.',
+    url: '/seasons',
+  },
 };
 
 export default function SeasonsIndexPage() {

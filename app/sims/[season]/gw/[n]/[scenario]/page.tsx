@@ -43,14 +43,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = `${sim.title} | FPL Gameweek ${sim.gw} what-if`;
   const description = simAnswer(sim);
 
+  const path = simPath(season, sim.gw, scenario);
+
   return {
     title,
     description,
     alternates: jsonAlternate(
-      simPath(season, sim.gw, scenario),
+      path,
       simSnapshotPath(season, sim.gw, scenario)
     ),
-    openGraph: { title, description },
+    openGraph: { title, description, url: path },
   };
 }
 

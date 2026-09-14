@@ -37,16 +37,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = gameweekHeading(decision);
   const description = gameweekAnswer(decision);
 
+  const path = gameweekPath(decision.season, decision.gw);
+
   return {
     title,
     description,
     alternates: jsonAlternate(
-      gameweekPath(decision.season, decision.gw),
+      path,
       gameweekSnapshotPath(decision.season, decision.gw)
     ),
     openGraph: {
       title,
       description,
+      url: path,
     },
   };
 }

@@ -31,7 +31,6 @@ export async function GET() {
     `- ${base}/`,
     `- ${base}/seasons`,
     `- ${base}/seasons/2025-26`,
-    `- ${base}/seasons/2025-26/snapshot.json`,
     `- ${base}/guides`,
     `- ${base}/chips`,
     `- ${base}/glossary`,

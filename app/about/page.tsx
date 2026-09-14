@@ -7,6 +7,15 @@ export const metadata: Metadata = {
   title: 'About',
   description:
     'FPL Replay publishes frozen FPL gameweek teams, captains and chip timing. Independent, not affiliated with the Premier League or FPL.',
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: 'About',
+    description:
+      'FPL Replay publishes frozen FPL gameweek teams, captains and chip timing. Independent, not affiliated with the Premier League or FPL.',
+    url: '/about',
+  },
 };
 
 export default function AboutPage() {
