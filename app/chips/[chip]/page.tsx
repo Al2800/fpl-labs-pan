@@ -24,9 +24,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { chip } = await params;
   const hub = getChipHub(chip);
   if (!hub) return { title: 'Chip not found' };
+  const path = chipHubPath(hub.slug);
   return {
     title: `When to play ${hub.name} in FPL`,
     description: hub.oneLiner,
+    alternates: {
+      canonical: path,
+    },
+    openGraph: {
+      title: `When to play ${hub.name} in FPL`,
+      description: hub.oneLiner,
+      url: path,
+    },
   };
 }
 

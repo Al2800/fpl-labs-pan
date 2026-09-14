@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: 'FPL gameweek decisions',
   description:
     'Archive of FPL gameweek teams, captains and transfers. 2025/26 is a reconstructive replay; 2026/27 is an illustrative sample.',
+  alternates: {
+    canonical: '/decisions',
+  },
+  openGraph: {
+    title: 'FPL gameweek decisions',
+    description:
+      'Archive of FPL gameweek teams, captains and transfers. 2025/26 is a reconstructive replay; 2026/27 is an illustrative sample.',
+    url: '/decisions',
+  },
 };
 
 export default function DecisionsIndexPage() {

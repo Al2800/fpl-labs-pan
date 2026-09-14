@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: 'Methods and calibration',
   description:
     'How FPL Replay builds a gameweek plan, how a reconstructive replay differs from a two-hour freeze, and error metrics for the 2025/26 ingest.',
+  alternates: {
+    canonical: '/methods',
+  },
+  openGraph: {
+    title: 'Methods and calibration',
+    description:
+      'How FPL Replay builds a gameweek plan, how a reconstructive replay differs from a two-hour freeze, and error metrics for the 2025/26 ingest.',
+    url: '/methods',
+  },
 };
 
 export default function MethodsPage() {

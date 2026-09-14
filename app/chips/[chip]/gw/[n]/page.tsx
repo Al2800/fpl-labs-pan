@@ -52,11 +52,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = `${chipData.chipName} in FPL Gameweek ${gwNum} (${seasonLabel(chipData.season)})`;
   const description = chipOneLiner(chipData) + ' ' + chipData.summary;
 
+  const path = chipPath(chip, gwNum);
+
   return {
     title,
     description,
-    alternates: jsonAlternate(chipPath(chip, gwNum), chipSnapshotPath(chip, gwNum)),
-    openGraph: { title, description },
+    alternates: jsonAlternate(path, chipSnapshotPath(chip, gwNum)),
+    openGraph: { title, description, url: path },
   };
 }
 

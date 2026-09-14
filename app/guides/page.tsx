@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: 'FPL guides',
   description:
     'Guides for reading FPL Replay: the 2025/26 reconstructive replay, freeze vs replay, chips, and Gameweek 34.',
+  alternates: {
+    canonical: '/guides',
+  },
+  openGraph: {
+    title: 'FPL guides',
+    description:
+      'Guides for reading FPL Replay: the 2025/26 reconstructive replay, freeze vs replay, chips, and Gameweek 34.',
+    url: '/guides',
+  },
 };
 
 export default function GuidesIndexPage() {

@@ -21,6 +21,9 @@ const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     default: 'FPL Replay | Pre-deadline FPL decisions',
     template: '%s | FPL Replay',
