@@ -10,6 +10,8 @@ import {
   ValidatedPlan,
 } from '@/types/fpl';
 
+export const DATASET_LICENSE_URL = 'https://creativecommons.org/licenses/by/4.0/';
+
 export function seasonLabel(season: string): string {
   return season.replace('-', '/');
 }
