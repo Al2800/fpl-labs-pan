@@ -5,6 +5,7 @@ import { getSimById, getAllSims, getGameweekDecision } from '@/lib/data';
 import { JsonLd } from '@/components/JsonLd';
 import { TrustStrip } from '@/components/TrustStrip';
 import {
+  DATASET_LICENSE_URL,
   absoluteUrl,
   breadcrumbList,
   gameweekPath,
@@ -76,6 +77,7 @@ export default async function SimulationDetailPage({ params }: PageProps) {
     name: sim.title,
     description: sim.hypothesis,
     url: absoluteUrl(simPath(season, gwNum, scenario)),
+    license: DATASET_LICENSE_URL,
     identifier: sim.provenance.snapshotHash,
     version: sim.provenance.modelVersion,
     datePublished: sim.provenance.frozenAt,

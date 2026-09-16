@@ -6,6 +6,7 @@ import { SquadView } from '@/components/SquadView';
 import { TrustStrip } from '@/components/TrustStrip';
 import {
   CHIP_HUBS,
+  DATASET_LICENSE_URL,
   absoluteUrl,
   breadcrumbList,
   captainAnswer,
@@ -100,6 +101,7 @@ export function GameweekDecisionView({
     name: heading,
     description: answer,
     url: absoluteUrl(pagePath),
+    license: DATASET_LICENSE_URL,
     identifier: provenance.snapshotHash,
     version: provenance.modelVersion,
     datePublished: provenance.frozenAt,

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getReplayForkNotes, getSeasonGameweeks, getSeasonIndex } from '@/lib/data';
 import { JsonLd } from '@/components/JsonLd';
 import {
+  DATASET_LICENSE_URL,
   absoluteUrl,
   breadcrumbList,
   gameweekPath,
@@ -61,6 +62,7 @@ export default async function SeasonHubPage({ params }: PageProps) {
             name: index.title,
             description: index.summary,
             url: absoluteUrl(seasonPath(season)),
+            license: DATASET_LICENSE_URL,
             distribution: {
               '@type': 'DataDownload',
               encodingFormat: 'application/json',
