@@ -21,10 +21,10 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     name: 'Triple Captain',
     metaTitle: 'When to Play Triple Captain in FPL: Rules & Timing',
     metaDescription:
-      'When to play Triple Captain in FPL: vice-captain rules, picking the optimal double gameweek, minutes security, and avoiding costly single-fixture blanks.',
+      'Triple Captain rules and timing in FPL: how vice-captaincy works, picking the right double gameweek, minutes security, and avoiding single-fixture blanks.',
     h1: 'When to play Triple Captain in FPL',
     oneLiner:
-      'Triple Captain in FPL triples your nominated captain’s score instead of doubling it. Reserve it for a locked-in premium talisman playing twice in a favourable double gameweek.',
+      'Triple Captain triples your captain’s score instead of doubling it. Save it for a secure premium talisman playing twice in an attractive double gameweek.',
     howItWorks:
       'The selected captain scores three times their official FPL points instead of two. If your captain plays even one minute across the gameweek, the chip is deemed active and spent. The vice-captain only inherits the triple multiplier if your primary captain records zero minutes across all scheduled fixtures in that round.',
     whenToPlay: [
@@ -38,11 +38,11 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     faqs: [
       {
         q: 'When should I play Triple Captain in FPL?',
-        a: 'When deciding when to play Triple Captain in FPL, the gold standard is a double gameweek featuring an in-form, penalty-taking premium attacker with two favourable home fixtures and guaranteed 90-minute security.',
+        a: 'Play Triple Captain in an attractive double gameweek where an elite, penalty-taking captain has two starts locked in and strong home fixtures.',
       },
       {
         q: 'What happens if my Triple Captain does not play?',
-        a: 'If your Triple Captain registers zero minutes across the entire gameweek, the triple points multiplier automatically shifts to your nominated vice-captain, provided your vice-captain plays at least one minute.',
+        a: 'If your captain plays zero minutes across the entire gameweek, the triple points multiplier passes to your vice-captain, provided they feature.',
       },
       {
         q: 'Can you change or cancel Triple Captain after the deadline?',
@@ -64,10 +64,10 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     name: 'Bench Boost',
     metaTitle: 'Bench Boost FPL: What Is Bench Boost & When to Play',
     metaDescription:
-      'Bench Boost FPL guide: what is Bench Boost in FPL, how your substitutes score points, and the best double gameweek timing windows to maximise your 15-man squad.',
+      'Bench Boost FPL guide: what the chip does, how your substitutes score points, and the best double gameweek windows to maximise your full 15-man squad.',
     h1: 'Bench Boost FPL: what is Bench Boost and when to play',
     oneLiner:
-      'Bench Boost FPL: what is Bench Boost in FPL and when to play it. This single-use chip counts the points scored by all four substitutes, turning your 15-man squad into active scorers for one gameweek.',
+      'Bench Boost adds your four substitutes’ points to your gameweek score. It turns all 15 squad players into active scorers for one round, so you need four reliable starters rather than cheap bench-fillers.',
     howItWorks:
       'When you activate Bench Boost, the points scored by all 15 squad members count towards your gameweek total. Points from your substitute goalkeeper and three outfield bench players are added directly to your official score. The chip can only be used once per season. Because every player on your bench is already active, standard automatic substitutions do not apply if a starter fails to play.',
     whenToPlay: [
@@ -81,19 +81,19 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     faqs: [
       {
         q: 'What is Bench Boost in FPL?',
-        a: 'What is Bench Boost in FPL? It is a single-use chip that adds the points scored by your four substitutes—one goalkeeper and three outfield players—to your overall gameweek total. In a normal gameweek, your bench only contributes if a starter plays zero minutes; with Bench Boost active, all 15 squad members score simultaneously.',
+        a: 'Bench Boost is a single-use chip that counts the points scored by all four of your substitutes alongside your starting eleven for one gameweek.',
       },
       {
         q: 'When should I play Bench Boost in FPL?',
-        a: 'Bench Boost FPL strategy centres on targeting a major double gameweek late in the season, typically between Gameweeks 34 and 37 when rescheduled cup ties create packed schedules. By ensuring all four of your substitutes play twice, you can extract up to eight extra player appearances from your bench.',
+        a: 'Play Bench Boost in a major double gameweek late in the season, usually between Gameweeks 34 and 37 when rearranged fixtures let your substitutes play twice.',
       },
       {
         q: 'What is a good score for Bench Boost in FPL?',
-        a: 'A return of 15 to 25 points from your four bench players is generally considered a successful Bench Boost in FPL. If your substitutes only deliver the appearance points of a single gameweek (around 8 points), the chip has essentially underperformed.',
+        a: 'A return of 15 to 25 points from your four bench players makes for a strong Bench Boost. If your substitutes only muster standard two-point appearance returns, the chip has largely been wasted.',
       },
       {
         q: 'Can you Wildcard and Bench Boost in the same gameweek?',
-        a: 'No, FPL rules state that you can only play one chip per gameweek. The most common expert tactic is to Wildcard in the gameweek preceding your Bench Boost, locking in a full 15-man squad of double gameweek starters with no points penalties.',
+        a: 'No, FPL rules allow only one active chip per gameweek. The standard tactic is to Wildcard the round before, setting up a 15-man squad of doubling starters with no transfer penalties.',
       },
       {
         q: 'What happens if a bench player doesn’t play during Bench Boost?',
@@ -114,7 +114,7 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       'Free Hit FPL guide: when to play the freehit chip, how single-gameweek squad reverts work, blank vs double gameweek tactics, and avoiding unnecessary transfer hits.',
     h1: 'Free Hit FPL: when to play the freehit chip',
     oneLiner:
-      'The Free Hit chip (commonly searched as freehit) lets you make unlimited transfers for one gameweek before your previous 15-man squad returns intact. Deploy it to survive major blank gameweeks without wrecking your long-term team.',
+      'Free Hit gives you unlimited transfers for one gameweek before your old 15-man squad returns intact. It is your main escape hatch for surviving severe blank gameweeks without dismantling your long-term team.',
     howItWorks:
       'Free Hit allows you to make unlimited transfers for a single gameweek without incurring any points deductions (-4 hits). Once the gameweek deadline passes and all matches conclude, your team resets exactly to the 15 players you owned before activating the chip. Any free transfers you had saved before triggering Free Hit will reset to one for the following week, and you do not retain any player price changes generated during the Free Hit round.',
     whenToPlay: [
@@ -128,11 +128,11 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     faqs: [
       {
         q: 'What is the Free Hit (freehit) chip in FPL?',
-        a: 'The Free Hit chip in FPL—frequently spelled by managers as freehit—grants you unlimited transfers for a single gameweek with zero transfer point deductions. When the gameweek ends, your squad immediately reverts back to the exact 15 players you held prior to playing the chip.',
+        a: 'The Free Hit chip grants unlimited transfers for a single gameweek with no points deductions, reverting to your previous 15 players as soon as the gameweek ends.',
       },
       {
         q: 'When should I play Free Hit in FPL?',
-        a: 'You should play Free Hit in FPL during a major blank gameweek when postponed fixtures leave you with fewer than eight or nine playing starters. Using the freehit chip here lets you target players with guaranteed fixtures while rival managers either take -8 or -12 hits or field incomplete teams.',
+        a: 'Play Free Hit during a major blank gameweek when postponed fixtures leave you with fewer than eight or nine available starters. It saves you from taking -8 or -12 hits just to field a team.',
       },
       {
         q: 'Do you keep team value and price rises gained on a Free Hit?',
@@ -158,10 +158,10 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     name: 'Wildcard',
     metaTitle: 'FPL When to Wildcard: Best Gameweeks & Timing Guide',
     metaDescription:
-      'Wondering when should I play Wildcard in FPL? Complete timing guide for your first and second Wildcards, fixture swings, international breaks, and squad rebuilds.',
+      'Best gameweeks to Wildcard in FPL: timing your first and second Wildcards, navigating fixture swings, international breaks, and permanent squad rebuilds.',
     h1: 'FPL when to Wildcard: strategy, rules and timing',
     oneLiner:
-      'FPL when to Wildcard: rebuild your entire 15-man squad permanently without points deductions. Trigger it ahead of extended fixture swings or when multiple starters lose their places, rather than kneejerking after one bad week.',
+      'Wildcard rebuilds your entire 15-man squad permanently with no transfer penalties. Pull the trigger ahead of sustained fixture swings or when multiple injuries break your structure, not as a kneejerk reaction to one bad week.',
     howItWorks:
       'Wildcard gives you unlimited free transfers for one gameweek, and the resulting squad remains permanently in place. You receive two Wildcards per season: one for the first half of the campaign (which expires in late December) and one for the second half. Any transfer hits taken earlier in the same gameweek are eliminated the moment you confirm the chip. However, your team value only reflects locked-in prices, so selling and buying players back at a higher price still incurs the 50% profit tax.',
     whenToPlay: [
@@ -176,19 +176,19 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     faqs: [
       {
         q: 'When should I play Wildcard in FPL?',
-        a: 'When deciding when should I play Wildcard in FPL, the optimal moment arrives when your squad has at least three structural flaws—such as sustained injuries, lost starting berths, or difficult fixture turnarounds—that free transfers cannot mend. In the first half of the season, Gameweeks 6 to 10 are historically the most effective window once manager rotations and early form settle.',
+        a: 'Play Wildcard when your squad has at least three structural problems—such as long-term injuries, lost starting spots, or a brutal run of fixtures—that regular free transfers cannot fix.',
       },
       {
         q: 'FPL when to Wildcard: should you use it in the first or second half of the season?',
-        a: 'FPL when to Wildcard rules provide two chips per campaign: the first Wildcard must be played before the mid-season deadline in late December, and the second becomes active immediately afterwards for the remainder of the season. If you do not play your first Wildcard before the mid-season cut-off, you lose it permanently; the two chips do not roll over or stack.',
+        a: 'You get two Wildcards per season: one must be played before the late December cut-off, and the second is available for the rest of the campaign. The two chips do not stack or roll over, so an unused first Wildcard is lost permanently.',
       },
       {
         q: 'Does activating Wildcard cancel transfer hits already taken?',
-        a: 'Yes, activating your Wildcard immediately cancels any points deductions (transfer hits) you have accumulated in that gameweek prior to hitting confirm. All transfers completed during that gameweek window become completely free, allowing you to experiment freely right up until the deadline.',
+        a: 'Yes, activating your Wildcard immediately wipes out any transfer hits you took earlier that gameweek. Every transfer made before the deadline becomes completely free.',
       },
       {
         q: 'Is it better to Wildcard or take hits in a blank gameweek?',
-        a: 'Taking one or two planned hits (-4 or -8) is usually preferable to burning a Wildcard if your long-term team remains sound, whereas a Wildcard is justified if you are pivoting to players with strong multi-gameweek runs. In our 2025/26 replay, the optimiser took an 8-point hit in Gameweek 34 because the squad was already strong for subsequent rounds.',
+        a: 'Taking a planned four-point or eight-point hit is usually wiser than burning a Wildcard if your long-term squad is in good shape. Wildcards are better saved for broad shifts into players with sustained fixture runs.',
       },
       {
         q: 'Can you cancel a Wildcard once activated?',
