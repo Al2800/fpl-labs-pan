@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getChipHub } from '@/lib/content/chips';
 import { JsonLd } from '@/components/JsonLd';
-import { breadcrumbList, chipHubPath } from '@/lib/present';
+import { breadcrumbList, chipHubPath, faqPage } from '@/lib/present';
 
 interface PageProps {
   params: Promise<{ chip: string }>;
@@ -25,15 +25,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const hub = getChipHub(chip);
   if (!hub) return { title: 'Chip not found' };
   const path = chipHubPath(hub.slug);
+  const title = hub.metaTitle ?? `When to play ${hub.name} in FPL`;
+  const description = hub.metaDescription ?? hub.oneLiner;
   return {
-    title: `When to play ${hub.name} in FPL`,
-    description: hub.oneLiner,
+    title,
+    description,
     alternates: {
       canonical: path,
     },
     openGraph: {
-      title: `When to play ${hub.name} in FPL`,
-      description: hub.oneLiner,
+      title,
+      description,
       url: path,
     },
   };
@@ -47,11 +49,14 @@ export default async function ChipHubPage({ params }: PageProps) {
   return (
     <div className="space-y-8 max-w-3xl">
       <JsonLd
-        data={breadcrumbList([
-          { name: 'Home', path: '/' },
-          { name: 'Chips', path: '/chips' },
-          { name: hub.name, path: chipHubPath(hub.slug) },
-        ])}
+        data={[
+          breadcrumbList([
+            { name: 'Home', path: '/' },
+            { name: 'Chips', path: '/chips' },
+            { name: hub.name, path: chipHubPath(hub.slug) },
+          ]),
+          faqPage(hub.faqs),
+        ]}
       />
       <nav className="text-sm text-neutral-600">
         <Link href="/chips" className="underline underline-offset-2">
@@ -62,7 +67,7 @@ export default async function ChipHubPage({ params }: PageProps) {
       </nav>
       <header className="space-y-3">
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-          When to play {hub.name}
+          {hub.h1 ?? `When to play ${hub.name}`}
         </h1>
         <p className="text-neutral-800 leading-relaxed">{hub.oneLiner}</p>
       </header>

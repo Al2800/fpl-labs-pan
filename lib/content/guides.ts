@@ -123,29 +123,74 @@ export const GUIDES: GuidePage[] = [
   },
   {
     slug: 'when-to-play-fpl-chips',
-    title: 'When to play FPL chips',
+    title: 'When to Play FPL Chips: Wildcard, Bench Boost & Free Hit',
     description:
-      'Short rules for Triple Captain, Bench Boost, Free Hit and Wildcard, plus what the 2025/26 replay left unused.',
+      'When to play FPL chips: clear timing rules for when to Wildcard, what is Bench Boost in FPL, how freehit works, and avoiding wasted chips on low-ceiling weeks.',
     answer:
-      'Play Triple Captain and Bench Boost when minutes are secure, usually in a double. Play Free Hit to cover a blank without wrecking next week. Play Wildcard when the 15 is structurally wrong for a block of fixtures. The 2025/26 reconstructive path played none of them, including in the Gameweek 34 blank.',
+      'Knowing when to play FPL chips is essential for a competitive season. The golden rules are clear: play your Wildcard when your squad requires three or more permanent structural fixes; trigger Bench Boost in FPL during a double gameweek when all 15 players have confirmed starts; deploy Free Hit (freehit) to navigate major blank gameweeks without taking transfer hits; and reserve Triple Captain for an elite talisman playing twice. In the 2025/26 reconstructive replay, holding all chips unplayed proved how unspent chips leave points on the table.',
     sections: [
       {
-        heading: 'A complete policy includes chips',
+        heading: 'FPL when to Wildcard: timing windows and rules',
         body: [
-          'Transfer, lineup and captaincy totals without chips are not a full FPL season. The 2025/26 replay is explicit about that gap. Use the chip hubs for the rules of thumb, and Gameweek 34 as the case where hits were taken instead.',
+          'When deciding when to play Wildcard in FPL, split your campaign into two distinct phases. Your first Wildcard must be triggered before the mid-season deadline in late December. The ideal window is between Gameweeks 6 and 10, once early tactical trends crystallise, starting lineups stabilise, and key attacks embark on sustained fixture runs.',
+          'Your second Wildcard is most powerful in the spring (typically Gameweeks 27 to 33). By using it one or two weeks before a major double gameweek, you can assemble 15 active double-gameweek footballers, seamlessly setting up your Bench Boost without burning points deductions.',
+        ],
+      },
+      {
+        heading: 'What is Bench Boost in FPL and when to play it',
+        body: [
+          'Bench Boost in FPL is a single-use chip that adds the scores of your substitute goalkeeper and three outfield bench players directly to your gameweek total. In a regular gameweek, your bench only registers points if a starter fails to play.',
+          'Because Bench Boost can only be used once per season, playing it in a standard single gameweek often yields just 8 to 12 points from fringe starters. Save it for a confirmed double gameweek (often Gameweek 34 or 37) where your four substitutes play twice each, targeting an extra 20 to 30 points from your bench.',
+        ],
+      },
+      {
+        heading: 'Free Hit (freehit) and Triple Captain strategy',
+        body: [
+          'The Free Hit chip (frequently searched by managers as freehit) lets you replace your entire squad for a single round before your previous 15-man squad returns intact. It is best deployed during major blank gameweeks caused by domestic cup clashes, when several fixtures are cancelled and your squad has fewer than eight playing starters.',
+          'For Triple Captain, patience is rewarded. Avoid the urge to trigger it on a single fixture for an in-form player; instead, wait for a double gameweek with two favourable home matches for an elite, penalty-taking premium with zero rotation risk.',
+        ],
+      },
+      {
+        heading: 'Lessons from the 2025/26 reconstructive replay',
+        body: [
+          'In the 2025/26 reconstructive replay, the model never fired a single chip. In Gameweek 34, facing a blank gameweek, the optimiser made three transfers with one free transfer and took an 8-point hit to field starters, scoring 28 net. Both Free Hit and Wildcard were sitting unused.',
+          'A balanced managerial strategy must incorporate chip timing alongside weekly transfers. Holding chips until they expire or taking severe hits while chips remain in hand is an expensive tactical error.',
         ],
       },
     ],
     faqs: [
       {
-        q: 'Which chip is most often wasted?',
-        a: 'Free Hit on a mild upgrade, and Bench Boost on a bench that will not start. The 2025/26 lab path wasted them in a different way: it never fired them at all.',
+        q: 'When should I play Wildcard in FPL?',
+        a: 'When deciding when should I play Wildcard in FPL, pull the trigger when your 15-man squad has at least three structural problems—such as long-term injuries, lost starting spots, or sustained negative fixture swings—that free transfers and minor hits cannot resolve.',
+      },
+      {
+        q: 'FPL when to Wildcard: should I play it early or hold?',
+        a: 'FPL when to Wildcard decisions favour playing your first chip between Gameweeks 6 and 10 rather than holding it until December. An early Wildcard lets you capitalise on emerging budget enablers and positive fixture shifts for 10 or more gameweeks, compounding your rank gains over time.',
+      },
+      {
+        q: 'What is Bench Boost in FPL and what is a good return?',
+        a: 'What is Bench Boost in FPL? It is a chip that scores all four of your substitutes alongside your starting eleven for one round. A successful Bench Boost return from your four bench players is 15 to 25 additional points, which is why waiting for a double gameweek with guaranteed minutes is so critical.',
+      },
+      {
+        q: 'When should I play Bench Boost in FPL?',
+        a: 'Bench Boost FPL strategy centres on targeting a major double gameweek late in the season, typically between Gameweeks 34 and 37 when rescheduled cup ties create packed schedules. By ensuring all four of your substitutes play twice, you can extract up to eight extra player appearances from your bench.',
+      },
+      {
+        q: 'When should you play the Free Hit (freehit) chip?',
+        a: 'You should play the Free Hit (or freehit) chip during a severe blank gameweek when postponed fixtures leave you with fewer than eight or nine playing starters. It lets you field a full eleven without wrecking your long-term team with -8 or -12 transfer penalties.',
+      },
+      {
+        q: 'Which FPL chip is most often wasted?',
+        a: 'Free Hit and Bench Boost are the most commonly wasted chips in FPL. Free Hit is frequently squandered on minor single-gameweek punts, while Bench Boost is often triggered when holding cheap, non-starting substitutes who score zero points.',
       },
     ],
     related: [
-      { href: '/chips', label: 'Chip hubs' },
-      { href: '/guides/gw34-blank-and-hits', label: 'Gameweek 34' },
-      { href: '/chips/free-hit', label: 'Free Hit' },
+      { href: '/chips', label: 'All Chip Hubs' },
+      { href: '/chips/wildcard', label: 'Wildcard Timing Guide' },
+      { href: '/chips/bench-boost', label: 'Bench Boost Strategy' },
+      { href: '/chips/free-hit', label: 'Free Hit Guide' },
+      { href: '/chips/triple-captain', label: 'Triple Captain Guide' },
+      { href: '/guides/gw34-blank-and-hits', label: 'Gameweek 34 Case Study' },
     ],
   },
   {

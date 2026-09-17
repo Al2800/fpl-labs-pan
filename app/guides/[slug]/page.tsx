@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getGuide, GUIDES } from '@/lib/content/guides';
 import { JsonLd } from '@/components/JsonLd';
-import { absoluteUrl, breadcrumbList } from '@/lib/present';
+import { absoluteUrl, breadcrumbList, faqPage } from '@/lib/present';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -55,6 +55,7 @@ export default async function GuidePage({ params }: PageProps) {
             { name: 'Guides', path: '/guides' },
             { name: guide.title, path: `/guides/${guide.slug}` },
           ]),
+          ...(guide.faqs && guide.faqs.length > 0 ? [faqPage(guide.faqs)] : []),
         ]}
       />
       <nav className="text-sm text-neutral-600">
