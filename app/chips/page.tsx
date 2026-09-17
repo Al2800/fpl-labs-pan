@@ -5,16 +5,16 @@ import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbList, chipHubPath } from '@/lib/present';
 
 export const metadata: Metadata = {
-  title: 'FPL chips: Triple Captain, Bench Boost, Free Hit, Wildcard',
+  title: 'When to Play FPL Chips: Wildcard, Bench Boost & Free Hit',
   description:
-    'When to play FPL chips. The 2025/26 reconstructive replay never used one, including an 8-point hit in the Gameweek 34 blank.',
+    'When to play FPL chips: strategy guides for Wildcard, Bench Boost, Free Hit and Triple Captain. Compare chip timing, double gameweeks, and hit avoidance.',
   alternates: {
     canonical: '/chips',
   },
   openGraph: {
-    title: 'FPL chips: Triple Captain, Bench Boost, Free Hit, Wildcard',
+    title: 'When to Play FPL Chips: Wildcard, Bench Boost & Free Hit',
     description:
-      'When to play FPL chips. The 2025/26 reconstructive replay never used one, including an 8-point hit in the Gameweek 34 blank.',
+      'When to play FPL chips: strategy guides for Wildcard, Bench Boost, Free Hit and Triple Captain. Compare chip timing, double gameweeks, and hit avoidance.',
     url: '/chips',
   },
 };
@@ -30,13 +30,12 @@ export default function ChipsIndexPage() {
       />
       <header className="space-y-3">
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-          FPL chips
+          FPL chips: when to play Wildcard, Bench Boost & Free Hit
         </h1>
         <p className="text-neutral-800 leading-relaxed max-w-3xl">
-          Triple Captain, Bench Boost, Free Hit and Wildcard are the four season chips. Play them
-          when minutes and the calendar justify it. The 2025/26 reconstructive path played none of
-          them — including Gameweek 34, when the optimiser took an 8-point hit in a blank instead of
-          Free Hit or Wildcard.
+          Triple Captain, Bench Boost, Free Hit and Wildcard are the four season chips in Fantasy Premier League. Play them
+          when confirmed minutes, double gameweeks, or severe blanks justify the opportunity cost. In the 2025/26 reconstructive path, all four chips were held unused—including Gameweek 34, when the optimiser took an 8-point hit in a blank instead of
+          deploying Free Hit or Wildcard.
         </p>
       </header>
       <ul className="space-y-4">
