@@ -19,12 +19,12 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     id: 'tc',
     slug: 'triple-captain',
     name: 'Triple Captain',
-    metaTitle: 'When to Play Triple Captain in FPL: Rules & Timing',
+    metaTitle: 'What Is Triple Captain in FPL? Rules & When to Play',
     metaDescription:
-      'Triple Captain rules and timing in FPL: how vice-captaincy works, picking the right double gameweek, minutes security, and avoiding single-fixture blanks.',
-    h1: 'When to play Triple Captain in FPL',
+      'Triple Captain in FPL triples your captain’s points for one gameweek. How the chip works, when the vice-captain inherits, and when to save it for a double gameweek.',
+    h1: 'What is Triple Captain in FPL?',
     oneLiner:
-      'Triple Captain triples your captain’s score instead of doubling it. Save it for a secure premium talisman playing twice in an attractive double gameweek.',
+      'Triple Captain in FPL is a once-per-season chip that triples your chosen captain’s official points instead of doubling them. Hold it for a secure premium with two starts in a confirmed double gameweek, not a one-off single fixture.',
     howItWorks:
       'The selected captain scores three times their official FPL points instead of two. If your captain plays even one minute across the gameweek, the chip is deemed active and spent. The vice-captain only inherits the triple multiplier if your primary captain records zero minutes across all scheduled fixtures in that round.',
     whenToPlay: [
@@ -37,24 +37,36 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       'The 2025/26 reconstructive path never played Triple Captain. That is a deliberate omission in the historical replay policy rather than evidence that the chip lacked scoring power.',
     faqs: [
       {
+        q: 'What is Triple Captain in FPL?',
+        a: 'Triple Captain in FPL is a chip that multiplies your captain’s official points by three for one gameweek, instead of the usual double. You can use it once per season, and it is spent as soon as your captain records any minutes.',
+      },
+      {
         q: 'When should I play Triple Captain in FPL?',
-        a: 'Play Triple Captain in an attractive double gameweek where an elite, penalty-taking captain has two starts locked in and strong home fixtures.',
+        a: 'Play Triple Captain in an attractive double gameweek where an elite, penalty-taking captain has two starts locked in and strong home fixtures. A single-fixture burn is a last resort if late-season doubles never deliver a secure option.',
+      },
+      {
+        q: 'Does Triple Captain work better in a double gameweek?',
+        a: 'Yes. In a double gameweek your captain can play twice, so the 3x multiplier applies across both fixtures if they start both. That is why most managers hold the chip for confirmed doubles rather than a single home fixture.',
       },
       {
         q: 'What happens if my Triple Captain does not play?',
-        a: 'If your captain plays zero minutes across the entire gameweek, the triple points multiplier passes to your vice-captain, provided they feature.',
+        a: 'If your captain plays zero minutes across the entire gameweek, the triple points multiplier passes to your vice-captain, provided they feature. If the captain plays even one minute, the chip is spent and the vice does not inherit the 3x.',
       },
       {
         q: 'Can you change or cancel Triple Captain after the deadline?',
-        a: 'No, once the gameweek deadline passes, your captaincy selection and the Triple Captain chip are locked and cannot be amended or refunded.',
+        a: 'No. Once the gameweek deadline passes, your captaincy selection and the Triple Captain chip are locked and cannot be amended or refunded.',
       },
       {
         q: 'Can you play Triple Captain and Bench Boost together?',
-        a: 'No, official FPL rules strictly permit only one active chip per gameweek. You must deploy Triple Captain, Bench Boost, Free Hit, and Wildcard in distinct gameweeks.',
+        a: 'No. Official FPL rules allow only one active chip per gameweek. Triple Captain, Bench Boost, Free Hit, and Wildcard must be used in different gameweeks.',
+      },
+      {
+        q: 'How many times can you use Triple Captain in a season?',
+        a: 'Once. Triple Captain is a single-use chip for the season. After it is spent, you cannot activate it again, even if your captain blanks.',
       },
       {
         q: 'Did the 2025/26 lab replay use Triple Captain?',
-        a: 'No, Triple Captain, Bench Boost, Free Hit, and Wildcard were all left unused on that reconstructive path.',
+        a: 'No. The 2025/26 reconstructive path left Triple Captain, Bench Boost, Free Hit, and Wildcard unused across all 38 gameweeks. That gap is policy omission, not a claim that Triple Captain has low value.',
       },
     ],
   },
@@ -109,12 +121,12 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     id: 'fh',
     slug: 'free-hit',
     name: 'Free Hit',
-    metaTitle: 'Free Hit FPL: When to Play the Freehit Chip & Rules',
+    metaTitle: 'What Is Free Hit (Freehit) in FPL? Rules & When to Play',
     metaDescription:
-      'Free Hit FPL guide: when to play the freehit chip, how single-gameweek squad reverts work, blank vs double gameweek tactics, and avoiding unnecessary transfer hits.',
-    h1: 'Free Hit FPL: when to play the freehit chip',
+      'Free Hit (freehit) in FPL gives unlimited transfers for one gameweek, then your previous 15-man squad returns. When to play it in blanks, and what happens to hits and prices.',
+    h1: 'What is Free Hit (freehit) in FPL?',
     oneLiner:
-      'Free Hit gives you unlimited transfers for one gameweek before your old 15-man squad returns intact. It is your main escape hatch for surviving severe blank gameweeks without dismantling your long-term team.',
+      'Free Hit (often searched as freehit) gives you unlimited transfers for one gameweek before your old 15-man squad returns intact. It is the main escape hatch for severe blank gameweeks without dismantling your long-term team.',
     howItWorks:
       'Free Hit allows you to make unlimited transfers for a single gameweek without incurring any points deductions (-4 hits). Once the gameweek deadline passes and all matches conclude, your team resets exactly to the 15 players you owned before activating the chip. Any free transfers you had saved before triggering Free Hit will reset to one for the following week, and you do not retain any player price changes generated during the Free Hit round.',
     whenToPlay: [
@@ -127,8 +139,8 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       'In Gameweek 34 of the 2025/26 replay, both the optimiser and the template took an 8-point hit (three transfers with one free transfer) during a blank, scoring 28 net. Free Hit was available and held in reserve.',
     faqs: [
       {
-        q: 'What is the Free Hit (freehit) chip in FPL?',
-        a: 'The Free Hit chip grants unlimited transfers for a single gameweek with no points deductions, reverting to your previous 15 players as soon as the gameweek ends.',
+        q: 'What is Free Hit (freehit) in FPL?',
+        a: 'Free Hit (also written freehit) is a chip that grants unlimited transfers for one gameweek with no points deductions. When the gameweek ends, your squad reverts to the exact 15 players you owned before you activated the chip.',
       },
       {
         q: 'When should I play Free Hit in FPL?',
@@ -136,7 +148,7 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       },
       {
         q: 'Do you keep team value and price rises gained on a Free Hit?',
-        a: 'No, you do not keep price rises or team value increases accrued while on a Free Hit. When your team reverts after the gameweek concludes, your bank balance and player purchase prices return to their exact pre-chip values.',
+        a: 'No. You do not keep price rises or team value increases accrued while on a Free Hit. When your team reverts after the gameweek concludes, your bank balance and player purchase prices return to their exact pre-chip values.',
       },
       {
         q: 'What happens to saved free transfers when you play Free Hit?',
@@ -144,7 +156,7 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       },
       {
         q: 'Does playing Free Hit cancel hits already taken this gameweek?',
-        a: 'Yes, activating Free Hit wipes out any transfer hits (-4, -8, etc.) you had already incurred earlier in the same gameweek before confirming the chip.',
+        a: 'Yes. Activating Free Hit wipes out any transfer hits (-4, -8, etc.) you had already incurred earlier in the same gameweek before confirming the chip.',
       },
       {
         q: 'What happened in 2025/26 Gameweek 34?',
@@ -156,17 +168,17 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     id: 'wc',
     slug: 'wildcard',
     name: 'Wildcard',
-    metaTitle: 'FPL When to Wildcard: Best Gameweeks & Timing Guide',
+    metaTitle: 'When to Wildcard in FPL: Meaning, Rules & Timing',
     metaDescription:
-      'Best gameweeks to Wildcard in FPL: timing your first and second Wildcards, navigating fixture swings, international breaks, and permanent squad rebuilds.',
-    h1: 'FPL when to Wildcard: strategy, rules and timing',
+      'Wildcard in FPL means unlimited free transfers for one gameweek, and the new squad stays. When to Wildcard, first vs second half timing, and how hits and value work.',
+    h1: 'When to Wildcard in FPL (and what Wildcard means)',
     oneLiner:
       'Wildcard rebuilds your entire 15-man squad permanently with no transfer penalties. Pull the trigger ahead of sustained fixture swings or when multiple injuries break your structure, not as a kneejerk reaction to one bad week.',
     howItWorks:
       'Wildcard gives you unlimited free transfers for one gameweek, and the resulting squad remains permanently in place. You receive two Wildcards per season: one for the first half of the campaign (which expires in late December) and one for the second half. Any transfer hits taken earlier in the same gameweek are eliminated the moment you confirm the chip. However, your team value only reflects locked-in prices, so selling and buying players back at a higher price still incurs the 50% profit tax.',
     whenToPlay: [
       'Ahead of a major fixture swing (typically Gameweeks 6 to 10 for the first Wildcard), rotating your funds towards teams embarking on favourable five-to-six match runs.',
-      'When structural squad issues mount—three or more injuries, benchings, or players losing minutes that cannot be fixed with free transfers and a single four-point hit.',
+      'When structural squad issues mount (three or more injuries, benchings, or players losing minutes that cannot be fixed with free transfers and a single four-point hit).',
       'During an international break if prices are fluctuating rapidly and you need two full weeks of market movement to fund your target XI.',
       'In the spring ahead of major double gameweeks (typically Gameweeks 27 to 33), setting up your 15-man bench for a future Bench Boost.',
       'Avoid burning the chip in frustration after a single sub-par gameweek when the underlying minutes and expected data for your starting XI remain healthy.',
@@ -175,8 +187,12 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       'Wildcard was never played on the 2025/26 reconstructive path, including before the Gameweek 34 blank. Chip planning is the largest functional gap before treating 2,010 as a complete-policy score.',
     faqs: [
       {
+        q: 'What does Wildcard mean in FPL?',
+        a: 'Wildcard in FPL means unlimited free transfers for one gameweek, and the squad you end up with stays permanently. Unlike Free Hit, nothing reverts after the round ends.',
+      },
+      {
         q: 'When should I play Wildcard in FPL?',
-        a: 'Play Wildcard when your squad has at least three structural problems—such as long-term injuries, lost starting spots, or a brutal run of fixtures—that regular free transfers cannot fix.',
+        a: 'Play Wildcard when your squad has at least three structural problems (such as long-term injuries, lost starting spots, or a brutal run of fixtures) that regular free transfers cannot fix.',
       },
       {
         q: 'FPL when to Wildcard: should you use it in the first or second half of the season?',
@@ -184,7 +200,7 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       },
       {
         q: 'Does activating Wildcard cancel transfer hits already taken?',
-        a: 'Yes, activating your Wildcard immediately wipes out any transfer hits you took earlier that gameweek. Every transfer made before the deadline becomes completely free.',
+        a: 'Yes. Activating your Wildcard immediately wipes out any transfer hits you took earlier that gameweek. Every transfer made before the deadline becomes completely free.',
       },
       {
         q: 'Is it better to Wildcard or take hits in a blank gameweek?',
@@ -192,11 +208,11 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       },
       {
         q: 'Can you cancel a Wildcard once activated?',
-        a: 'No, once confirmed, an FPL Wildcard cannot be cancelled, reversed, or refunded under any circumstances. Ensure you are completely satisfied with your newly assembled squad before clicking the final confirmation button.',
+        a: 'No. Once confirmed, an FPL Wildcard cannot be cancelled, reversed, or refunded under any circumstances. Ensure you are completely satisfied with your newly assembled squad before clicking the final confirmation button.',
       },
       {
         q: 'Should Wildcard have been used in 2025/26 Gameweek 34?',
-        a: 'The 2025/26 replay took an 8-point hit in Gameweek 34 while leaving Wildcard and Free Hit unplayed. A complete human policy would evaluate whether playing Wildcard here unlocked higher net returns over the final four gameweeks.',
+        a: 'The 2025/26 replay took an 8-point hit in Gameweek 34 while leaving Wildcard and Free Hit unplayed. A complete human policy would compare that hit against Wildcard or Free Hit over the final four gameweeks. That comparison is not published in the artifacts.',
       },
     ],
   },
