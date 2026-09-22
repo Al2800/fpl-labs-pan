@@ -21,7 +21,7 @@ export const GUIDES: GuidePage[] = [
         heading: 'The published path',
         body: [
           'Each gameweek page is built from the lab’s reconstructive artifacts: a template that rolls transfers, a forecast optimiser (the selected plan), and a same-state evidence arm. The cutoff is first kickoff minus 90 minutes, rebuilt after the season. It is not a two-hour live freeze.',
-          'The optimiser finished 2,010 net points. The template finished 1,990. Same-state evidence scored 2,010 — identical week by week, because the evidence arm selected the same plan as the optimiser in every gameweek folder.',
+          'The optimiser finished 2,010 net points. The template finished 1,990. Same-state evidence scored 2,010, identical week by week, because the evidence arm selected the same plan as the optimiser in every gameweek folder.',
         ],
       },
       {
@@ -123,11 +123,11 @@ export const GUIDES: GuidePage[] = [
   },
   {
     slug: 'when-to-play-fpl-chips',
-    title: 'When to Play FPL Chips: Wildcard, Bench Boost & Free Hit',
+    title: 'When to Play FPL Chips: Wildcard, Bench Boost, Free Hit & TC',
     description:
-      'When to play FPL chips: clear timing rules for when to Wildcard, what Bench Boost does, how Free Hit works, and avoiding wasted chips on low-ceiling weeks.',
+      'When to play FPL chips: Wildcard timing, what Bench Boost does, how Free Hit (freehit) works, and when Triple Captain belongs in a double gameweek.',
     answer:
-      'Knowing when to play FPL chips comes down to fixture swings, doubles, and blank management. Play Wildcard when your squad needs three or more permanent structural fixes. Trigger Bench Boost in a double gameweek when all 15 players have confirmed starts. Deploy Free Hit to navigate blank gameweeks without taking transfer hits, and save Triple Captain for an elite talisman with two favourable fixtures. In the 2025/26 replay, keeping every chip unspent left significant scoring potential on the table.',
+      'When to play FPL chips comes down to fixture swings, doubles, and blanks. Play Wildcard when your squad needs three or more permanent structural fixes. Trigger Bench Boost in a double gameweek when all 15 players have confirmed starts. Deploy Free Hit (freehit) to survive blank gameweeks without transfer hits. Save Triple Captain for an elite talisman with two favourable fixtures. In the 2025/26 reconstructive replay, every chip stayed unused, including when Gameweek 34 took an 8-point hit instead of Free Hit or Wildcard.',
     sections: [
       {
         heading: 'When to play your Wildcard',
@@ -147,21 +147,21 @@ export const GUIDES: GuidePage[] = [
         heading: 'Free Hit (freehit) and Triple Captain strategy',
         body: [
           'The Free Hit chip (often searched as freehit) lets you replace your entire squad for a single round before your previous 15 players return intact. It is most valuable in major blank gameweeks caused by domestic cup ties, when your squad has fewer than eight active starters.',
-          'For Triple Captain, patience is essential. Avoid spending it on a one-off home fixture; wait for a confirmed double gameweek with two favourable matches for an in-form, penalty-taking premium with minimal minutes risk.',
+          'Triple Captain triples your captain’s points instead of doubling them. Avoid spending it on a one-off home fixture. Wait for a confirmed double gameweek with two favourable matches for an in-form, penalty-taking premium with minimal minutes risk.',
         ],
       },
       {
         heading: 'Lessons from the 2025/26 reconstructive replay',
         body: [
           'In the 2025/26 reconstructive replay, the model never fired a single chip. In Gameweek 34, facing a blank gameweek, the optimiser made three transfers with one free transfer and took an 8-point hit to field starters, scoring 28 net. Both Free Hit and Wildcard were sitting unused.',
-          'A balanced managerial strategy must incorporate chip timing alongside weekly transfers. Holding chips until they expire or taking severe hits while chips remain in hand is an expensive tactical error.',
+          'Chip timing belongs alongside weekly transfers. Holding chips unused while taking heavy hits, or burning them on low-ceiling weeks, is an expensive tactical error.',
         ],
       },
     ],
     faqs: [
       {
         q: 'When should I play Wildcard in FPL?',
-        a: 'Play Wildcard when your squad has at least three structural problems—such as long-term injuries, lost starting spots, or a brutal run of fixtures—that regular free transfers cannot fix.',
+        a: 'Play Wildcard when your squad has at least three structural problems (such as long-term injuries, lost starting spots, or a brutal run of fixtures) that regular free transfers cannot fix.',
       },
       {
         q: 'FPL when to Wildcard: should I play it early or hold?',
@@ -180,8 +180,12 @@ export const GUIDES: GuidePage[] = [
         a: 'Play Free Hit (or freehit) during a severe blank gameweek when postponed fixtures leave you with fewer than eight or nine playing starters. It lets you field a full eleven without wrecking your long-term squad with transfer hits.',
       },
       {
+        q: 'What is Triple Captain in FPL, and when should you play it?',
+        a: 'Triple Captain triples your captain’s official points for one gameweek instead of doubling them. Save it for a confirmed double gameweek where a secure premium has two starts and strong fixtures.',
+      },
+      {
         q: 'Which FPL chip is most often wasted?',
-        a: 'Free Hit and Bench Boost are the most commonly wasted chips in FPL. Free Hit is frequently squandered on minor single-gameweek punts, while Bench Boost is often triggered when holding cheap, non-starting substitutes who score zero points.',
+        a: 'Free Hit and Bench Boost are the chips managers most often waste. Free Hit gets spent on minor single-gameweek punts, while Bench Boost often fires while cheap non-starters on the bench score zero.',
       },
     ],
     related: [

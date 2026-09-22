@@ -34,7 +34,7 @@ export default function ChipsIndexPage() {
         </h1>
         <p className="text-neutral-800 leading-relaxed max-w-3xl">
           Triple Captain, Bench Boost, Free Hit and Wildcard are the four season chips in Fantasy Premier League. Play them
-          when confirmed minutes, double gameweeks, or severe blanks justify the opportunity cost. In the 2025/26 reconstructive path, all four chips were held unused—including Gameweek 34, when the optimiser took an 8-point hit in a blank instead of
+          when confirmed minutes, double gameweeks, or severe blanks justify the opportunity cost. In the 2025/26 reconstructive path, all four chips were held unused, including Gameweek 34, when the optimiser took an 8-point hit in a blank instead of
           deploying Free Hit or Wildcard.
         </p>
       </header>
