@@ -11,6 +11,14 @@ export interface ChipHubContent {
   howItWorks: string;
   whenToPlay: string[];
   replay2025: string;
+  scenario: {
+    label: string;
+    title: string;
+    body: string;
+    sourceLabel: string;
+    sourcePath: string;
+    sourceDetail: string;
+  };
   faqs: Array<{ q: string; a: string }>;
 }
 
@@ -35,6 +43,15 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     ],
     replay2025:
       'The 2025/26 reconstructive path never played Triple Captain. That is a deliberate omission in the historical replay policy rather than evidence that the chip lacked scoring power.',
+    scenario: {
+      label: 'Illustrative calculation. Triple Captain was not used.',
+      title: 'GW37 captain: how the 3x multiplier changes the total',
+      body:
+        'In the 2025/26 GW37 replay, the optimiser captained Gabriel, who scored 6 official FPL points. His usual 2x captain return was 12 points. Triple Captain would have made it 18, a 6-point increase. This is a single-gameweek calculation, not a chip result or a recommendation to play it in GW37.',
+      sourceLabel: '2025/26 GW37 optimiser snapshot',
+      sourcePath: '/seasons/2025-26/gw/37/snapshot.json',
+      sourceDetail: 'Data used: validatedPlan.captain.realisedPoints (6) and multiplier (2).',
+    },
     faqs: [
       {
         q: 'What is Triple Captain in FPL?',
@@ -90,6 +107,16 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     ],
     replay2025:
       'Bench Boost was never triggered on the 2025/26 reconstructive path. The replay optimised starting selections and captains while leaving all substitute scoring value unrealised on the bench.',
+    scenario: {
+      label: 'Illustrative calculation. Bench Boost was not used.',
+      title: 'GW37 bench: what Bench Boost would have added',
+      body:
+        'The optimiser’s four listed substitutes scored 0, 6, 0 and 0 points in the 2025/26 GW37 replay. Adding those 6 bench points to its 70-point score gives 76, assuming the same squad and starting XI. The replay did not use Bench Boost, so 76 is not an observed chip score.',
+      sourceLabel: '2025/26 GW37 optimiser snapshot',
+      sourcePath: '/seasons/2025-26/gw/37/snapshot.json',
+      sourceDetail:
+        'Data used: validatedPlan.bench.realisedPoints (0 + 6 + 0 + 0) and realisedSquadTotalPoints (70).',
+    },
     faqs: [
       {
         q: 'What is Bench Boost in FPL?',
@@ -136,7 +163,17 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       'Avoid using Free Hit for minor fixture swings or to target a single captaincy option when you already have 10 or 11 reliable starters.',
     ],
     replay2025:
-      'In Gameweek 34 of the 2025/26 replay, both the optimiser and the template took an 8-point hit (three transfers with one free transfer) during a blank, scoring 28 net. Free Hit was available and held in reserve.',
+      'In Gameweek 34 of the 2025/26 replay, the optimiser made three transfers with one free transfer and took an 8-point hit in a blank, scoring 28 net. The template held and scored 33. Free Hit was available and unused.',
+    scenario: {
+      label: '2025/26 replay record. No Free Hit comparison was modelled.',
+      title: 'GW34 blank: the optimiser took an eight-point hit',
+      body:
+        'The optimiser made 3 transfers with 1 free transfer available, took an 8-point deduction and finished GW34 on 28 net points. It left Free Hit unused. The replay has no Free Hit squad or alternative score to compare.',
+      sourceLabel: '2025/26 GW34 optimiser snapshot',
+      sourcePath: '/seasons/2025-26/gw/34/snapshot.json',
+      sourceDetail:
+        'Data used: validatedPlan.transfersIn (3 players), freeTransfersAvailable (1), hitCost (8) and realisedSquadTotalPoints (28).',
+    },
     faqs: [
       {
         q: 'What is Free Hit (freehit) in FPL?',
@@ -160,7 +197,7 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       },
       {
         q: 'What happened in 2025/26 Gameweek 34?',
-        a: 'Both the optimiser and the template took an 8-point hit (three transfers, one free transfer) during the Gameweek 34 blank. Free Hit was not used, serving as a primary example of unrealised chip equity.',
+        a: 'In the 2025/26 GW34 blank, the optimiser made three transfers with one free transfer and took an 8-point hit, finishing on 28 net. The template held and scored 33. Free Hit was not used, and no Free Hit score was modelled.',
       },
     ],
   },
@@ -185,6 +222,15 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     ],
     replay2025:
       'Wildcard was never played on the 2025/26 reconstructive path, including before the Gameweek 34 blank. Chip planning is the largest functional gap before treating 2,010 as a complete-policy score.',
+    scenario: {
+      label: '2025/26 replay context. Wildcard was not used.',
+      title: 'The season totals do not measure Wildcard value',
+      body:
+        'The optimiser finished on 2,010 points and the template on 1,990. Neither path used a chip. The 20-point gap compares those recorded squad paths; it does not show what a Wildcard would have added.',
+      sourceLabel: '2025/26 season replay snapshot',
+      sourcePath: '/seasons/2025-26/snapshot.json',
+      sourceDetail: 'Data used: optimiserPoints (2010), templatePoints (1990) and chipsPlayed (empty).',
+    },
     faqs: [
       {
         q: 'What does Wildcard mean in FPL?',
