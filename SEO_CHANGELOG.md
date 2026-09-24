@@ -1,5 +1,14 @@
 # SEO Changelog
 
+## 2026-09-24
+- Date merged: 2026-09-24 (direct update on main)
+- PR: Not applicable; applied directly to main as requested
+- Page URL(s) changed: https://www.fplreplay.com/chips/triple-captain, https://www.fplreplay.com/chips/bench-boost, https://www.fplreplay.com/chips/free-hit, https://www.fplreplay.com/chips/wildcard, https://www.fplreplay.com/seasons/2025-26, https://www.fplreplay.com/guides/2025-26-season-review, https://www.fplreplay.com/guides/when-to-play-fpl-chips
+- Search query or queries that prompted it: "what is triple captain in fpl", "bench boost", "free hit / freehit", "wildcard fpl meaning", "when to play chips", "fpl gameweek 37"
+- GSC numbers at the time: 2 clicks, 228 impressions, average position 13.8 for the 28 days to 2026-09-20. /chips/triple-captain had 1 click and 95 impressions. Query-level counts were not supplied.
+- What changed: Added source-linked scenario cards to the four chip hubs. Triple Captain and Bench Boost examples are labelled as illustrative calculations; the Free Hit and Wildcard cards show replay records and say no chip counterfactual was scored. Added the GW37 score and no-chip note to the 2025/26 season page. Corrected GW34 copy that had incorrectly attributed the 8-point hit to the template.
+Result (check ~4 weeks after):
+
 ## 2026-09-22
 - Date merged: 2026-09-22
 - PR: #7 https://github.com/Al2800/fpl-labs-pan/pull/7
