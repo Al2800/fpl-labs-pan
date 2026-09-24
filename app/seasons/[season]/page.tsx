@@ -122,10 +122,18 @@ export default async function SeasonHubPage({ params }: PageProps) {
             {fork.sameStateEvidenceDelta} points. {fork.disclaimer}
           </p>
           <p className="text-neutral-800 leading-relaxed">
-            No chip was used. In Gameweek 34 both the optimiser ({fork.gw34.optimiserNet} net) and
-            the template ({fork.gw34.templateNet} net) took an 8-point hit in a blank.{' '}
+            No chip was used. In Gameweek 34, the optimiser took an 8-point hit and scored
+            {fork.gw34.optimiserNet} net. The template held and scored {fork.gw34.templateNet} net.{' '}
             <Link href="/guides/gw34-blank-and-hits" className="underline underline-offset-2">
               Read the case
+            </Link>
+            .
+          </p>
+          <p className="text-neutral-800 leading-relaxed">
+            In Gameweek 37, the optimiser scored 70 points and the template scored 63. The optimiser
+            made no transfers and used no chip.{' '}
+            <Link href="/seasons/2025-26/gw/37" className="underline underline-offset-2">
+              See the GW37 replay
             </Link>
             .
           </p>
