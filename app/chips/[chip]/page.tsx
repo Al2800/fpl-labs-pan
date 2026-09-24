@@ -83,6 +83,21 @@ export default async function ChipHubPage({ params }: PageProps) {
           ))}
         </ul>
       </section>
+      <section
+        className="border border-neutral-200 bg-neutral-50 p-5 space-y-2"
+        aria-label={`${hub.name} replay scenario`}
+      >
+        <p className="text-sm font-medium text-neutral-600">{hub.scenario.label}</p>
+        <h2 className="text-lg font-semibold">{hub.scenario.title}</h2>
+        <p className="text-neutral-800 leading-relaxed">{hub.scenario.body}</p>
+        <p className="text-sm text-neutral-600">
+          Source:{' '}
+          <a href={hub.scenario.sourcePath} className="underline underline-offset-2">
+            {hub.scenario.sourceLabel}
+          </a>
+          . {hub.scenario.sourceDetail}
+        </p>
+      </section>
       <section className="space-y-2">
         <h2 className="text-lg font-semibold">What the 2025/26 replay did</h2>
         <p className="text-neutral-800 leading-relaxed">{hub.replay2025}</p>
