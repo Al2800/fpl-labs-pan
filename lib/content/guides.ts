@@ -34,7 +34,7 @@ export const GUIDES: GuidePage[] = [
       {
         heading: 'Chips and Gameweek 34',
         body: [
-          'Wildcard, Free Hit, Triple Captain and Bench Boost were never played. In Gameweek 34, a blank, both the optimiser and the template took three transfers with one free transfer and paid eight points. Free Hit and Wildcard were still available. That is the main chip lesson on this path: the replay evaluated transfers, lineups and captains, not a complete FPL policy.',
+          'Wildcard, Free Hit, Triple Captain and Bench Boost were never played. In Gameweek 34, the optimiser made three transfers with one free transfer and took an 8-point hit. It scored 28 net; the template held and scored 33. Free Hit and Wildcard were still available. The replay evaluated transfers, lineups and captains, not a complete FPL policy.',
         ],
       },
     ],
@@ -127,7 +127,7 @@ export const GUIDES: GuidePage[] = [
     description:
       'When to play FPL chips: Wildcard timing, what Bench Boost does, how Free Hit (freehit) works, and when Triple Captain belongs in a double gameweek.',
     answer:
-      'When to play FPL chips comes down to fixture swings, doubles, and blanks. Play Wildcard when your squad needs three or more permanent structural fixes. Trigger Bench Boost in a double gameweek when all 15 players have confirmed starts. Deploy Free Hit (freehit) to survive blank gameweeks without transfer hits. Save Triple Captain for an elite talisman with two favourable fixtures. In the 2025/26 reconstructive replay, every chip stayed unused, including when Gameweek 34 took an 8-point hit instead of Free Hit or Wildcard.',
+      'When to play FPL chips comes down to fixture swings, doubles, and blanks. Play Wildcard when your squad needs three or more permanent structural fixes. Trigger Bench Boost in a double gameweek when all 15 players have confirmed starts. Deploy Free Hit (freehit) to survive blank gameweeks without transfer hits. Save Triple Captain for an elite talisman with two favourable fixtures. In the 2025/26 reconstructive replay, every chip stayed unused, including when the optimiser took an 8-point hit in Gameweek 34 instead of using Free Hit or Wildcard.',
     sections: [
       {
         heading: 'When to play your Wildcard',
