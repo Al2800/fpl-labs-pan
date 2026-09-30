@@ -1,9 +1,57 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getGuide, GUIDES } from '@/lib/content/guides';
+import { getGuide, GUIDES, type GuidePage as Guide } from '@/lib/content/guides';
 import { JsonLd } from '@/components/JsonLd';
 import { absoluteUrl, breadcrumbList, faqPage } from '@/lib/present';
+
+function FaqAnswer({ faq }: { faq: Guide['faqs'][number] }) {
+  const links = [...(faq.links ?? [])].sort((a, b) => b.label.length - a.label.length);
+  if (links.length === 0) {
+    return <p className="text-neutral-800 leading-relaxed">{faq.a}</p>;
+  }
+
+  const parts: Array<string | { href: string; label: string }> = [];
+  let rest = faq.a;
+
+  while (rest.length > 0) {
+    let best: { index: number; link: (typeof links)[number] } | null = null;
+    for (const link of links) {
+      const index = rest.indexOf(link.label);
+      if (index === -1) continue;
+      if (
+        !best ||
+        index < best.index ||
+        (index === best.index && link.label.length > best.link.label.length)
+      ) {
+        best = { index, link };
+      }
+    }
+    if (!best) {
+      parts.push(rest);
+      break;
+    }
+    if (best.index > 0) parts.push(rest.slice(0, best.index));
+    parts.push(best.link);
+    const used = links.indexOf(best.link);
+    if (used >= 0) links.splice(used, 1);
+    rest = rest.slice(best.index + best.link.label.length);
+  }
+
+  return (
+    <p className="text-neutral-800 leading-relaxed">
+      {parts.map((part, index) =>
+        typeof part === 'string' ? (
+          <span key={index}>{part}</span>
+        ) : (
+          <Link key={`${part.href}-${index}`} href={part.href} className="underline underline-offset-2">
+            {part.label}
+          </Link>
+        )
+      )}
+    </p>
+  );
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -82,7 +130,7 @@ export default async function GuidePage({ params }: PageProps) {
       {guide.faqs.map((faq) => (
         <section key={faq.q} className="space-y-2">
           <h2 className="text-lg font-semibold">{faq.q}</h2>
-          <p className="text-neutral-800 leading-relaxed">{faq.a}</p>
+          <FaqAnswer faq={faq} />
         </section>
       ))}
       <p className="text-sm flex flex-wrap gap-x-4 gap-y-2">

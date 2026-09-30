@@ -2,6 +2,15 @@
 
 ## 2026-09-30
 - Date merged: not merged
+- PR: pending
+- Page URL(s) changed: https://www.fplreplay.com/guides/when-to-play-fpl-chips
+- Search query or queries that prompted it: "fpl chips" (cluster already deepened on /chips); when-to-play timing intent (query-level counts not recorded)
+- GSC numbers at the time: 28 days to 27 Sep 2026. Query "fpl chips": 0 clicks / 17 impressions / position 20.2 (same window as the chips hub; that URL already targets the cluster). Page /guides/when-to-play-fpl-chips: 0 clicks / 32 impressions / 0% CTR / position 15.3. Site: 2 clicks / 444 impressions / 0.5% CTR / average position 15.8.
+- What changed: Retitled the when-to-play guide so Wildcard, Bench Boost, Free Hit and Triple Captain lead the title, meta description, H1, and opening sentence. Kept the existing FAQs. Added one FAQ, "What are the FPL chips and when do you play them?", with a first-sentence inventory and links to /chips and the four chip hubs. Did not add new sections or chip scores.
+Result (check ~4 weeks after):
+
+## 2026-09-30
+- Date merged: 2026-09-30
 - PR: #12 https://github.com/Al2800/fpl-labs-pan/pull/12
 - Page URL(s) changed: https://www.fplreplay.com/chips/wildcard (the Wildcard card on https://www.fplreplay.com/chips uses the same opening sentence)
 - Search query or queries that prompted it: "wildcard fpl meaning", "when to wildcard fpl", "wildcard in fpl meaning"
