@@ -2,7 +2,7 @@
 
 ## 2026-09-30
 - Date merged: not merged
-- PR: pending
+- PR: #13 https://github.com/Al2800/fpl-labs-pan/pull/13
 - Page URL(s) changed: https://www.fplreplay.com/guides/when-to-play-fpl-chips
 - Search query or queries that prompted it: "fpl chips" (cluster already deepened on /chips); when-to-play timing intent (query-level counts not recorded)
 - GSC numbers at the time: 28 days to 27 Sep 2026. Query "fpl chips": 0 clicks / 17 impressions / position 20.2 (same window as the chips hub; that URL already targets the cluster). Page /guides/when-to-play-fpl-chips: 0 clicks / 32 impressions / 0% CTR / position 15.3. Site: 2 clicks / 444 impressions / 0.5% CTR / average position 15.8.
