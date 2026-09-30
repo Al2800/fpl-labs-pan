@@ -1,41 +1,93 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { CHIP_HUB_CONTENT } from '@/lib/content/chips';
+import { CHIP_HUB_CONTENT, CHIPS_INDEX_FAQS, type ChipIndexFaq } from '@/lib/content/chips';
 import { JsonLd } from '@/components/JsonLd';
-import { breadcrumbList, chipHubPath } from '@/lib/present';
+import { breadcrumbList, chipHubPath, faqPage } from '@/lib/present';
 
 export const metadata: Metadata = {
-  title: 'When to Play FPL Chips: Wildcard, Bench Boost & Free Hit',
+  title: 'FPL Chips: Triple Captain, Bench Boost, Free Hit, Wildcard',
   description:
-    'When to play FPL chips: strategy guides for Wildcard, Bench Boost, Free Hit and Triple Captain. Compare chip timing, double gameweeks, and hit avoidance.',
+    'FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. One chip per gameweek, how many you can play in a season, and a hub for each chip.',
   alternates: {
     canonical: '/chips',
   },
   openGraph: {
-    title: 'When to Play FPL Chips: Wildcard, Bench Boost & Free Hit',
+    title: 'FPL Chips: Triple Captain, Bench Boost, Free Hit, Wildcard',
     description:
-      'When to play FPL chips: strategy guides for Wildcard, Bench Boost, Free Hit and Triple Captain. Compare chip timing, double gameweeks, and hit avoidance.',
+      'FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. One chip per gameweek, how many you can play in a season, and a hub for each chip.',
     url: '/chips',
   },
 };
+
+function FaqAnswer({ faq }: { faq: ChipIndexFaq }) {
+  const links = [...(faq.links ?? [])].sort((a, b) => b.label.length - a.label.length);
+  if (links.length === 0) {
+    return <p className="text-neutral-800 leading-relaxed">{faq.a}</p>;
+  }
+
+  const parts: Array<string | { href: string; label: string }> = [];
+  let rest = faq.a;
+
+  while (rest.length > 0) {
+    let best: { index: number; link: (typeof links)[number] } | null = null;
+    for (const link of links) {
+      const index = rest.indexOf(link.label);
+      if (index === -1) continue;
+      if (
+        !best ||
+        index < best.index ||
+        (index === best.index && link.label.length > best.link.label.length)
+      ) {
+        best = { index, link };
+      }
+    }
+    if (!best) {
+      parts.push(rest);
+      break;
+    }
+    if (best.index > 0) parts.push(rest.slice(0, best.index));
+    parts.push(best.link);
+    const used = links.indexOf(best.link);
+    if (used >= 0) links.splice(used, 1);
+    rest = rest.slice(best.index + best.link.label.length);
+  }
+
+  return (
+    <p className="text-neutral-800 leading-relaxed">
+      {parts.map((part, index) =>
+        typeof part === 'string' ? (
+          <span key={index}>{part}</span>
+        ) : (
+          <Link key={`${part.href}-${index}`} href={part.href} className="underline underline-offset-2">
+            {part.label}
+          </Link>
+        )
+      )}
+    </p>
+  );
+}
 
 export default function ChipsIndexPage() {
   return (
     <div className="space-y-8">
       <JsonLd
-        data={breadcrumbList([
-          { name: 'Home', path: '/' },
-          { name: 'Chips', path: '/chips' },
-        ])}
+        data={[
+          breadcrumbList([
+            { name: 'Home', path: '/' },
+            { name: 'Chips', path: '/chips' },
+          ]),
+          faqPage(CHIPS_INDEX_FAQS),
+        ]}
       />
       <header className="space-y-3">
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-          FPL chips: when to play Wildcard, Bench Boost & Free Hit
+          FPL chips: Triple Captain, Bench Boost, Free Hit and Wildcard
         </h1>
         <p className="text-neutral-800 leading-relaxed max-w-3xl">
-          Triple Captain, Bench Boost, Free Hit and Wildcard are the four season chips in Fantasy Premier League. Play them
-          when confirmed minutes, double gameweeks, or severe blanks justify the opportunity cost. In the 2025/26 reconstructive path, all four chips were held unused, including Gameweek 34, when the optimiser took an 8-point hit in a blank instead of
-          deploying Free Hit or Wildcard.
+          FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard: the four season chips in Fantasy Premier
+          League. Play them when confirmed minutes, double gameweeks, or severe blanks justify the opportunity cost. In
+          the 2025/26 reconstructive path, all four chips were held unused, including Gameweek 34, when the optimiser
+          took an 8-point hit in a blank instead of deploying Free Hit or Wildcard.
         </p>
       </header>
       <ul className="space-y-4">
@@ -51,6 +103,12 @@ export default function ChipsIndexPage() {
           </li>
         ))}
       </ul>
+      {CHIPS_INDEX_FAQS.map((faq) => (
+        <section key={faq.q} className="space-y-2 max-w-3xl">
+          <h2 className="text-lg font-semibold">{faq.q}</h2>
+          <FaqAnswer faq={faq} />
+        </section>
+      ))}
       <p className="text-sm">
         <Link href="/guides/when-to-play-fpl-chips" className="underline underline-offset-2">
           When to play chips
