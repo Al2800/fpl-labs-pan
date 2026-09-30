@@ -2,7 +2,7 @@
 
 ## 2026-09-30
 - Date merged: not merged
-- PR: pending
+- PR: #9 https://github.com/Al2800/fpl-labs-pan/pull/9
 - Page URL(s) changed: https://www.fplreplay.com/chips/free-hit (the reconstructive notice also moves below the lead on https://www.fplreplay.com/chips/triple-captain, https://www.fplreplay.com/chips/bench-boost, and https://www.fplreplay.com/chips/wildcard)
 - Search query or queries that prompted it: "free hit"
 - GSC numbers at the time: 28 days to 27 Sep 2026. Query "free hit": 0 clicks / 12 impressions / position 29.0. Page /chips/free-hit: 0 clicks / 56 impressions / 0% CTR / position 33.1. Site: 2 clicks / 444 impressions / 0.5% CTR / average position 15.8.
