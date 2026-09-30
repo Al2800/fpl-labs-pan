@@ -2,6 +2,15 @@
 
 ## 2026-09-30
 - Date merged: not merged
+- PR: pending
+- Page URL(s) changed: https://www.fplreplay.com/chips
+- Search query or queries that prompted it: "fpl chips", "what are the chips in fpl"
+- GSC numbers at the time: 28 days to 27 Sep 2026. Query "fpl chips": 0 clicks / 17 impressions / position 20.2. Query "what are the chips in fpl": 0 clicks / 2 impressions / position 9.0. Page /chips: 0 clicks / 38 impressions / 0% CTR / position 17.2. Site: 2 clicks / 444 impressions / 0.5% CTR / average position 15.8.
+- What changed: Added a FAQ block and FAQPage JSON-LD on the chips hub. The questions answer what the FPL chips are, how many there are, playing more than one in a season, two chips in one gameweek, and where Triple Captain, Bench Boost, Free Hit and Wildcard fit, with links to the four hubs. The title, meta description, H1 and opening sentence now name all four chips. Did not rewrite the Free Hit, Bench Boost, Triple Captain or Wildcard hub bodies. Left the top reconstructive notice on /chips.
+Result (check ~4 weeks after):
+
+## 2026-09-30
+- Date merged: 2026-09-30
 - PR: #10 https://github.com/Al2800/fpl-labs-pan/pull/10
 - Page URL(s) changed: https://www.fplreplay.com/chips/bench-boost (the Bench Boost card on https://www.fplreplay.com/chips uses the same opening sentence)
 - Search query or queries that prompted it: "what is bench boost in fpl", "bench boost fpl", "bench boost"

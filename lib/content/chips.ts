@@ -285,3 +285,54 @@ export function getChipHub(slug: string): ChipHubContent | null {
     CHIP_HUB_CONTENT.find((hub) => hub.slug === slug || hub.id === slug) ?? null
   );
 }
+
+export interface ChipIndexFaq {
+  q: string;
+  a: string;
+  links?: Array<{ href: string; label: string }>;
+}
+
+export const CHIPS_INDEX_FAQS: ChipIndexFaq[] = [
+  {
+    q: 'What are the FPL chips?',
+    a: 'The FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. Each hub on this page covers one of them.',
+    links: [
+      { href: '/chips/triple-captain', label: 'Triple Captain' },
+      { href: '/chips/bench-boost', label: 'Bench Boost' },
+      { href: '/chips/free-hit', label: 'Free Hit' },
+      { href: '/chips/wildcard', label: 'Wildcard' },
+    ],
+  },
+  {
+    q: 'How many chips are there in FPL?',
+    a: 'There are four FPL chips: Triple Captain, Bench Boost, Free Hit and Wildcard. Triple Captain and Bench Boost can each be used once per season, and you get two Wildcards.',
+  },
+  {
+    q: 'Can you play more than one chip in a season?',
+    a: 'Yes, you can play more than one chip in a season. Triple Captain, Bench Boost, Free Hit and Wildcard are separate chips, and you use them in different gameweeks. Triple Captain and Bench Boost are once each. You get two Wildcards, and an unused first Wildcard is lost permanently after the late December cut-off.',
+  },
+  {
+    q: 'Can you play two chips in one gameweek?',
+    a: 'No. Official FPL rules allow only one active chip per gameweek. Triple Captain, Bench Boost, Free Hit, and Wildcard must be used in different gameweeks.',
+  },
+  {
+    q: 'Where does Triple Captain fit?',
+    a: 'Triple Captain triples your captain’s official points for one gameweek, instead of doubling them. You can use it once per season. The Triple Captain hub covers the rules.',
+    links: [{ href: '/chips/triple-captain', label: 'Triple Captain hub' }],
+  },
+  {
+    q: 'Where does Bench Boost fit?',
+    a: 'Bench Boost adds the points from your four substitutes for one gameweek. You can use it once per season. The Bench Boost hub covers the rules.',
+    links: [{ href: '/chips/bench-boost', label: 'Bench Boost hub' }],
+  },
+  {
+    q: 'Where does Free Hit fit?',
+    a: 'Free Hit is a one-week squad: unlimited transfers for that gameweek, with no points deduction, then your previous 15 return. The Free Hit hub covers the rules.',
+    links: [{ href: '/chips/free-hit', label: 'Free Hit hub' }],
+  },
+  {
+    q: 'Where does Wildcard fit?',
+    a: 'Wildcard gives you unlimited free transfers for one gameweek, and the new squad stays. You get two Wildcards per season, and an unused first Wildcard is lost permanently after the late December cut-off. The Wildcard hub covers the rules.',
+    links: [{ href: '/chips/wildcard', label: 'Wildcard hub' }],
+  },
+];
