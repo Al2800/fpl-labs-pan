@@ -4,7 +4,7 @@ export interface GuidePage {
   description: string;
   answer: string;
   sections: Array<{ heading: string; body: string[] }>;
-  faqs: Array<{ q: string; a: string }>;
+  faqs: Array<{ q: string; a: string; links?: Array<{ href: string; label: string }> }>;
   related: Array<{ href: string; label: string }>;
 }
 
@@ -123,11 +123,11 @@ export const GUIDES: GuidePage[] = [
   },
   {
     slug: 'when-to-play-fpl-chips',
-    title: 'When to Play FPL Chips: Wildcard, Bench Boost, Free Hit & TC',
+    title: 'Wildcard, Bench Boost, Free Hit, Triple Captain: when to play',
     description:
-      'When to play FPL chips: Wildcard timing, what Bench Boost does, how Free Hit (freehit) works, and when Triple Captain belongs in a double gameweek.',
+      'In FPL, Wildcard when free transfers cannot fix the squad, Bench Boost and Triple Captain in a double, Free Hit (freehit) in a blank.',
     answer:
-      'When to play FPL chips comes down to fixture swings, doubles, and blanks. Play Wildcard when your squad needs three or more permanent structural fixes. Trigger Bench Boost in a double gameweek when all 15 players have confirmed starts. Deploy Free Hit (freehit) to survive blank gameweeks without transfer hits. Save Triple Captain for an elite talisman with two favourable fixtures. In the 2025/26 reconstructive replay, every chip stayed unused, including when the optimiser took an 8-point hit in Gameweek 34 instead of using Free Hit or Wildcard.',
+      'Wildcard, Bench Boost, Free Hit and Triple Captain: when to play them comes down to fixture swings, doubles, and blanks. Play Wildcard when your squad needs three or more permanent structural fixes. Trigger Bench Boost in a double gameweek when all 15 players have confirmed starts. Deploy Free Hit (freehit) to survive blank gameweeks without transfer hits. Save Triple Captain for an elite talisman with two favourable fixtures. In the 2025/26 reconstructive replay, every chip stayed unused, including when the optimiser took an 8-point hit in Gameweek 34 instead of using Free Hit or Wildcard.',
     sections: [
       {
         heading: 'When to play your Wildcard',
@@ -159,6 +159,17 @@ export const GUIDES: GuidePage[] = [
       },
     ],
     faqs: [
+      {
+        q: 'What are the FPL chips and when do you play them?',
+        a: 'The FPL chips are Wildcard, Bench Boost, Free Hit and Triple Captain: the chips page has a hub for each. Play Wildcard when your squad has at least three structural problems that free transfers cannot fix. Play Bench Boost in a double gameweek when all 15 players have confirmed starts. Play Free Hit in a severe blank when fewer than eight or nine starters are active. Save Triple Captain for a confirmed double where a premium has two starts.',
+        links: [
+          { href: '/chips/wildcard', label: 'Wildcard' },
+          { href: '/chips/bench-boost', label: 'Bench Boost' },
+          { href: '/chips/free-hit', label: 'Free Hit' },
+          { href: '/chips/triple-captain', label: 'Triple Captain' },
+          { href: '/chips', label: 'chips page' },
+        ],
+      },
       {
         q: 'When should I play Wildcard in FPL?',
         a: 'Play Wildcard when your squad has at least three structural problems (such as long-term injuries, lost starting spots, or a brutal run of fixtures) that regular free transfers cannot fix.',
