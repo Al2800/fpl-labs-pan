@@ -91,12 +91,12 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     id: 'bb',
     slug: 'bench-boost',
     name: 'Bench Boost',
-    metaTitle: 'Bench Boost FPL: What Is Bench Boost & When to Play',
+    metaTitle: 'What Is Bench Boost in FPL? Rules & When to Play',
     metaDescription:
-      'Bench Boost FPL guide: what the chip does, how your substitutes score points, and the best double gameweek windows to maximise your full 15-man squad.',
-    h1: 'Bench Boost FPL: what is Bench Boost and when to play',
+      'Bench Boost in FPL adds your four substitutes’ points for one gameweek. How the chip works in a single gameweek, and when to save it for a double.',
+    h1: 'What is Bench Boost in FPL?',
     oneLiner:
-      'Bench Boost adds your four substitutes’ points to your gameweek score. It turns all 15 squad players into active scorers for one round, so you need four reliable starters rather than cheap bench-fillers.',
+      'Bench Boost in FPL is a once-per-season chip that adds the points from your four substitutes to your gameweek score. Hold it for a confirmed double gameweek where those four can play twice, rather than a bench of players who will not start.',
     howItWorks:
       'When you activate Bench Boost, the points scored by all 15 squad members count towards your gameweek total. Points from your substitute goalkeeper and three outfield bench players are added directly to your official score. The chip can only be used once per season. Because every player on your bench is already active, standard automatic substitutions do not apply if a starter fails to play.',
     whenToPlay: [
@@ -120,7 +120,15 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     faqs: [
       {
         q: 'What is Bench Boost in FPL?',
-        a: 'Bench Boost is a single-use chip that counts the points scored by all four of your substitutes alongside your starting eleven for one gameweek.',
+        a: 'Bench Boost in FPL is a chip that adds the points from your four substitutes to your score for one gameweek. You can use it once per season. The starting eleven still score as usual.',
+      },
+      {
+        q: 'How does Bench Boost work in FPL?',
+        a: 'Bench Boost works by counting all 15 players for one gameweek. Your starting eleven score as usual, and the points from your four substitutes are added on top. Automatic substitutions do not apply, because the bench is already active.',
+      },
+      {
+        q: 'Can you play Bench Boost in a single gameweek?',
+        a: 'Yes. You can play Bench Boost in a single gameweek: it adds your four substitutes’ points for that one round, even when each club plays only once. A double gameweek is usually the better time, because those bench players can play twice.',
       },
       {
         q: 'When should I play Bench Boost in FPL?',
@@ -140,7 +148,7 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       },
       {
         q: 'Did the 2025/26 replay play Bench Boost?',
-        a: 'No, Bench Boost was never triggered on the 2025/26 reconstructive path. The published squads therefore understate what a complete FPL policy could achieve.',
+        a: 'No. Bench Boost was never triggered on the 2025/26 reconstructive path. The GW37 card that reaches 76 adds the recorded 6 bench points to the replay’s 70-point score. That 76 is an illustrative calculation, not a Bench Boost the replay played.',
       },
     ],
   },

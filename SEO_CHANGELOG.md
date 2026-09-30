@@ -2,6 +2,15 @@
 
 ## 2026-09-30
 - Date merged: not merged
+- PR: pending
+- Page URL(s) changed: https://www.fplreplay.com/chips/bench-boost (the Bench Boost card on https://www.fplreplay.com/chips uses the same opening sentence)
+- Search query or queries that prompted it: "what is bench boost in fpl", "bench boost fpl", "bench boost"
+- GSC numbers at the time: 28 days to 27 Sep 2026. Query "what is bench boost in fpl": 0 clicks / 12 impressions / position 17.0. Query "bench boost fpl": 0 clicks / 7 impressions / position 24.4. Query "bench boost": 0 clicks / 7 impressions / position 26.1. Page /chips/bench-boost: 0 clicks / 51 impressions / 0% CTR / position 19.5. Site: 2 clicks / 444 impressions / 0.5% CTR / average position 15.8.
+- What changed: Retitled the Bench Boost hub so the title, meta description, H1, and opening sentence lead with what Bench Boost is in FPL. The first sentence now says Bench Boost in FPL is a once-per-season chip that adds the points from your four substitutes. Rewrote the definition FAQ so it answers that query first, and added FAQs on how Bench Boost works in FPL and on playing it in a single gameweek, where bench points still count for that one round. FAQPage JSON-LD uses the same FAQ list. Left the GW37 bench card labelled as an illustrative calculation (6 bench points on a 70-point score, 76 not an observed chip score). Did not add a played Bench Boost score. Left the reconstructive notice below the lead.
+Result (check ~4 weeks after):
+
+## 2026-09-30
+- Date merged: 2026-09-30
 - PR: #9 https://github.com/Al2800/fpl-labs-pan/pull/9
 - Page URL(s) changed: https://www.fplreplay.com/chips/free-hit (the reconstructive notice also moves below the lead on https://www.fplreplay.com/chips/triple-captain, https://www.fplreplay.com/chips/bench-boost, and https://www.fplreplay.com/chips/wildcard)
 - Search query or queries that prompted it: "free hit"
