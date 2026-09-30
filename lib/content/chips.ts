@@ -148,12 +148,12 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     id: 'fh',
     slug: 'free-hit',
     name: 'Free Hit',
-    metaTitle: 'What Is Free Hit (Freehit) in FPL? Rules & When to Play',
+    metaTitle: 'Free Hit (Freehit) in FPL: What It Is',
     metaDescription:
-      'Free Hit (freehit) in FPL gives unlimited transfers for one gameweek, then your previous 15-man squad returns. When to play it in blanks, and what happens to hits and prices.',
-    h1: 'What is Free Hit (freehit) in FPL?',
+      'Free Hit (freehit) in FPL is a one-week squad: unlimited transfers for one gameweek, then your old 15 return. For a blank week. Wildcard keeps the new squad.',
+    h1: 'Free Hit (freehit) in FPL: what a free hit is',
     oneLiner:
-      'Free Hit (often searched as freehit) gives you unlimited transfers for one gameweek before your old 15-man squad returns intact. It is the main escape hatch for severe blank gameweeks without dismantling your long-term team.',
+      'A free hit in FPL (also written freehit) is a one-week squad. You can transfer in as many players as you like for that gameweek, with no points deduction, and your previous 15 come back when the gameweek ends. Save it for a blank week, when postponed matches leave your real squad short of players. If you want the new squad to stay, that is a Wildcard.',
     howItWorks:
       'Free Hit allows you to make unlimited transfers for a single gameweek without incurring any points deductions (-4 hits). Once the gameweek deadline passes and all matches conclude, your team resets exactly to the 15 players you owned before activating the chip. Any free transfers you had saved before triggering Free Hit will reset to one for the following week, and you do not retain any player price changes generated during the Free Hit round.',
     whenToPlay: [
@@ -176,8 +176,16 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     },
     faqs: [
       {
-        q: 'What is Free Hit (freehit) in FPL?',
-        a: 'Free Hit (also written freehit) is a chip that grants unlimited transfers for one gameweek with no points deductions. When the gameweek ends, your squad reverts to the exact 15 players you owned before you activated the chip.',
+        q: 'What does Free Hit mean in FPL?',
+        a: 'Free Hit means a temporary squad for one gameweek. You get unlimited transfers with no points deduction, and your old 15 return afterwards. It is also written freehit.',
+      },
+      {
+        q: 'How does Free Hit differ from Wildcard?',
+        a: 'Free Hit gives your old squad back after one gameweek. Wildcard keeps the new 15. Both allow unlimited transfers, with no points hit, in the week you play them.',
+      },
+      {
+        q: 'Is Free Hit a one-week squad for a blank week?',
+        a: 'Yes. A free hit is a squad for one gameweek, and a blank week is the usual reason to play it. You cover postponed fixtures, then your previous 15 return. A double gameweek is the other case, and only when your season squad is aimed at the wrong clubs.',
       },
       {
         q: 'When should I play Free Hit in FPL?',

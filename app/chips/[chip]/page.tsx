@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getChipHub } from '@/lib/content/chips';
+import { DemoNoticeBanner } from '@/components/DemoNoticeBanner';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbList, chipHubPath, faqPage } from '@/lib/present';
 
@@ -70,6 +71,7 @@ export default async function ChipHubPage({ params }: PageProps) {
           {hub.h1 ?? `When to play ${hub.name}`}
         </h1>
         <p className="text-neutral-800 leading-relaxed">{hub.oneLiner}</p>
+        <DemoNoticeBanner placement="below-lead" />
       </header>
       <section className="space-y-2">
         <h2 className="text-lg font-semibold">How {hub.name} works</h2>
