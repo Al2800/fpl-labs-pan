@@ -2,7 +2,7 @@
 
 ## 2026-09-30
 - Date merged: not merged
-- PR: pending
+- PR: #12 https://github.com/Al2800/fpl-labs-pan/pull/12
 - Page URL(s) changed: https://www.fplreplay.com/chips/wildcard (the Wildcard card on https://www.fplreplay.com/chips uses the same opening sentence)
 - Search query or queries that prompted it: "wildcard fpl meaning", "when to wildcard fpl", "wildcard in fpl meaning"
 - GSC numbers at the time: 28 days to 27 Sep 2026. Query "wildcard fpl meaning": 0 clicks / 6 impressions / position 15.2. Query "when to wildcard fpl": 0 clicks / 4 impressions / position 15.0. Query "wildcard in fpl meaning": 2 impressions (clicks and position not recorded). Page /chips/wildcard: 0 clicks / 39 impressions / 0% CTR / position 15.5. Site: 2 clicks / 444 impressions / 0.5% CTR / average position 15.8.
