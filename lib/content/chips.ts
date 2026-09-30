@@ -221,12 +221,12 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     id: 'wc',
     slug: 'wildcard',
     name: 'Wildcard',
-    metaTitle: 'When to Wildcard in FPL: Meaning, Rules & Timing',
+    metaTitle: 'Wildcard FPL Meaning: When to Wildcard',
     metaDescription:
-      'Wildcard in FPL means unlimited free transfers for one gameweek, and the new squad stays. When to Wildcard, first vs second half timing, and how hits and value work.',
-    h1: 'When to Wildcard in FPL (and what Wildcard means)',
+      'Wildcard in FPL means unlimited free transfers for one gameweek, and the new squad stays. When to Wildcard: two per season. The first is lost after late December.',
+    h1: 'Wildcard FPL meaning: when to Wildcard',
     oneLiner:
-      'Wildcard rebuilds your entire 15-man squad permanently with no transfer penalties. Pull the trigger ahead of sustained fixture swings or when multiple injuries break your structure, not as a kneejerk reaction to one bad week.',
+      'Wildcard in FPL means unlimited free transfers for one gameweek, and the new squad stays. Play it ahead of a sustained fixture swing, or when several injuries break the squad, not after one bad week.',
     howItWorks:
       'Wildcard gives you unlimited free transfers for one gameweek, and the resulting squad remains permanently in place. You receive two Wildcards per season: one for the first half of the campaign (which expires in late December) and one for the second half. Any transfer hits taken earlier in the same gameweek are eliminated the moment you confirm the chip. However, your team value only reflects locked-in prices, so selling and buying players back at a higher price still incurs the 50% profit tax.',
     whenToPlay: [
@@ -250,15 +250,19 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     faqs: [
       {
         q: 'What does Wildcard mean in FPL?',
-        a: 'Wildcard in FPL means unlimited free transfers for one gameweek, and the squad you end up with stays permanently. Unlike Free Hit, nothing reverts after the round ends.',
+        a: 'Wildcard in FPL means unlimited free transfers for one gameweek, and the new squad stays. Unlike Free Hit, the old squad does not come back.',
+      },
+      {
+        q: 'How many Wildcards do you get per season?',
+        a: 'You get two Wildcards per season. The first must be played before the late December cut-off, or it is lost. The second covers the rest of the season. They do not roll over.',
       },
       {
         q: 'When should I play Wildcard in FPL?',
         a: 'Play Wildcard when your squad has at least three structural problems (such as long-term injuries, lost starting spots, or a brutal run of fixtures) that regular free transfers cannot fix.',
       },
       {
-        q: 'FPL when to Wildcard: should you use it in the first or second half of the season?',
-        a: 'You get two Wildcards per season: one must be played before the late December cut-off, and the second is available for the rest of the campaign. The two chips do not stack or roll over, so an unused first Wildcard is lost permanently.',
+        q: 'When to Wildcard: first half or second half of the season?',
+        a: 'Play the first Wildcard in the first half, before the late December cut-off, when the squad needs a permanent rebuild. Keep the second for later in the season. If you leave the first one unused, it is lost.',
       },
       {
         q: 'Does activating Wildcard cancel transfer hits already taken?',
@@ -270,7 +274,7 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
       },
       {
         q: 'Can you cancel a Wildcard once activated?',
-        a: 'No. Once confirmed, an FPL Wildcard cannot be cancelled, reversed, or refunded under any circumstances. Ensure you are completely satisfied with your newly assembled squad before clicking the final confirmation button.',
+        a: 'No. Once you confirm a Wildcard, you cannot cancel it or get it back. Check the new squad before you confirm.',
       },
       {
         q: 'Should Wildcard have been used in 2025/26 Gameweek 34?',

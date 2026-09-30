@@ -2,6 +2,15 @@
 
 ## 2026-09-30
 - Date merged: not merged
+- PR: pending
+- Page URL(s) changed: https://www.fplreplay.com/chips/wildcard (the Wildcard card on https://www.fplreplay.com/chips uses the same opening sentence)
+- Search query or queries that prompted it: "wildcard fpl meaning", "when to wildcard fpl", "wildcard in fpl meaning"
+- GSC numbers at the time: 28 days to 27 Sep 2026. Query "wildcard fpl meaning": 0 clicks / 6 impressions / position 15.2. Query "when to wildcard fpl": 0 clicks / 4 impressions / position 15.0. Query "wildcard in fpl meaning": 2 impressions (clicks and position not recorded). Page /chips/wildcard: 0 clicks / 39 impressions / 0% CTR / position 15.5. Site: 2 clicks / 444 impressions / 0.5% CTR / average position 15.8.
+- What changed: Retitled the Wildcard hub so the title, meta description, and H1 carry Wildcard FPL meaning alongside when to Wildcard. The opening sentence now says Wildcard in FPL means unlimited free transfers for one gameweek, and the new squad stays. Left the definition FAQ first in the FAQ list and tightened its answer. Added a FAQ on how many Wildcards per season: two, with the first lost after the late December cut-off. Reworded the first-half versus second-half FAQ so the answer leads with that choice, and simplified the cancel FAQ. FAQPage JSON-LD uses the same FAQ list. Did not add a Wildcard score. Left the reconstructive notice below the lead. Did not rewrite Free Hit, Bench Boost, Triple Captain, or the chips hub page.
+Result (check ~4 weeks after):
+
+## 2026-09-30
+- Date merged: 2026-09-30
 - PR: #11 https://github.com/Al2800/fpl-labs-pan/pull/11
 - Page URL(s) changed: https://www.fplreplay.com/chips
 - Search query or queries that prompted it: "fpl chips", "what are the chips in fpl"
