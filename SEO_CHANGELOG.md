@@ -1,5 +1,14 @@
 # SEO Changelog
 
+## 2026-09-30
+- Date merged: not merged
+- PR: #9 https://github.com/Al2800/fpl-labs-pan/pull/9
+- Page URL(s) changed: https://www.fplreplay.com/chips/free-hit (the reconstructive notice also moves below the lead on https://www.fplreplay.com/chips/triple-captain, https://www.fplreplay.com/chips/bench-boost, and https://www.fplreplay.com/chips/wildcard)
+- Search query or queries that prompted it: "free hit"
+- GSC numbers at the time: 28 days to 27 Sep 2026. Query "free hit": 0 clicks / 12 impressions / position 29.0. Page /chips/free-hit: 0 clicks / 56 impressions / 0% CTR / position 33.1. Site: 2 clicks / 444 impressions / 0.5% CTR / average position 15.8.
+- What changed: Retitled the Free Hit hub so the title, meta description, H1, and opening sentence lead with free hit, including the freehit spelling. The first sentence now says a free hit is a one-week squad. Rewrote the definition FAQ so it answers what Free Hit means, and added FAQs on how Free Hit differs from Wildcard and on using it as a one-week squad in a blank week. FAQPage JSON-LD uses the same FAQ list. Moved the reconstructive demo notice below the content lead on all four chip hubs. Left the GW34 hit record in place and did not add a Free Hit score.
+Result (check ~4 weeks after):
+
 ## 2026-09-24
 - Date merged: 2026-09-24 (direct update on main)
 - PR: Not applicable; applied directly to main as requested

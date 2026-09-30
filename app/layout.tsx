@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { DemoNoticeBanner } from '@/components/DemoNoticeBanner';
+import { GlobalDemoNotice } from '@/components/GlobalDemoNotice';
 import { JsonLd } from '@/components/JsonLd';
 import { getSiteUrl } from '@/lib/site';
 
@@ -105,7 +107,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-neutral-50 text-neutral-900">
         <JsonLd data={websiteJsonLd} />
-        <DemoNoticeBanner />
+        <Suspense fallback={<DemoNoticeBanner />}>
+          <GlobalDemoNotice />
+        </Suspense>
         <Navbar />
         <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8">
           {children}
