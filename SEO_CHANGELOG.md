@@ -2,7 +2,7 @@
 
 ## 2026-09-30
 - Date merged: not merged
-- PR: pending
+- PR: #11 https://github.com/Al2800/fpl-labs-pan/pull/11
 - Page URL(s) changed: https://www.fplreplay.com/chips
 - Search query or queries that prompted it: "fpl chips", "what are the chips in fpl"
 - GSC numbers at the time: 28 days to 27 Sep 2026. Query "fpl chips": 0 clicks / 17 impressions / position 20.2. Query "what are the chips in fpl": 0 clicks / 2 impressions / position 9.0. Page /chips: 0 clicks / 38 impressions / 0% CTR / position 17.2. Site: 2 clicks / 444 impressions / 0.5% CTR / average position 15.8.
