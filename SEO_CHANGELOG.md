@@ -2,7 +2,7 @@
 
 ## 2026-09-30
 - Date merged: not merged
-- PR: pending
+- PR: #10 https://github.com/Al2800/fpl-labs-pan/pull/10
 - Page URL(s) changed: https://www.fplreplay.com/chips/bench-boost (the Bench Boost card on https://www.fplreplay.com/chips uses the same opening sentence)
 - Search query or queries that prompted it: "what is bench boost in fpl", "bench boost fpl", "bench boost"
 - GSC numbers at the time: 28 days to 27 Sep 2026. Query "what is bench boost in fpl": 0 clicks / 12 impressions / position 17.0. Query "bench boost fpl": 0 clicks / 7 impressions / position 24.4. Query "bench boost": 0 clicks / 7 impressions / position 26.1. Page /chips/bench-boost: 0 clicks / 51 impressions / 0% CTR / position 19.5. Site: 2 clicks / 444 impressions / 0.5% CTR / average position 15.8.
