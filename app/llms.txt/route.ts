@@ -4,6 +4,7 @@ import { CHIP_HUB_CONTENT } from '@/lib/content/chips';
 import { GLOSSARY } from '@/lib/content/glossary';
 import { getSiteUrl } from '@/lib/site';
 import { gameweekPath, gameweekSnapshotPath, seasonPath, seasonSnapshotPath } from '@/lib/present';
+import { REPLAY_DOWNLOAD_PATH } from '@/lib/replay-2025';
 
 export const dynamic = 'force-static';
 
@@ -23,14 +24,16 @@ export async function GET() {
     '',
     '- Prefer JSON snapshots over HTML scraping.',
     '- 2025/26 is a reconstructive replay (cutoff = first kickoff minus 90 minutes), not a live T-120 freeze.',
-    '- 2026/27 Gameweeks 1–3 are an illustrative sample of the live page format.',
+    '- Sample 2026/27 pages are not published.',
     '- Same-state evidence matched the optimiser in every 2025/26 gameweek folder. Chips were never played.',
+    '- In 2026/27 managers get two of each chip. The first set must be used by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027.',
     '',
     '## Core pages',
     '',
     `- ${base}/`,
     `- ${base}/seasons`,
     `- ${base}/seasons/2025-26`,
+    `- ${base}${REPLAY_DOWNLOAD_PATH}`,
     `- ${base}/guides`,
     `- ${base}/chips`,
     `- ${base}/glossary`,
@@ -40,15 +43,15 @@ export async function GET() {
     '',
     '## Guides',
     '',
-    ...GUIDES.map((guide) => `- ${base}/guides/${guide.slug} — ${guide.title}`),
+    ...GUIDES.map((guide) => `- ${base}/guides/${guide.slug}: ${guide.title}`),
     '',
     '## Chip hubs',
     '',
-    ...CHIP_HUB_CONTENT.map((chip) => `- ${base}/chips/${chip.slug} — ${chip.name}`),
+    ...CHIP_HUB_CONTENT.map((chip) => `- ${base}/chips/${chip.slug}: ${chip.name}`),
     '',
     '## Glossary terms',
     '',
-    ...GLOSSARY.map((entry) => `- ${base}/glossary#${entry.id} — ${entry.term}`),
+    ...GLOSSARY.map((entry) => `- ${base}/glossary#${entry.id}: ${entry.term}`),
     '',
     '## Seasons',
     '',
@@ -63,7 +66,7 @@ export async function GET() {
       const html = gameweekPath(gw.season, gw.gw);
       const json = gameweekSnapshotPath(gw.season, gw.gw);
       const pts = gw.validatedPlan.realisedSquadTotalPoints;
-      return `- GW${gw.gw} ${gw.validatedPlan.captain.webName} ${pts} pts — ${base}${html} — ${base}${json}`;
+      return `- GW${gw.gw} ${gw.validatedPlan.captain.webName} ${pts} pts: ${base}${html} | ${base}${json}`;
     }),
     '',
   ];

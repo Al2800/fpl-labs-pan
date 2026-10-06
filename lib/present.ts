@@ -147,6 +147,24 @@ export function gameweekHeading(decision: GameweekDecision): string {
   return `FPL Gameweek ${decision.gw} (${seasonLabel(decision.season)}): Team, Captain and Transfers`;
 }
 
+export function gameweekMetaDescription(decision: GameweekDecision): string {
+  const plan = decision.validatedPlan;
+  const template = decision.arms.find((arm) => arm.id === 'baseline')?.realisedPoints;
+  const points = plan.realisedSquadTotalPoints;
+  const hit = plan.hitCost > 0 ? ` after a ${plan.hitCost}-point hit` : '';
+  const transfers =
+    plan.transferActions.length === 0
+      ? 'No transfers'
+      : `${plan.transferActions.length} transfer${plan.transferActions.length === 1 ? '' : 's'}${hit}`;
+  const templateBit =
+    template !== null && template !== undefined ? ` Template scored ${template}.` : '';
+  const full = `FPL GW${decision.gw} ${seasonLabel(decision.season)}: ${plan.captain.webName} captained, ${points} net. ${transfers}.${templateBit}`;
+  if (full.length <= 155) return full;
+  const shorter = `FPL GW${decision.gw} ${seasonLabel(decision.season)}: ${plan.captain.webName} captained, ${points} net.${templateBit}`;
+  if (shorter.length <= 155) return shorter;
+  return shorter.slice(0, 152).trimEnd() + '...';
+}
+
 export function formatProjected(value: number, kind: DatasetKind): string {
   if (kind === 'historical-replay' && value === 0) return 'Unavailable';
   return `${value.toFixed(1)} xP`;
@@ -213,7 +231,14 @@ export function chipCheckAnswer(
 ): string {
   const kind = datasetKindOf(decision);
   if (kind === 'historical-replay') {
-    return 'No chip was played. The 2025/26 reconstructive path left Wildcard, Free Hit, Triple Captain and Bench Boost unused, including in Gameweek 34 when both the optimiser and the template took an 8-point hit in a blank.';
+    const plan = decision.validatedPlan;
+    const template = decision.arms.find((arm) => arm.id === 'baseline')?.realisedPoints;
+    const unused =
+      'No chip was played. Wildcard, Free Hit, Triple Captain and Bench Boost stayed unused on the 2025/26 replay.';
+    if (decision.gw === 34 && plan.hitCost > 0) {
+      return `${unused} In Gameweek 34 the optimiser took a ${plan.hitCost}-point hit and scored ${plan.realisedSquadTotalPoints} net. The template held and scored ${template}.`;
+    }
+    return unused;
   }
   const planChip =
     decision.validatedPlan.chipUsed === 'none'

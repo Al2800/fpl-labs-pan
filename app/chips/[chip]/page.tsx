@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getChipHub } from '@/lib/content/chips';
+import { CHIP_HUB_CONTENT, getChipHub } from '@/lib/content/chips';
 import { DemoNoticeBanner } from '@/components/DemoNoticeBanner';
+import { ChipReplayCards, blankWeeksFaqAnswer } from '@/components/ChipReplayCards';
 import { JsonLd } from '@/components/JsonLd';
+import { REPLAY_DOWNLOAD_PATH } from '@/lib/replay-2025';
 import { breadcrumbList, chipHubPath, faqPage } from '@/lib/present';
 
 interface PageProps {
@@ -46,6 +48,12 @@ export default async function ChipHubPage({ params }: PageProps) {
   const { chip } = await params;
   const hub = getChipHub(chip);
   if (!hub) notFound();
+  const faqs = hub.faqs.map((faq) =>
+    hub.id === 'fh' && faq.q === 'What happened in the 2025/26 blank gameweeks?'
+      ? { ...faq, a: blankWeeksFaqAnswer() }
+      : faq
+  );
+  const otherChips = CHIP_HUB_CONTENT.filter((item) => item.id !== hub.id);
 
   return (
     <div className="space-y-8 max-w-3xl">
@@ -56,7 +64,7 @@ export default async function ChipHubPage({ params }: PageProps) {
             { name: 'Chips', path: '/chips' },
             { name: hub.name, path: chipHubPath(hub.slug) },
           ]),
-          faqPage(hub.faqs),
+          faqPage(faqs),
         ]}
       />
       <nav className="text-sm text-neutral-600">
@@ -85,6 +93,8 @@ export default async function ChipHubPage({ params }: PageProps) {
           ))}
         </ul>
       </section>
+      <ChipReplayCards chip={hub.id} />
+      {hub.id === 'fh' ? null : (
       <section
         className="border border-neutral-200 bg-neutral-50 p-5 space-y-2"
         aria-label={`${hub.name} replay scenario`}
@@ -100,23 +110,34 @@ export default async function ChipHubPage({ params }: PageProps) {
           . {hub.scenario.sourceDetail}
         </p>
       </section>
+      )}
       <section className="space-y-2">
         <h2 className="text-lg font-semibold">What the 2025/26 replay did</h2>
         <p className="text-neutral-800 leading-relaxed">{hub.replay2025}</p>
       </section>
-      {hub.faqs.map((faq) => (
+      {faqs.map((faq) => (
         <section key={faq.q} className="space-y-2">
           <h2 className="text-lg font-semibold">{faq.q}</h2>
           <p className="text-neutral-800 leading-relaxed">{faq.a}</p>
         </section>
       ))}
-      <p className="text-sm">
+      <p className="text-sm flex flex-wrap gap-x-4 gap-y-2">
+        {otherChips.map((item) => (
+          <Link key={item.id} href={chipHubPath(item.slug)} className="underline underline-offset-2">
+            {item.name}
+          </Link>
+        ))}
+        <Link href="/chips" className="underline underline-offset-2">
+          All chips
+        </Link>
+        <Link href="/guides/when-to-play-fpl-chips" className="underline underline-offset-2">
+          When to play them
+        </Link>
         <Link href="/seasons/2025-26" className="underline underline-offset-2">
           2025/26 season
         </Link>
-        {' · '}
-        <Link href="/guides/when-to-play-fpl-chips" className="underline underline-offset-2">
-          Chip timing guide
+        <Link href={REPLAY_DOWNLOAD_PATH} className="underline underline-offset-2">
+          Download the replay
         </Link>
       </p>
     </div>

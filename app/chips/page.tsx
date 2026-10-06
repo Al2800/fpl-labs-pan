@@ -7,14 +7,14 @@ import { breadcrumbList, chipHubPath, faqPage } from '@/lib/present';
 export const metadata: Metadata = {
   title: 'FPL Chips: Triple Captain, Bench Boost, Free Hit, Wildcard',
   description:
-    'FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. One chip per gameweek, how many you can play in a season, and a hub for each chip.',
+    'Eight FPL chips in 2026/27: two each of Triple Captain, Bench Boost, Free Hit and Wildcard. The first set expires at the GW19 deadline on 2 Jan 2027.',
   alternates: {
     canonical: '/chips',
   },
   openGraph: {
     title: 'FPL Chips: Triple Captain, Bench Boost, Free Hit, Wildcard',
     description:
-      'FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. One chip per gameweek, how many you can play in a season, and a hub for each chip.',
+      'Eight FPL chips in 2026/27: two each of Triple Captain, Bench Boost, Free Hit and Wildcard. The first set expires at the GW19 deadline on 2 Jan 2027.',
     url: '/chips',
   },
 };
@@ -84,10 +84,11 @@ export default function ChipsIndexPage() {
           FPL chips: Triple Captain, Bench Boost, Free Hit and Wildcard
         </h1>
         <p className="text-neutral-800 leading-relaxed max-w-3xl">
-          FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard: the four season chips in Fantasy Premier
-          League. Play them when confirmed minutes, double gameweeks, or severe blanks justify the opportunity cost. In
-          the 2025/26 reconstructive path, all four chips were held unused, including Gameweek 34, when the optimiser
-          took an 8-point hit in a blank instead of deploying Free Hit or Wildcard.
+          FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. In 2026/27 you get two of each, eight in
+          total, and only one chip in a gameweek. The first set has to be used by the Gameweek 19 deadline, 13:30 GMT
+          on Saturday 2 January 2027. It does not carry over. A new set is there from Gameweek 20. In the 2025/26
+          replay, all four were left unused, including Gameweek 34, when the optimiser took an 8-point hit in a blank
+          and did not play Free Hit or Wildcard.
         </p>
       </header>
       <ul className="space-y-4">
@@ -116,6 +117,10 @@ export default function ChipsIndexPage() {
         {' · '}
         <Link href="/guides/gw34-blank-and-hits" className="underline underline-offset-2">
           Gameweek 34 hit
+        </Link>
+        {' · '}
+        <Link href="/seasons/2025-26/download" className="underline underline-offset-2">
+          2025/26 download
         </Link>
       </p>
     </div>

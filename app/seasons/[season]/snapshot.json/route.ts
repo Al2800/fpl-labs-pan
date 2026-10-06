@@ -3,8 +3,10 @@ import { snapshotNotFound, snapshotResponse } from '@/lib/snapshot';
 
 export const dynamic = 'force-static';
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return [{ season: '2025-26' }, { season: '2026-27' }];
+  return [{ season: '2025-26' }];
 }
 
 export async function GET(

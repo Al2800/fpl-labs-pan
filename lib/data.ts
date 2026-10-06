@@ -126,7 +126,7 @@ export function getSeasonIndex(season: string): SeasonIndex | null {
 }
 
 export function getSeasons(): SeasonIndex[] {
-  return [getSeasonIndex(REPLAY_SEASON), getSeasonIndex(DEMO_SEASON)].filter(
+  return [getSeasonIndex(REPLAY_SEASON)].filter(
     (season): season is SeasonIndex => season !== null
   );
 }

@@ -7,14 +7,14 @@ import { breadcrumbList, seasonLabel, seasonPath } from '@/lib/present';
 export const metadata: Metadata = {
   title: 'FPL gameweek decisions',
   description:
-    'Archive of FPL gameweek teams, captains and transfers. 2025/26 is a reconstructive replay; 2026/27 is an illustrative sample.',
+    'Archive of FPL gameweek teams, captains and transfers. 2025/26 is the published reconstructive replay.',
   alternates: {
     canonical: '/decisions',
   },
   openGraph: {
     title: 'FPL gameweek decisions',
     description:
-      'Archive of FPL gameweek teams, captains and transfers. 2025/26 is a reconstructive replay; 2026/27 is an illustrative sample.',
+      'Archive of FPL gameweek teams, captains and transfers. 2025/26 is the published reconstructive replay.',
     url: '/decisions',
   },
 };
@@ -37,7 +37,7 @@ export default function DecisionsIndexPage() {
         </h1>
         <p className="text-neutral-700 max-w-3xl leading-relaxed">
           Open a season for the full gameweek list. 2025/26 is the settled reconstructive replay.
-          2026/27 is three illustrative sample pages.
+          Sample 2026/27 gameweeks are not published.
         </p>
       </header>
 

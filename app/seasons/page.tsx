@@ -7,14 +7,14 @@ import { breadcrumbList, seasonLabel, seasonPath } from '@/lib/present';
 export const metadata: Metadata = {
   title: 'FPL seasons',
   description:
-    'FPL Replay seasons: the 2025/26 reconstructive replay and the 2026/27 illustrative sample of the live format.',
+    'FPL Replay seasons. The published record is the 2025/26 reconstructive replay, with a CSV and JSON download.',
   alternates: {
     canonical: '/seasons',
   },
   openGraph: {
     title: 'FPL seasons',
     description:
-      'FPL Replay seasons: the 2025/26 reconstructive replay and the 2026/27 illustrative sample of the live format.',
+      'FPL Replay seasons. The published record is the 2025/26 reconstructive replay, with a CSV and JSON download.',
     url: '/seasons',
   },
 };
@@ -33,8 +33,8 @@ export default function SeasonsIndexPage() {
       <header className="space-y-2">
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">FPL seasons</h1>
         <p className="text-neutral-700 max-w-3xl leading-relaxed">
-          Each season is either a reconstructive replay or an illustrative sample. Open a season for
-          the gameweek list, then download JSON from any page.
+          Open 2025/26 for the gameweek list, the captain and transfer record, and the season
+          download. Sample 2026/27 pages are not published.
         </p>
       </header>
       <ul className="space-y-4">

@@ -3,8 +3,8 @@ import Link from 'next/link';
 function NoticeCopy() {
   return (
     <>
-      2025/26 is a reconstructive replay (cutoff = first kickoff − 90 minutes, not a live two-hour
-      freeze). 2026/27 pages are an illustrative sample of the live format.{' '}
+      2025/26 is a reconstructive replay. The cutoff is first kickoff minus 90 minutes, not a live
+      two-hour freeze.{' '}
       <Link href="/guides/reconstructive-replay" className="underline underline-offset-2">
         What that means
       </Link>

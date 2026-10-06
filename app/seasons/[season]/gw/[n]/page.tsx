@@ -3,8 +3,8 @@ import { Metadata } from 'next';
 import { getAdjacentGameweeks, getSeasonGameweek, getSeasonGameweeks } from '@/lib/data';
 import { GameweekDecisionView } from '@/components/GameweekDecisionView';
 import {
-  gameweekAnswer,
   gameweekHeading,
+  gameweekMetaDescription,
   gameweekPath,
   gameweekSnapshotPath,
   jsonAlternate,
@@ -14,6 +14,8 @@ import {
 interface PageProps {
   params: Promise<{ season: string; n: string }>;
 }
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return getSeasonGameweeks('2025-26').map((gw) => ({
@@ -29,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Gameweek not found' };
   }
   const title = gameweekHeading(decision);
-  const description = gameweekAnswer(decision);
+  const description = gameweekMetaDescription(decision);
   const path = gameweekPath(decision.season, decision.gw);
   return {
     title,
