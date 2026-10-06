@@ -18,6 +18,7 @@ import {
   formatProjected,
   gameweekAnswer,
   gameweekHeading,
+  pointsHitPhrase,
   seasonLabel,
   simPath,
   statusLabel,
@@ -102,7 +103,7 @@ export function GameweekDecisionView({
     transferCount === 0
       ? 'It made no transfers.'
       : `It made ${transferCount} transfer${transferCount === 1 ? '' : 's'}${
-          validatedPlan.hitCost > 0 ? ` and took a ${validatedPlan.hitCost}-point hit` : ''
+          validatedPlan.hitCost > 0 ? ` and took ${pointsHitPhrase(validatedPlan.hitCost)}` : ''
         }.`;
   const replayFaqs =
     kind === 'historical-replay' && validatedPlan.captain.realisedPoints !== null
@@ -212,7 +213,9 @@ export function GameweekDecisionView({
 
       <section className="space-y-4">
         <h2 className="text-lg font-semibold">Why this plan</h2>
-        <p className="text-neutral-800 leading-relaxed">{summaryAnalysis.executiveSummary}</p>
+        <p className="text-neutral-800 leading-relaxed">
+          {summaryAnalysis.executiveSummary.replaceAll('a 8-point', 'an 8-point')}
+        </p>
 
         {validatedPlan.transferActions.length > 0 ? (
           <div className="border border-neutral-200 bg-white p-4 space-y-2">

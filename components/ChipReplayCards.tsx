@@ -7,7 +7,7 @@ import {
   type BlankWeekRecord,
   type ReplayDigest,
 } from '@/lib/replay-2025';
-import { gameweekPath } from '@/lib/present';
+import { gameweekPath, pointsHitPhrase } from '@/lib/present';
 
 function gwLink(gw: number) {
   return (
@@ -22,7 +22,7 @@ function BlankWeekCopy({ week }: { week: BlankWeekRecord }) {
   const bench = week.withoutFixture.filter((player) => player.where === 'bench').map((player) => player.webName);
   const hit =
     week.hitCost > 0
-      ? `took a ${week.hitCost}-point hit`
+      ? `took ${pointsHitPhrase(week.hitCost)}`
       : 'did not take a hit';
   const places = [
     xi.length ? `${joinNames(xi)} in the starting XI` : '',
@@ -242,6 +242,6 @@ export function blankWeeksFaqAnswer(): string {
   }
   const freeTransfers = (count: number) =>
     `${count} free ${count === 1 ? 'transfer' : 'transfers'}`;
-  const gw31Hit = gw31.hitCost === 0 ? 'there was no hit' : `it took a ${gw31.hitCost}-point hit`;
-  return `In GW34 the optimiser had ${gw34.withoutFixture.length} of ${gw34.squadSize} players without a fixture, made ${gw34.transfers} transfers on ${freeTransfers(gw34.freeTransfersAvailable)}, took a ${gw34.hitCost}-point hit and scored ${gw34.optimiserPoints} net. The template scored ${gw34.templatePoints}. In GW31, ${gw31.withoutFixture.length} of ${gw31.squadSize} had no fixture, ${freeTransfers(gw31.freeTransfersAvailable)} were available, ${gw31.transfers} were used, ${gw31Hit}, and the optimiser scored ${gw31.optimiserPoints}. Free Hit was not played in either week.`;
+  const gw31Hit = gw31.hitCost === 0 ? 'there was no hit' : `it took ${pointsHitPhrase(gw31.hitCost)}`;
+  return `In GW34 the optimiser had ${gw34.withoutFixture.length} of ${gw34.squadSize} players without a fixture, made ${gw34.transfers} transfers on ${freeTransfers(gw34.freeTransfersAvailable)}, took ${pointsHitPhrase(gw34.hitCost)} and scored ${gw34.optimiserPoints} net. The template scored ${gw34.templatePoints}. In GW31, ${gw31.withoutFixture.length} of ${gw31.squadSize} had no fixture, ${freeTransfers(gw31.freeTransfersAvailable)} were available, ${gw31.transfers} were used, ${gw31Hit}, and the optimiser scored ${gw31.optimiserPoints}. Free Hit was not played in either week.`;
 }

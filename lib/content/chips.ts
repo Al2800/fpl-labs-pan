@@ -237,7 +237,7 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     name: 'Wildcard',
     metaTitle: 'Wildcard Meaning in FPL: When to Wildcard',
     metaDescription:
-      'Wildcard meaning in FPL: unlimited free transfers for one gameweek, and the new squad stays. Two per season. The first must be used by the GW19 deadline on 2 Jan 2027.',
+      'Wildcard meaning in FPL: unlimited free transfers, and the new squad stays. You get two. The first must be used by the GW19 deadline on 2 Jan 2027.',
     h1: 'Wildcard meaning in FPL',
     oneLiner:
       'Wildcard meaning in FPL: unlimited free transfers for one gameweek, and the new squad stays. You get two in 2026/27, one in each half. The first has to be played by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027, or it is lost. Use it for a run of bad fixtures or several injuries, not after one bad week.',
