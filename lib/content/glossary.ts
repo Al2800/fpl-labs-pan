@@ -1,3 +1,5 @@
+import { CHIP_HALF_DEADLINE, SAVED_TRANSFERS_KEPT } from '@/lib/content/chip-rules';
+
 export const GLOSSARY = [
   {
     term: 'xP',
@@ -48,9 +50,49 @@ export const GLOSSARY = [
       'The downloadable twin of a page, at the same path plus /snapshot.json, with a SHA-256 digest in the trust strip and X-Snapshot-Hash header.',
   },
   {
+    term: 'FPL chips',
+    id: 'chips',
+    definition:
+      'Triple Captain, Bench Boost, Free Hit and Wildcard. In 2026/27 you get two of each, eight in total, and only one chip in a gameweek. The first set must be used by ' +
+      CHIP_HALF_DEADLINE +
+      '. It does not carry over. A new set is available from Gameweek 20.',
+  },
+  {
+    term: 'Free Hit',
+    id: 'free-hit',
+    definition:
+      'A one-week squad. Unlimited transfers for that gameweek, then your previous 15 return. You get two. It cannot be played in Gameweek 1, and the two Free Hits cannot be played in consecutive gameweeks, so Gameweek 19 and Gameweek 20 is not allowed. ' +
+      SAVED_TRANSFERS_KEPT,
+  },
+  {
+    term: 'Wildcard',
+    id: 'wildcard',
+    definition:
+      'Unlimited free transfers for one gameweek, and the new squad stays. You get two. The first must be used by ' +
+      CHIP_HALF_DEADLINE +
+      ', and it cannot be played in Gameweek 1. ' +
+      SAVED_TRANSFERS_KEPT,
+  },
+  {
+    term: 'Bench Boost',
+    id: 'bench-boost',
+    definition:
+      'Adds the points from your four substitutes for one gameweek. You get two, one in each half. The first can be used from Gameweek 1 and must be used by ' +
+      CHIP_HALF_DEADLINE +
+      '. Automatic substitutions do not apply while it is active.',
+  },
+  {
+    term: 'Triple Captain',
+    id: 'triple-captain',
+    definition:
+      'Triples your captain’s points for one gameweek instead of doubling them. You get two, one in each half. The first must be used by ' +
+      CHIP_HALF_DEADLINE +
+      '. You can cancel it before the deadline.',
+  },
+  {
     term: 'Illustrative sample',
     id: 'illustrative-sample',
     definition:
-      '2026/27 Gameweeks 1–3 on this site. They show the live page format. They are not a live freeze.',
+      'Hand-built 2026/27 fixtures that used to sit on this site, including squads that were not a real freeze. Those pages have been removed. The published record is the 2025/26 reconstructive replay.',
   },
 ];

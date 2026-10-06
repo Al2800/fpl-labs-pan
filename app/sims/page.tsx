@@ -1,27 +1,24 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { getAllSims } from '@/lib/data';
 import { JsonLd } from '@/components/JsonLd';
-import { breadcrumbList, gameweekPath, seasonLabel, simAnswer, simPath } from '@/lib/present';
+import { breadcrumbList } from '@/lib/present';
 
 export const metadata: Metadata = {
   title: 'FPL what-ifs',
   description:
-    'What-if FPL decisions held to the same pre-deadline freeze: Haaland vs no Haaland, chip timing, and template vs optimiser.',
+    'Sample 2026/27 what-if pages have been taken down. The checkable record is the 2025/26 FPL replay, with captains, transfers and chip rules.',
   alternates: {
     canonical: '/sims',
   },
   openGraph: {
     title: 'FPL what-ifs',
     description:
-      'What-if FPL decisions held to the same pre-deadline freeze: Haaland vs no Haaland, chip timing, and template vs optimiser.',
+      'Sample 2026/27 what-if pages have been taken down. The checkable record is the 2025/26 FPL replay, with captains, transfers and chip rules.',
     url: '/sims',
   },
 };
 
 export default function SimsIndexPage() {
-  const sims = getAllSims();
-
   return (
     <div className="space-y-8">
       <JsonLd
@@ -34,66 +31,28 @@ export default function SimsIndexPage() {
       <header className="space-y-2">
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">FPL what-ifs</h1>
         <p className="text-neutral-700 max-w-3xl leading-relaxed">
-          Each what-if holds pre-deadline odds and minutes fixed, then changes one decision — a
-          player, a chip, or an approach — and scores both paths against official points.
+          This section used to show sample 2026/27 what-ifs. The squads were made up, so the pages
+          have been taken down. A what-if only belongs here once it is built from a real freeze.
         </p>
       </header>
 
-      <ul className="space-y-4">
-        {sims.map((sim) => {
-          const control = sim.arms.find((arm) => arm.isControl);
-          const treatment = sim.arms.find((arm) => !arm.isControl);
-          return (
-            <li key={sim.id} className="border border-neutral-200 bg-white p-5 space-y-3">
-              <p className="text-sm text-neutral-500">
-                GW{sim.gw} ({seasonLabel(sim.season)})
-              </p>
-              <h2 className="text-lg font-semibold">
-                <Link
-                  href={simPath(sim.season, sim.gw, sim.slug)}
-                  className="underline underline-offset-2"
-                >
-                  {sim.title}
-                </Link>
-              </h2>
-              <p className="text-neutral-800 leading-relaxed">{simAnswer(sim)}</p>
-              {control && treatment ? (
-                <dl className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
-                  <div>
-                    <dt className="text-neutral-500">Control</dt>
-                    <dd>
-                      {control.projectedEP.toFixed(1)} xP
-                      {control.realisedPoints !== null ? ` · ${control.realisedPoints} pts` : ''}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-neutral-500">Alternative</dt>
-                    <dd>
-                      {treatment.projectedEP.toFixed(1)} xP
-                      {treatment.realisedPoints !== null ? ` · ${treatment.realisedPoints} pts` : ''}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-neutral-500">Model delta</dt>
-                    <dd>
-                      {treatment.deltaVsControl >= 0 ? '+' : ''}
-                      {treatment.deltaVsControl.toFixed(1)} xP
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-neutral-500">Related</dt>
-                    <dd>
-                      <Link href={gameweekPath(sim.season, sim.gw)} className="underline underline-offset-2">
-                        GW{sim.gw} decision
-                      </Link>
-                    </dd>
-                  </div>
-                </dl>
-              ) : null}
-            </li>
-          );
-        })}
-      </ul>
+      <p className="text-neutral-800 leading-relaxed max-w-3xl">
+        The checkable record is the 2025/26 replay: 38 gameweeks, no chips played, and a download
+        of the season file. Chip rules for 2026/27, including the two sets and the Gameweek 19
+        deadline, are on the chip pages.
+      </p>
+
+      <p className="text-sm flex flex-wrap gap-x-4 gap-y-2">
+        <Link href="/seasons/2025-26" className="underline underline-offset-2">
+          2025/26 season
+        </Link>
+        <Link href="/seasons/2025-26/download" className="underline underline-offset-2">
+          Download the replay
+        </Link>
+        <Link href="/chips" className="underline underline-offset-2">
+          Chip rules
+        </Link>
+      </p>
     </div>
   );
 }

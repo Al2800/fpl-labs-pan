@@ -19,8 +19,10 @@ interface PageProps {
   params: Promise<{ season: string }>;
 }
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return [{ season: '2025-26' }, { season: '2026-27' }];
+  return [{ season: '2025-26' }];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -118,7 +120,7 @@ export default async function SeasonHubPage({ params }: PageProps) {
             Same-state evidence copied the optimiser in all 38 gameweek folders, so the evidence
             column equals 2,010. An exploratory post-season fork that kept a different squad from
             Gameweek 12 finished {fork.forkHybridNet} hybrid net ({fork.forkDeltaGw12to38 >= 0 ? '+' : ''}
-            {fork.forkDeltaGw12to38} from GW12–38). Direct same-state evidence contributed only +
+            {fork.forkDeltaGw12to38} from GW12 to GW38). Direct same-state evidence contributed only +
             {fork.sameStateEvidenceDelta} points. {fork.disclaimer}
           </p>
           <p className="text-neutral-800 leading-relaxed">
@@ -150,6 +152,10 @@ export default async function SeasonHubPage({ params }: PageProps) {
         </a>
         {isReplay ? (
           <>
+            {' · '}
+            <Link href="/seasons/2025-26/download" className="underline underline-offset-2">
+              Download CSV and JSON
+            </Link>
             {' · '}
             <Link
               href="/guides/2025-26-season-review"
@@ -207,15 +213,15 @@ export default async function SeasonHubPage({ params }: PageProps) {
                   <td className="py-2 px-3">{row.captain}</td>
                   <td className="py-2 px-3">
                     {row.formation}
-                    {row.hits > 0 ? ` · −${row.hits} hit` : ''}
+                    {row.hits > 0 ? ` · ${row.hits}-pt hit` : ''}
                     {row.transfers === 0 ? ' · Hold' : ` · ${row.transfers} tr`}
                   </td>
                   <td className="py-2 px-3 text-right tabular-nums">
-                    {row.projected === 0 && isReplay ? '—' : row.projected.toFixed(1)}
+                    {row.projected === 0 && isReplay ? 'n/a' : row.projected.toFixed(1)}
                   </td>
                   <td className="py-2 px-3 text-right tabular-nums">{row.points ?? 'Pending'}</td>
                   <td className="py-2 px-3 text-right tabular-nums">
-                    {row.templatePoints ?? '—'}
+                    {row.templatePoints ?? 'n/a'}
                   </td>
                   <td className="py-2 px-3 font-mono text-xs text-neutral-600">
                     {shortHash(row.hash)}

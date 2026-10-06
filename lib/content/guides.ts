@@ -1,3 +1,5 @@
+import { CHIP_HALF_DEADLINE, CHIP_RESET_ANSWER } from '@/lib/content/chip-rules';
+
 export interface GuidePage {
   slug: string;
   title: string;
@@ -125,43 +127,55 @@ export const GUIDES: GuidePage[] = [
     slug: 'when-to-play-fpl-chips',
     title: 'Wildcard, Bench Boost, Free Hit, Triple Captain: when to play',
     description:
-      'In FPL, Wildcard when free transfers cannot fix the squad, Bench Boost and Triple Captain in a double, Free Hit (freehit) in a blank.',
+      'Eight FPL chips in 2026/27, two of each. Wildcard when transfers cannot fix the squad, Bench Boost and Triple Captain in a double, Free Hit in a blank.',
     answer:
-      'Wildcard, Bench Boost, Free Hit and Triple Captain: when to play them comes down to fixture swings, doubles, and blanks. Play Wildcard when your squad needs three or more permanent structural fixes. Trigger Bench Boost in a double gameweek when all 15 players have confirmed starts. Deploy Free Hit (freehit) to survive blank gameweeks without transfer hits. Save Triple Captain for an elite talisman with two favourable fixtures. In the 2025/26 reconstructive replay, every chip stayed unused, including when the optimiser took an 8-point hit in Gameweek 34 instead of using Free Hit or Wildcard.',
+      'You get eight chips in 2026/27: two each of Wildcard, Bench Boost, Free Hit and Triple Captain, one set per half. Play Wildcard when the squad needs three or more permanent fixes. Play Bench Boost in a double when all 15 have confirmed starts. Play Free Hit (freehit) in a blank so you do not take hits. Save Triple Captain for a premium with two good fixtures. The first set has to be used by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027. In the 2025/26 replay, every chip stayed unused, including when the optimiser took an 8-point hit in Gameweek 34 and did not play Free Hit or Wildcard.',
     sections: [
       {
         heading: 'When to play your Wildcard',
         body: [
-          'You get two Wildcards per season. The first must be used before the late December cut-off, with Gameweeks 6 to 10 usually offering the best balance of settled team data and sustained fixture swings.',
-          'Your second Wildcard is best kept for the spring (typically Gameweeks 27 to 33). Deploying it one or two rounds before a major double gameweek lets you build a 15-man squad of doubling starters without incurring transfer hits, directly priming your Bench Boost.',
+          'You get two Wildcards, one in each half. The first must be used by ' +
+            CHIP_HALF_DEADLINE +
+            '. Gameweeks 6 to 10 are often a sensible window: the teams have settled, and a good run of fixtures can last a while. You cannot play Wildcard in Gameweek 1.',
+          'The second Wildcard is usually better in the spring, often somewhere in Gameweeks 27 to 33. Playing it a week or two before a big double lets you build a 15 of players who all have two games, without a hit, so Bench Boost has a full squad.',
         ],
       },
       {
         heading: 'What Bench Boost does and when to use it',
         body: [
-          'Bench Boost adds the points scored by your substitute goalkeeper and three outfield bench players directly to your gameweek score for one round. Standard automatic substitutions do not apply while it is active because all 15 players count.',
-          'Triggering Bench Boost in a standard single gameweek rarely returns more than 8 to 12 points from fringe bench options. Save it for a confirmed double gameweek (often Gameweek 34 or 37) where four playing substitutes get two fixtures each, realistically targeting 15 to 25 extra points.',
+          'Bench Boost adds the points scored by your substitute goalkeeper and three outfield bench players to your gameweek score for one round. You get two, one in each half. Automatic substitutions do not apply while it is active, because all 15 players count.',
+          'A single gameweek is usually a weak time, because the cheap players on the bench often do not start. Save it for a confirmed double (often Gameweek 34 or 37) where those four can play twice. The 2025/26 bench table on the Bench Boost page shows what the substitutes actually scored. That table is arithmetic. Bench Boost was not played.',
         ],
       },
       {
         heading: 'Free Hit (freehit) and Triple Captain strategy',
         body: [
-          'The Free Hit chip (often searched as freehit) lets you replace your entire squad for a single round before your previous 15 players return intact. It is most valuable in major blank gameweeks caused by domestic cup ties, when your squad has fewer than eight active starters.',
-          'Triple Captain triples your captain’s points instead of doubling them. Avoid spending it on a one-off home fixture. Wait for a confirmed double gameweek with two favourable matches for an in-form, penalty-taking premium with minimal minutes risk.',
+          'Free Hit (often searched as freehit) replaces your squad for one round, then your previous 15 come back. You get two. You cannot play it in Gameweek 1, and you cannot play the two Free Hits in consecutive gameweeks, so Gameweek 19 then Gameweek 20 is not allowed. Saved free transfers are kept. A blank, when you are short of starters, is the usual time.',
+          'Triple Captain triples your captain’s points instead of doubling them. You get two. Do not spend the first one on a single home fixture if a proper double is still ahead. Wait for two favourable matches for an in-form, penalty-taking premium.',
         ],
       },
       {
         heading: 'Lessons from the 2025/26 reconstructive replay',
         body: [
-          'In the 2025/26 reconstructive replay, the model never fired a single chip. In Gameweek 34, facing a blank gameweek, the optimiser made three transfers with one free transfer and took an 8-point hit to field starters, scoring 28 net. Both Free Hit and Wildcard were sitting unused.',
+          'In the 2025/26 replay, no chip was played. In Gameweek 34, a blank, the optimiser made three transfers with one free transfer and took an 8-point hit, scoring 28 net. Free Hit and Wildcard were both still available.',
           'Chip timing belongs alongside weekly transfers. Holding chips unused while taking heavy hits, or burning them on low-ceiling weeks, is an expensive tactical error.',
         ],
       },
     ],
     faqs: [
       {
+        q: 'When do FPL chips reset?',
+        a: CHIP_RESET_ANSWER,
+        links: [
+          { href: '/chips/free-hit', label: 'Free Hit' },
+          { href: '/chips/wildcard', label: 'Wildcard' },
+          { href: '/chips/bench-boost', label: 'Bench Boost' },
+          { href: '/chips/triple-captain', label: 'Triple Captain' },
+        ],
+      },
+      {
         q: 'What are the FPL chips and when do you play them?',
-        a: 'The FPL chips are Wildcard, Bench Boost, Free Hit and Triple Captain: the chips page has a hub for each. Play Wildcard when your squad has at least three structural problems that free transfers cannot fix. Play Bench Boost in a double gameweek when all 15 players have confirmed starts. Play Free Hit in a severe blank when fewer than eight or nine starters are active. Save Triple Captain for a confirmed double where a premium has two starts.',
+        a: 'The FPL chips are Wildcard, Bench Boost, Free Hit and Triple Captain, and you get two of each. The chips page has a hub for each. Play Wildcard when the squad has at least three problems that free transfers cannot fix. Play Bench Boost in a double when all 15 players have confirmed starts. Play Free Hit in a blank when you are short of starters. Save Triple Captain for a confirmed double where a premium has two starts.',
         links: [
           { href: '/chips/wildcard', label: 'Wildcard' },
           { href: '/chips/bench-boost', label: 'Bench Boost' },
@@ -176,11 +190,11 @@ export const GUIDES: GuidePage[] = [
       },
       {
         q: 'FPL when to Wildcard: should I play it early or hold?',
-        a: 'Playing your first Wildcard between Gameweeks 6 and 10 is usually better than holding it until December, as it lets you capitalise on emerging budget enablers and positive fixture shifts for 10 or more gameweeks.',
+        a: 'Playing the first Wildcard between Gameweeks 6 and 10 is usually more useful than holding it to the deadline. The new squad then has a long run. In 2026/27 that deadline is 13:30 GMT on Saturday 2 January 2027. If you leave the first Wildcard, it is lost.',
       },
       {
         q: 'What is Bench Boost in FPL and what is a good return?',
-        a: 'Bench Boost is a chip that scores all four of your substitutes alongside your starting eleven for one round. A return of 15 to 25 points from your four bench players makes for a successful boost.',
+        a: 'Bench Boost scores all four of your substitutes alongside your starting eleven for one round. You get two in 2026/27, one in each half. A return in the mid-teens or higher from the bench is a strong week. The 2025/26 replay never played it.',
       },
       {
         q: 'When should I play Bench Boost in FPL?',
@@ -192,7 +206,7 @@ export const GUIDES: GuidePage[] = [
       },
       {
         q: 'What is Triple Captain in FPL, and when should you play it?',
-        a: 'Triple Captain triples your captain’s official points for one gameweek instead of doubling them. Save it for a confirmed double gameweek where a secure premium has two starts and strong fixtures.',
+        a: 'Triple Captain triples your captain’s official points for one gameweek instead of doubling them. You get two in 2026/27, one in each half. Save one for a confirmed double where a premium has two starts.',
       },
       {
         q: 'Which FPL chip is most often wasted?',
@@ -212,20 +226,27 @@ export const GUIDES: GuidePage[] = [
     slug: 'gw34-blank-and-hits',
     title: 'FPL Gameweek 34 2025/26: an 8-point hit in a blank',
     description:
-      'The optimiser took three transfers with one free transfer and paid eight points in a blank gameweek, captaining Bruno Fernandes, and scored 28 net. Free Hit and Wildcard were unused.',
+      'In FPL GW34 2025/26 the optimiser captained Bruno Fernandes, took an 8-point hit in a blank, and scored 28 net. The template scored 33. No chip was played.',
     answer:
-      'In 2025/26 Gameweek 34 the optimiser captained Bruno Fernandes, used a 3-4-3, and made three transfers (Wieffer to Rice, Chalobah to Virgil, Haaland to Bowen) with one free transfer, taking an 8-point hit. It scored 28 net versus 33 for the template, which held. Free Hit and Wildcard were available and not played.',
+      'In 2025/26 Gameweek 34 the optimiser captained Bruno Fernandes, used a 3-4-3, and made three transfers (Wieffer to Rice, Chalobah to Virgil, Haaland to Bowen) with one free transfer, taking an 8-point hit. It scored 28 net. The template made no transfers and scored 33. Free Hit and Wildcard were available and not played.',
     sections: [
+      {
+        heading: 'The blank in the squad file',
+        body: [
+          'Seven of the 15 squad players had no fixture stored. Groß, João Pedro and Marc Guiu were in the starting XI. Dúbravka, Guéhi, Rodon and Semenyo were on the bench. The other eight had a fixture. Those names and the 7 of 15 count come from gw-34.json. The opponent field holds one fixture only, so this is not a double-gameweek note.',
+          'Gameweek 31 is the other blank in the files, and it is a useful contrast. Three of 15 had no fixture (Guéhi in the XI, Gabriel and J.Timber on the bench). Five free transfers were available, three were used, and there was no hit. The optimiser scored 63 net and the template 68. No chip was played that week either.',
+        ],
+      },
       {
         heading: 'What was published',
         body: [
-          'Projected objective was 35.6 expected points. Net realised was 28 after the hit. The template scored 33 by making no transfers. Same-state evidence matched the optimiser.',
+          'The projected objective was 35.6 expected points. Net realised was 28 after the hit. The template scored 33 by making no transfers. Same-state evidence matched the optimiser. Across the whole season this was the only hit week: 39 transfers in total, and the 8-point hit only in Gameweek 34.',
         ],
       },
       {
         heading: 'What is still missing',
         body: [
-          'A complete chip policy would show points with zero, one, two and three transfers, the payback week, and Free Hit / Wildcard alternatives. That ladder is not in the 2025/26 artifacts. Until it exists, treat the hit as an observed choice, not as proof it was optimal.',
+          'A complete chip policy would show the points from zero, one, two and three transfers, the weeks after, and a Free Hit or Wildcard alternative. That comparison is not in the 2025/26 files. The hit is an observed choice. It is not proof it was the right one. No Free Hit score was modelled.',
         ],
       },
     ],

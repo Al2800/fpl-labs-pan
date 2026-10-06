@@ -36,6 +36,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/seasons/2025-26/download" className="hover:underline">
+                  Download the season
+                </Link>
+              </li>
+              <li>
                 <Link href={gameweekPath(latest.season, latest.gw)} className="hover:underline">
                   Latest: GW{latest.gw}
                 </Link>
@@ -101,7 +106,7 @@ export function Footer() {
         <p className="text-xs text-neutral-500 leading-relaxed">
           FPL Replay is independent and is not affiliated with, sponsored by, or endorsed by the
           Football Association Premier League Ltd, Fantasy Premier League, or any Premier League
-          club. Outputs are for research and entertainment — not financial, gambling, or betting
+          club. Outputs are for research and entertainment, not financial, gambling, or betting
           advice.
         </p>
       </div>

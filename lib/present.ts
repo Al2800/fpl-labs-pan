@@ -121,6 +121,11 @@ export function chipVerdict(status: ChipScenarioData['status']): string {
   }
 }
 
+export function pointsHitPhrase(cost: number): string {
+  const article = cost === 8 ? 'an' : 'a';
+  return `${article} ${cost}-point hit`;
+}
+
 function transferPhrase(plan: ValidatedPlan): string {
   const actions = plan.transferActions;
   if (actions.length === 0) return 'no transfers';
@@ -128,7 +133,7 @@ function transferPhrase(plan: ValidatedPlan): string {
   const pairs = actions
     .map((action) => `${action.playerOut.webName} out, ${action.playerIn.webName} in`)
     .join('; ');
-  const hit = plan.hitCost > 0 ? ` taking a ${plan.hitCost}-point hit` : '';
+  const hit = plan.hitCost > 0 ? ` taking ${pointsHitPhrase(plan.hitCost)}` : '';
   const n = actions.length;
   const free = plan.hitCost === 0;
   const count =
@@ -145,6 +150,24 @@ function transferPhrase(plan: ValidatedPlan): string {
 
 export function gameweekHeading(decision: GameweekDecision): string {
   return `FPL Gameweek ${decision.gw} (${seasonLabel(decision.season)}): Team, Captain and Transfers`;
+}
+
+export function gameweekMetaDescription(decision: GameweekDecision): string {
+  const plan = decision.validatedPlan;
+  const template = decision.arms.find((arm) => arm.id === 'baseline')?.realisedPoints;
+  const points = plan.realisedSquadTotalPoints;
+  const hit = plan.hitCost > 0 ? ` after ${pointsHitPhrase(plan.hitCost)}` : '';
+  const transfers =
+    plan.transferActions.length === 0
+      ? 'No transfers'
+      : `${plan.transferActions.length} transfer${plan.transferActions.length === 1 ? '' : 's'}${hit}`;
+  const templateBit =
+    template !== null && template !== undefined ? ` Template scored ${template}.` : '';
+  const full = `FPL GW${decision.gw} ${seasonLabel(decision.season)}: ${plan.captain.webName} captained, ${points} net. ${transfers}.${templateBit}`;
+  if (full.length <= 155) return full;
+  const shorter = `FPL GW${decision.gw} ${seasonLabel(decision.season)}: ${plan.captain.webName} captained, ${points} net.${templateBit}`;
+  if (shorter.length <= 155) return shorter;
+  return shorter.slice(0, 152).trimEnd() + '...';
 }
 
 export function formatProjected(value: number, kind: DatasetKind): string {
@@ -213,7 +236,14 @@ export function chipCheckAnswer(
 ): string {
   const kind = datasetKindOf(decision);
   if (kind === 'historical-replay') {
-    return 'No chip was played. The 2025/26 reconstructive path left Wildcard, Free Hit, Triple Captain and Bench Boost unused, including in Gameweek 34 when both the optimiser and the template took an 8-point hit in a blank.';
+    const plan = decision.validatedPlan;
+    const template = decision.arms.find((arm) => arm.id === 'baseline')?.realisedPoints;
+    const unused =
+      'No chip was played. Wildcard, Free Hit, Triple Captain and Bench Boost stayed unused on the 2025/26 replay.';
+    if (decision.gw === 34 && plan.hitCost > 0) {
+      return `${unused} In Gameweek 34 the optimiser took ${pointsHitPhrase(plan.hitCost)} and scored ${plan.realisedSquadTotalPoints} net. The template held and scored ${template}.`;
+    }
+    return unused;
   }
   const planChip =
     decision.validatedPlan.chipUsed === 'none'

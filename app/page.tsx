@@ -1,11 +1,10 @@
 import Link from 'next/link';
-import { getFeaturedGameweek, getLatestDemoGameweek, getSeasonIndex } from '@/lib/data';
+import { getFeaturedGameweek, getSeasonIndex } from '@/lib/data';
 import { ArmsComparisonTable } from '@/components/ArmsComparisonTable';
 import {
   CHIP_HUBS,
   chipHubPath,
   datasetKindOf,
-  formatProjected,
   gameweekAnswer,
   gameweekHeading,
   gameweekPath,
@@ -16,7 +15,6 @@ import { GUIDES } from '@/lib/content/guides';
 
 export default function HomePage() {
   const featured = getFeaturedGameweek();
-  const demo = getLatestDemoGameweek();
   const replay = getSeasonIndex('2025-26');
   const answer = gameweekAnswer(featured);
   const kind = datasetKindOf(featured);
@@ -29,8 +27,8 @@ export default function HomePage() {
         </h1>
         <p className="text-neutral-700 leading-relaxed max-w-3xl">
           FPL Replay publishes the team, captain, transfers and chip call for each gameweek, then
-          scores them on official points. 2025/26 is a full reconstructive replay. 2026/27 pages
-          show the live format as an illustrative sample.
+          scores them on official points. The 2025/26 season is a full reconstructive replay. Live
+          seasons will freeze two hours before the deadline.
         </p>
       </header>
 
@@ -125,8 +123,9 @@ export default function HomePage() {
 
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">Chip timing</h2>
-        <p className="text-neutral-700">
-          2025/26 never played a chip. These hubs are the evergreen rules, plus that finding.
+        <p className="text-neutral-700 leading-relaxed">
+          You get eight chips in 2026/27, two of each. The first set has to be used by the Gameweek
+          19 deadline, 13:30 GMT on Saturday 2 January 2027. The 2025/26 replay never played a chip.
         </p>
         <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
           {CHIP_HUBS.map((chip) => (
@@ -139,22 +138,6 @@ export default function HomePage() {
         </ul>
       </section>
 
-      <section className="space-y-3">
-        <h2 className="text-lg font-semibold">2026/27 illustrative sample</h2>
-        <p className="text-neutral-700 leading-relaxed">
-          Gameweek {demo.gw} shows the live-product layout. Captain {demo.validatedPlan.captain.webName},{' '}
-          {demo.validatedPlan.formation}, {formatProjected(demo.validatedPlan.projectedSquadTotalXP, 'illustrative-sample')}.
-          It is not a live freeze.
-        </p>
-        <p className="text-sm">
-          <Link
-            href={gameweekPath(demo.season, demo.gw)}
-            className="underline underline-offset-2"
-          >
-            Open sample Gameweek {demo.gw}
-          </Link>
-        </p>
-      </section>
     </div>
   );
 }

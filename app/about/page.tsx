@@ -46,7 +46,7 @@ export default function AboutPage() {
         <ul className="list-disc pl-5 space-y-2 text-neutral-800">
           <li>
             Gameweek pages compare a template, an optimiser, and an evidence approach on the same
-            cutoff. 2025/26 is a reconstructive replay; 2026/27 pages are an illustrative sample.
+            cutoff. 2025/26 is a reconstructive replay. Sample 2026/27 pages are not published.
           </li>
           <li>
             Chip hubs say when Triple Captain, Bench Boost, Free Hit or Wildcard is worth playing.

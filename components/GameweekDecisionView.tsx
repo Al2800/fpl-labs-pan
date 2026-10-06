@@ -11,12 +11,14 @@ import {
   breadcrumbList,
   captainAnswer,
   chipCheckAnswer,
+  faqPage,
   chipHubPath,
   chipOneLiner,
   datasetKindOf,
   formatProjected,
   gameweekAnswer,
   gameweekHeading,
+  pointsHitPhrase,
   seasonLabel,
   simPath,
   statusLabel,
@@ -95,6 +97,32 @@ export function GameweekDecisionView({
     { label: 'Status', value: statusLabel(decision.status) },
   ];
 
+  const templatePoints = arms.find((arm) => arm.id === 'baseline')?.realisedPoints;
+  const transferCount = validatedPlan.transferActions.length;
+  const transferSentence =
+    transferCount === 0
+      ? 'It made no transfers.'
+      : `It made ${transferCount} transfer${transferCount === 1 ? '' : 's'}${
+          validatedPlan.hitCost > 0 ? ` and took ${pointsHitPhrase(validatedPlan.hitCost)}` : ''
+        }.`;
+  const replayFaqs =
+    kind === 'historical-replay' && validatedPlan.captain.realisedPoints !== null
+      ? [
+          {
+            q: `Who did the replay captain in FPL Gameweek ${decision.gw} 2025/26?`,
+            a: `The 2025/26 replay captained ${validatedPlan.captain.webName}, who scored ${validatedPlan.captain.realisedPoints} points before the captain multiplier. The vice-captain was ${validatedPlan.viceCaptain.webName}.`,
+          },
+          {
+            q: `How many points did the 2025/26 replay score in Gameweek ${decision.gw}?`,
+            a: `The optimiser scored ${validatedPlan.realisedSquadTotalPoints} net points${
+              templatePoints !== null && templatePoints !== undefined
+                ? `, and the template scored ${templatePoints}`
+                : ''
+            }. ${transferSentence} No chip was played.`,
+          },
+        ]
+      : [];
+
   const datasetJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Dataset',
@@ -129,6 +157,7 @@ export function GameweekDecisionView({
             { name: indexLabel, path: indexHref },
             { name: `Gameweek ${decision.gw}`, path: pagePath },
           ]),
+          ...(replayFaqs.length > 0 ? [faqPage(replayFaqs)] : []),
         ]}
       />
 
@@ -184,7 +213,9 @@ export function GameweekDecisionView({
 
       <section className="space-y-4">
         <h2 className="text-lg font-semibold">Why this plan</h2>
-        <p className="text-neutral-800 leading-relaxed">{summaryAnalysis.executiveSummary}</p>
+        <p className="text-neutral-800 leading-relaxed">
+          {summaryAnalysis.executiveSummary.replaceAll('a 8-point', 'an 8-point')}
+        </p>
 
         {validatedPlan.transferActions.length > 0 ? (
           <div className="border border-neutral-200 bg-white p-4 space-y-2">
@@ -316,6 +347,13 @@ export function GameweekDecisionView({
           </Link>
         </p>
       </section>
+
+      {replayFaqs.map((faq) => (
+        <section key={faq.q} className="space-y-2">
+          <h2 className="text-lg font-semibold">{faq.q}</h2>
+          <p className="text-neutral-800 leading-relaxed">{faq.a}</p>
+        </section>
+      ))}
 
       <section className="space-y-2">
         <h2 className="text-lg font-semibold">

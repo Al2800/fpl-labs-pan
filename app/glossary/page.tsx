@@ -7,14 +7,14 @@ import { breadcrumbList } from '@/lib/present';
 export const metadata: Metadata = {
   title: 'FPL Replay glossary',
   description:
-    'Definitions for xP, FDR, T-120 freeze, reconstructed cutoff, approaches, hits, net points, and JSON snapshots.',
+    'Definitions for FPL chips, Free Hit, Wildcard, Bench Boost, Triple Captain, xP, hits and the 2025/26 replay.',
   alternates: {
     canonical: '/glossary',
   },
   openGraph: {
     title: 'FPL Replay glossary',
     description:
-      'Definitions for xP, FDR, T-120 freeze, reconstructed cutoff, approaches, hits, net points, and JSON snapshots.',
+      'Definitions for FPL chips, Free Hit, Wildcard, Bench Boost, Triple Captain, xP, hits and the 2025/26 replay.',
     url: '/glossary',
   },
 };
@@ -43,6 +43,10 @@ export default function GlossaryPage() {
       <p className="text-sm">
         <Link href="/guides/reconstructive-replay" className="underline underline-offset-2">
           Reconstructive replay
+        </Link>
+        {' · '}
+        <Link href="/chips" className="underline underline-offset-2">
+          Chips
         </Link>
         {' · '}
         <Link href="/methods" className="underline underline-offset-2">
