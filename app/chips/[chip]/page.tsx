@@ -139,6 +139,11 @@ export default async function ChipHubPage({ params }: PageProps) {
         <Link href={REPLAY_DOWNLOAD_PATH} className="underline underline-offset-2">
           Download the replay
         </Link>
+        {hub.id === 'tc' || hub.id === 'bb' ? (
+          <Link href="/chips/calculator" className="underline underline-offset-2">
+            What this chip would have added
+          </Link>
+        ) : null}
       </p>
     </div>
   );

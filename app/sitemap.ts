@@ -3,6 +3,7 @@ import { getSeasonGameweeks } from '@/lib/data';
 import { CHIP_HUBS } from '@/lib/present';
 import { getSiteUrl } from '@/lib/site';
 import { GUIDES } from '@/lib/content/guides';
+import { CHIP_CALCULATOR_PATH } from '@/lib/chip-calculator';
 import { REPLAY_DOWNLOAD_PATH } from '@/lib/replay-2025';
 
 const CONTENT_UPDATED = new Date('2026-10-06T00:00:00.000Z');
@@ -31,6 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: `${baseUrl}/decisions`, lastModified: CONTENT_UPDATED, changeFrequency: 'weekly', priority: 0.6 },
     { url: `${baseUrl}/chips`, lastModified: CONTENT_UPDATED, changeFrequency: 'weekly', priority: 0.85 },
+    {
+      url: `${baseUrl}${CHIP_CALCULATOR_PATH}`,
+      lastModified: CONTENT_UPDATED,
+      changeFrequency: 'yearly',
+      priority: 0.8,
+    },
     { url: `${baseUrl}/guides`, lastModified: CONTENT_UPDATED, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/glossary`, lastModified: CONTENT_UPDATED, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/sims`, lastModified: CONTENT_UPDATED, changeFrequency: 'yearly', priority: 0.4 },

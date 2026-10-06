@@ -157,7 +157,7 @@ export const GUIDES: GuidePage[] = [
       {
         heading: 'Lessons from the 2025/26 reconstructive replay',
         body: [
-          'In the 2025/26 replay, no chip was played. In Gameweek 34, a blank, the optimiser made three transfers with one free transfer and took an 8-point hit, scoring 28 net. Free Hit and Wildcard were both still available.',
+          'In the 2025/26 replay, no chip was played. In Gameweek 34, a blank, the optimiser made three transfers with one free transfer and took an 8-point hit, scoring 28 net. Free Hit and Wildcard were both still available. The chip calculator ranks what Triple Captain and Bench Boost would have added in each scored week.',
           'Chip timing belongs alongside weekly transfers. Holding chips unused while taking heavy hits, or burning them on low-ceiling weeks, is an expensive tactical error.',
         ],
       },
@@ -214,6 +214,7 @@ export const GUIDES: GuidePage[] = [
       },
     ],
     related: [
+      { href: '/chips/calculator', label: 'Chip calculator' },
       { href: '/chips', label: 'All Chip Hubs' },
       { href: '/chips/wildcard', label: 'Wildcard Timing Guide' },
       { href: '/chips/bench-boost', label: 'Bench Boost Strategy' },
