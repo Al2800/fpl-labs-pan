@@ -122,6 +122,10 @@ export default function ChipsIndexPage() {
         <Link href="/seasons/2025-26/download" className="underline underline-offset-2">
           2025/26 download
         </Link>
+        {' · '}
+        <Link href="/chips/calculator" className="underline underline-offset-2">
+          Chip calculator
+        </Link>
       </p>
     </div>
   );

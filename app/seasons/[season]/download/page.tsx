@@ -125,6 +125,9 @@ export default async function ReplayDownloadPage({ params }: PageProps) {
         <Link href="/chips" className="underline underline-offset-2">
           Chip pages
         </Link>
+        <Link href="/chips/calculator" className="underline underline-offset-2">
+          Chip calculator
+        </Link>
       </p>
 
       <section className="space-y-3">

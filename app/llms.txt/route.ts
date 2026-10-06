@@ -36,6 +36,7 @@ export async function GET() {
     `- ${base}${REPLAY_DOWNLOAD_PATH}`,
     `- ${base}/guides`,
     `- ${base}/chips`,
+    `- ${base}/chips/calculator`,
     `- ${base}/glossary`,
     `- ${base}/methods`,
     `- ${base}/about`,
