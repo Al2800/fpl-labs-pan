@@ -26,7 +26,7 @@ export async function GET() {
     '- 2025/26 is a reconstructive replay (cutoff = first kickoff minus 90 minutes), not a live T-120 freeze.',
     '- Sample 2026/27 pages are not published.',
     '- Same-state evidence matched the optimiser in every 2025/26 gameweek folder. Chips were never played.',
-    '- In 2026/27 managers get two of each chip. The first set must be used by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027.',
+    '- In 2026/27 managers get two of each chip. The first set must be used by the Gameweek 19 deadline, 18:30 GMT on Friday 1 January 2027.',
     '',
     '## Core pages',
     '',

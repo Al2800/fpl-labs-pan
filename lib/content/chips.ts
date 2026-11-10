@@ -1,5 +1,5 @@
 import { ChipType } from '@/types/fpl';
-import { CHIP_HALF_DEADLINE, CHIP_RESET_ANSWER, SAVED_TRANSFERS_KEPT } from '@/lib/content/chip-rules';
+import { CHIP_HALF_DEADLINE, CHIP_RESET_ANSWER } from '@/lib/content/chip-rules';
 
 export interface ChipHubContent {
   id: Exclude<ChipType, 'none'>;
@@ -28,12 +28,12 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     id: 'tc',
     slug: 'triple-captain',
     name: 'Triple Captain',
-    metaTitle: 'Triple Captain FPL: What It Is and How Many',
+    metaTitle: 'How Many Triple Captains in FPL? You Get Two',
     metaDescription:
-      'Triple Captain in FPL triples your captain’s points for one gameweek. You get two in 2026/27, one each half. The first must be used by the GW19 deadline.',
-    h1: 'What is Triple Captain in FPL?',
+      'You get two Triple Captains in FPL 2026/27, one in each half. For one gameweek your captain’s points are tripled.',
+    h1: 'How many Triple Captains do you get in FPL?',
     oneLiner:
-      'Triple Captain in FPL triples your chosen captain’s official points instead of doubling them. You get two in 2026/27, one in each half of the season. The first has to be used by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027. Hold it for a secure premium with two starts in a confirmed double, not a one-off single fixture.',
+      'You get two Triple Captains in FPL, one in each half of 2026/27. For that gameweek your captain’s points are tripled. The first has to be used by the Gameweek 19 deadline, 18:30 GMT on Friday 1 January 2027, or it is lost. Save it for a double, when your captain starts both matches.',
     howItWorks:
       'The selected captain scores three times their official FPL points instead of two. You get two Triple Captains, one for each half of the season. The first is available from the start and must be used by ' +
       CHIP_HALF_DEADLINE +
@@ -57,36 +57,24 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     },
     faqs: [
       {
-        q: 'What is Triple Captain in FPL?',
-        a: 'Triple Captain in FPL multiplies your captain’s official points by three for one gameweek, instead of the usual double. You get two in 2026/27, one in each half, and the chip is spent as soon as your captain records any minutes.',
-      },
-      {
         q: 'How many Triple Captains do you get in FPL?',
-        a: 'You get two Triple Captains in FPL 2026/27, one in each half of the season. The first has to be used by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027. If you leave it, it is lost. The second is available from Gameweek 20.',
+        a: 'You get two Triple Captains in FPL, one in each half of 2026/27. The first has to be used by the Gameweek 19 deadline, 18:30 GMT on Friday 1 January 2027, or it is lost. The second is available from Gameweek 20.',
       },
       {
-        q: 'When should I play Triple Captain in FPL?',
-        a: 'Play Triple Captain in an attractive double gameweek where an elite, penalty-taking captain has two starts locked in and strong home fixtures. A single-fixture week is a last resort if the later doubles never deliver a secure option.',
+        q: 'How many Triple Captains are there in FPL?',
+        a: 'There are two Triple Captains in 2026/27. One is for the first half and one is for the second. An unused first chip does not carry over.',
       },
       {
-        q: 'Does Triple Captain work better in a double gameweek?',
-        a: 'Yes. In a double gameweek your captain can play twice, so the 3x multiplier covers both fixtures if they start both. That is why most managers hold the chip for a confirmed double rather than a single home fixture.',
+        q: 'What is Triple Captain in FPL?',
+        a: 'Triple Captain is the chip that triples your captain’s points for one gameweek. You get two in 2026/27. If your captain plays any minutes, the chip is spent.',
       },
       {
-        q: 'What happens if my Triple Captain does not play?',
-        a: 'If your captain plays zero minutes across the gameweek, the triple multiplier passes to your vice-captain, if the vice plays. If the captain plays even one minute, the chip is spent and the vice does not inherit the 3x.',
+        q: 'How does Triple Captain work in FPL?',
+        a: 'Triple Captain scores your captain three times their official points for that gameweek. You can cancel it before the deadline. If your captain plays no minutes, the vice-captain becomes captain, and the triple moves with that change if the vice plays.',
       },
       {
-        q: 'Can you cancel Triple Captain after you have played it?',
-        a: 'You can cancel Triple Captain before the gameweek deadline. Once the deadline has passed, the captain and the chip are locked.',
-      },
-      {
-        q: 'Can you play Triple Captain and Bench Boost together?',
-        a: 'No. Official FPL rules allow only one chip in a gameweek. Triple Captain, Bench Boost, Free Hit and Wildcard have to go in different gameweeks.',
-      },
-      {
-        q: 'Did the 2025/26 lab replay use Triple Captain?',
-        a: 'No. The 2025/26 reconstructive path left Triple Captain, Bench Boost, Free Hit and Wildcard unused across all 38 gameweeks. The captain log on this page is who was captained at the normal double. Any “added points” line is arithmetic, not a chip that was played.',
+        q: 'Do you get two Triple Captains in FPL?',
+        a: 'Yes, you get two Triple Captains in 2026/27, one before the Gameweek 19 deadline and one after it. Only one chip can be played in a gameweek.',
       },
     ],
   },
@@ -94,12 +82,12 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     id: 'bb',
     slug: 'bench-boost',
     name: 'Bench Boost',
-    metaTitle: 'What Is Bench Boost in FPL? Rules and When to Play',
+    metaTitle: 'How Many Bench Boosts in FPL? You Get Two',
     metaDescription:
-      'Bench Boost in FPL adds your four substitutes’ points for one gameweek. You get two in 2026/27, one each half. Often best when the bench plays twice.',
-    h1: 'What is Bench Boost in FPL?',
+      'You get two Bench Boosts in 2026/27, one in each half. For one gameweek, your four substitutes’ points are added to your score.',
+    h1: 'How many Bench Boosts do you get in FPL?',
     oneLiner:
-      'Bench Boost in FPL adds the points from your four substitutes to your gameweek score. You get two in 2026/27, one in each half of the season. The first has to be used by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027. Hold it for a confirmed double where those four can play twice, rather than a bench of players who will not start.',
+      'You get two Bench Boosts in FPL, one in each half of 2026/27. Bench Boost adds the points from your four substitutes for one gameweek. The first has to be used by the Gameweek 19 deadline, 18:30 GMT on Friday 1 January 2027, or it is lost. Play it when those four start, often in a double gameweek.',
     howItWorks:
       'When you activate Bench Boost, the points scored by all 15 squad members count towards your gameweek total. Points from your substitute goalkeeper and three outfield bench players are added to your score. You get two Bench Boosts, one per half. The first can be used from Gameweek 1 and must be used by ' +
       CHIP_HALF_DEADLINE +
@@ -124,40 +112,24 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     },
     faqs: [
       {
-        q: 'What is Bench Boost in FPL?',
-        a: 'Bench Boost in FPL adds the points from your four substitutes to your score for one gameweek. You get two in 2026/27, one in each half. The starting eleven still score as usual.',
+        q: 'How many Bench Boosts do you get in FPL?',
+        a: 'You get two Bench Boosts in FPL, one in each half of 2026/27. The first has to be used by the Gameweek 19 deadline, 18:30 GMT on Friday 1 January 2027, or it is lost. The second is available from Gameweek 20.',
       },
       {
-        q: 'Is Bench Boost once a season?',
-        a: 'No. You get two Bench Boosts in FPL 2026/27, one in each half of the season. The first has to be used by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027, or it is lost. The second is available from Gameweek 20.',
+        q: 'What is Bench Boost in FPL?',
+        a: 'Bench Boost is the chip that adds your four substitutes’ points to your score for one gameweek. You get two in 2026/27, one in each half. Your starting eleven still score as usual.',
+      },
+      {
+        q: 'What does Bench Boost do?',
+        a: 'Bench Boost counts your bench for one gameweek, as well as the starting eleven. You get two in 2026/27. A substitute who does not play scores zero, and automatic substitutions do not step in.',
+      },
+      {
+        q: 'Do you get two Bench Boosts in FPL?',
+        a: 'Yes, you get two Bench Boosts in 2026/27. One lasts until the Gameweek 19 deadline and one is for the second half. The first does not carry over.',
       },
       {
         q: 'How does Bench Boost work in FPL?',
-        a: 'Bench Boost counts all 15 players for one gameweek. Your starting eleven score as usual, and the points from your four substitutes are added on top. Automatic substitutions do not apply, because the bench is already active.',
-      },
-      {
-        q: 'Can you play Bench Boost in a single gameweek?',
-        a: 'Yes. You can play Bench Boost in a single gameweek. It adds your four substitutes’ points for that one round, even when each club plays only once. A double is usually the better time, because those bench players can play twice.',
-      },
-      {
-        q: 'When should I play Bench Boost in FPL?',
-        a: 'Play Bench Boost when your four substitutes actually start. A double gameweek is the usual spot. In the first half you can also play it in Gameweek 1, or straight after a Wildcard, if the whole 15 have a match.',
-      },
-      {
-        q: 'What is a good score for Bench Boost in FPL?',
-        a: 'A strong Bench Boost is one where the four substitutes actually start. If they only bring appearance points, the chip has not done much. The 2025/26 table on this page is the substitutes’ recorded scores. Those figures are arithmetic, not a Bench Boost the replay played.',
-      },
-      {
-        q: 'Can you Wildcard and Bench Boost in the same gameweek?',
-        a: 'No. FPL rules allow only one chip in a gameweek. The usual move is to Wildcard the week before, then Bench Boost a 15-man squad of starters.',
-      },
-      {
-        q: 'What happens if a bench player does not play during Bench Boost?',
-        a: 'They score zero, the same as a starter who does not play. Automatic substitutions do not step in, because every player in the squad is already active.',
-      },
-      {
-        q: 'Did the 2025/26 replay play Bench Boost?',
-        a: 'No. Bench Boost was never played on the 2025/26 path. The bench table adds up the four substitutes’ recorded scores. Those totals are arithmetic, not a Bench Boost the replay played.',
+        a: 'Bench Boost adds the points from your substitute goalkeeper and your three outfield bench players. You can cancel it before the deadline. You can play it in a single gameweek. A double gives those bench players two matches.',
       },
     ],
   },
@@ -165,12 +137,12 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     id: 'fh',
     slug: 'free-hit',
     name: 'Free Hit',
-    metaTitle: 'FPL Free Hit: What Is a Free Hit (Freehit)?',
+    metaTitle: 'What Is a Free Hit in FPL? You Get Two',
     metaDescription:
-      'A Free Hit in FPL is a one-week squad: unlimited transfers, then your old 15 return. You get two, one each half. Save it for a blank week.',
-    h1: 'What is Free Hit in FPL?',
+      'A free hit in FPL (freehit) is a squad for one week. You make unlimited transfers, then your old 15 come back. You get two in 2026/27.',
+    h1: 'What is a free hit in FPL?',
     oneLiner:
-      'A Free Hit in FPL (also written freehit) is a one-week squad. You can make as many transfers as you like for that gameweek, with no points hit, and your previous 15 come back afterwards. In 2026/27 you get two Free Hits, one in each half. The first has to be played by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027. You cannot play it in Gameweek 1, and you cannot play the two Free Hits in back-to-back gameweeks, so Gameweek 19 and Gameweek 20 is not allowed. Save it for a blank week. If you want the new squad to stay, that is a Wildcard.',
+      'A free hit in FPL, also written freehit, is a squad for one gameweek, and you get two in 2026/27. You can make as many transfers as you like that week, with no points hit, and your previous 15 come back afterwards. The first has to be played by the Gameweek 19 deadline, 18:30 GMT on Friday 1 January 2027. You cannot play it in Gameweek 1, and you cannot play the two free hits in consecutive gameweeks. Save it for a blank gameweek. If you want the new squad to stay, that is a Wildcard.',
     howItWorks:
       'Free Hit lets you make unlimited transfers for a single gameweek with no points hit. At the next deadline your squad goes back to how it was at the start of that gameweek. You get two Free Hits. The first is available after Gameweek 1 and must be played by ' +
       CHIP_HALF_DEADLINE +
@@ -194,40 +166,24 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     },
     faqs: [
       {
-        q: 'What is Free Hit in FPL?',
-        a: 'Free Hit in FPL is a one-week squad. You get unlimited transfers with no points deduction, and your old 15 return afterwards. It is also written freehit.',
+        q: 'What is a free hit in FPL?',
+        a: 'A free hit in FPL is a squad you use for one gameweek. You make unlimited transfers, with no points hit, and your previous 15 come back at the next deadline. It is also written freehit. You get two in 2026/27.',
       },
       {
-        q: 'How many Free Hits do you get in FPL?',
-        a: 'You get two Free Hits in FPL 2026/27, one in each half of the season. The first has to be played by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027. You cannot play Free Hit in Gameweek 1. You also cannot play the two Free Hits in consecutive gameweeks, so Gameweek 19 and Gameweek 20 back to back is not allowed.',
+        q: 'What does a free hit do in FPL?',
+        a: 'A free hit lets you change as many players as you like for one gameweek, then puts your old squad back. Those transfers are free. You get two in 2026/27, and you cannot play them in consecutive gameweeks.',
       },
       {
-        q: 'What happens to saved free transfers when you play Free Hit?',
-        a: SAVED_TRANSFERS_KEPT,
+        q: 'What is the free hit meaning in FPL?',
+        a: 'Free hit means a temporary squad. The players you bring in do not stay past that gameweek. If you want the new squad to stay, that is a Wildcard. You get two free hits in 2026/27.',
       },
       {
-        q: 'How does Free Hit differ from Wildcard?',
-        a: 'Free Hit gives your old squad back after one gameweek. Wildcard keeps the new 15. Both allow unlimited transfers, with no points hit, in the week you play them. Both also keep your saved free transfers.',
+        q: 'How many free hits do you get in FPL?',
+        a: 'You get two free hits in FPL 2026/27, one in each half of the season. The first has to be played by the Gameweek 19 deadline, 18:30 GMT on Friday 1 January 2027. You cannot play Free Hit in Gameweek 1. A Free Hit in Gameweek 19 blocks Gameweek 20.',
       },
       {
-        q: 'Is Free Hit a one-week squad for a blank week?',
-        a: 'Yes. A Free Hit is a squad for one gameweek, and a blank week is the usual reason to play it. You cover the postponed fixtures, then your previous 15 return. A double is the other case, and only when your season squad is aimed at the wrong clubs.',
-      },
-      {
-        q: 'When should I play Free Hit in FPL?',
-        a: 'Play Free Hit in a blank gameweek when postponed fixtures leave you short of starters. It saves a stack of hits just to field a team, and your long-term squad comes back the next week.',
-      },
-      {
-        q: 'Do you keep the Free Hit squad, and what about price changes?',
-        a: 'No. The squad does not stay. At the next deadline it goes back to how it was at the start of the Free Hit gameweek. The published chip rules stop there. They do not spell out a separate price-rise rule.',
-      },
-      {
-        q: 'Can you cancel a Free Hit?',
-        a: 'No. Free Hit is played when you confirm your transfers, and it cannot be cancelled once confirmed. Bench Boost and Triple Captain can still be cancelled before the deadline.',
-      },
-      {
-        q: 'What happened in the 2025/26 blank gameweeks?',
-        a: 'The replay did not play Free Hit in the blank weeks. The numbers are on the card above, taken from the squad files.',
+        q: 'What is freehit?',
+        a: 'Freehit is the Free Hit chip written as one word. It is a squad for one gameweek in FPL, and you get two in 2026/27.',
       },
     ],
   },
@@ -235,12 +191,12 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     id: 'wc',
     slug: 'wildcard',
     name: 'Wildcard',
-    metaTitle: 'Wildcard Meaning in FPL: When to Wildcard',
+    metaTitle: 'Wildcard Meaning in FPL: You Get Two',
     metaDescription:
-      'Wildcard meaning in FPL: unlimited free transfers, and the new squad stays. You get two. The first must be used by the GW19 deadline on 2 Jan 2027.',
+      'A Wildcard in FPL is unlimited free transfers for one gameweek, and the new squad stays. You get two in 2026/27, one in each half.',
     h1: 'Wildcard meaning in FPL',
     oneLiner:
-      'Wildcard meaning in FPL: unlimited free transfers for one gameweek, and the new squad stays. You get two in 2026/27, one in each half. The first has to be played by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027, or it is lost. Use it for a run of bad fixtures or several injuries, not after one bad week.',
+      'Wildcard in FPL means unlimited free transfers for one gameweek, the new squad stays, and you get two in 2026/27. The first has to be played by the Gameweek 19 deadline, 18:30 GMT on Friday 1 January 2027, or it is lost. You cannot play it in Gameweek 1. Use it when several players are injured or the fixtures have gone against you. If everyone is still starting, wait.',
     howItWorks:
       'Wildcard gives you unlimited free transfers for one gameweek, and the new squad stays. You get two. The first is available after Gameweek 1 and must be played by ' +
       CHIP_HALF_DEADLINE +
@@ -265,36 +221,24 @@ export const CHIP_HUB_CONTENT: ChipHubContent[] = [
     },
     faqs: [
       {
-        q: 'What is the wildcard meaning in FPL?',
-        a: 'Wildcard meaning in FPL: unlimited free transfers for one gameweek, and the new squad stays. Unlike Free Hit, the old squad does not come back.',
+        q: 'What does wildcard mean in FPL?',
+        a: 'Wildcard in FPL means unlimited free transfers for one gameweek, and the new squad stays. You get two in 2026/27, one in each half.',
       },
       {
-        q: 'How many Wildcards do you get per season?',
-        a: 'You get two Wildcards in 2026/27, one in each half. The first must be played by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027, or it is lost. The second is available after that deadline. They do not roll over. You cannot play Wildcard in Gameweek 1.',
+        q: 'What is the wildcard FPL meaning?',
+        a: 'The wildcard in FPL means you can rebuild for free and keep the new squad. Every transfer that gameweek is free, including transfers you have already made, so a hit from earlier in the week is wiped. You get two in 2026/27.',
       },
       {
-        q: 'Do you keep saved free transfers after a Wildcard?',
-        a: SAVED_TRANSFERS_KEPT,
+        q: 'What is a wildcard in FPL?',
+        a: 'A wildcard in FPL is the chip that makes every transfer that gameweek free, and the new 15 stays. You get two in 2026/27. You cannot play Wildcard in Gameweek 1, and you cannot cancel it once you have confirmed it.',
       },
       {
-        q: 'When should I play Wildcard in FPL?',
-        a: 'Play Wildcard when the squad has at least three problems you cannot fix with free transfers, such as long-term injuries, lost starting spots, or a bad run of fixtures.',
+        q: 'How many wildcards do you get in FPL?',
+        a: 'You get two wildcards in FPL 2026/27, one in each half. The first must be played by the Gameweek 19 deadline, 18:30 GMT on Friday 1 January 2027, or it is lost. The second is available after that deadline, until the end of the season.',
       },
       {
-        q: 'When to Wildcard: first half or second half of the season?',
-        a: 'Play the first Wildcard in the first half, before the Gameweek 19 deadline on 2 January 2027, when the squad needs a permanent rebuild. Keep the second for later. If you leave the first one unused, it is lost.',
-      },
-      {
-        q: 'Does activating Wildcard cancel transfer hits already taken?',
-        a: 'Yes. The rules say all transfers already made in that gameweek are free once you play Wildcard. The hits from earlier in the week are wiped.',
-      },
-      {
-        q: 'Is it better to Wildcard or take hits in a blank gameweek?',
-        a: 'A planned four-point or eight-point hit is often enough if the long-term squad is fine. Wildcard is better kept for a wider move onto players with a sustained run of fixtures. In the 2025/26 replay, Gameweek 31 used banked free transfers and no chip.',
-      },
-      {
-        q: 'Can you cancel a Wildcard once activated?',
-        a: 'No. Once you confirm a Wildcard, you cannot cancel it or get it back. Check the new squad before you confirm.',
+        q: 'What does a wildcard do in FPL?',
+        a: 'A wildcard takes the points cost off your transfers for that gameweek and keeps the squad you build. Saved free transfers stay for the next gameweek. If you had two saved, you still have two.',
       },
     ],
   },
@@ -313,17 +257,13 @@ export interface ChipIndexFaq {
 export const CHIPS_INDEX_FAQS: ChipIndexFaq[] = [
   {
     q: 'What are the FPL chips?',
-    a: 'The FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. Each hub on this page covers one of them. You get two of each in 2026/27.',
+    a: 'The FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. You get two of each in 2026/27, eight in total. Only one chip can be played in a gameweek.',
     links: [
       { href: '/chips/triple-captain', label: 'Triple Captain' },
       { href: '/chips/bench-boost', label: 'Bench Boost' },
       { href: '/chips/free-hit', label: 'Free Hit' },
       { href: '/chips/wildcard', label: 'Wildcard' },
     ],
-  },
-  {
-    q: 'How many chips are there in FPL?',
-    a: 'There are eight chips in 2026/27: two each of Triple Captain, Bench Boost, Free Hit and Wildcard. Only one chip can be played in a gameweek.',
   },
   {
     q: 'When do FPL chips reset?',
@@ -336,31 +276,33 @@ export const CHIPS_INDEX_FAQS: ChipIndexFaq[] = [
     ],
   },
   {
-    q: 'Can you play more than one chip in a season?',
-    a: 'Yes. You play them in different gameweeks. You get two of each chip, eight in total. The first set is lost if you have not used it by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027.',
+    q: 'Do FPL chips reset in January?',
+    a: 'Yes, FPL chips reset on Friday 1 January 2027, at the Gameweek 19 deadline of 18:30 GMT. The first Wildcard, Free Hit, Bench Boost and Triple Captain do not carry over. A new set of four is available from Gameweek 20.',
+    links: [
+      { href: '/chips/wildcard', label: 'Wildcard' },
+      { href: '/chips/free-hit', label: 'Free Hit' },
+      { href: '/chips/bench-boost', label: 'Bench Boost' },
+      { href: '/chips/triple-captain', label: 'Triple Captain' },
+    ],
   },
   {
-    q: 'Can you play two chips in one gameweek?',
-    a: 'No. Official FPL rules allow only one chip in a gameweek. Triple Captain, Bench Boost, Free Hit and Wildcard have to go in different gameweeks.',
+    q: 'How many FPL chips do you get?',
+    a: 'You get eight FPL chips in 2026/27: two Triple Captains, two Bench Boosts, two Free Hits and two Wildcards. The first of each is lost if it is still unused at the Gameweek 19 deadline.',
+    links: [
+      { href: '/chips/triple-captain', label: 'Triple Captains' },
+      { href: '/chips/bench-boost', label: 'Bench Boosts' },
+      { href: '/chips/free-hit', label: 'Free Hits' },
+      { href: '/chips/wildcard', label: 'Wildcards' },
+    ],
   },
   {
-    q: 'Where does Triple Captain fit?',
-    a: 'Triple Captain triples your captain’s official points for one gameweek, instead of doubling them. You get two, one in each half. The Triple Captain hub covers the rules and the 2025/26 captain log.',
-    links: [{ href: '/chips/triple-captain', label: 'Triple Captain hub' }],
-  },
-  {
-    q: 'Where does Bench Boost fit?',
-    a: 'Bench Boost adds the points from your four substitutes for one gameweek. You get two, one in each half. The Bench Boost hub covers the rules and the 2025/26 bench points.',
-    links: [{ href: '/chips/bench-boost', label: 'Bench Boost hub' }],
-  },
-  {
-    q: 'Where does Free Hit fit?',
-    a: 'Free Hit is a one-week squad: unlimited transfers for that gameweek, with no points deduction, then your previous 15 return. You get two, and you cannot play them back to back. The Free Hit hub covers the rules.',
-    links: [{ href: '/chips/free-hit', label: 'Free Hit hub' }],
-  },
-  {
-    q: 'Where does Wildcard fit?',
-    a: 'Wildcard gives you unlimited free transfers for one gameweek, and the new squad stays. You get two. An unused first Wildcard is lost at the Gameweek 19 deadline on 2 January 2027. The Wildcard hub covers the rules.',
-    links: [{ href: '/chips/wildcard', label: 'Wildcard hub' }],
+    q: 'When do chips reset in FPL?',
+    a: 'Chips in FPL reset when the Gameweek 19 deadline passes. In 2026/27 that is 18:30 GMT on Friday 1 January 2027. You then have a fresh Wildcard, Free Hit, Bench Boost and Triple Captain from Gameweek 20.',
+    links: [
+      { href: '/chips/wildcard', label: 'Wildcard' },
+      { href: '/chips/free-hit', label: 'Free Hit' },
+      { href: '/chips/bench-boost', label: 'Bench Boost' },
+      { href: '/chips/triple-captain', label: 'Triple Captain' },
+    ],
   },
 ];

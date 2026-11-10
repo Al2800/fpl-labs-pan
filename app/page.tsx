@@ -125,7 +125,7 @@ export default function HomePage() {
         <h2 className="text-lg font-semibold">Chip timing</h2>
         <p className="text-neutral-700 leading-relaxed">
           You get eight chips in 2026/27, two of each. The first set has to be used by the Gameweek
-          19 deadline, 13:30 GMT on Saturday 2 January 2027. The 2025/26 replay never played a chip.
+          19 deadline, 18:30 GMT on Friday 1 January 2027. The 2025/26 replay never played a chip.
         </p>
         <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
           {CHIP_HUBS.map((chip) => (
