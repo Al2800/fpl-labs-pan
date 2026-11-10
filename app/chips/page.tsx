@@ -5,16 +5,16 @@ import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbList, chipHubPath, faqPage } from '@/lib/present';
 
 export const metadata: Metadata = {
-  title: 'FPL Chips: Triple Captain, Bench Boost, Free Hit, Wildcard',
+  title: 'FPL Chips: Eight in 2026/27, Reset at GW19',
   description:
-    'Eight FPL chips in 2026/27: two each of Triple Captain, Bench Boost, Free Hit and Wildcard. The first set expires at the GW19 deadline on 2 Jan 2027.',
+    'The FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. You get eight in 2026/27. They reset at 18:30 GMT on Friday 1 January 2027.',
   alternates: {
     canonical: '/chips',
   },
   openGraph: {
-    title: 'FPL Chips: Triple Captain, Bench Boost, Free Hit, Wildcard',
+    title: 'FPL Chips: Eight in 2026/27, Reset at GW19',
     description:
-      'Eight FPL chips in 2026/27: two each of Triple Captain, Bench Boost, Free Hit and Wildcard. The first set expires at the GW19 deadline on 2 Jan 2027.',
+      'The FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. You get eight in 2026/27. They reset at 18:30 GMT on Friday 1 January 2027.',
     url: '/chips',
   },
 };
@@ -81,14 +81,14 @@ export default function ChipsIndexPage() {
       />
       <header className="space-y-3">
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-          FPL chips: Triple Captain, Bench Boost, Free Hit and Wildcard
+          What are FPL chips, and when do they reset?
         </h1>
         <p className="text-neutral-800 leading-relaxed max-w-3xl">
-          FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. In 2026/27 you get two of each, eight in
-          total, and only one chip in a gameweek. The first set has to be used by the Gameweek 19 deadline, 13:30 GMT
-          on Saturday 2 January 2027. It does not carry over. A new set is there from Gameweek 20. In the 2025/26
-          replay, all four were left unused, including Gameweek 34, when the optimiser took an 8-point hit in a blank
-          and did not play Free Hit or Wildcard.
+          FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard, and they reset at the Gameweek 19
+          deadline. In 2026/27 you get two of each, eight in total, and only one chip in a gameweek. That deadline is
+          18:30 GMT on Friday 1 January 2027. The first set does not carry over. A new set is there from Gameweek 20.
+          In the 2025/26 replay, all four were left unused, including Gameweek 34, when the optimiser took an 8-point
+          hit in a blank and did not play Free Hit or Wildcard.
         </p>
       </header>
       <ul className="space-y-4">

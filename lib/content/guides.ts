@@ -1,4 +1,4 @@
-import { CHIP_HALF_DEADLINE, CHIP_RESET_ANSWER } from '@/lib/content/chip-rules';
+import { CHIP_HALF_DEADLINE } from '@/lib/content/chip-rules';
 
 export interface GuidePage {
   slug: string;
@@ -125,11 +125,11 @@ export const GUIDES: GuidePage[] = [
   },
   {
     slug: 'when-to-play-fpl-chips',
-    title: 'Wildcard, Bench Boost, Free Hit, Triple Captain: when to play',
+    title: 'When to play Free Hit in FPL 2026: a blank week',
     description:
-      'Eight FPL chips in 2026/27, two of each. Wildcard when transfers cannot fix the squad, Bench Boost and Triple Captain in a double, Free Hit in a blank.',
+      'Play Free Hit during a blank gameweek in 2026/27, when postponed matches leave you short of starters. You get two, and your old squad comes back.',
     answer:
-      'You get eight chips in 2026/27: two each of Wildcard, Bench Boost, Free Hit and Triple Captain, one set per half. Play Wildcard when the squad needs three or more permanent fixes. Play Bench Boost in a double when all 15 have confirmed starts. Play Free Hit (freehit) in a blank so you do not take hits. Save Triple Captain for a premium with two good fixtures. The first set has to be used by the Gameweek 19 deadline, 13:30 GMT on Saturday 2 January 2027. In the 2025/26 replay, every chip stayed unused, including when the optimiser took an 8-point hit in Gameweek 34 and did not play Free Hit or Wildcard.',
+      'Play Free Hit in FPL 2026 in a blank gameweek, when postponed matches leave you short of starters. You get two Free Hits in 2026/27, one in each half, and your previous squad comes back the next week. The first has to be used by the Gameweek 19 deadline, 18:30 GMT on Friday 1 January 2027. You cannot play Free Hit in Gameweek 1, and you cannot play the two Free Hits in consecutive gameweeks. Play Wildcard when free transfers will not fix the squad, Bench Boost when your substitutes start in a double, and Triple Captain when your captain has two fixtures. In the 2025/26 replay, every chip stayed unused, including Gameweek 34, when the optimiser took an 8-point hit and did not play Free Hit or Wildcard.',
     sections: [
       {
         heading: 'When to play your Wildcard',
@@ -164,53 +164,29 @@ export const GUIDES: GuidePage[] = [
     ],
     faqs: [
       {
-        q: 'When do FPL chips reset?',
-        a: CHIP_RESET_ANSWER,
-        links: [
-          { href: '/chips/free-hit', label: 'Free Hit' },
-          { href: '/chips/wildcard', label: 'Wildcard' },
-          { href: '/chips/bench-boost', label: 'Bench Boost' },
-          { href: '/chips/triple-captain', label: 'Triple Captain' },
-        ],
+        q: 'When should you play Free Hit in FPL 2026?',
+        a: 'Play Free Hit in FPL 2026 in a blank gameweek, when postponed fixtures leave you short of starters. You get two Free Hits in 2026/27. Your old squad comes back the next week. You cannot play Free Hit in Gameweek 1, or in two gameweeks running.',
+        links: [{ href: '/chips/free-hit', label: 'Free Hit' }],
       },
       {
-        q: 'What are the FPL chips and when do you play them?',
-        a: 'The FPL chips are Wildcard, Bench Boost, Free Hit and Triple Captain, and you get two of each. The chips page has a hub for each. Play Wildcard when the squad has at least three problems that free transfers cannot fix. Play Bench Boost in a double when all 15 players have confirmed starts. Play Free Hit in a blank when you are short of starters. Save Triple Captain for a confirmed double where a premium has two starts.',
-        links: [
-          { href: '/chips/wildcard', label: 'Wildcard' },
-          { href: '/chips/bench-boost', label: 'Bench Boost' },
-          { href: '/chips/free-hit', label: 'Free Hit' },
-          { href: '/chips/triple-captain', label: 'Triple Captain' },
-          { href: '/chips', label: 'chips page' },
-        ],
+        q: 'When to play Free Hit in FPL?',
+        a: 'Play Free Hit when fielding eleven players would otherwise cost you several transfer hits. Keep it for a blank gameweek. Use it in a double only when your season squad is built around the wrong clubs.',
+        links: [{ href: '/chips/free-hit', label: 'Free Hit' }],
       },
       {
-        q: 'When should I play Wildcard in FPL?',
-        a: 'Play Wildcard when your squad has at least three structural problems (such as long-term injuries, lost starting spots, or a brutal run of fixtures) that regular free transfers cannot fix.',
+        q: 'When should you play Wildcard in FPL?',
+        a: 'Play Wildcard when the squad has three or more problems that free transfers will not fix, such as long-term injuries, lost starting spots, or a bad run of fixtures. You get two in 2026/27. The first is lost if you still have it after the Gameweek 19 deadline.',
+        links: [{ href: '/chips/wildcard', label: 'Wildcard' }],
       },
       {
-        q: 'FPL when to Wildcard: should I play it early or hold?',
-        a: 'Playing the first Wildcard between Gameweeks 6 and 10 is usually more useful than holding it to the deadline. The new squad then has a long run. In 2026/27 that deadline is 13:30 GMT on Saturday 2 January 2027. If you leave the first Wildcard, it is lost.',
+        q: 'When should you play Bench Boost in FPL?',
+        a: 'Play Bench Boost when your four substitutes are starting, usually in a double gameweek so they can play twice. You get two in 2026/27, one in each half.',
+        links: [{ href: '/chips/bench-boost', label: 'Bench Boost' }],
       },
       {
-        q: 'What is Bench Boost in FPL and what is a good return?',
-        a: 'Bench Boost scores all four of your substitutes alongside your starting eleven for one round. You get two in 2026/27, one in each half. A return in the mid-teens or higher from the bench is a strong week. The 2025/26 replay never played it.',
-      },
-      {
-        q: 'When should I play Bench Boost in FPL?',
-        a: 'Play Bench Boost in a major double gameweek late in the season, usually between Gameweeks 34 and 37 when rearranged fixtures let your substitutes play twice.',
-      },
-      {
-        q: 'When should you play the Free Hit (freehit) chip?',
-        a: 'Play Free Hit (or freehit) during a severe blank gameweek when postponed fixtures leave you with fewer than eight or nine playing starters. It lets you field a full eleven without wrecking your long-term squad with transfer hits.',
-      },
-      {
-        q: 'What is Triple Captain in FPL, and when should you play it?',
-        a: 'Triple Captain triples your captain’s official points for one gameweek instead of doubling them. You get two in 2026/27, one in each half. Save one for a confirmed double where a premium has two starts.',
-      },
-      {
-        q: 'Which FPL chip is most often wasted?',
-        a: 'Free Hit and Bench Boost are the chips managers most often waste. Free Hit gets spent on minor single-gameweek punts, while Bench Boost often fires while cheap non-starters on the bench score zero.',
+        q: 'When should you play Triple Captain in FPL?',
+        a: 'Play Triple Captain when your captain starts both matches in a confirmed double. You get two in 2026/27, one in each half. If your captain has only one match and a double is still coming, wait.',
+        links: [{ href: '/chips/triple-captain', label: 'Triple Captain' }],
       },
     ],
     related: [

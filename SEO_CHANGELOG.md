@@ -1,5 +1,14 @@
 # SEO Changelog
 
+## 2026-11-10
+- Date merged: not merged
+- PR: #17 https://github.com/Al2800/fpl-labs-pan/pull/17
+- Page URL(s) changed: https://www.fplreplay.com/chips/free-hit, https://www.fplreplay.com/chips/triple-captain, https://www.fplreplay.com/chips/wildcard, https://www.fplreplay.com/chips/bench-boost, https://www.fplreplay.com/chips, https://www.fplreplay.com/guides/when-to-play-fpl-chips. The shared Gameweek 19 deadline string also updates https://www.fplreplay.com/, https://www.fplreplay.com/glossary and https://www.fplreplay.com/llms.txt.
+- Search query or queries that prompted it: "free hit", "freehit", "what is free hit in fpl", "free hit fpl", "what does free hit do in fpl", "free hit fpl meaning"; "how many triple captains do you get in fpl", "how many triple captains in fpl", "triple captain fpl", "how does triple captain work"; "wildcard fpl meaning", "wildcard meaning in fpl", "what is wildcard in fpl", "how many wildcards in fpl"; "how many bench boosts do you get in fpl", "what is bench boost in fpl", "what does bench boost do", "do you get two bench boosts"; "fpl chips", "when do fpl chips reset"; "when to play free hit fpl 2026".
+- GSC numbers at the time: 12 Sep to 8 Nov 2026. Site: 67 clicks / 30,092 impressions / 0.2% CTR / average position 8.2. /chips/free-hit: 22 clicks / 11,278 impressions / position 8.2. /chips/triple-captain: 14 / 6,573 / 6.9. Query "how many triple captains do you get in fpl": 0 clicks / 720 impressions / position 5.1. /chips/wildcard: 6 / 4,557 / 9.7. /chips/bench-boost: 5 / 3,949 / 7.4. /chips: 1 / 1,941 / 8.8. /guides/when-to-play-fpl-chips: 11 / 1,469 / 7.6.
+- What changed: Rewrote the title, meta description, og:title and og:description so each snippet answers the main query, including how many of that chip you get in 2026/27. The H1 and the first sentence do the same. Each of the six pages now has five FAQs phrased like the queries above, with the answer in the first sentence. FAQPage JSON-LD was already present and uses that same list. No second schema block. Corrected the Gameweek 19 deadline from 13:30 GMT on Saturday 2 January 2027 to 18:30 GMT on Friday 1 January 2027, matching the live FPL rules (90 minutes before Leeds v Everton at 20:00). No layout changes and no new pages.
+Result (check ~4 weeks after):
+
 ## 2026-10-06
 - Date merged: not merged
 - PR: #15 https://github.com/Al2800/fpl-labs-pan/pull/15
