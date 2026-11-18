@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { getAdjacentGameweeks, getSeasonGameweek, getSeasonGameweeks } from '@/lib/data';
+import { getAdjacentGameweeks, getSeasonGameweek, getSeasons } from '@/lib/data';
 import { GameweekDecisionView } from '@/components/GameweekDecisionView';
 import {
   gameweekHeading,
@@ -18,10 +18,12 @@ interface PageProps {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getSeasonGameweeks('2025-26').map((gw) => ({
-    season: gw.season,
-    n: gw.gw.toString(),
-  }));
+  return getSeasons().flatMap((season) =>
+    season.rows.map((row) => ({
+      season: season.id,
+      n: row.gw.toString(),
+    }))
+  );
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

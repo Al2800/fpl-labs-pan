@@ -93,6 +93,6 @@ export const GLOSSARY = [
     term: 'Illustrative sample',
     id: 'illustrative-sample',
     definition:
-      'Hand-built 2026/27 fixtures that used to sit on this site, including squads that were not a real freeze. Those pages have been removed. The published record is the 2025/26 reconstructive replay.',
+      'Hand-built 2026/27 fixtures that used to sit on this site. Those pages have been removed. The published 2026/27 season is a reconstructive replay for Gameweeks 1 to 10, then a pre-deadline freeze from Gameweek 11. 2025/26 remains the settled replay.',
   },
 ];

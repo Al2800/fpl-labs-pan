@@ -128,8 +128,54 @@ function armPoints(gw: GameweekDecision, id: 'baseline' | 'agent'): number | nul
   return gw.arms.find((arm) => arm.id === id)?.realisedPoints ?? null;
 }
 
-export function listReplayWeeks(): ReplayWeekRecord[] {
-  return getSeasonGameweeks(REPLAY_SEASON_ID).map((gw) => {
+export const LIVE_SEASON_ID = '2026-27';
+export const LIVE_DOWNLOAD_PATH = '/seasons/2026-27/download';
+export const LIVE_CSV_PATH = '/seasons/2026-27/download/replay.csv';
+export const LIVE_JSON_PATH = '/seasons/2026-27/download/replay.json';
+export const LIVE_DATASET_NAME = 'FPL Replay 2026/27 season';
+export const LIVE_CITATION =
+  'FPL Replay (2026). 2026/27 season dataset. Gameweeks 1 to 10 are a reconstructive replay. Later gameweeks are frozen before the deadline. https://www.fplreplay.com/seasons/2026-27/download. Licensed under CC BY 4.0.';
+
+export function fieldDictionary(season: string = REPLAY_SEASON_ID) {
+  if (season !== LIVE_SEASON_ID) return REPLAY_FIELDS;
+  return REPLAY_FIELDS.map((item) => {
+    if (item.field === 'captainExpectedPoints') {
+      return {
+        ...item,
+        meaning: 'Single-week forecast for the captain, before the captain multiplier.',
+      };
+    }
+    if (item.field === 'templatePoints') {
+      return {
+        ...item,
+        meaning:
+          'Template arm net points. The template makes at most one free transfer and never takes a hit. Blank means the gameweek is not final.',
+      };
+    }
+    if (item.field === 'evidencePoints') {
+      return {
+        ...item,
+        meaning: 'Same-state evidence arm. It copies the optimiser. Blank means the gameweek is not final.',
+      };
+    }
+    if (item.field === 'projectedXP') {
+      return {
+        ...item,
+        meaning: 'Projected squad total with the captain doubled and any hit removed.',
+      };
+    }
+    if (item.field === 'optimiserPoints') {
+      return {
+        ...item,
+        meaning: 'Optimiser net points after any hit. Blank means the gameweek is not final.',
+      };
+    }
+    return item;
+  });
+}
+
+export function listReplayWeeks(season: string = REPLAY_SEASON_ID): ReplayWeekRecord[] {
+  return getSeasonGameweeks(season).map((gw) => {
     const plan = gw.validatedPlan;
     const squad = [...plan.startingXI, ...plan.bench];
     const benchPoints = plan.bench.reduce((sum, player) => sum + (player.realisedPoints ?? 0), 0);
@@ -251,16 +297,18 @@ function assertCitedReplayFacts(digest: ReplayDigest): void {
   }
 }
 
-export function replayDatasetJson(): string {
-  const weeks = listReplayWeeks();
+export function replayDatasetJson(season: string = REPLAY_SEASON_ID): string {
+  const weeks = listReplayWeeks(season);
+  const live = season === LIVE_SEASON_ID;
   return JSON.stringify(
     {
-      name: REPLAY_DATASET_NAME,
-      season: REPLAY_SEASON_ID,
+      name: live ? LIVE_DATASET_NAME : REPLAY_DATASET_NAME,
+      season,
       license: 'https://creativecommons.org/licenses/by/4.0/',
-      citation: REPLAY_CITATION,
-      description:
-        'One row per gameweek from the 2025/26 reconstructive replay. Built from data/seasons/2025-26/gw-01.json to gw-38.json. No chip was played. Weekly ownership and double gameweeks are not included: the ownership figure does not change by week, and the opponent field stores one fixture only.',
+      citation: live ? LIVE_CITATION : REPLAY_CITATION,
+      description: live
+        ? 'One row per published 2026/27 gameweek. Gameweeks 1 to 10 are a reconstructive replay. Later rows are a pre-deadline freeze, and blank point fields mean the gameweek is not final. No chip was played. The opponent field stores one fixture only.'
+        : 'One row per gameweek from the 2025/26 reconstructive replay. Built from data/seasons/2025-26/gw-01.json to gw-38.json. No chip was played. Weekly ownership and double gameweeks are not included: the ownership figure does not change by week, and the opponent field stores one fixture only.',
       rows: weeks,
     },
     null,
@@ -274,8 +322,8 @@ function csvCell(value: string | number | null): string {
   return text;
 }
 
-export function replayDatasetCsv(): string {
-  const weeks = listReplayWeeks();
+export function replayDatasetCsv(season: string = REPLAY_SEASON_ID): string {
+  const weeks = listReplayWeeks(season);
   const fields = REPLAY_FIELDS.map((item) => item.field);
   const lines = [
     fields.join(','),

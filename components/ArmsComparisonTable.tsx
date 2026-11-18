@@ -17,11 +17,13 @@ export function ArmsComparisonTable({
   compact = false,
   kind,
 }: ArmsComparisonTableProps) {
-  const showDetail = kind !== 'historical-replay';
+  const showDetail = false;
   const intro =
-    kind === 'historical-replay'
-      ? 'Template (roll transfers), optimiser (selected plan), and same-state evidence. In this ingest, evidence matched the optimiser every week.'
-      : 'Template (hold transfers), optimiser (selected plan), and high-ceiling (more risk).';
+    season === '2026-27'
+      ? 'Template (at most one free transfer, no hits), optimiser (selected plan, at most one paid transfer), and same-state evidence. Evidence copies the optimiser. Chips are not in the search.'
+      : kind === 'historical-replay'
+        ? 'Template (roll transfers), optimiser (selected plan), and same-state evidence. In this ingest, evidence matched the optimiser every week.'
+        : 'Template (hold transfers), optimiser (selected plan), and high-ceiling (more risk).';
 
   return (
     <div className="border border-neutral-200 bg-white overflow-hidden">
@@ -90,12 +92,12 @@ export function ArmsComparisonTable({
                   </td>
                   <td className="py-3 px-3 text-right tabular-nums">
                     {kind === 'historical-replay' && arm.objectiveEP === 0
-                      ? '—'
+                      ? 'n/a'
                       : arm.objectiveEP.toFixed(1)}
                   </td>
                   <td className="py-3 px-3 text-right tabular-nums">
                     {arm.decisionDeltaVsBaseline === 0
-                      ? '—'
+                      ? '0'
                       : `${arm.decisionDeltaVsBaseline > 0 ? '+' : ''}${arm.decisionDeltaVsBaseline.toFixed(1)}`}
                   </td>
                   <td className="py-3 px-3 text-right tabular-nums">

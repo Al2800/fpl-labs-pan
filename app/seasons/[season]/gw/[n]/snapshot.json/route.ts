@@ -1,13 +1,15 @@
-import { getSeasonGameweek, getSeasonGameweeks } from '@/lib/data';
+import { getSeasonGameweek, getSeasons } from '@/lib/data';
 import { snapshotNotFound, snapshotResponse } from '@/lib/snapshot';
 
 export const dynamic = 'force-static';
 
 export function generateStaticParams() {
-  return getSeasonGameweeks('2025-26').map((gw) => ({
-    season: gw.season,
-    n: gw.gw.toString(),
-  }));
+  return getSeasons().flatMap((season) =>
+    season.rows.map((row) => ({
+      season: season.id,
+      n: row.gw.toString(),
+    }))
+  );
 }
 
 export async function GET(

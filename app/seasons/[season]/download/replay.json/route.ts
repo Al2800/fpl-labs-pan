@@ -1,10 +1,12 @@
-import { REPLAY_SEASON_ID, replayDatasetJson } from '@/lib/replay-2025';
+import { LIVE_SEASON_ID, REPLAY_SEASON_ID, replayDatasetJson } from '@/lib/replay-2025';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
 
+const SEASONS = [REPLAY_SEASON_ID, LIVE_SEASON_ID];
+
 export function generateStaticParams() {
-  return [{ season: REPLAY_SEASON_ID }];
+  return SEASONS.map((season) => ({ season }));
 }
 
 export async function GET(
@@ -12,16 +14,16 @@ export async function GET(
   { params }: { params: Promise<{ season: string }> }
 ) {
   const { season } = await params;
-  if (season !== REPLAY_SEASON_ID) {
+  if (!SEASONS.includes(season)) {
     return new Response(JSON.stringify({ error: 'Not found' }), {
       status: 404,
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
     });
   }
-  return new Response(replayDatasetJson(), {
+  return new Response(replayDatasetJson(season), {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      'Content-Disposition': 'attachment; filename="fpl-replay-2025-26.json"',
+      'Content-Disposition': `attachment; filename="fpl-replay-${season}.json"`,
       'Cache-Control': 'public, max-age=0, s-maxage=3600',
     },
   });

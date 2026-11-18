@@ -38,4 +38,10 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# FPL API cache and the cloned lab solver used by scripts/fpl_2026_27.py
+/data/.cache/
+/vendor/
+__pycache__/
+*.pyc
 next-env.d.ts

@@ -7,14 +7,14 @@ import { breadcrumbList, seasonLabel, seasonPath } from '@/lib/present';
 export const metadata: Metadata = {
   title: 'FPL seasons',
   description:
-    'FPL Replay seasons. The published record is the 2025/26 reconstructive replay, with a CSV and JSON download.',
+    'FPL Replay seasons. 2026/27 is the current season. 2025/26 is the settled reconstructive replay. Both have a CSV and JSON download.',
   alternates: {
     canonical: '/seasons',
   },
   openGraph: {
     title: 'FPL seasons',
     description:
-      'FPL Replay seasons. The published record is the 2025/26 reconstructive replay, with a CSV and JSON download.',
+      'FPL Replay seasons. 2026/27 is the current season. 2025/26 is the settled reconstructive replay. Both have a CSV and JSON download.',
     url: '/seasons',
   },
 };
@@ -33,8 +33,8 @@ export default function SeasonsIndexPage() {
       <header className="space-y-2">
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">FPL seasons</h1>
         <p className="text-neutral-700 max-w-3xl leading-relaxed">
-          Open 2025/26 for the gameweek list, the captain and transfer record, and the season
-          download. Sample 2026/27 pages are not published.
+          2026/27 is the current season: Gameweeks 1 to 10 were rebuilt after the matches, and later
+          weeks are frozen before the deadline. 2025/26 is the settled reconstructive replay.
         </p>
       </header>
       <ul className="space-y-4">
@@ -48,7 +48,9 @@ export default function SeasonsIndexPage() {
             <p className="text-neutral-700">{season.summary}</p>
             <p className="text-sm text-neutral-600">
               {seasonLabel(season.id)} · {season.gameweeks} gameweeks
-              {season.kind === 'historical-replay' ? ` · ${season.optimiserPoints} pts` : ''}
+              {season.kind === 'historical-replay'
+                ? ` · ${season.optimiserPoints} pts`
+                : ` · ${season.optimiserPoints} pts so far`}
             </p>
           </li>
         ))}

@@ -4,8 +4,8 @@ import { CHIP_HUBS, chipHubPath, gameweekPath, seasonPath } from '@/lib/present'
 
 export function Footer() {
   const latest = getFeaturedGameweek();
-  const replay = getSeasonIndex('2025-26');
-  const recent = replay ? replay.rows.slice(-5).reverse() : [];
+  const live = getSeasonIndex('2026-27');
+  const recent = live ? [...live.rows].reverse().slice(0, 5) : [];
 
   return (
     <footer className="mt-auto border-t border-neutral-200 bg-white text-sm text-neutral-600">
@@ -14,35 +14,40 @@ export function Footer() {
           <div className="space-y-2">
             <div className="font-semibold text-neutral-900">FPL Replay</div>
             <p>
-              Checkable FPL gameweek teams, captains, transfers and chip timing. 2025/26 is a
-              reconstructive replay; live seasons will freeze two hours before the deadline.
+              Checkable FPL gameweek teams, captains, transfers and chip timing. 2026/27 is the
+              current season. 2025/26 stays up as a settled reconstructive replay.
             </p>
           </div>
 
           <div className="space-y-2">
-            <div className="font-semibold text-neutral-900">2025/26</div>
+            <div className="font-semibold text-neutral-900">2026/27</div>
             <ul className="space-y-1">
+              <li>
+                <Link href={gameweekPath(latest.season, latest.gw)} className="hover:underline">
+                  Latest: GW{latest.gw}
+                </Link>
+              </li>
               {recent.map((row) => (
                 <li key={row.gw}>
-                  <Link href={gameweekPath('2025-26', row.gw)} className="hover:underline">
+                  <Link href={gameweekPath('2026-27', row.gw)} className="hover:underline">
                     GW{row.gw}
-                    {row.points !== null ? ` · ${row.points} pts` : ''}
+                    {row.points !== null ? ` · ${row.points} pts` : ' · pending'}
                   </Link>
                 </li>
               ))}
               <li>
+                <Link href={seasonPath('2026-27')} className="hover:underline">
+                  2026/27 season
+                </Link>
+              </li>
+              <li>
+                <Link href="/seasons/2026-27/download" className="hover:underline">
+                  Download 2026/27
+                </Link>
+              </li>
+              <li>
                 <Link href={seasonPath('2025-26')} className="hover:underline">
-                  All 38 gameweeks
-                </Link>
-              </li>
-              <li>
-                <Link href="/seasons/2025-26/download" className="hover:underline">
-                  Download the season
-                </Link>
-              </li>
-              <li>
-                <Link href={gameweekPath(latest.season, latest.gw)} className="hover:underline">
-                  Latest: GW{latest.gw}
+                  2025/26 replay
                 </Link>
               </li>
             </ul>

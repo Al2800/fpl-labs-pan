@@ -45,13 +45,13 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/replays/2026-27/gw/:n/:arm',
-        destination: '/seasons/2025-26/gw/:n',
-        permanent: true,
+        destination: '/seasons/2026-27/gw/:n',
+        permanent: false,
       },
       {
         source: '/replays/2026-27/gw/:n/:arm/snapshot.json',
-        destination: '/seasons/2025-26/gw/:n/snapshot.json',
-        permanent: true,
+        destination: '/seasons/2026-27/gw/:n/snapshot.json',
+        permanent: false,
       },
       {
         source: '/chips/tc/gw/:n',
@@ -101,26 +101,6 @@ const nextConfig: NextConfig = {
       {
         source: '/sims/2026-27/gw/:n/:scenario/snapshot.json',
         destination: '/sims',
-        permanent: true,
-      },
-      {
-        source: '/seasons/2026-27',
-        destination: '/seasons/2025-26',
-        permanent: true,
-      },
-      {
-        source: '/seasons/2026-27/snapshot.json',
-        destination: '/seasons/2025-26/snapshot.json',
-        permanent: true,
-      },
-      {
-        source: '/seasons/2026-27/gw/:n',
-        destination: '/seasons/2025-26/gw/:n',
-        permanent: true,
-      },
-      {
-        source: '/seasons/2026-27/gw/:n/snapshot.json',
-        destination: '/seasons/2025-26/gw/:n/snapshot.json',
         permanent: true,
       },
     ];
