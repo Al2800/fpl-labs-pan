@@ -2,7 +2,7 @@
 
 ## 2026-11-18
 - Date merged: not merged
-- PR: opened with this change
+- PR: #18 https://github.com/Al2800/fpl-labs-pan/pull/18
 - Page URL(s) changed: https://www.fplreplay.com/, https://www.fplreplay.com/seasons, https://www.fplreplay.com/seasons/2026-27, https://www.fplreplay.com/seasons/2026-27/gw/1 to /gw/11, https://www.fplreplay.com/seasons/2026-27/download, https://www.fplreplay.com/seasons/2025-26, https://www.fplreplay.com/decisions, https://www.fplreplay.com/methods, https://www.fplreplay.com/about, https://www.fplreplay.com/sims, https://www.fplreplay.com/guides/reconstructive-replay, https://www.fplreplay.com/guides/how-freeze-and-hash-work, https://www.fplreplay.com/glossary, https://www.fplreplay.com/llms.txt, https://www.fplreplay.com/sitemap.xml
 - Search query or queries that prompted it: site had no 2026/27 data; weekly gameweek pages
 - GSC numbers at the time: 28d 42 clicks, 17.4K impressions, 0.2% CTR, avg position 8.8
