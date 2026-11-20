@@ -2,6 +2,15 @@
 
 ## 2026-11-20
 - Date merged: not merged
+- PR: pending
+- Page URL(s) changed: https://www.fplreplay.com/guides/use-fpl-chips-before-they-expire (new). Also listed from https://www.fplreplay.com/guides, https://www.fplreplay.com/, https://www.fplreplay.com/llms.txt and https://www.fplreplay.com/sitemap.xml.
+- Search query or queries that prompted it: "do fpl chips reset in january", "free hit deadline fpl", "does your triple captain reset in january", "do you get another triple captain after christmas", "do all fpl chips reset after christmas".
+- GSC numbers at the time: 28 days to 20 Nov 2026, sc-domain:fplreplay.com. "do fpl chips reset in january": 0 clicks / 31 impressions / position 8.45. "free hit deadline fpl": 1 click / 50 impressions / position 12.02. Reset/refresh query cluster: 0 clicks / 618 impressions.
+- What changed: Added /guides/use-fpl-chips-before-they-expire, a Gameweek 16 to 19 planner for the first chip set. The opening sentence says yes, those chips expire at the Gameweek 19 deadline, 18:30 GMT (18:30 UTC) on Friday 1 January 2027. The page has that deadline table in GMT and UTC, a section for each chip across the four festive gameweeks, and FAQs for the January reset, the Free Hit deadline, and the Triple Captain questions. At the time of writing the fixture list has no blank or double. Related links go to the chips reset section, the when-to-play guide, and the four chip pages. Chip rules, chip hubs, the existing when-to-play guide, glossary chip strings, and the 2026/27 season files were left as they were.
+Result (check ~4 weeks after):
+
+## 2026-11-20
+- Date merged: not merged
 - PR: #19 https://github.com/Al2800/fpl-labs-pan/pull/19
 - Page URL(s) changed: https://www.fplreplay.com/chips, https://www.fplreplay.com/chips/free-hit, https://www.fplreplay.com/chips/wildcard, https://www.fplreplay.com/chips/triple-captain, https://www.fplreplay.com/chips/bench-boost, https://www.fplreplay.com/guides/when-to-play-fpl-chips. The shared Gameweek 19 deadline string also updates the chip definitions on https://www.fplreplay.com/glossary.
 - Search query or queries that prompted it: "when do fpl chips reset", "when do chips reset fpl", "when to play free hit fpl 2026"
