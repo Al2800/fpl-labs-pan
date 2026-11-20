@@ -62,7 +62,7 @@ export const GUIDES: GuidePage[] = [
     description:
       'A reconstructive replay rebuilds pre-deadline inputs after the season. It is not the same as locking odds and minutes two hours before a live deadline.',
     answer:
-      'A reconstructive replay rebuilds what the lab could have known before a historical deadline, then scores the plan on official points. The 2025/26 cutoff is first kickoff minus 90 minutes. A live FPL Replay freeze will lock inputs two hours before the official deadline and publish a hash before results.',
+      'A reconstructive replay rebuilds what the lab could have known before a historical deadline, then scores the plan on official points. The cutoff is first kickoff minus 90 minutes. That is how 2025/26 was built, and how 2026/27 Gameweeks 1 to 10 were built. From Gameweek 11 the 2026/27 pick is frozen before the official deadline and hashed.',
     sections: [
       {
         heading: 'What is rebuilt',
@@ -81,7 +81,7 @@ export const GUIDES: GuidePage[] = [
     faqs: [
       {
         q: 'Is this the same as a two-hour freeze?',
-        a: 'No. Live pages will freeze at T-120 and keep an immutable snapshot. 2025/26 pages say reconstructive replay on the trust strip.',
+        a: 'No. A live freeze locks the plan about two hours before the deadline and keeps the hash. 2025/26, and 2026/27 Gameweeks 1 to 10, say reconstructive replay on the trust strip. They were not frozen before the deadline.',
       },
     ],
     related: [
@@ -96,7 +96,7 @@ export const GUIDES: GuidePage[] = [
     description:
       'Each published plan has a JSON twin and a SHA-256 hash so humans and agents can download the same object the page was built from.',
     answer:
-      'Every gameweek page has a JSON snapshot at the same URL plus /snapshot.json. The trust strip shows the cutoff time and a shortened SHA-256. Download the file to inspect the squad, transfers and limitations. Live seasons will freeze two hours before the deadline; 2025/26 snapshots are reconstructive.',
+      'Every gameweek page has a JSON snapshot at the same URL plus /snapshot.json. The trust strip shows the cutoff time and a shortened SHA-256. Download the file to inspect the squad, transfers and limitations. A live 2026/27 week freezes about two hours before the deadline. 2025/26, and 2026/27 Gameweeks 1 to 10, are reconstructive.',
     sections: [
       {
         heading: 'For humans',
@@ -107,7 +107,7 @@ export const GUIDES: GuidePage[] = [
       {
         heading: 'For agents',
         body: [
-          'Prefer the JSON twin over scraping HTML. Start at /llms.txt for the catalog, then fetch /seasons/2025-26/snapshot.json or a gameweek snapshot. The Content-Type is application/json. X-Snapshot-Hash repeats the digest.',
+          'Prefer the JSON twin over scraping HTML. Start at /llms.txt for the catalog, then fetch /seasons/2026-27/snapshot.json or a gameweek snapshot. The Content-Type is application/json. X-Snapshot-Hash repeats the digest. Scoring a finished week fills official points and does not change the plan hash.',
         ],
       },
     ],

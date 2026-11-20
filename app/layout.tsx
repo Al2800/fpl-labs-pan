@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: '%s | FPL Replay',
   },
   description:
-    'FPL gameweek teams, captains, transfers and chip timing. 2025/26 is a full reconstructive replay with downloadable JSON. Live seasons will freeze two hours before the deadline.',
+    'FPL gameweek teams, captains, transfers and chip timing. 2026/27 is the current season, with a reconstructive start and a pre-deadline freeze from Gameweek 11. 2025/26 stays up as a settled replay.',
   keywords: [
     'FPL',
     'Fantasy Premier League',
@@ -56,14 +56,14 @@ export const metadata: Metadata = {
     url: siteUrl,
     title: 'FPL Replay | Pre-deadline FPL decisions',
     description:
-      'FPL gameweek teams, captains, transfers and chip timing, with a reconstructive 2025/26 season and JSON snapshots.',
+      'FPL gameweek teams, captains, transfers and chip timing for 2026/27, plus the settled 2025/26 replay.',
     siteName: 'FPL Replay',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'FPL Replay | Pre-deadline FPL decisions',
     description:
-      'FPL gameweek teams, captains, transfers and chip timing, with a reconstructive 2025/26 season and JSON snapshots.',
+      'FPL gameweek teams, captains, transfers and chip timing for 2026/27, plus the settled 2025/26 replay.',
     creator: '@FPLabsPan',
   },
   robots: {

@@ -7,14 +7,14 @@ import { breadcrumbList, seasonLabel, seasonPath } from '@/lib/present';
 export const metadata: Metadata = {
   title: 'FPL gameweek decisions',
   description:
-    'Archive of FPL gameweek teams, captains and transfers. 2025/26 is the published reconstructive replay.',
+    'Archive of FPL gameweek teams, captains and transfers. 2026/27 is the current season. 2025/26 is the settled reconstructive replay.',
   alternates: {
     canonical: '/decisions',
   },
   openGraph: {
     title: 'FPL gameweek decisions',
     description:
-      'Archive of FPL gameweek teams, captains and transfers. 2025/26 is the published reconstructive replay.',
+      'Archive of FPL gameweek teams, captains and transfers. 2026/27 is the current season. 2025/26 is the settled reconstructive replay.',
     url: '/decisions',
   },
 };
@@ -36,8 +36,8 @@ export default function DecisionsIndexPage() {
           FPL gameweek decisions
         </h1>
         <p className="text-neutral-700 max-w-3xl leading-relaxed">
-          Open a season for the full gameweek list. 2025/26 is the settled reconstructive replay.
-          Sample 2026/27 gameweeks are not published.
+          Open a season for the full gameweek list. 2026/27 is the current season. 2025/26 is the
+          settled reconstructive replay.
         </p>
       </header>
 
@@ -52,7 +52,9 @@ export default function DecisionsIndexPage() {
             <p className="text-neutral-700">{season.summary}</p>
             <p className="text-sm text-neutral-600">
               {seasonLabel(season.id)} · {season.gameweeks} gameweeks
-              {season.kind === 'historical-replay' ? ` · optimiser ${season.optimiserPoints} pts` : ''}
+              {season.kind === 'historical-replay'
+                ? ` · optimiser ${season.optimiserPoints} pts`
+                : ` · optimiser ${season.optimiserPoints} pts so far`}
             </p>
           </li>
         ))}

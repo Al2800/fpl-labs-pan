@@ -9,6 +9,15 @@
 - What changed: Added a "When do FPL chips reset?" section on the chips hub and the when-to-play guide. The first sentence is the deadline checked on 20 Nov 2026: 18:30 GMT (18:30 UTC) on Friday 1 January 2027, Gameweek 19 in the FPL API (deadline_time 2027-01-01T18:30:00Z). The first chip set stops at Gameweek 19 and the second starts at Gameweek 20. FAQPage JSON-LD uses that same answer. Each chip page has a one-line reset note linking to the hub section. Leads keep the definition, then say when to use the chip in 2026/27. Titles and meta descriptions keep the direct answer and add the 2026/27 deadline. Deadlines on these pages show UTC next to GMT. The 20 July 2026 Premier League news article still says 13:30 GMT on Saturday 2 January. That clock time is not used.
 Result (check ~4 weeks after):
 
+## 2026-11-18
+- Date merged: not merged
+- PR: #18 https://github.com/Al2800/fpl-labs-pan/pull/18
+- Page URL(s) changed: https://www.fplreplay.com/, https://www.fplreplay.com/seasons, https://www.fplreplay.com/seasons/2026-27, https://www.fplreplay.com/seasons/2026-27/gw/1 to /gw/11, https://www.fplreplay.com/seasons/2026-27/download, https://www.fplreplay.com/seasons/2025-26, https://www.fplreplay.com/decisions, https://www.fplreplay.com/methods, https://www.fplreplay.com/about, https://www.fplreplay.com/sims, https://www.fplreplay.com/guides/reconstructive-replay, https://www.fplreplay.com/guides/how-freeze-and-hash-work, https://www.fplreplay.com/glossary, https://www.fplreplay.com/llms.txt, https://www.fplreplay.com/sitemap.xml
+- Search query or queries that prompted it: site had no 2026/27 data; weekly gameweek pages
+- GSC numbers at the time: 28d 42 clicks, 17.4K impressions, 0.2% CTR, avg position 8.8
+- What changed: Published the 2026/27 season. Gameweeks 1 to 10 are a reconstructive replay, scored on official FPL points, with the same cutoff as 2025/26 (first kickoff minus 90 minutes). Gameweek 11 is a live freeze, locked before the Saturday 21 November 2026 11:00 UTC deadline. Homepage and nav now lead with the current 2026/27 gameweek. 2025/26 stays as a settled season. Added a 2026/27 CSV and JSON download, sitemap and llms.txt entries, and a scheduled workflow that freezes the next pick from the FPL API and scores it after the gameweek is final.
+Result (check ~4 weeks after):
+
 ## 2026-11-10
 - Date merged: not merged
 - PR: #17 https://github.com/Al2800/fpl-labs-pan/pull/17

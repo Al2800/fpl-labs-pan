@@ -87,6 +87,9 @@ export interface ProvenanceMetadata {
   isDemoSample: boolean;
   datasetKind?: DatasetKind;
   limitations?: string[];
+  freezeMode?: 'reconstructive' | 'early-publish' | 'deadline-window';
+  officialDeadline?: string;
+  labCommit?: string;
 }
 
 export interface PolicyArmSummary {

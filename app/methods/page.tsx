@@ -36,9 +36,10 @@ export default function MethodsPage() {
           Methods and calibration
         </h1>
         <p className="text-neutral-700 max-w-3xl leading-relaxed">
-          The optimiser maximises discounted expected points over a five-week window, subject to
-          FPL squad rules. Live seasons freeze two hours before the deadline. The published 2025/26
-          season is a reconstructive replay with a different cutoff.
+          The 2025/26 optimiser maximises discounted expected points over a five-week window, subject
+          to FPL squad rules. The 2026/27 pages use a different public solver, described below. A
+          live week freezes about two hours before the deadline. A reconstructive week uses first
+          kickoff minus 90 minutes, and was not frozen before the deadline.
         </p>
       </header>
 
@@ -65,10 +66,11 @@ subject to
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">2. Live freeze versus reconstructive replay</h2>
         <p className="text-neutral-800 leading-relaxed">
-          Live pages lock odds, minutes and the plan two hours before the official deadline, hash
-          the JSON, and do not edit after results. The 2025/26 pages use a reconstructed cutoff
-          (first kickoff minus 90 minutes) built after the season. Fixtures come from the final
-          export; private bank, exact pre-deadline prices and timestamped odds were not archived.
+          A live week locks the plan about two hours before the official deadline, hashes the JSON,
+          and does not edit the squad after that. Scoring only fills official points. The 2025/26
+          pages, and 2026/27 Gameweeks 1 to 10, use a reconstructed cutoff (first kickoff minus 90
+          minutes) built after the matches. They were not frozen before the deadline. Private bank,
+          exact pre-deadline prices and timestamped odds were not archived for 2025/26.
           See{' '}
           <Link href="/guides/reconstructive-replay" className="underline underline-offset-2">
             reconstructive replay
@@ -78,6 +80,27 @@ subject to
             freeze and hash
           </Link>
           .
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold">2026/27 solver</h2>
+        <p className="text-neutral-800 leading-relaxed">
+          The 2026/27 pages use the public solver in the sibling lab (Al2800/FPL, WP-07 bounded
+          search, version wp07-wc-fh-rebuild-v0.3). Gameweek 1 is that repo&apos;s six-week
+          initial-squad search on the deterministic arm, using Gameweek 1 prices and the published
+          2025/26 points-per-90 prior. Later weeks are a one-week search. The optimiser may take at
+          most one paid transfer. The template makes at most one free transfer and never takes a
+          hit. Evidence copies the optimiser, because no pre-deadline evidence ledger was available.
+          Chips are not in the search.
+        </p>
+        <p className="text-neutral-800 leading-relaxed">
+          The five-week mixed-integer programme above is the 2025/26 method. It was not run for
+          2026/27. The lab&apos;s full live model, which uses odds, ratings and an evidence ledger,
+          is not in the public repository, so this run does not pretend to use it. Expected points
+          blend the prior with official minutes from earlier gameweeks only, then scale by official
+          fixture difficulty. Selling prices follow the official half-profit rule from the stored
+          purchase price.
         </p>
       </section>
 

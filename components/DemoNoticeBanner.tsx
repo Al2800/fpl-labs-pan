@@ -3,8 +3,8 @@ import Link from 'next/link';
 function NoticeCopy() {
   return (
     <>
-      2025/26 is a reconstructive replay. The cutoff is first kickoff minus 90 minutes, not a live
-      two-hour freeze.{' '}
+      2025/26 is a reconstructive replay, and so are 2026/27 Gameweeks 1 to 10. The cutoff is first
+      kickoff minus 90 minutes. From Gameweek 11 the 2026/27 pick is frozen before the deadline.{' '}
       <Link href="/guides/reconstructive-replay" className="underline underline-offset-2">
         What that means
       </Link>

@@ -1,0 +1,110 @@
+# Weekly 2026/27 freeze and score.
+#
+# Schedule: every 30 minutes. scripts/fpl_2026_27.py tick reads deadlines from
+# the public FPL API and does nothing unless a gameweek is inside the freeze
+# window (about 2 hours to 2 hours 45 minutes before the deadline) or a
+# finished, data-checked gameweek still needs official points.
+#
+# Publish mode, chosen by the repository variable FPL_PUBLISH_MODE:
+# - unset, or anything other than "main": open or update one pull request on
+#   the branch data/2026-27-weekly. Recommended. A bad freeze does not go live
+#   until someone merges it. The site does not update until that merge.
+# - "main": commit straight to the default branch so the existing deploy picks
+#   it up with no review.
+#
+# No secrets. The FPL API is public. The job uses the built-in GITHUB_TOKEN.
+# The owner must allow Actions to write and to open pull requests
+# (Settings, Actions, General, Workflow permissions: Read and write, and
+# "Allow GitHub Actions to create and approve pull requests").
+# This file only runs after it is on the default branch.
+
+name: FPL 2026/27 weekly
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: tick (freeze or score if due), score, or freeze
+        required: true
+        default: tick
+        type: choice
+        options:
+          - tick
+          - score
+          - freeze
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: fpl-2026-27
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this site
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Checkout the public solver
+        uses: actions/checkout@v4
+        with:
+          repository: Al2800/FPL
+          path: vendor/fpl-lab
+          sparse-checkout: |
+            src
+            control
+            reports/forecasting
+          sparse-checkout-cone: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install the solver's YAML dependency
+        run: python -m pip install pyyaml
+
+      - name: Freeze or score from the FPL API
+        env:
+          FPL_LAB_ROOT: vendor/fpl-lab
+        run: python scripts/fpl_2026_27.py ${{ github.event.inputs.mode || 'tick' }}
+
+      - name: Publish the season files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLISH_MODE: ${{ vars.FPL_PUBLISH_MODE }}
+        run: |
+          set -euo pipefail
+          git add data/seasons/2026-27
+          if git diff --cached --quiet; then
+            echo "No season file changed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update 2026/27 gameweek data from the FPL API"
+          if [ "${PUBLISH_MODE}" = "main" ]; then
+            git push origin HEAD:main
+            echo "Pushed straight to main because FPL_PUBLISH_MODE=main."
+            exit 0
+          fi
+          if git ls-remote --exit-code --heads origin data/2026-27-weekly >/dev/null 2>&1; then
+            git fetch origin data/2026-27-weekly
+            git push --force-with-lease=refs/heads/data/2026-27-weekly:refs/remotes/origin/data/2026-27-weekly origin HEAD:data/2026-27-weekly
+          else
+            git push origin HEAD:data/2026-27-weekly
+          fi
+          if gh pr list --head data/2026-27-weekly --base main --state open --json number --jq '.[0].number' | grep -q '^[0-9]'; then
+            echo "Updated the open weekly pull request."
+            exit 0
+          fi
+          gh pr create --base main --head data/2026-27-weekly \
+            --title "Update 2026/27 gameweek data" \
+            --body "Weekly freeze or score from the public FPL API. Merge this to publish the new gameweek files. Set the repository variable FPL_PUBLISH_MODE to main if you would rather commit straight to main."

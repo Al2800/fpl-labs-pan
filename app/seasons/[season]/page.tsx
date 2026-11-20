@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getReplayForkNotes, getSeasonGameweeks, getSeasonIndex } from '@/lib/data';
+import { getReplayForkNotes, getSeasonGameweeks, getSeasons, getSeasonIndex } from '@/lib/data';
 import { JsonLd } from '@/components/JsonLd';
 import {
   DATASET_LICENSE_URL,
@@ -22,7 +22,7 @@ interface PageProps {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return [{ season: '2025-26' }];
+  return getSeasons().map((season) => ({ season: season.id }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -53,6 +53,8 @@ export default async function SeasonHubPage({ params }: PageProps) {
   const fork = season === '2025-26' ? getReplayForkNotes() : null;
   const snapshotHref = seasonSnapshotPath(season);
   const isReplay = index.kind === 'historical-replay';
+  const isLiveSeason = season === '2026-27';
+  const scored = index.rows.filter((row) => row.points !== null).length;
 
   return (
     <div className="space-y-8">
@@ -94,11 +96,11 @@ export default async function SeasonHubPage({ params }: PageProps) {
 
       <dl className="grid grid-cols-2 sm:grid-cols-4 border border-neutral-200 bg-white">
         <div className="p-4 border-r border-b border-neutral-200">
-          <dt className="text-sm text-neutral-500">Optimiser</dt>
+          <dt className="text-sm text-neutral-500">{isLiveSeason ? 'Optimiser so far' : 'Optimiser'}</dt>
           <dd className="mt-1 text-xl font-semibold">{index.optimiserPoints} pts</dd>
         </div>
         <div className="p-4 border-r border-b border-neutral-200">
-          <dt className="text-sm text-neutral-500">Template</dt>
+          <dt className="text-sm text-neutral-500">{isLiveSeason ? 'Template so far' : 'Template'}</dt>
           <dd className="mt-1 text-xl font-semibold">{index.templatePoints} pts</dd>
         </div>
         <div className="p-4 border-r border-b border-neutral-200">
@@ -140,29 +142,45 @@ export default async function SeasonHubPage({ params }: PageProps) {
             .
           </p>
         </section>
+      ) : isLiveSeason ? (
+        <section className="space-y-3">
+          <h2 className="text-lg font-semibold">How to read this season</h2>
+          <p className="text-neutral-800 leading-relaxed">
+            Gameweeks 1 to 10 were rebuilt after the matches. The cutoff is first kickoff minus 90
+            minutes, the same rule as the 2025/26 replay. Those pages are not a live freeze.
+          </p>
+          <p className="text-neutral-800 leading-relaxed">
+            From Gameweek 11 the pick is frozen before the official deadline and hashed. The weekly
+            job locks the next plan about two hours before the deadline, then fills official points
+            once FPL marks the gameweek final. The totals above add the {scored} scored weeks. No
+            chip is in the search.
+          </p>
+        </section>
       ) : (
-        <p className="text-neutral-700">
-          These three gameweeks are fixtures for the live page format, not a live freeze.
-        </p>
+        <p className="text-neutral-700">This season has no published notes yet.</p>
       )}
 
       <p className="text-sm">
         <a href={snapshotHref} className="underline underline-offset-2">
           Download season JSON
         </a>
-        {isReplay ? (
+        {isReplay || isLiveSeason ? (
           <>
             {' · '}
-            <Link href="/seasons/2025-26/download" className="underline underline-offset-2">
+            <Link href={`/seasons/${season}/download`} className="underline underline-offset-2">
               Download CSV and JSON
             </Link>
-            {' · '}
-            <Link
-              href="/guides/2025-26-season-review"
-              className="underline underline-offset-2"
-            >
-              Season review
-            </Link>
+            {isReplay ? (
+              <>
+                {' · '}
+                <Link
+                  href="/guides/2025-26-season-review"
+                  className="underline underline-offset-2"
+                >
+                  Season review
+                </Link>
+              </>
+            ) : null}
           </>
         ) : null}
       </p>
@@ -240,7 +258,7 @@ export default async function SeasonHubPage({ params }: PageProps) {
         <p className="text-neutral-800 leading-relaxed">
           {isReplay
             ? 'Not on the published per-week plans. Same-state evidence matched the optimiser every week. The +65 figure is an exploratory forked squad path from Gameweek 12, recovered after outcomes were known.'
-            : 'These sample weeks are illustrative and not a season result.'}
+            : 'No. Same-state evidence copies the optimiser, because no pre-deadline evidence ledger was available to move a rate.'}
         </p>
       </section>
 
@@ -249,7 +267,7 @@ export default async function SeasonHubPage({ params }: PageProps) {
         <p className="text-neutral-800 leading-relaxed">
           {isReplay
             ? 'No. See the chip hubs and the Gameweek 34 hit case for what that gap means.'
-            : 'Sample chip pages exist under the live format; they are not 2025/26 results.'}
+            : 'No. Wildcard, Free Hit, Triple Captain and Bench Boost are left out of the weekly search, on the replay weeks and on the live freeze.'}
         </p>
       </section>
     </div>

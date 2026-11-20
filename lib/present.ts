@@ -149,13 +149,36 @@ function transferPhrase(plan: ValidatedPlan): string {
 }
 
 export function gameweekHeading(decision: GameweekDecision): string {
+  if (decision.season === '2026-27') {
+    return `FPL Gameweek ${decision.gw} 2026/27: Team, Captain and Transfers`;
+  }
   return `FPL Gameweek ${decision.gw} (${seasonLabel(decision.season)}): Team, Captain and Transfers`;
+}
+
+export function hoursBeforeDeadline(decision: GameweekDecision): number {
+  const deadline = new Date(decision.deadline).getTime();
+  const frozen = new Date(decision.provenance.frozenAt).getTime();
+  return (deadline - frozen) / 3600000;
+}
+
+export function frozenInDeadlineWindow(decision: GameweekDecision): boolean {
+  const hours = hoursBeforeDeadline(decision);
+  return hours >= 1.75 && hours <= 2.75;
+}
+
+export function liveFreezeSentence(decision: GameweekDecision): string {
+  const when = formatUtc(decision.provenance.frozenAt);
+  if (frozenInDeadlineWindow(decision)) {
+    return `The plan was frozen at ${when}, two hours before the deadline, and has not been edited since.`;
+  }
+  return `The plan was frozen at ${when}, before the deadline, and has not been edited since.`;
 }
 
 export function gameweekMetaDescription(decision: GameweekDecision): string {
   const plan = decision.validatedPlan;
   const template = decision.arms.find((arm) => arm.id === 'baseline')?.realisedPoints;
   const points = plan.realisedSquadTotalPoints;
+  const pointsBit = points === null ? 'points pending' : `${points} net`;
   const hit = plan.hitCost > 0 ? ` after ${pointsHitPhrase(plan.hitCost)}` : '';
   const transfers =
     plan.transferActions.length === 0
@@ -163,9 +186,9 @@ export function gameweekMetaDescription(decision: GameweekDecision): string {
       : `${plan.transferActions.length} transfer${plan.transferActions.length === 1 ? '' : 's'}${hit}`;
   const templateBit =
     template !== null && template !== undefined ? ` Template scored ${template}.` : '';
-  const full = `FPL GW${decision.gw} ${seasonLabel(decision.season)}: ${plan.captain.webName} captained, ${points} net. ${transfers}.${templateBit}`;
+  const full = `FPL GW${decision.gw} ${seasonLabel(decision.season)}: ${plan.captain.webName} captained, ${pointsBit}. ${transfers}.${templateBit}`;
   if (full.length <= 155) return full;
-  const shorter = `FPL GW${decision.gw} ${seasonLabel(decision.season)}: ${plan.captain.webName} captained, ${points} net.${templateBit}`;
+  const shorter = `FPL GW${decision.gw} ${seasonLabel(decision.season)}: ${plan.captain.webName} captained, ${pointsBit}.${templateBit}`;
   if (shorter.length <= 155) return shorter;
   return shorter.slice(0, 152).trimEnd() + '...';
 }
@@ -196,7 +219,7 @@ export function gameweekAnswer(decision: GameweekDecision): string {
   const freezeBit =
     kind === 'illustrative-sample'
       ? ` The plan is an illustrative sample frozen at ${formatUtc(provenance.frozenAt)} in the live-product format.`
-      : ` The plan was frozen at ${formatUtc(provenance.frozenAt)}, two hours before the deadline, and has not been edited since.`;
+      : ` ${liveFreezeSentence(decision)}`;
 
   return `For FPL ${seasonLabel(decision.season)} Gameweek ${decision.gw} (deadline ${formatUtc(decision.deadline)}), the FPL Replay optimiser picked ${plan.captain.webName} as captain and ${plan.viceCaptain.webName} as vice, a ${plan.formation}, and ${transferPhrase(plan)}, projecting ${plan.projectedSquadTotalXP.toFixed(1)} points.${chipBit}${freezeBit}${realised}`;
 }
@@ -238,12 +261,18 @@ export function chipCheckAnswer(
   if (kind === 'historical-replay') {
     const plan = decision.validatedPlan;
     const template = decision.arms.find((arm) => arm.id === 'baseline')?.realisedPoints;
+    if (decision.season === '2026-27') {
+      return 'No chip was played. Wildcard, Free Hit, Triple Captain and Bench Boost were left out of the search, so this replay does not time chips.';
+    }
     const unused =
       'No chip was played. Wildcard, Free Hit, Triple Captain and Bench Boost stayed unused on the 2025/26 replay.';
     if (decision.gw === 34 && plan.hitCost > 0) {
       return `${unused} In Gameweek 34 the optimiser took ${pointsHitPhrase(plan.hitCost)} and scored ${plan.realisedSquadTotalPoints} net. The template held and scored ${template}.`;
     }
     return unused;
+  }
+  if (decision.season === '2026-27' && decision.validatedPlan.chipUsed === 'none') {
+    return 'No chip is in the plan. The weekly solver does not spend chips. Chip timing stays a separate call.';
   }
   const planChip =
     decision.validatedPlan.chipUsed === 'none'
@@ -292,9 +321,6 @@ export function jsonAlternate(htmlPath: string, snapshotPath: string) {
 }
 
 export function gameweekPath(season: string, gw: number): string {
-  if (season === '2026-27') {
-    return `/decisions/gw/${gw}`;
-  }
   return `/seasons/${season}/gw/${gw}`;
 }
 
