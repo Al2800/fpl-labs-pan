@@ -2,7 +2,7 @@
 
 ## 2026-11-20
 - Date merged: not merged
-- PR: pending
+- PR: #20 https://github.com/Al2800/fpl-labs-pan/pull/20
 - Page URL(s) changed: https://www.fplreplay.com/guides/use-fpl-chips-before-they-expire (new). Also listed from https://www.fplreplay.com/guides, https://www.fplreplay.com/, https://www.fplreplay.com/llms.txt and https://www.fplreplay.com/sitemap.xml.
 - Search query or queries that prompted it: "do fpl chips reset in january", "free hit deadline fpl", "does your triple captain reset in january", "do you get another triple captain after christmas", "do all fpl chips reset after christmas".
 - GSC numbers at the time: 28 days to 20 Nov 2026, sc-domain:fplreplay.com. "do fpl chips reset in january": 0 clicks / 31 impressions / position 8.45. "free hit deadline fpl": 1 click / 50 impressions / position 12.02. Reset/refresh query cluster: 0 clicks / 618 impressions.
