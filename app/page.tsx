@@ -15,9 +15,10 @@ import { GUIDES } from '@/lib/content/guides';
 
 export default function HomePage() {
   const featured = getFeaturedGameweek();
-  const replay = getSeasonIndex('2025-26');
+  const live = getSeasonIndex('2026-27');
   const answer = gameweekAnswer(featured);
   const kind = datasetKindOf(featured);
+  const featuredPoints = featured.validatedPlan.realisedSquadTotalPoints;
 
   return (
     <div className="space-y-10">
@@ -27,8 +28,9 @@ export default function HomePage() {
         </h1>
         <p className="text-neutral-700 leading-relaxed max-w-3xl">
           FPL Replay publishes the team, captain, transfers and chip call for each gameweek, then
-          scores them on official points. The 2025/26 season is a full reconstructive replay. Live
-          seasons will freeze two hours before the deadline.
+          scores them on official points. 2026/27 is the current season. Gameweeks 1 to 10 were
+          rebuilt after the matches. From Gameweek 11 the pick is frozen before the deadline. 2025/26
+          stays up as a settled reconstructive replay.
         </p>
       </header>
 
@@ -36,7 +38,7 @@ export default function HomePage() {
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="text-sm text-neutral-500">
-              Settled season · {seasonLabel(featured.season)} · {statusLabel(featured.status)}
+              Latest · {seasonLabel(featured.season)} · {statusLabel(featured.status)}
             </p>
             <h2 className="text-xl font-semibold">{gameweekHeading(featured)}</h2>
           </div>
@@ -48,25 +50,25 @@ export default function HomePage() {
           </Link>
         </div>
         <p className="text-neutral-800 leading-relaxed">{answer}</p>
-        {replay ? (
+        {live ? (
           <dl className="grid grid-cols-2 sm:grid-cols-4 border border-neutral-200 bg-white">
             <div className="p-3 border-r border-b border-neutral-200">
-              <dt className="text-sm text-neutral-500">Optimiser</dt>
-              <dd className="mt-1 font-medium">{replay.optimiserPoints} pts</dd>
+              <dt className="text-sm text-neutral-500">Optimiser so far</dt>
+              <dd className="mt-1 font-medium">{live.optimiserPoints} pts</dd>
             </div>
             <div className="p-3 border-r border-b border-neutral-200">
-              <dt className="text-sm text-neutral-500">Template</dt>
-              <dd className="mt-1 font-medium">{replay.templatePoints} pts</dd>
+              <dt className="text-sm text-neutral-500">Template so far</dt>
+              <dd className="mt-1 font-medium">{live.templatePoints} pts</dd>
             </div>
             <div className="p-3 border-r border-b border-neutral-200">
               <dt className="text-sm text-neutral-500">Chips played</dt>
               <dd className="mt-1 font-medium">None</dd>
             </div>
             <div className="p-3 border-b border-neutral-200">
-              <dt className="text-sm text-neutral-500">Last week</dt>
+              <dt className="text-sm text-neutral-500">This week</dt>
               <dd className="mt-1 font-medium">
                 {featured.validatedPlan.captain.webName} ·{' '}
-                {featured.validatedPlan.realisedSquadTotalPoints} pts
+                {featuredPoints === null ? 'Pending' : `${featuredPoints} pts`}
               </dd>
             </div>
           </dl>
@@ -79,8 +81,12 @@ export default function HomePage() {
           kind={kind}
         />
         <p className="text-sm">
+          <Link href="/seasons/2026-27" className="underline underline-offset-2">
+            Open the 2026/27 season
+          </Link>
+          {' · '}
           <Link href="/seasons/2025-26" className="underline underline-offset-2">
-            Open the 2025/26 season
+            2025/26 replay
           </Link>
           {' · '}
           <Link href="/guides/2025-26-season-review" className="underline underline-offset-2">
@@ -125,7 +131,8 @@ export default function HomePage() {
         <h2 className="text-lg font-semibold">Chip timing</h2>
         <p className="text-neutral-700 leading-relaxed">
           You get eight chips in 2026/27, two of each. The first set has to be used by the Gameweek
-          19 deadline, 18:30 GMT on Friday 1 January 2027. The 2025/26 replay never played a chip.
+          19 deadline, 18:30 GMT on Friday 1 January 2027. The published 2026/27 search does not time
+          chips, and the 2025/26 replay never played one.
         </p>
         <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
           {CHIP_HUBS.map((chip) => (

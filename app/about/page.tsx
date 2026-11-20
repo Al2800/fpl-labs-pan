@@ -46,7 +46,8 @@ export default function AboutPage() {
         <ul className="list-disc pl-5 space-y-2 text-neutral-800">
           <li>
             Gameweek pages compare a template, an optimiser, and an evidence approach on the same
-            cutoff. 2025/26 is a reconstructive replay. Sample 2026/27 pages are not published.
+            cutoff. 2026/27 is the current season. Gameweeks 1 to 10 are a reconstructive replay,
+            and later weeks are frozen before the deadline. 2025/26 is a settled reconstructive replay.
           </li>
           <li>
             Chip hubs say when Triple Captain, Bench Boost, Free Hit or Wildcard is worth playing.

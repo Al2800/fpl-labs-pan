@@ -16,8 +16,10 @@ import {
   chipOneLiner,
   datasetKindOf,
   formatProjected,
+  frozenInDeadlineWindow,
   gameweekAnswer,
   gameweekHeading,
+  liveFreezeSentence,
   pointsHitPhrase,
   seasonLabel,
   simPath,
@@ -105,15 +107,16 @@ export function GameweekDecisionView({
       : `It made ${transferCount} transfer${transferCount === 1 ? '' : 's'}${
           validatedPlan.hitCost > 0 ? ` and took ${pointsHitPhrase(validatedPlan.hitCost)}` : ''
         }.`;
+  const seasonName = seasonLabel(decision.season);
   const replayFaqs =
     kind === 'historical-replay' && validatedPlan.captain.realisedPoints !== null
       ? [
           {
-            q: `Who did the replay captain in FPL Gameweek ${decision.gw} 2025/26?`,
-            a: `The 2025/26 replay captained ${validatedPlan.captain.webName}, who scored ${validatedPlan.captain.realisedPoints} points before the captain multiplier. The vice-captain was ${validatedPlan.viceCaptain.webName}.`,
+            q: `Who did the replay captain in FPL Gameweek ${decision.gw} ${seasonName}?`,
+            a: `The ${seasonName} replay captained ${validatedPlan.captain.webName}, who scored ${validatedPlan.captain.realisedPoints} points before the captain multiplier. The vice-captain was ${validatedPlan.viceCaptain.webName}.`,
           },
           {
-            q: `How many points did the 2025/26 replay score in Gameweek ${decision.gw}?`,
+            q: `How many points did the ${seasonName} replay score in Gameweek ${decision.gw}?`,
             a: `The optimiser scored ${validatedPlan.realisedSquadTotalPoints} net points${
               templatePoints !== null && templatePoints !== undefined
                 ? `, and the template scored ${templatePoints}`
@@ -121,7 +124,26 @@ export function GameweekDecisionView({
             }. ${transferSentence} No chip was played.`,
           },
         ]
-      : [];
+      : kind === 'live-freeze'
+        ? [
+            {
+              q: `Who is the FPL Gameweek ${decision.gw} ${seasonName} captain?`,
+              a: `The published plan captains ${validatedPlan.captain.webName}. The vice-captain is ${validatedPlan.viceCaptain.webName}.${
+                validatedPlan.captain.realisedPoints === null
+                  ? ' Official points are added after the gameweek is final.'
+                  : ` ${validatedPlan.captain.webName} scored ${validatedPlan.captain.realisedPoints} points before the captain multiplier.`
+              }`,
+            },
+            {
+              q: `What is the FPL Gameweek ${decision.gw} ${seasonName} team?`,
+              a: `The optimiser set a ${validatedPlan.formation}. ${transferSentence} ${
+                validatedPlan.realisedSquadTotalPoints === null
+                  ? 'Official points are added after the gameweek is final.'
+                  : `It scored ${validatedPlan.realisedSquadTotalPoints} net points.`
+              } No chip was played.`,
+            },
+          ]
+        : [];
 
   const datasetJsonLd = {
     '@context': 'https://schema.org',
@@ -195,6 +217,7 @@ export function GameweekDecisionView({
         snapshotHref={snapshotHref}
         status={decision.status}
         kind={kind}
+        deadline={decision.deadline}
       />
 
       <section>
@@ -375,10 +398,12 @@ export function GameweekDecisionView({
         </h2>
         <p className="text-neutral-800 leading-relaxed">
           {kind === 'historical-replay'
-            ? 'A reconstructive replay. Inputs were rebuilt after the season. The cutoff is first kickoff minus 90 minutes.'
+            ? 'A reconstructive replay. Inputs were rebuilt after the matches. The cutoff is first kickoff minus 90 minutes. It was not frozen before the deadline.'
             : kind === 'illustrative-sample'
               ? 'An illustrative sample of the live page format, not a live two-hour freeze.'
-              : 'A live two-hour freeze. The snapshot is not edited after the deadline.'}
+              : frozenInDeadlineWindow(decision)
+                ? 'A live freeze. The snapshot was locked about two hours before the deadline and is not edited after that.'
+                : `${liveFreezeSentence(decision)} Team news after that time is not in the plan. The weekly job can replace an early lock once, inside the two-hour window, and then the squad stays put.`}
         </p>
       </section>
     </div>

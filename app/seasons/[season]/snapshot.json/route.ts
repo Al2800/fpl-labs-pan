@@ -1,4 +1,4 @@
-import { getSeasonIndex } from '@/lib/data';
+import { getSeasonIndex, getSeasons } from '@/lib/data';
 import { snapshotNotFound, snapshotResponse } from '@/lib/snapshot';
 
 export const dynamic = 'force-static';
@@ -6,7 +6,7 @@ export const dynamic = 'force-static';
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return [{ season: '2025-26' }];
+  return getSeasons().map((season) => ({ season: season.id }));
 }
 
 export async function GET(

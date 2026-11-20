@@ -9,7 +9,7 @@ function PlayerCard({ player }: { player: PlayerSelection }) {
   const isVC = player.isViceCaptain;
   const realised =
     player.realisedPoints === null
-      ? '—'
+      ? 'Pending'
       : String(player.realisedPoints * (isCap ? player.multiplier || 2 : 1));
 
   return (

@@ -29,6 +29,8 @@ import {
 
 export const DEMO_SEASON = '2026-27';
 export const REPLAY_SEASON = '2025-26';
+export const LIVE_SEASON = '2026-27';
+export const PUBLISHED_SEASONS = [LIVE_SEASON, REPLAY_SEASON] as const;
 
 const HISTORICAL_SIMS: HistoricalSim[] = [
   simHaaland as unknown as HistoricalSim,
@@ -57,23 +59,44 @@ const CHIP_DATA_MAP: Record<ChipType, ChipScenarioData> = {
   wc: wcData as unknown as ChipScenarioData,
 };
 
-let replayCache: GameweekDecision[] | null = null;
-let replayIndexCache: SeasonIndex | null = null;
+const weekCache = new Map<string, GameweekDecision[]>();
+const indexCache = new Map<string, SeasonIndex>();
 
 function seasonDir(season: string): string {
   return join(process.cwd(), 'data', 'seasons', season);
 }
 
-function loadReplayGameweeks(): GameweekDecision[] {
-  if (replayCache) return replayCache;
-  const dir = seasonDir(REPLAY_SEASON);
-  const files = readdirSync(dir)
-    .filter((name) => /^gw-\d+\.json$/.test(name))
-    .sort();
-  replayCache = files.map((name) =>
-    JSON.parse(readFileSync(join(dir, name), 'utf8')) as GameweekDecision
+function loadSeasonGameweeks(season: string): GameweekDecision[] {
+  const cached = weekCache.get(season);
+  if (cached) return cached;
+  const dir = seasonDir(season);
+  let names: string[] = [];
+  try {
+    names = readdirSync(dir)
+      .filter((name) => /^gw-\d+\.json$/.test(name))
+      .sort();
+  } catch {
+    weekCache.set(season, []);
+    return [];
+  }
+  const weeks = names.map(
+    (name) => JSON.parse(readFileSync(join(dir, name), 'utf8')) as GameweekDecision
   );
-  return replayCache;
+  weekCache.set(season, weeks);
+  return weeks;
+}
+
+function loadSeasonIndex(season: string): SeasonIndex | null {
+  if (indexCache.has(season)) return indexCache.get(season) ?? null;
+  try {
+    const index = JSON.parse(
+      readFileSync(join(seasonDir(season), 'index.json'), 'utf8')
+    ) as SeasonIndex;
+    indexCache.set(season, index);
+    return index;
+  } catch {
+    return null;
+  }
 }
 
 export function getReplayForkNotes(): ReplayForkNotes {
@@ -81,52 +104,12 @@ export function getReplayForkNotes(): ReplayForkNotes {
 }
 
 export function getSeasonIndex(season: string): SeasonIndex | null {
-  if (season === REPLAY_SEASON) {
-    if (!replayIndexCache) {
-      replayIndexCache = JSON.parse(
-        readFileSync(join(seasonDir(REPLAY_SEASON), 'index.json'), 'utf8')
-      ) as SeasonIndex;
-    }
-    return replayIndexCache;
-  }
-  if (season === DEMO_SEASON) {
-    const completed = DEMO_GAMEWEEKS.filter(
-      (gw) => gw.validatedPlan.realisedSquadTotalPoints !== null
-    );
-    return {
-      id: DEMO_SEASON,
-      kind: 'illustrative-sample',
-      title: 'FPL 2026/27 illustrative sample',
-      summary:
-        'Three illustrative gameweeks showing the live-product page format. Plans, hashes and scores are fixtures, not a live freeze.',
-      gameweeks: DEMO_GAMEWEEKS.length,
-      optimiserPoints: completed.reduce(
-        (sum, gw) => sum + (gw.validatedPlan.realisedSquadTotalPoints || 0),
-        0
-      ),
-      templatePoints: 0,
-      evidencePoints: 0,
-      chipsPlayed: [],
-      rows: DEMO_GAMEWEEKS.map((gw) => ({
-        gw: gw.gw,
-        captain: gw.validatedPlan.captain.webName,
-        formation: gw.validatedPlan.formation,
-        projected: gw.validatedPlan.projectedSquadTotalXP,
-        points: gw.validatedPlan.realisedSquadTotalPoints,
-        templatePoints: gw.arms.find((arm) => arm.id === 'baseline')?.realisedPoints ?? null,
-        evidencePoints: gw.arms.find((arm) => arm.id === 'agent')?.realisedPoints ?? null,
-        transfers: gw.validatedPlan.transferActions.length,
-        hits: gw.validatedPlan.hitCost,
-        chip: gw.validatedPlan.chipUsed,
-        hash: gw.provenance.snapshotHash.replace(/^sha256:/, ''),
-      })),
-    };
-  }
-  return null;
+  if (season !== REPLAY_SEASON && season !== LIVE_SEASON) return null;
+  return loadSeasonIndex(season);
 }
 
 export function getSeasons(): SeasonIndex[] {
-  return [getSeasonIndex(REPLAY_SEASON)].filter(
+  return PUBLISHED_SEASONS.map((season) => getSeasonIndex(season)).filter(
     (season): season is SeasonIndex => season !== null
   );
 }
@@ -136,13 +119,12 @@ export function getDemoGameweeks(): GameweekDecision[] {
 }
 
 export function getSeasonGameweeks(season: string): GameweekDecision[] {
-  if (season === REPLAY_SEASON) return loadReplayGameweeks();
-  if (season === DEMO_SEASON) return DEMO_GAMEWEEKS;
-  return [];
+  if (season !== REPLAY_SEASON && season !== LIVE_SEASON) return [];
+  return loadSeasonGameweeks(season);
 }
 
 export function getAllGameweeks(): GameweekDecision[] {
-  return [...loadReplayGameweeks(), ...DEMO_GAMEWEEKS];
+  return PUBLISHED_SEASONS.flatMap((season) => loadSeasonGameweeks(season));
 }
 
 export function getGameweekDecision(gw: number): GameweekDecision | null {
@@ -159,7 +141,9 @@ export function getLatestDemoGameweek(): GameweekDecision {
 }
 
 export function getFeaturedGameweek(): GameweekDecision {
-  const replay = loadReplayGameweeks();
+  const live = loadSeasonGameweeks(LIVE_SEASON);
+  if (live.length > 0) return live[live.length - 1];
+  const replay = loadSeasonGameweeks(REPLAY_SEASON);
   return replay[replay.length - 1];
 }
 
@@ -235,8 +219,9 @@ export function getSimById(season: string, gw: number, scenario: string): Histor
 }
 
 export function getSimsForGameweek(season: string, gw: number): HistoricalSim[] {
-  if (season !== DEMO_SEASON) return [];
-  return HISTORICAL_SIMS.filter((s) => s.gw === gw || s.relatedGw === gw);
+  void season;
+  void gw;
+  return [];
 }
 
 export function getChipScenario(chip: ChipType, gw: number): ChipScenarioData | null {

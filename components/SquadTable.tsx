@@ -8,11 +8,11 @@ function roleLabel(player: PlayerSelection, benchOrder?: number): string {
   if (player.isCaptain) return 'Captain';
   if (player.isViceCaptain) return 'Vice-captain';
   if (typeof benchOrder === 'number') return `Sub #${benchOrder}`;
-  return '—';
+  return '';
 }
 
 function pointsFor(player: PlayerSelection): string {
-  if (player.realisedPoints === null) return '—';
+  if (player.realisedPoints === null) return 'Pending';
   const multiplier = player.isCaptain ? player.multiplier || 2 : 1;
   return String(player.realisedPoints * multiplier);
 }

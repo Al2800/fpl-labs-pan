@@ -9,16 +9,24 @@ interface TrustStripProps {
   snapshotHref: string;
   status?: string;
   kind?: DatasetKind;
+  deadline?: string;
 }
 
-export function TrustStrip({ provenance, snapshotHref, status, kind }: TrustStripProps) {
+export function TrustStrip({ provenance, snapshotHref, status, kind, deadline }: TrustStripProps) {
   const [copied, setCopied] = useState(false);
+  const hours =
+    deadline === undefined
+      ? null
+      : (new Date(deadline).getTime() - new Date(provenance.frozenAt).getTime()) / 3600000;
+  const inWindow = hours !== null && hours >= 1.75 && hours <= 2.75;
   const freezeKind =
     kind === 'historical-replay'
-      ? 'Reconstructed cutoff (kickoff − 90 min)'
+      ? 'Reconstructed cutoff (kickoff minus 90 min)'
       : kind === 'illustrative-sample'
         ? 'Illustrative sample'
-        : '2h before deadline';
+        : inWindow
+          ? '2h before deadline'
+          : 'Frozen before the deadline';
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(provenance.snapshotHash);
