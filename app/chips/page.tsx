@@ -1,20 +1,23 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { CHIP_HUB_CONTENT, CHIPS_INDEX_FAQS, type ChipIndexFaq } from '@/lib/content/chips';
+import { CHIP_RESET_CLOCK } from '@/lib/content/chip-rules';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbList, chipHubPath, faqPage } from '@/lib/present';
 
+const chipsTitle = 'FPL Chips: Eight in 2026/27, Reset 1 Jan at GW19';
+const chipsDescription =
+  'Eight FPL chips in 2026/27: Triple Captain, Bench Boost, Free Hit and Wildcard. They reset at 18:30 GMT (18:30 UTC) on 1 January 2027. Use the first set before then.';
+
 export const metadata: Metadata = {
-  title: 'FPL Chips: Eight in 2026/27, Reset at GW19',
-  description:
-    'The FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. You get eight in 2026/27. They reset at 18:30 GMT on Friday 1 January 2027.',
+  title: chipsTitle,
+  description: chipsDescription,
   alternates: {
     canonical: '/chips',
   },
   openGraph: {
-    title: 'FPL Chips: Eight in 2026/27, Reset at GW19',
-    description:
-      'The FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. You get eight in 2026/27. They reset at 18:30 GMT on Friday 1 January 2027.',
+    title: chipsTitle,
+    description: chipsDescription,
     url: '/chips',
   },
 };
@@ -68,6 +71,9 @@ function FaqAnswer({ faq }: { faq: ChipIndexFaq }) {
 }
 
 export default function ChipsIndexPage() {
+  const resetFaq = CHIPS_INDEX_FAQS.find((faq) => faq.q === 'When do FPL chips reset?');
+  const otherFaqs = CHIPS_INDEX_FAQS.filter((faq) => faq.q !== 'When do FPL chips reset?');
+
   return (
     <div className="space-y-8">
       <JsonLd
@@ -84,13 +90,25 @@ export default function ChipsIndexPage() {
           What are FPL chips, and when do they reset?
         </h1>
         <p className="text-neutral-800 leading-relaxed max-w-3xl">
-          FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard, and they reset at the Gameweek 19
-          deadline. In 2026/27 you get two of each, eight in total, and only one chip in a gameweek. That deadline is
-          18:30 GMT on Friday 1 January 2027. The first set does not carry over. A new set is there from Gameweek 20.
+          The FPL chips are Triple Captain, Bench Boost, Free Hit and Wildcard. You get two of each in 2026/27,
+          eight in total, and only one chip in a gameweek. They reset at {CHIP_RESET_CLOCK}, the Gameweek 19
+          deadline. Use the first set before then: Free Hit in a blank, Wildcard when free transfers will not fix
+          the squad, Bench Boost when your substitutes start, and Triple Captain when your captain has two matches.
           In the 2025/26 replay, all four were left unused, including Gameweek 34, when the optimiser took an 8-point
           hit in a blank and did not play Free Hit or Wildcard.
         </p>
       </header>
+      {resetFaq ? (
+        <section id="when-do-fpl-chips-reset" className="space-y-2 max-w-3xl">
+          <h2 className="text-lg font-semibold">{resetFaq.q}</h2>
+          <FaqAnswer faq={resetFaq} />
+          <p className="text-sm">
+            <Link href="/guides/when-to-play-fpl-chips" className="underline underline-offset-2">
+              When to play them in 2026/27
+            </Link>
+          </p>
+        </section>
+      ) : null}
       <ul className="space-y-4">
         {CHIP_HUB_CONTENT.map((chip) => (
           <li key={chip.id} className="border border-neutral-200 bg-white p-5 space-y-2">
@@ -104,7 +122,7 @@ export default function ChipsIndexPage() {
           </li>
         ))}
       </ul>
-      {CHIPS_INDEX_FAQS.map((faq) => (
+      {otherFaqs.map((faq) => (
         <section key={faq.q} className="space-y-2 max-w-3xl">
           <h2 className="text-lg font-semibold">{faq.q}</h2>
           <FaqAnswer faq={faq} />

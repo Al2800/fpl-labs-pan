@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { CHIP_RESET_CLOCK, CHIP_RESET_PATH } from '@/lib/content/chip-rules';
 import { CHIP_HUB_CONTENT, getChipHub } from '@/lib/content/chips';
 import { DemoNoticeBanner } from '@/components/DemoNoticeBanner';
 import { ChipReplayCards, blankWeeksFaqAnswer } from '@/components/ChipReplayCards';
@@ -79,6 +80,12 @@ export default async function ChipHubPage({ params }: PageProps) {
           {hub.h1 ?? `When to play ${hub.name}`}
         </h1>
         <p className="text-neutral-800 leading-relaxed">{hub.oneLiner}</p>
+        <p className="text-neutral-800 leading-relaxed">
+          The first {hub.name} is lost if you have not used it by {CHIP_RESET_CLOCK}.{' '}
+          <Link href={CHIP_RESET_PATH} className="underline underline-offset-2">
+            When do FPL chips reset?
+          </Link>
+        </p>
         <DemoNoticeBanner placement="below-lead" />
       </header>
       <section className="space-y-2">
