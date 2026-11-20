@@ -1,11 +1,20 @@
-import { CHIP_HALF_DEADLINE, CHIP_RESET_ANSWER, CHIP_RESET_CLOCK } from '@/lib/content/chip-rules';
+import {
+  CHIP_HALF_DEADLINE,
+  CHIP_RESET_ANSWER,
+  CHIP_RESET_CLOCK,
+  CHIP_RESET_PATH,
+} from '@/lib/content/chip-rules';
 
 export interface GuidePage {
   slug: string;
   title: string;
   description: string;
   answer: string;
-  sections: Array<{ heading: string; body: string[] }>;
+  sections: Array<{
+    heading: string;
+    body: string[];
+    table?: { caption: string; headers: string[]; rows: string[][] };
+  }>;
   faqs: Array<{ q: string; a: string; links?: Array<{ href: string; label: string }> }>;
   related: Array<{ href: string; label: string }>;
 }
@@ -121,6 +130,142 @@ export const GUIDES: GuidePage[] = [
       { href: '/llms.txt', label: 'llms.txt' },
       { href: '/seasons/2025-26/snapshot.json', label: '2025/26 season JSON' },
       { href: '/glossary', label: 'Glossary' },
+    ],
+  },
+  {
+    slug: 'use-fpl-chips-before-they-expire',
+    title: 'Do FPL chips reset in January? Plan Gameweeks 16 to 19',
+    description:
+      'Yes. The first Wildcard, Free Hit, Bench Boost and Triple Captain expire at 18:30 GMT (18:30 UTC) on Friday 1 January 2027. Plan Gameweeks 16 to 19 before they go.',
+    answer:
+      'Yes. The first set of FPL chips expires at ' +
+      CHIP_HALF_DEADLINE +
+      '. Unused Wildcard, Free Hit, Bench Boost and Triple Captain chips do not carry over. A second set is available from Gameweek 20 to Gameweek 38. Gameweeks 16 to 19 are the last weeks you can play the first set.',
+    sections: [
+      {
+        heading: 'Deadlines for Gameweeks 16 to 19',
+        body: [
+          'These are the last four deadlines of the first chip set. Anything still unused expires at the Gameweek 19 deadline, the last row. Each time is the same instant in GMT and UTC. The UK is on Greenwich Mean Time then, and GMT is UTC+0.',
+          'At the time of writing (20 November 2026) the fixture list has no blank and no double gameweek. Every gameweek has 10 fixtures. That can change if fixtures are moved.',
+        ],
+        table: {
+          caption: 'Gameweek 16 to 19 deadlines, in GMT and UTC',
+          headers: ['Gameweek', 'Deadline'],
+          rows: [
+            ['16', '11:00 GMT (11:00 UTC) on Saturday 19 December 2026'],
+            ['17', '11:00 GMT (11:00 UTC) on Saturday 26 December 2026'],
+            ['18', '18:00 GMT (18:00 UTC) on Tuesday 29 December 2026'],
+            ['19', CHIP_RESET_CLOCK],
+          ],
+        },
+      },
+      {
+        heading: 'The first Wildcard',
+        body: [
+          'The first Wildcard runs from Gameweek 2 to Gameweek 19. It is unlimited transfers for one gameweek, and the new squad stays. You cannot cancel it once you have confirmed it. Saved free transfers are kept. If you had two, you still have two in the next gameweek.',
+          'Play it in the earliest of these four weeks where free transfers will not fix the squad. A Gameweek 16 Wildcard leaves the new 15 in place for Gameweek 17, Gameweek 18 and Gameweek 19 as well. A Gameweek 19 Wildcard still counts, but that squad only has Gameweek 19 left in the first half. The second Wildcard runs from Gameweek 20 to Gameweek 38 either way. If the first is still unused at ' +
+            CHIP_RESET_CLOCK +
+            ', it is lost.',
+        ],
+      },
+      {
+        heading: 'The first Free Hit',
+        body: [
+          'The first Free Hit runs from Gameweek 2 to Gameweek 19. It is a squad for one gameweek, then your previous 15 come back. You cannot cancel it once it is confirmed. Saved free transfers are kept.',
+          'A blank is the usual reason to play it, when postponed matches leave you short of starters. At the time of writing, Gameweeks 16 to 19 are not blanks. If a fixture move creates one, that is the week to look at. The chip still expires at ' +
+            CHIP_HALF_DEADLINE +
+            ' if you do not play it.',
+          'Free Hit cannot be played in consecutive gameweeks. A Free Hit in Gameweek 19 cannot be active again until Gameweek 21. The second Free Hit is in the set that starts at Gameweek 20, but you cannot play it in Gameweek 20 if the first one was active in Gameweek 19.',
+        ],
+      },
+      {
+        heading: 'The first Bench Boost',
+        body: [
+          'The first Bench Boost runs from Gameweek 1 to Gameweek 19. It adds the points from your four substitutes for that gameweek. You can cancel it before the deadline. Automatic substitutions do not apply while it is active, because all 15 players count.',
+          'A double is the usual week, because the bench can play twice. At the time of writing there is no double in Gameweeks 16 to 19, so each substitute has one fixture, the same as every other gameweek on the current list. Play it in one of these four weeks only if those four are expected to start. If they are not, the first Bench Boost still expires at ' +
+            CHIP_RESET_CLOCK +
+            '. The second Bench Boost runs from Gameweek 20 to Gameweek 38.',
+        ],
+      },
+      {
+        heading: 'The first Triple Captain',
+        body: [
+          'The first Triple Captain runs from Gameweek 1 to Gameweek 19. For that gameweek your captain’s points are tripled instead of doubled. You can cancel it before the deadline. If your captain plays any minutes, the chip is spent. The vice-captain inherits the triple only if your captain records zero minutes across the gameweek.',
+          'There is no double on the fixture list at the time of writing, so the chip triples one match. The Triple Captain resets in January. The second one is available from Gameweek 20 to Gameweek 38, after ' +
+            CHIP_RESET_CLOCK +
+            '. The first one does not carry over, even if it is still unused after Christmas.',
+        ],
+      },
+      {
+        heading: 'Fitting the four chips into four weeks',
+        body: [
+          'You can play only one chip in a gameweek. If all four first-half chips are still unused at the Gameweek 16 deadline, these four weeks give you a week for each. If you have already used some, play the ones you have left. This page does not know your chip history.',
+          'If the 20 November 2026 fixture list has not changed, share the four weeks like this. Use Wildcard in the earliest week where free transfers will not fix the squad, so the new side plays more than Gameweek 19. Use Bench Boost in a later week, once the four substitutes start. Use Triple Captain in the week you trust your captain for a single match, because there is no double to wait for. Use Free Hit in a week you are short of starters, and keep it off Gameweek 19 if you want the next one in Gameweek 21. A Free Hit in Gameweek 19 cannot be active again until then.',
+          'The deadlines sit close together. Gameweek 16 closes at 11:00 GMT (11:00 UTC) on Saturday 19 December 2026. Gameweek 17 closes at 11:00 GMT (11:00 UTC) on Saturday 26 December 2026, Boxing Day. Gameweek 18 closes at 18:00 GMT (18:00 UTC) on Tuesday 29 December 2026. Gameweek 19 closes at ' +
+            CHIP_RESET_CLOCK +
+            '. After that, the first set is gone.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'Do FPL chips reset in January?',
+        a:
+          'Yes. The first Wildcard, Free Hit, Bench Boost and Triple Captain expire at ' +
+          CHIP_RESET_CLOCK +
+          ', the Gameweek 19 deadline. They do not carry over. A second set is available from Gameweek 20 to Gameweek 38.',
+        links: [
+          { href: '/chips/wildcard', label: 'Wildcard' },
+          { href: '/chips/free-hit', label: 'Free Hit' },
+          { href: '/chips/bench-boost', label: 'Bench Boost' },
+          { href: '/chips/triple-captain', label: 'Triple Captain' },
+        ],
+      },
+      {
+        q: 'What is the Free Hit deadline in FPL?',
+        a:
+          'The first Free Hit deadline is ' +
+          CHIP_RESET_CLOCK +
+          ', the Gameweek 19 deadline. You can play that Free Hit from Gameweek 2 to Gameweek 19. Free Hit cannot be played in consecutive gameweeks, so a Free Hit in Gameweek 19 cannot be active again until Gameweek 21.',
+        links: [{ href: '/chips/free-hit', label: 'Free Hit' }],
+      },
+      {
+        q: 'Does your Triple Captain reset in January?',
+        a:
+          'Yes. Your first Triple Captain expires at ' +
+          CHIP_RESET_CLOCK +
+          ' if you have not used it. A second Triple Captain is available from Gameweek 20 to Gameweek 38. The first one does not carry over.',
+        links: [{ href: '/chips/triple-captain', label: 'Triple Captain' }],
+      },
+      {
+        q: 'Do you get another Triple Captain after Christmas?',
+        a:
+          'Yes. You get another Triple Captain from Gameweek 20, after ' +
+          CHIP_RESET_CLOCK +
+          '. The Christmas gameweek is Gameweek 17, with a deadline of 11:00 GMT (11:00 UTC) on Saturday 26 December 2026. The new Triple Captain is not available in Gameweek 17 or Gameweek 18.',
+        links: [{ href: '/chips/triple-captain', label: 'Triple Captain' }],
+      },
+      {
+        q: 'Do all FPL chips reset after Christmas?',
+        a:
+          'Yes. Wildcard, Free Hit, Bench Boost and Triple Captain all reset together after Christmas, at ' +
+          CHIP_RESET_CLOCK +
+          '. Unused first-half chips do not carry over. Each chip is available again from Gameweek 20 to Gameweek 38.',
+        links: [
+          { href: '/chips/wildcard', label: 'Wildcard' },
+          { href: '/chips/free-hit', label: 'Free Hit' },
+          { href: '/chips/bench-boost', label: 'Bench Boost' },
+          { href: '/chips/triple-captain', label: 'Triple Captain' },
+        ],
+      },
+    ],
+    related: [
+      { href: CHIP_RESET_PATH, label: 'When do FPL chips reset?' },
+      { href: '/guides/when-to-play-fpl-chips', label: 'When to play FPL chips' },
+      { href: '/chips/wildcard', label: 'Wildcard' },
+      { href: '/chips/free-hit', label: 'Free Hit' },
+      { href: '/chips/bench-boost', label: 'Bench Boost' },
+      { href: '/chips/triple-captain', label: 'Triple Captain' },
     ],
   },
   {

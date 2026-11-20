@@ -125,6 +125,38 @@ export default async function GuidePage({ params }: PageProps) {
               {paragraph}
             </p>
           ))}
+          {section.table ? (
+            <div className="overflow-x-auto border border-neutral-200 bg-white">
+              <table className="w-full text-sm text-left">
+                <caption className="caption-top px-3 py-2 text-left text-neutral-600">
+                  {section.table.caption}
+                </caption>
+                <thead className="bg-neutral-100 text-neutral-600">
+                  <tr>
+                    {section.table.headers.map((header) => (
+                      <th key={header} scope="col" className="py-2 px-3 font-medium">
+                        {header}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {section.table.rows.map((row) => (
+                    <tr key={row[0]} className="border-t border-neutral-200">
+                      {row.map((cell, index) => (
+                        <td
+                          key={`${row[0]}-${index}`}
+                          className="py-2 px-3 text-neutral-800 align-top"
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : null}
         </section>
       ))}
       {guide.faqs
