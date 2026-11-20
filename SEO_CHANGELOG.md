@@ -1,5 +1,14 @@
 # SEO Changelog
 
+## 2026-11-20
+- Date merged: not merged
+- PR: #19 https://github.com/Al2800/fpl-labs-pan/pull/19
+- Page URL(s) changed: https://www.fplreplay.com/chips, https://www.fplreplay.com/chips/free-hit, https://www.fplreplay.com/chips/wildcard, https://www.fplreplay.com/chips/triple-captain, https://www.fplreplay.com/chips/bench-boost, https://www.fplreplay.com/guides/when-to-play-fpl-chips. The shared Gameweek 19 deadline string also updates the chip definitions on https://www.fplreplay.com/glossary.
+- Search query or queries that prompted it: "when do fpl chips reset", "when do chips reset fpl", "when to play free hit fpl 2026"
+- GSC numbers at the time: 23 Oct to 19 Nov 2026. 82% of clicks and 66% of impressions came from outside the UK. "when to play free hit fpl 2026": 3.45% CTR. "when do fpl chips reset": 0 clicks / 145 impressions / position 7.8. "when do chips reset fpl": 0 clicks / 69 impressions / position 9.1. /chips/free-hit: 7 clicks / 5,700 impressions / position 9.3. /chips/wildcard: 2 / 2,668 / 10.6. /chips/triple-captain: 5 / 3,091 / 6.8. /chips/bench-boost: 6 / 2,602 / 7.8. /chips: 0 / 1,426 / 8.5. /guides/when-to-play-fpl-chips: 10 / 1,100 / 7.5.
+- What changed: Added a "When do FPL chips reset?" section on the chips hub and the when-to-play guide. The first sentence is the deadline checked on 20 Nov 2026: 18:30 GMT (18:30 UTC) on Friday 1 January 2027, Gameweek 19 in the FPL API (deadline_time 2027-01-01T18:30:00Z). The first chip set stops at Gameweek 19 and the second starts at Gameweek 20. FAQPage JSON-LD uses that same answer. Each chip page has a one-line reset note linking to the hub section. Leads keep the definition, then say when to use the chip in 2026/27. Titles and meta descriptions keep the direct answer and add the 2026/27 deadline. Deadlines on these pages show UTC next to GMT. The 20 July 2026 Premier League news article still says 13:30 GMT on Saturday 2 January. That clock time is not used.
+Result (check ~4 weeks after):
+
 ## 2026-11-18
 - Date merged: not merged
 - PR: #18 https://github.com/Al2800/fpl-labs-pan/pull/18

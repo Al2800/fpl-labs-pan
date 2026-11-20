@@ -127,12 +127,14 @@ export default async function GuidePage({ params }: PageProps) {
           ))}
         </section>
       ))}
-      {guide.faqs.map((faq) => (
-        <section key={faq.q} className="space-y-2">
-          <h2 className="text-lg font-semibold">{faq.q}</h2>
-          <FaqAnswer faq={faq} />
-        </section>
-      ))}
+      {guide.faqs
+        .filter((faq) => !guide.sections.some((section) => section.heading === faq.q))
+        .map((faq) => (
+          <section key={faq.q} className="space-y-2">
+            <h2 className="text-lg font-semibold">{faq.q}</h2>
+            <FaqAnswer faq={faq} />
+          </section>
+        ))}
       <p className="text-sm flex flex-wrap gap-x-4 gap-y-2">
         {guide.related.map((item) => (
           <Link key={item.href} href={item.href} className="underline underline-offset-2">
