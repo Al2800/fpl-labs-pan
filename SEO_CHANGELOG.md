@@ -1,5 +1,14 @@
 # SEO Changelog
 
+## 2026-11-23
+- Date merged: not merged
+- PR: pending
+- Page URL(s) changed: https://www.fplreplay.com/guides/fpl-deadlines-2026-27 plus the guides index, sitemap and llms.txt
+- Search query or queries that prompted it: "free hit deadline fpl", "fpl chips deadline", "fpl chip deadlines", and pre-deadline searches for the GW12 deadline
+- GSC numbers at the time: 24 Oct to 20 Nov 2026, sc-domain:fplreplay.com. Site: 43 clicks, 17,043 impressions, 0.25% CTR, average position 8.8. "free hit deadline fpl": 1 click / 51 impressions / 2.0% CTR / position 11.8 (ranking /guides/when-to-play-fpl-chips). "fpl chips deadline": 0 / 3 / position 8.3. "fpl chip deadlines": 0 / 2 impressions across /chips and the when-to-play guide. No page on the site targets the general deadline query yet.
+- What changed: Added /guides/fpl-deadlines-2026-27. The first sentence is the next deadline, checked on 23 November 2026: Gameweek 12, Friday 27 November 2026, 18:30 GMT (18:30 UTC), from deadline_time 2026-11-27T18:30:00Z. A static snapshot of all 38 event deadlines (id, deadline_time) is in lib/content/deadlines-2026-27.ts and is not fetched again at build time. The table lists every gameweek with the UK date, GMT or BST, and UTC. Deadlines before 23 November 2026 are marked passed. Two sentences say the first chip set expires at the Gameweek 19 deadline, 18:30 GMT (18:30 UTC) on Friday 1 January 2027, and the second set runs from Gameweek 20 to Gameweek 38, with a link to /chips#when-do-fpl-chips-reset. The deadline note says it is 90 minutes before the first kickoff, which matched every gameweek in the API that day. The fixtures list that day had 380 matches, none unscheduled, and Gameweeks 12 to 15 each had 10 fixtures, so no blank or double. FAQPage, Article and WebPage JSON-LD use those answers. The page is on the guides index, in the sitemap and in llms.txt. Gameweek 12 has no published gameweek route, so the page links to the 2026/27 season hub only.
+Result (check ~4 weeks after):
+
 ## 2026-11-20
 - Date merged: not merged
 - PR: #19 https://github.com/Al2800/fpl-labs-pan/pull/19

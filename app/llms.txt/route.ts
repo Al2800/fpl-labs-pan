@@ -1,5 +1,6 @@
 import { getSeasonGameweeks, getSeasons } from '@/lib/data';
 import { GUIDES } from '@/lib/content/guides';
+import { DEADLINES_GUIDE_PATH, DEADLINES_GUIDE_TITLE } from '@/lib/content/deadlines-2026-27';
 import { CHIP_HUB_CONTENT } from '@/lib/content/chips';
 import { GLOSSARY } from '@/lib/content/glossary';
 import { getSiteUrl } from '@/lib/site';
@@ -49,6 +50,7 @@ export async function GET() {
     '',
     '## Guides',
     '',
+    `- ${base}${DEADLINES_GUIDE_PATH}: ${DEADLINES_GUIDE_TITLE}`,
     ...GUIDES.map((guide) => `- ${base}/guides/${guide.slug}: ${guide.title}`),
     '',
     '## Chip hubs',
