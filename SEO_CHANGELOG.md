@@ -2,7 +2,7 @@
 
 ## 2026-11-23
 - Date merged: not merged
-- PR: pending
+- PR: #21 https://github.com/Al2800/fpl-labs-pan/pull/21
 - Page URL(s) changed: https://www.fplreplay.com/guides/fpl-deadlines-2026-27 plus the guides index, sitemap and llms.txt
 - Search query or queries that prompted it: "free hit deadline fpl", "fpl chips deadline", "fpl chip deadlines", and pre-deadline searches for the GW12 deadline
 - GSC numbers at the time: 24 Oct to 20 Nov 2026, sc-domain:fplreplay.com. Site: 43 clicks, 17,043 impressions, 0.25% CTR, average position 8.8. "free hit deadline fpl": 1 click / 51 impressions / 2.0% CTR / position 11.8 (ranking /guides/when-to-play-fpl-chips). "fpl chips deadline": 0 / 3 / position 8.3. "fpl chip deadlines": 0 / 2 impressions across /chips and the when-to-play guide. No page on the site targets the general deadline query yet.
