@@ -3,6 +3,7 @@ import { getSeasonGameweeks } from '@/lib/data';
 import { CHIP_HUBS } from '@/lib/present';
 import { getSiteUrl } from '@/lib/site';
 import { GUIDES } from '@/lib/content/guides';
+import { DEADLINES_GUIDE_PATH } from '@/lib/content/deadlines-2026-27';
 import { CHIP_CALCULATOR_PATH } from '@/lib/chip-calculator';
 import { LIVE_DOWNLOAD_PATH, REPLAY_DOWNLOAD_PATH } from '@/lib/replay-2025';
 
@@ -80,6 +81,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     });
   }
+
+  routes.push({
+    url: `${baseUrl}${DEADLINES_GUIDE_PATH}`,
+    lastModified: new Date('2026-11-23T00:00:00.000Z'),
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  });
 
   for (const gw of liveWeeks) {
     routes.push({

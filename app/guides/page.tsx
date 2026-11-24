@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { GUIDES } from '@/lib/content/guides';
+import {
+  DEADLINES_GUIDE_PATH,
+  DEADLINES_GUIDE_TITLE,
+  DEADLINES_META_DESCRIPTION,
+} from '@/lib/content/deadlines-2026-27';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbList } from '@/lib/present';
 
@@ -36,6 +41,12 @@ export default function GuidesIndexPage() {
         </p>
       </header>
       <ul className="divide-y divide-neutral-200 border border-neutral-200 bg-white">
+        <li className="px-4 py-4 space-y-1">
+          <Link href={DEADLINES_GUIDE_PATH} className="font-medium underline underline-offset-2">
+            {DEADLINES_GUIDE_TITLE}
+          </Link>
+          <p className="text-sm text-neutral-600">{DEADLINES_META_DESCRIPTION}</p>
+        </li>
         {GUIDES.map((guide) => (
           <li key={guide.slug} className="px-4 py-4 space-y-1">
             <Link
