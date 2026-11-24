@@ -8,6 +8,7 @@ import { LIVE_DOWNLOAD_PATH, REPLAY_DOWNLOAD_PATH } from '@/lib/replay-2025';
 
 const CONTENT_UPDATED = new Date('2026-10-06T00:00:00.000Z');
 const SEASON_2026_UPDATED = new Date('2026-11-18T00:00:00.000Z');
+const CHIP_EXPIRY_GUIDE_UPDATED = new Date('2026-11-20T00:00:00.000Z');
 const GUIDE_UPDATED = new Date('2026-09-09T00:00:00.000Z');
 const SEASON_REVIEW_UPDATED = new Date('2026-09-24T00:00:00.000Z');
 
@@ -47,7 +48,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.8,
     },
-    { url: `${baseUrl}/guides`, lastModified: CONTENT_UPDATED, changeFrequency: 'weekly', priority: 0.8 },
+    {
+      url: `${baseUrl}/guides`,
+      lastModified: CHIP_EXPIRY_GUIDE_UPDATED,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
     { url: `${baseUrl}/glossary`, lastModified: CONTENT_UPDATED, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/sims`, lastModified: CONTENT_UPDATED, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${baseUrl}/methods`, lastModified: SEASON_2026_UPDATED, changeFrequency: 'monthly', priority: 0.6 },
@@ -66,7 +72,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const guide of GUIDES) {
     routes.push({
       url: `${baseUrl}/guides/${guide.slug}`,
-      lastModified: UNCHANGED_GUIDE_DATES[guide.slug] ?? CONTENT_UPDATED,
+      lastModified:
+        guide.slug === 'use-fpl-chips-before-they-expire'
+          ? CHIP_EXPIRY_GUIDE_UPDATED
+          : (UNCHANGED_GUIDE_DATES[guide.slug] ?? CONTENT_UPDATED),
       changeFrequency: 'monthly',
       priority: 0.7,
     });
