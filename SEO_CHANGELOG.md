@@ -2,7 +2,7 @@
 
 ## 2026-11-26
 - Date merged: not merged
-- PR: pending
+- PR: #22 https://github.com/Al2800/fpl-labs-pan/pull/22
 - Page URL(s) changed: https://www.fplreplay.com/chips, https://www.fplreplay.com/chips/free-hit, https://www.fplreplay.com/chips/triple-captain, https://www.fplreplay.com/chips/bench-boost, https://www.fplreplay.com/chips/wildcard, https://www.fplreplay.com/guides, https://www.fplreplay.com/guides/use-fpl-chips-before-they-expire, https://www.fplreplay.com/guides/fpl-deadlines-2026-27. Sitemap lastmod on those URLs only.
 - Search query or queries that prompted it: "fpl chips reset", plus "do fpl chips reset in january" and "fpl chip reset". On 26 Nov 2026, GSC URL Inspection said "Discovered - currently not indexed" for /guides/use-fpl-chips-before-they-expire, /guides/fpl-deadlines-2026-27 and /seasons/2026-27. All three return HTTP 200 and are in the sitemap.
 - GSC numbers at the time: 7 days, 18 to 24 Nov 2026. /chips: 1 click / 1,103 impressions / position 9.1. /chips/free-hit: 0 / 1,563 / 9.8. /chips/triple-captain: 2 / 1,053 / 5.6. /chips/bench-boost: 0 / 716 / 6.7. /chips/wildcard: 1 / 553 / 10.2. Site, 28 Oct to 24 Nov 2026: 46 clicks / 17,921 impressions / position 8.7. "fpl chips reset": 61 impressions / position 8.3 (28 days). "do fpl chips reset in january": 30 impressions. "fpl chip reset": 48 impressions.
