@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/JsonLd';
-import { CHIP_RESET_CLOCK, CHIP_RESET_PATH } from '@/lib/content/chip-rules';
+import { CHIP_EXPIRY_PLAN_PATH, CHIP_RESET_CLOCK, CHIP_RESET_PATH } from '@/lib/content/chip-rules';
 import {
   DEADLINE_OFFSET_MINUTES,
   DEADLINE_ROWS,
@@ -174,6 +174,13 @@ export default function FplDeadlinesPage() {
       <section className="space-y-2">
         <h2 className="text-lg font-semibold">When the first chips expire</h2>
         <p className="text-neutral-800 leading-relaxed">{chipAnswer}</p>
+        <p className="text-neutral-800 leading-relaxed">
+          Gameweeks 16 to 19 are the last four weeks for that first set. The{' '}
+          <Link href={CHIP_EXPIRY_PLAN_PATH} className="underline underline-offset-2">
+            Gameweek 16 to 19 plan for chips that expire
+          </Link>{' '}
+          goes through Wildcard, Free Hit, Bench Boost and Triple Captain for those weeks.
+        </p>
         <p className="text-sm">
           <Link href={CHIP_RESET_PATH} className="underline underline-offset-2">
             When do FPL chips reset?
@@ -212,6 +219,9 @@ export default function FplDeadlinesPage() {
       <p className="text-sm flex flex-wrap gap-x-4 gap-y-2">
         <Link href="/seasons/2026-27" className="underline underline-offset-2">
           2026/27 season
+        </Link>
+        <Link href={CHIP_EXPIRY_PLAN_PATH} className="underline underline-offset-2">
+          Gameweek 16 to 19 plan for chips that expire
         </Link>
         <Link href={CHIP_RESET_PATH} className="underline underline-offset-2">
           When do FPL chips reset?

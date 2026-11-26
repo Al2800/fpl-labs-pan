@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { CHIP_RESET_CLOCK, CHIP_RESET_PATH } from '@/lib/content/chip-rules';
 import { CHIP_HUB_CONTENT, getChipHub } from '@/lib/content/chips';
+import { ChipExpiryLinks } from '@/components/ChipExpiryLinks';
 import { DemoNoticeBanner } from '@/components/DemoNoticeBanner';
 import { ChipReplayCards, blankWeeksFaqAnswer } from '@/components/ChipReplayCards';
 import { JsonLd } from '@/components/JsonLd';
@@ -88,6 +89,7 @@ export default async function ChipHubPage({ params }: PageProps) {
         </p>
         <DemoNoticeBanner placement="below-lead" />
       </header>
+      <ChipExpiryLinks page={hub.id} />
       <section className="space-y-2">
         <h2 className="text-lg font-semibold">How {hub.name} works</h2>
         <p className="text-neutral-800 leading-relaxed">{hub.howItWorks}</p>

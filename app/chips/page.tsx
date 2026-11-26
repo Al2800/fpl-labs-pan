@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { CHIP_HUB_CONTENT, CHIPS_INDEX_FAQS, type ChipIndexFaq } from '@/lib/content/chips';
 import { CHIP_RESET_CLOCK } from '@/lib/content/chip-rules';
+import { ChipExpiryLinks } from '@/components/ChipExpiryLinks';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbList, chipHubPath, faqPage } from '@/lib/present';
 
@@ -98,6 +99,7 @@ export default function ChipsIndexPage() {
           hit in a blank and did not play Free Hit or Wildcard.
         </p>
       </header>
+      <ChipExpiryLinks page="index" />
       {resetFaq ? (
         <section id="when-do-fpl-chips-reset" className="space-y-2 max-w-3xl">
           <h2 className="text-lg font-semibold">{resetFaq.q}</h2>
@@ -135,6 +137,10 @@ export default function ChipsIndexPage() {
         {' · '}
         <Link href="/guides/gw34-blank-and-hits" className="underline underline-offset-2">
           Gameweek 34 hit
+        </Link>
+        {' · '}
+        <Link href="/seasons/2026-27" className="underline underline-offset-2">
+          2026/27 season
         </Link>
         {' · '}
         <Link href="/seasons/2025-26/download" className="underline underline-offset-2">

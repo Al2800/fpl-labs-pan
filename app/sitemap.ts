@@ -9,7 +9,7 @@ import { LIVE_DOWNLOAD_PATH, REPLAY_DOWNLOAD_PATH } from '@/lib/replay-2025';
 
 const CONTENT_UPDATED = new Date('2026-10-06T00:00:00.000Z');
 const SEASON_2026_UPDATED = new Date('2026-11-18T00:00:00.000Z');
-const CHIP_EXPIRY_GUIDE_UPDATED = new Date('2026-11-20T00:00:00.000Z');
+const INTERNAL_LINKS_UPDATED = new Date('2026-11-26T00:00:00.000Z');
 const GUIDE_UPDATED = new Date('2026-09-09T00:00:00.000Z');
 const SEASON_REVIEW_UPDATED = new Date('2026-09-24T00:00:00.000Z');
 
@@ -42,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     { url: `${baseUrl}/decisions`, lastModified: CONTENT_UPDATED, changeFrequency: 'weekly', priority: 0.6 },
-    { url: `${baseUrl}/chips`, lastModified: CONTENT_UPDATED, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${baseUrl}/chips`, lastModified: INTERNAL_LINKS_UPDATED, changeFrequency: 'weekly', priority: 0.85 },
     {
       url: `${baseUrl}${CHIP_CALCULATOR_PATH}`,
       lastModified: CONTENT_UPDATED,
@@ -51,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/guides`,
-      lastModified: CHIP_EXPIRY_GUIDE_UPDATED,
+      lastModified: INTERNAL_LINKS_UPDATED,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
@@ -64,7 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const hub of CHIP_HUBS) {
     routes.push({
       url: `${baseUrl}/chips/${hub.slug}`,
-      lastModified: CONTENT_UPDATED,
+      lastModified: INTERNAL_LINKS_UPDATED,
       changeFrequency: 'weekly',
       priority: 0.8,
     });
@@ -75,7 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/guides/${guide.slug}`,
       lastModified:
         guide.slug === 'use-fpl-chips-before-they-expire'
-          ? CHIP_EXPIRY_GUIDE_UPDATED
+          ? INTERNAL_LINKS_UPDATED
           : (UNCHANGED_GUIDE_DATES[guide.slug] ?? CONTENT_UPDATED),
       changeFrequency: 'monthly',
       priority: 0.7,
@@ -84,7 +84,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   routes.push({
     url: `${baseUrl}${DEADLINES_GUIDE_PATH}`,
-    lastModified: new Date('2026-11-23T00:00:00.000Z'),
+    lastModified: INTERNAL_LINKS_UPDATED,
     changeFrequency: 'weekly',
     priority: 0.7,
   });
