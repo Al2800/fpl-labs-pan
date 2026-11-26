@@ -5,14 +5,14 @@ import { getGuide, GUIDES, type GuidePage as Guide } from '@/lib/content/guides'
 import { JsonLd } from '@/components/JsonLd';
 import { absoluteUrl, breadcrumbList, faqPage } from '@/lib/present';
 
-function FaqAnswer({ faq }: { faq: Guide['faqs'][number] }) {
-  const links = [...(faq.links ?? [])].sort((a, b) => b.label.length - a.label.length);
+function linkify(text: string, source: Array<{ href: string; label: string }> | undefined) {
+  const links = [...(source ?? [])].sort((a, b) => b.label.length - a.label.length);
   if (links.length === 0) {
-    return <p className="text-neutral-800 leading-relaxed">{faq.a}</p>;
+    return [text];
   }
 
   const parts: Array<string | { href: string; label: string }> = [];
-  let rest = faq.a;
+  let rest = text;
 
   while (rest.length > 0) {
     let best: { index: number; link: (typeof links)[number] } | null = null;
@@ -38,6 +38,17 @@ function FaqAnswer({ faq }: { faq: Guide['faqs'][number] }) {
     rest = rest.slice(best.index + best.link.label.length);
   }
 
+  return parts;
+}
+
+function LinkedParagraph({
+  text,
+  links,
+}: {
+  text: string;
+  links?: Array<{ href: string; label: string }>;
+}) {
+  const parts = linkify(text, links);
   return (
     <p className="text-neutral-800 leading-relaxed">
       {parts.map((part, index) =>
@@ -51,6 +62,10 @@ function FaqAnswer({ faq }: { faq: Guide['faqs'][number] }) {
       )}
     </p>
   );
+}
+
+function FaqAnswer({ faq }: { faq: Guide['faqs'][number] }) {
+  return <LinkedParagraph text={faq.a} links={faq.links} />;
 }
 
 interface PageProps {
@@ -121,9 +136,7 @@ export default async function GuidePage({ params }: PageProps) {
         <section key={section.heading} className="space-y-2">
           <h2 className="text-lg font-semibold">{section.heading}</h2>
           {section.body.map((paragraph) => (
-            <p key={paragraph} className="text-neutral-800 leading-relaxed">
-              {paragraph}
-            </p>
+            <LinkedParagraph key={paragraph} text={paragraph} links={section.links} />
           ))}
           {section.table ? (
             <div className="overflow-x-auto border border-neutral-200 bg-white">

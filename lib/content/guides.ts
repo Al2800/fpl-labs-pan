@@ -4,6 +4,7 @@ import {
   CHIP_RESET_CLOCK,
   CHIP_RESET_PATH,
 } from '@/lib/content/chip-rules';
+import { DEADLINES_GUIDE_PATH } from '@/lib/content/deadlines-2026-27';
 
 export interface GuidePage {
   slug: string;
@@ -14,6 +15,7 @@ export interface GuidePage {
     heading: string;
     body: string[];
     table?: { caption: string; headers: string[]; rows: string[][] };
+    links?: Array<{ href: string; label: string }>;
   }>;
   faqs: Array<{ q: string; a: string; links?: Array<{ href: string; label: string }> }>;
   related: Array<{ href: string; label: string }>;
@@ -147,6 +149,11 @@ export const GUIDES: GuidePage[] = [
         body: [
           'These are the last four deadlines of the first chip set. Anything still unused expires at the Gameweek 19 deadline, the last row. Each time is the same instant in GMT and UTC. The UK is on Greenwich Mean Time then, and GMT is UTC+0.',
           'At the time of writing (20 November 2026) the fixture list has no blank and no double gameweek. Every gameweek has 10 fixtures. That can change if fixtures are moved.',
+          'All 38 gameweeks, with GMT and UTC on each row, are in the full deadline list in GMT and UTC. The 2026/27 season has the published gameweeks.',
+        ],
+        links: [
+          { href: DEADLINES_GUIDE_PATH, label: 'full deadline list in GMT and UTC' },
+          { href: '/seasons/2026-27', label: '2026/27 season' },
         ],
         table: {
           caption: 'Gameweek 16 to 19 deadlines, in GMT and UTC',
@@ -260,6 +267,8 @@ export const GUIDES: GuidePage[] = [
       },
     ],
     related: [
+      { href: DEADLINES_GUIDE_PATH, label: 'Full deadline list in GMT and UTC' },
+      { href: '/seasons/2026-27', label: '2026/27 season' },
       { href: CHIP_RESET_PATH, label: 'When do FPL chips reset?' },
       { href: '/guides/when-to-play-fpl-chips', label: 'When to play FPL chips' },
       { href: '/chips/wildcard', label: 'Wildcard' },

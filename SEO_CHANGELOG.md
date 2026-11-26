@@ -1,5 +1,14 @@
 # SEO Changelog
 
+## 2026-11-26
+- Date merged: not merged
+- PR: #22 https://github.com/Al2800/fpl-labs-pan/pull/22
+- Page URL(s) changed: https://www.fplreplay.com/chips, https://www.fplreplay.com/chips/free-hit, https://www.fplreplay.com/chips/triple-captain, https://www.fplreplay.com/chips/bench-boost, https://www.fplreplay.com/chips/wildcard, https://www.fplreplay.com/guides, https://www.fplreplay.com/guides/use-fpl-chips-before-they-expire, https://www.fplreplay.com/guides/fpl-deadlines-2026-27. Sitemap lastmod on those URLs only.
+- Search query or queries that prompted it: "fpl chips reset", plus "do fpl chips reset in january" and "fpl chip reset". On 26 Nov 2026, GSC URL Inspection said "Discovered - currently not indexed" for /guides/use-fpl-chips-before-they-expire, /guides/fpl-deadlines-2026-27 and /seasons/2026-27. All three return HTTP 200 and are in the sitemap.
+- GSC numbers at the time: 7 days, 18 to 24 Nov 2026. /chips: 1 click / 1,103 impressions / position 9.1. /chips/free-hit: 0 / 1,563 / 9.8. /chips/triple-captain: 2 / 1,053 / 5.6. /chips/bench-boost: 0 / 716 / 6.7. /chips/wildcard: 1 / 553 / 10.2. Site, 28 Oct to 24 Nov 2026: 46 clicks / 17,921 impressions / position 8.7. "fpl chips reset": 61 impressions / position 8.3 (28 days). "do fpl chips reset in january": 30 impressions. "fpl chip reset": 48 impressions.
+- What changed: Added a short block under the lead on /chips and the four chip pages. It links to the Gameweek 16 to 19 plan for chips that expire and the full deadline list in GMT and UTC. Free Hit, Wildcard, Bench Boost and Triple Captain each say which of those four weeks suits that chip. Times stay in GMT with UTC alongside. /chips and the guides index now link to /seasons/2026-27. The two guides link to each other and to /seasons/2026-27. Titles, meta descriptions and H1s on the chip pages were left as they were. Sitemap URLs are unchanged. lastmod on the edited pages is 26 November 2026.
+Result (check ~4 weeks after):
+
 ## 2026-11-23
 - Date merged: not merged
 - PR: #21 https://github.com/Al2800/fpl-labs-pan/pull/21
@@ -43,7 +52,7 @@ Result (check ~4 weeks after):
 - Search query or queries that prompted it: "free hit", "freehit", "what is free hit in fpl", "free hit fpl", "what does free hit do in fpl", "free hit fpl meaning"; "how many triple captains do you get in fpl", "how many triple captains in fpl", "triple captain fpl", "how does triple captain work"; "wildcard fpl meaning", "wildcard meaning in fpl", "what is wildcard in fpl", "how many wildcards in fpl"; "how many bench boosts do you get in fpl", "what is bench boost in fpl", "what does bench boost do", "do you get two bench boosts"; "fpl chips", "when do fpl chips reset"; "when to play free hit fpl 2026".
 - GSC numbers at the time: 12 Sep to 8 Nov 2026. Site: 67 clicks / 30,092 impressions / 0.2% CTR / average position 8.2. /chips/free-hit: 22 clicks / 11,278 impressions / position 8.2. /chips/triple-captain: 14 / 6,573 / 6.9. Query "how many triple captains do you get in fpl": 0 clicks / 720 impressions / position 5.1. /chips/wildcard: 6 / 4,557 / 9.7. /chips/bench-boost: 5 / 3,949 / 7.4. /chips: 1 / 1,941 / 8.8. /guides/when-to-play-fpl-chips: 11 / 1,469 / 7.6.
 - What changed: Rewrote the title, meta description, og:title and og:description so each snippet answers the main query, including how many of that chip you get in 2026/27. The H1 and the first sentence do the same. Each of the six pages now has five FAQs phrased like the queries above, with the answer in the first sentence. FAQPage JSON-LD was already present and uses that same list. No second schema block. Corrected the Gameweek 19 deadline from 13:30 GMT on Saturday 2 January 2027 to 18:30 GMT on Friday 1 January 2027, matching the live FPL rules (90 minutes before Leeds v Everton at 20:00). No layout changes and no new pages.
-Result (check ~4 weeks after):
+Result (check ~4 weeks after): Impressions fell after the change (10,235 to 6,417 across these five pages), clicks were roughly flat (10 before, 12 after), and Bench Boost clicks rose from 1 to 5. PR #19 (20 Nov) also changed these pages, so the after window is mixed. 14 days each side, final data. /chips: before (27 Oct to 9 Nov) 0 clicks / 770 impressions / position 8.6; after (11 to 24 Nov) 1 / 1,392 / 8.8. /chips/free-hit: before 5 / 3,975 / 8.8; after 2 / 2,163 / 10.5. /chips/triple-captain: before 4 / 1,970 / 6.8; after 2 / 1,252 / 5.8. /chips/bench-boost: before 1 / 1,746 / 7.5; after 5 / 892 / 7.8. /chips/wildcard: before 0 / 1,774 / 10.2; after 2 / 718 / 11.0.
 
 ## 2026-10-06
 - Date merged: not merged

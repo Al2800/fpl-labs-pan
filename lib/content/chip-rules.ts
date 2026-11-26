@@ -33,5 +33,7 @@ export const CHIP_RESET_ANSWER = `FPL chips reset at ${CHIP_RESET_CLOCK}, the Ga
 
 export const CHIP_RESET_PATH = '/chips#when-do-fpl-chips-reset';
 
+export const CHIP_EXPIRY_PLAN_PATH = '/guides/use-fpl-chips-before-they-expire';
+
 export const SAVED_TRANSFERS_KEPT =
   'Yes. Saved free transfers are kept. If you had two saved free transfers, you still have two in the gameweek after a Wildcard or a Free Hit.';

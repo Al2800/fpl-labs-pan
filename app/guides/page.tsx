@@ -60,6 +60,10 @@ export default function GuidesIndexPage() {
         ))}
       </ul>
       <p className="text-sm">
+        <Link href="/seasons/2026-27" className="underline underline-offset-2">
+          2026/27 season
+        </Link>
+        {' · '}
         <Link href="/glossary" className="underline underline-offset-2">
           Glossary
         </Link>
